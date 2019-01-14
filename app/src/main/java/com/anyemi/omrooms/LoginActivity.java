@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,7 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     private String verificationId;
     private FirebaseAuth mAuth;
 
-    private ConstraintLayout phoneLayout,codeLayout;
+    private LinearLayout phoneLayout,codeLayout;
 
     private EditText codeT;
     private Button signIn;
