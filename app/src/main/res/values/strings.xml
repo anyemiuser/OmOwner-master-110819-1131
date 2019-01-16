@@ -3,4 +3,7 @@
     <string name="login_prferance">com.anyemi.omrooms.Utils.login_preference</string>
     <string name="phone_no_preference">com.anyemi.omrooms.Utils.phone_no_preference</string>
     <string name="name_preference">com.anyemi.omrooms.Utils.customer_name</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
