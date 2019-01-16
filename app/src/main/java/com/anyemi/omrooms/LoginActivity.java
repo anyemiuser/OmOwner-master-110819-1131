@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.anyemi.omrooms.Utils.SharedPreferenceConfig;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
@@ -32,6 +33,10 @@ public class LoginActivity extends AppCompatActivity {
     private EditText codeT;
     private Button signIn;
 
+    private String phoneNumber ="";
+
+    private SharedPreferenceConfig sharedPreferenceConfig;
+
     public static Intent getStartIntent(Context context) {
         return new Intent(context, LoginActivity.class);
     }
@@ -41,6 +46,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        sharedPreferenceConfig= new SharedPreferenceConfig(this);
+
         phoneLayout = findViewById(R.id.phone_layout);
         codeLayout = findViewById(R.id.code_layout);
 
@@ -49,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 verifyCode(codeT.getText().toString().trim());
             }
         });
@@ -59,9 +67,18 @@ public class LoginActivity extends AppCompatActivity {
         findViewById(R.id.go_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                codeLayout.setVisibility(View.VISIBLE);
-                sendVeificationCode(phoneNo.getText().toString().trim());
-                phoneLayout.setVisibility(View.GONE);
+
+                phoneNumber = phoneNo.getText().toString().trim();
+                if(phoneNumber.length()==10){
+                    sendVeificationCode(phoneNo.getText().toString().trim());
+                    phoneLayout.setVisibility(View.GONE);
+                    codeLayout.setVisibility(View.VISIBLE);
+                }else if(phoneNumber.length()==0){
+                    Toast.makeText(LoginActivity.this,"Fill phone number",Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(LoginActivity.this,"Phone number should be 10 digit",Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
     }
@@ -77,6 +94,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
+                            sharedPreferenceConfig.writePhoneNo(phoneNumber);
                             Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
