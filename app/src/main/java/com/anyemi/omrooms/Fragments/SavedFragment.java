@@ -20,4 +20,10 @@ public class SavedFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_saved, container, false);
 //        return super.onCreateView(inflater, container, savedInstanceState);
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+    }
 }
