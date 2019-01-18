@@ -6,10 +6,12 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.anyemi.omrooms.MainActivity;
 import com.anyemi.omrooms.R;
 
 public class BookingFragment extends Fragment {
@@ -18,6 +20,7 @@ public class BookingFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
 //        View view = inflater.inflate(R.layout.fragment_home, container, false);
         return inflater.inflate(R.layout.fragment_booking, container, false);
 //        return inflater.inflate(R.layout.fragment_home,null);
@@ -34,6 +37,15 @@ public class BookingFragment extends Fragment {
         adapter.addFragment(new BookingHistoryFragment(),"Stayed");
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
+
+        Toolbar toolbar = getActivity().findViewById(R.id.toolbarId);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MainActivity)getActivity()).onBackPressed();
+            }
+        });
 
     }
 }
