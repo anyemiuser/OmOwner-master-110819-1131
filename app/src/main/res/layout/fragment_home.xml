@@ -35,7 +35,7 @@
                 android:id="@+id/notification_button"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_gravity="right"
+                android:layout_gravity="end"
                 android:layout_marginRight="8dp"
                 android:background="@android:color/transparent"
                 android:elevation="15dp"
@@ -72,28 +72,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="@android:color/white"
-                app:title=" " />
+                app:title="Search" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/white"
-                android:orientation="vertical"
-                android:paddingTop="6dp"
-                android:paddingBottom="6dp">
-
-                <EditText xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:layout_width="380dp"
-                    android:layout_height="32dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/curved_edittext"
-                    android:hint="search"
-                    android:gravity="center"
-                    android:drawableLeft="@drawable/ic_search"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/darker_gray" />
-
-            </LinearLayout>
 
         </FrameLayout>
 
