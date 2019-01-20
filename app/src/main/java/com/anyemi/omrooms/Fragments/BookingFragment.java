@@ -43,7 +43,7 @@ public class BookingFragment extends Fragment {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity)getActivity()).onBackPressed();
+                getActivity().onBackPressed();
             }
         });
 
