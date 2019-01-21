@@ -28,7 +28,8 @@ public class LoginActivity extends AppCompatActivity {
     private String verificationId;
     private FirebaseAuth mAuth;
 
-    private LinearLayout phoneLayout,codeLayout;
+    private ConstraintLayout phoneLayout;
+    private LinearLayout codeLayout;
 
     private EditText codeT;
     private Button signIn;
