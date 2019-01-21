@@ -7,19 +7,26 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.WindowManager;
 
 import com.anyemi.omrooms.Fragments.BookingFragment;
 import com.anyemi.omrooms.Fragments.HomeFragment;
 import com.anyemi.omrooms.Fragments.ProfileFragment;
 import com.anyemi.omrooms.Fragments.SavedFragment;
+import com.anyemi.omrooms.Models.Location;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
+
+//    ArrayList<Location> locationList;
+//    RecyclerView recyclerView;
 
     public static Intent getStartIntent(Context context) {
 
@@ -40,6 +47,23 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+//        recyclerView = findViewById(R.id.locations_rv);
+//        final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+//        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+//        recyclerView.setLayoutManager(layoutManager);
+//
+//        locationList = new ArrayList<Location>(locationList);
+//        locationList.add(new Location("Bangalore", R.drawable.ic_launcher_background));
+//        locationList.add(new Location("Bangalore", R.drawable.ic_launcher_background));
+//        locationList.add(new Location("Bangalore", R.drawable.ic_launcher_background));
+//        locationList.add(new Location("Bangalore", R.drawable.ic_launcher_background));
+//        locationList.add(new Location("Bangalore", R.drawable.ic_launcher_background));
+//        locationList.add(new Location("Bangalore", R.drawable.ic_launcher_background));
+//
+//        LocationAdapter locationAdapter = new LocationAdapter(this, locationList);
+//        recyclerView.setAdapter(locationAdapter);
+
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
