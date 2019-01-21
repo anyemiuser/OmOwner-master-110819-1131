@@ -11,8 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        app:layout_constraintBottom_toTopOf="@+id/view"
-        app:layout_constraintTop_toTopOf="@+id/view">
+        app:layout_constraintBottom_toTopOf="@+id/view2"
+        app:layout_constraintTop_toTopOf="@+id/view2">
 
         <View
             android:id="@+id/view2"
@@ -55,6 +55,7 @@
             android:layout_marginTop="268dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
+            android:fontFamily="@font/opensans_extrabold"
             android:text="Name"
             android:textAlignment="center"
             android:textSize="25sp"
@@ -66,11 +67,12 @@
 
         <TextView
             android:id="@+id/textView3"
-            android:layout_width="177dp"
+            android:layout_width="wrap_content"
             android:layout_height="27dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
+            android:fontFamily="@font/opensans_semibold"
             android:gravity="center"
             android:text="example@gmail.com"
             android:textAlignment="center"
@@ -86,32 +88,33 @@
             android:layout_height="30dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="52dp"
+            android:fontFamily="@font/opensans_regular"
             android:text="Address"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <EditText
-            android:hint="street name"
             android:id="@+id/address_edittext1"
             android:layout_width="250sp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="36dp"
             android:layout_marginEnd="8dp"
+            android:hint="street name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.509"
             app:layout_constraintStart_toEndOf="@+id/textView4"
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <EditText
-            android:hint="city"
             android:id="@+id/address_edittext2"
             android:layout_width="250sp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
+            android:hint="city"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.511"
             app:layout_constraintStart_toEndOf="@+id/textView4"
@@ -139,6 +142,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="72dp"
             android:layout_marginBottom="8dp"
+            android:fontFamily="@font/opensans_regular"
             android:text="Gender"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"

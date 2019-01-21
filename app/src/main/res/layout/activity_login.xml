@@ -50,6 +50,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="8dp"
+                android:fontFamily="@font/opensans_extrabold"
                 android:gravity="center"
                 android:padding="6dp"
                 android:text="Verify Your Number"
@@ -68,6 +69,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="8dp"
+                android:fontFamily="@font/opensans_regular"
                 android:gravity="center"
                 android:padding="6dp"
                 android:text="Please enter valid mobile number to recieve a verification code. Carrier charges may apply."
@@ -138,6 +140,7 @@
             </android.support.constraint.ConstraintLayout>
 
             <Button
+
                 android:id="@+id/go_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
