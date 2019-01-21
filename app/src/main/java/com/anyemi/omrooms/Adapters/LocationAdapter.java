@@ -1,4 +1,4 @@
-package com.anyemi.omrooms;
+package com.anyemi.omrooms.Adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.anyemi.omrooms.Models.Location;
+import com.anyemi.omrooms.R;
 
 import java.util.ArrayList;
 
