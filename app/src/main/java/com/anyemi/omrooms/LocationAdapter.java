@@ -45,7 +45,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.MyView
         return locations.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+    public class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView locationsTextView;
         ImageView locationsImageView;

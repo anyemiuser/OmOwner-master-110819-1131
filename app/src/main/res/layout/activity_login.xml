@@ -62,8 +62,8 @@
                     android:background="@drawable/curved_edittext"
                     android:gravity="center"
                     android:inputType="phone"
-                    android:textSize="15sp"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:textSize="15sp" />
             </android.support.design.widget.TextInputLayout>
 
             <Button

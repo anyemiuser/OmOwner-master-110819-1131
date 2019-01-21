@@ -15,7 +15,6 @@ import com.anyemi.omrooms.Models.Location;
 import com.anyemi.omrooms.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class HomeFragment extends Fragment {
 
