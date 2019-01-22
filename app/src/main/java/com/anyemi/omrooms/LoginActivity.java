@@ -46,6 +46,10 @@ public class LoginActivity extends AppCompatActivity {
 
     private SharedPreferenceConfig sharedPreferenceConfig;
 
+    private UserResponse userResponse;
+
+    private Boolean isSucess = false;
+
     public static Intent getStartIntent(Context context) {
         return new Intent(context, LoginActivity.class);
     }
@@ -110,19 +114,8 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(intent);
-                            if(registerOnSuccess(phoneNumber)){
-                                sharedPreferenceConfig.writePhoneNo(phoneNumber);
-                                Toast.makeText(LoginActivity.this,"Registered Succesfully",Toast.LENGTH_LONG).show();
-//                                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-//                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                                startActivity(intent);
-                            }else {
-                                Log.e("database"," insert failed");
-                                Toast.makeText(LoginActivity.this, "Not Registered Yet", Toast.LENGTH_SHORT).show();
-                            }
+
+                            registerOnSuccess(phoneNumber);
 
                         }else {
                             Toast.makeText(LoginActivity.this,"Unsuccesful",Toast.LENGTH_SHORT).show();
@@ -131,40 +124,45 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    private boolean registerOnSuccess(String phoneNumber) {
-        final Boolean[] isSuccess = {false};
+    private void registerOnSuccess(String phoneNumber) {
+
         OmRoomApi omRoomApi = ApiUtils.getOmRoomApi();
         UserRequest user = new UserRequest(phoneNumber);
-//        omRoomApi.postUserRegister2(phoneNumber).enqueue(new Callback<UserResponse>() {
-//            @Override
-//            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-//                UserResponse userResponse = response.body();
-//                Log.e("retrofit",userResponse.getStatus()+userResponse.getMsg()+userResponse.getMobile_number());
-//                isSuccess[0] = true;
-//            }
-//
-//            @Override
-//            public void onFailure(Call<UserResponse> call, Throwable t) {
-//                Log.e("error",""+t.getMessage());
-//            }
-//        });
+
         omRoomApi.postUserRegister(user).enqueue(new Callback<UserResponse>() {
+
             @Override
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-                UserResponse userResponse = response.body();
-                Log.e("retrofit",userResponse.getStatus()+" "+userResponse.getMsg()+" "+userResponse.getMobile_number());
-                if(userResponse.getStatus().equals("sucess")){
-                    isSuccess[0] = true;
+                if(response.isSuccessful()){
+
+                    userResponse = response.body();
+                    Log.e("retrofit",userResponse.getStatus()+" "+userResponse.getMsg()+" "+userResponse.getMobile_number());
+
+                    if(userResponse.getStatus().equals("sucess")){
+
+                        sharedPreferenceConfig.writePhoneNo(phoneNumber);
+                        Toast.makeText(LoginActivity.this,"Registered Succesfully",Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+
+                    }else {
+                        Toast.makeText(LoginActivity.this, "Not Registered Yet", Toast.LENGTH_SHORT).show();
+                    }
+                }else {
+                    Toast.makeText(LoginActivity.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
                 }
+
 
             }
 
             @Override
             public void onFailure(Call<UserResponse> call, Throwable t) {
                 Log.e("error",""+t.getMessage());
+
             }
         });
-        return isSuccess[0];
+
     }
 
 
