@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".UI.SearchActivity"></activity>
         <activity
             android:name=".SplashActivity"
             android:label="@string/app_name"
@@ -23,8 +24,7 @@
             android:theme="@style/AppThemeNoBar"/>
         <activity
             android:name=".MainActivity"
-            android:theme="@style/AppThemeNoBar"></activity>
-
+            android:theme="@style/AppThemeNoBar" />
     </application>
 
 </manifest>

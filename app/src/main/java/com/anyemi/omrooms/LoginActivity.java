@@ -6,13 +6,18 @@ import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.anyemi.omrooms.Model.UserRequest;
+import com.anyemi.omrooms.Model.UserResponse;
 import com.anyemi.omrooms.Utils.SharedPreferenceConfig;
+import com.anyemi.omrooms.api.ApiUtils;
+import com.anyemi.omrooms.api.OmRoomApi;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
@@ -22,6 +27,10 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.concurrent.TimeUnit;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -84,8 +93,15 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void verifyCode(String code){
-        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId,code);
-        signInWithCredential(credential);
+        Log.e("verification id",""+verificationId);
+        if(verificationId != null){
+            PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId,code);
+//        Log.e("verification id",""+verificationId);
+            signInWithCredential(credential);
+        }else {
+            Toast.makeText(this, "verify code", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     private void signInWithCredential(PhoneAuthCredential credential) {
@@ -94,16 +110,63 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            sharedPreferenceConfig.writePhoneNo(phoneNumber);
                             Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
+                            if(registerOnSuccess(phoneNumber)){
+                                sharedPreferenceConfig.writePhoneNo(phoneNumber);
+                                Toast.makeText(LoginActivity.this,"Registered Succesfully",Toast.LENGTH_LONG).show();
+//                                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+//                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                                startActivity(intent);
+                            }else {
+                                Log.e("database"," insert failed");
+                                Toast.makeText(LoginActivity.this, "Not Registered Yet", Toast.LENGTH_SHORT).show();
+                            }
+
                         }else {
                             Toast.makeText(LoginActivity.this,"Unsuccesful",Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
     }
+
+    private boolean registerOnSuccess(String phoneNumber) {
+        final Boolean[] isSuccess = {false};
+        OmRoomApi omRoomApi = ApiUtils.getOmRoomApi();
+        UserRequest user = new UserRequest(phoneNumber);
+//        omRoomApi.postUserRegister2(phoneNumber).enqueue(new Callback<UserResponse>() {
+//            @Override
+//            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+//                UserResponse userResponse = response.body();
+//                Log.e("retrofit",userResponse.getStatus()+userResponse.getMsg()+userResponse.getMobile_number());
+//                isSuccess[0] = true;
+//            }
+//
+//            @Override
+//            public void onFailure(Call<UserResponse> call, Throwable t) {
+//                Log.e("error",""+t.getMessage());
+//            }
+//        });
+        omRoomApi.postUserRegister(user).enqueue(new Callback<UserResponse>() {
+            @Override
+            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+                UserResponse userResponse = response.body();
+                Log.e("retrofit",userResponse.getStatus()+" "+userResponse.getMsg()+" "+userResponse.getMobile_number());
+                if(userResponse.getStatus().equals("sucess")){
+                    isSuccess[0] = true;
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<UserResponse> call, Throwable t) {
+                Log.e("error",""+t.getMessage());
+            }
+        });
+        return isSuccess[0];
+    }
+
 
     private void sendVeificationCode(String phoneNumber){
         phoneNumber="+91".concat(phoneNumber);

@@ -28,7 +28,7 @@ public class SplashActivity extends AppCompatActivity {
 //        pathView.setFillAfter(true);
 //        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         Intent i;
-        if (sharedPreferenceConfig.readPhoneNo().length()>2) {
+        if (sharedPreferenceConfig.readPhoneNo().length() == 10) {
             i = MainActivity.getStartIntent(SplashActivity.this);
         } else {
             i = LoginActivity.getStartIntent(SplashActivity.this);
