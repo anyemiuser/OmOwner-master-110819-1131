@@ -45,7 +45,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
 
         locationList = new ArrayList<Location>();
-        locationList.add(new Location("Bangalore", R.drawable.ic_launcher_background));
+        locationList.add(new Location("Locations", R.drawable.ic_location_placeholder));
         locationList.add(new Location("Bangalore", R.drawable.ic_launcher_background));
         locationList.add(new Location("Bangalore", R.drawable.ic_launcher_background));
         locationList.add(new Location("Bangalore", R.drawable.ic_launcher_background));
@@ -56,13 +56,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         recyclerViewLocations.setAdapter(locationAdapter);
 
         hotelsList = new ArrayList<Hotels>();
-        hotelsList.add(new Hotels("The Hotel Prince", R.drawable.ic_launcher_foreground));
-        hotelsList.add(new Hotels("The Hotel Prince", R.drawable.ic_launcher_foreground));
-        hotelsList.add(new Hotels("The Hotel Prince", R.drawable.ic_launcher_foreground));
-        hotelsList.add(new Hotels("The Hotel Prince", R.drawable.ic_launcher_foreground));
-        hotelsList.add(new Hotels("The Hotel Prince", R.drawable.ic_launcher_foreground));
-        hotelsList.add(new Hotels("The Hotel Prince", R.drawable.ic_launcher_foreground));
-        hotelsList.add(new Hotels("The Hotel Prince", R.drawable.ic_launcher_foreground));
+        hotelsList.add(new Hotels("The Fairfield Hotel", R.drawable.hotel1));
+        hotelsList.add(new Hotels("The Hotel Prince", R.drawable.hotel2));
+        hotelsList.add(new Hotels("Hotel Novotel", R.drawable.hotel3));
+        hotelsList.add(new Hotels("The Hotel Prince", R.drawable.hotel5));
+        hotelsList.add(new Hotels("The Hotel Prince", R.drawable.hotel6));
+        hotelsList.add(new Hotels("The Hotel Prince", R.drawable.hotel2));
+        hotelsList.add(new Hotels("The Hotel Prince", R.drawable.hotel1));
 
         recyclerViewHotels.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         HotelAdapter hotelAdapter = new HotelAdapter(hotelsList, getContext());

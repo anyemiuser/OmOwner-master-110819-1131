@@ -29,8 +29,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_verified_sheild" />
-                            <entry key="sourceFile" value="C:\Users\Mohan\Desktop\OM Rooms\verified-protection.svg" />
+                            <entry key="outputName" value="ic_location_placeholder" />
+                            <entry key="sourceFile" value="C:\Users\Mohan\Desktop\OM Rooms\location_placeholder.svg" />
                           </map>
                         </option>
                       </PersistentState>
