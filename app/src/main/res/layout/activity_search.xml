@@ -27,20 +27,16 @@
             <android.support.v7.widget.SearchView
                 android:id="@+id/search_material"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="60dp"
-                android:layout_marginLeft="60dp"
                 android:background="@color/white"
-                app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
             </android.support.v7.widget.SearchView>
 
-            <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
+            <android.support.constraint.ConstraintLayout
                 android:id="@+id/constraintLayout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -57,85 +53,101 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
+
                     <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:gravity="center">
-                        <TextView
-                            android:id="@+id/check_in_date"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Today"
-                            />
-                        <TextView
-                            android:id="@+id/check_in_time"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="12PM"
-                            />
-                    </LinearLayout>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.5"
-                        android:text="1N"
-                        android:gravity="center"
-                        />
-                    <LinearLayout
+                        android:id="@+id/check_in_layout"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/check_in_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Today" />
+
+                        <TextView
+                            android:id="@+id/check_in_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="12PM" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/no_of_nights"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.5"
+                        android:gravity="center"
+                        android:text="1N" />
+
+                    <LinearLayout
+                        android:id="@+id/check_out_layout"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
                         <TextView
                             android:id="@+id/check_out_date"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Tomorrow"
-                            />
+                            android:text="Tomorrow" />
+
                         <TextView
                             android:id="@+id/check_out_time"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="11AM"
-                            />
+                            android:text="11AM" />
                     </LinearLayout>
+
                     <LinearLayout
+                        android:id="@+id/room_user_layout"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="vertical">
+
                         <TextView
                             android:id="@+id/no_of_rooms"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="1 Room"
-                            />
+                            android:text="1 Room" />
+
                         <TextView
                             android:id="@+id/no_of_user"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="1 Adult"
-                            />
+                            android:text="1 Adult" />
                     </LinearLayout>
 
 
                 </LinearLayout>
 
                 <android.support.v7.widget.RecyclerView
-                    android:id="@+id/search_material_recyclerview"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:id="@+id/recent_search_rv"
+                    android:layout_width="395dp"
+                    android:layout_height="205dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/check_layout" />
 
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/all_area_rv"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/recent_search_rv" />
 
 
             </android.support.constraint.ConstraintLayout>

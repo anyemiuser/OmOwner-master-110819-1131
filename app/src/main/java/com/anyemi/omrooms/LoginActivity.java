@@ -116,9 +116,7 @@ public class LoginActivity extends AppCompatActivity {
                         if(task.isSuccessful()){
 
                             registerOnSuccess(phoneNumber);
-                            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(intent);
+
 
                         }else {
                             Toast.makeText(LoginActivity.this,"Unsuccesful",Toast.LENGTH_SHORT).show();
@@ -143,11 +141,11 @@ public class LoginActivity extends AppCompatActivity {
 
                     if(userResponse.getStatus().equals("sucess")){
 
-//                        sharedPreferenceConfig.writePhoneNo(phoneNumber);
+                        sharedPreferenceConfig.writePhoneNo(phoneNumber);
                         Toast.makeText(LoginActivity.this,"Registered Succesfully",Toast.LENGTH_LONG).show();
-//                        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-//                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                        startActivity(intent);
+                        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
 
                     }else {
                         Toast.makeText(LoginActivity.this, "Not Registered Yet", Toast.LENGTH_SHORT).show();
