@@ -11,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.anyemi.omrooms.MainActivity;
+import com.anyemi.omrooms.Fragments.FragmentAdapter.BookingHistoryAdapter;
 import com.anyemi.omrooms.R;
 
 public class BookingFragment extends Fragment {

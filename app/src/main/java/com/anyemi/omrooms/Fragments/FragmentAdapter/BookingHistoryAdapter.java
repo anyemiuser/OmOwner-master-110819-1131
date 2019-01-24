@@ -1,4 +1,4 @@
-package com.anyemi.omrooms.Fragments;
+package com.anyemi.omrooms.Fragments.FragmentAdapter;
 
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
