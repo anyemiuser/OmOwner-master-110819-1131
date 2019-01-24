@@ -29,4 +29,9 @@
         <item name="colorControlNormal">@color/black</item>
     </style>
 
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">#D3D3D3</item>
+        <item name="colorControlActivated">#FFDF00</item>
+    </style>
+
 </resources>

@@ -38,7 +38,7 @@ public class SavedHotelsAdapter extends RecyclerView.Adapter<SavedHotelsAdapter.
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
         SavedHotels savedHotel = savedHotels.get(i);
         myViewHolder.savedHotelsTextView.setText(savedHotel.getSavedHotelName());
-        myViewHolder.savedHotelsmageView.setImageResource(savedHotel.getSavedHotelImage());
+        myViewHolder.savedHotelsImageView.setImageResource(savedHotel.getSavedHotelImage());
 
     }
 
@@ -50,13 +50,13 @@ public class SavedHotelsAdapter extends RecyclerView.Adapter<SavedHotelsAdapter.
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView savedHotelsTextView;
-        ImageView savedHotelsmageView;
+        ImageView savedHotelsImageView;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             savedHotelsTextView = itemView.findViewById(R.id.saved_hotels_name);
-            savedHotelsmageView = itemView.findViewById(R.id.saved_hotels_image);
+            savedHotelsImageView = itemView.findViewById(R.id.saved_hotels_image);
         }
     }
 }

@@ -46,11 +46,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         locationList = new ArrayList<Location>();
         locationList.add(new Location("Locations", R.drawable.ic_location_placeholder));
-        locationList.add(new Location("Bangalore", R.drawable.ic_launcher_background));
-        locationList.add(new Location("Bangalore", R.drawable.ic_launcher_background));
-        locationList.add(new Location("Bangalore", R.drawable.ic_launcher_background));
-        locationList.add(new Location("Bangalore", R.drawable.ic_launcher_background));
-        locationList.add(new Location("Bangalore", R.drawable.ic_launcher_background));
+        locationList.add(new Location("Kailasagiri", R.drawable.location2));
+        locationList.add(new Location("Varaha Lakshmi...", R.drawable.location3));
+        locationList.add(new Location("Indira Gandhi..", R.drawable.location4));
+        locationList.add(new Location("INS Kursu..", R.drawable.location1));
+        locationList.add(new Location("Rushikonda", R.drawable.location5));
 
         LocationAdapter locationAdapter = new LocationAdapter(locationList, getContext());
         recyclerViewLocations.setAdapter(locationAdapter);

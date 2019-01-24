@@ -50,7 +50,7 @@
                 android:paddingBottom="5dp"
                 android:text="Good Morning, $User"
                 android:textAlignment="center"
-                android:textColor="@android:color/holo_red_dark"
+                android:textColor="#5c8d89"
                 android:textSize="22sp"
                 android:textStyle="bold" />
 

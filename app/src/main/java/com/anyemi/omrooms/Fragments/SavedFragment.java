@@ -37,19 +37,19 @@ public class SavedFragment extends Fragment {
         View rootview = inflater.inflate(R.layout.fragment_saved, container, false);
         recyclerViewSavedHotels = rootview.findViewById(R.id.saved_rv);
 
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerViewSavedHotels.setLayoutManager(layoutManager);
+
+        savedHotelsList = new ArrayList<SavedHotels>();
+        savedHotelsList.add(new SavedHotels("The Park Hotel", R.drawable.park));
+        savedHotelsList.add(new SavedHotels("Hotel Akshaya", R.drawable.akshaya));
+        savedHotelsList.add(new SavedHotels("Hotel Chandra's", R.drawable.chandras));
+        savedHotelsList.add(new SavedHotels("Sai priya Beach", R.drawable.saiprlya));
+        savedHotelsList.add(new SavedHotels("Hotel Fortune", R.drawable.fortune));
+        savedHotelsList.add(new SavedHotels("The Port Hotel", R.drawable.port));
 
         SavedHotelsAdapter savedHotelsAdapter = new SavedHotelsAdapter(savedHotelsList, getActivity());
         recyclerViewSavedHotels.setAdapter(savedHotelsAdapter);
-
-        savedHotelsList = new ArrayList<SavedHotels>();
-        savedHotelsList.add(new SavedHotels("Locations", R.drawable.ic_location_placeholder));
-        savedHotelsList.add(new SavedHotels("Bangalore", R.drawable.ic_launcher_background));
-        savedHotelsList.add(new SavedHotels("Bangalore", R.drawable.ic_launcher_background));
-        savedHotelsList.add(new SavedHotels("Bangalore", R.drawable.ic_launcher_background));
-        savedHotelsList.add(new SavedHotels("Bangalore", R.drawable.ic_launcher_background));
-        savedHotelsList.add(new SavedHotels("Bangalore", R.drawable.ic_launcher_background));
 
         return rootview;
     }
