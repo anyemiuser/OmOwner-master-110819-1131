@@ -100,8 +100,7 @@
                             android:id="@+id/search_action_bar_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:alpha="0.662"
-                            android:text="Search" />
+                            android:text="Search for Hotels or Areas" />
 
                     </android.support.v7.widget.Toolbar>
 
@@ -132,7 +131,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginBottom="8dp"
                     android:fontFamily="@font/opensans_extrabold"
-                    android:text="Recommend Hotels"
+                    android:text="Recommended Hotels"
                     android:layout_margin="15dp"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
