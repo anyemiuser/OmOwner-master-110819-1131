@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.inputmethodservice.Keyboard;
+import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -37,7 +38,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         if (getSupportActionBar() != null) {
             actionbar.setDisplayHomeAsUpEnabled(true);
         }
-
+        startCheckInCheckOutForResult();
         //set focus to search view
         searchView.setFocusable(true);
         searchView.setIconified(false);
@@ -78,7 +79,21 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(requestCode == 1 && resultCode == RESULT_OK){
+            Bundle extras = data.getExtras();
+            String ra = data.getStringExtra("checkIn");
+            String ee = data.getStringExtra("checkOut");
+            Toast.makeText(this, ""+ra+ee, Toast.LENGTH_SHORT).show();
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 
+    private void startCheckInCheckOutForResult() {
+        Intent intent = new Intent(SearchActivity.this, CalenderActivity.class);
+        startActivityForResult(intent,1);
+    }
 
 
     @Override
@@ -94,15 +109,15 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         switch (view.getId()){
             case R.id.check_in_layout:
                 intent.putExtra("check",0);
-                startActivity(intent);
+                startActivityForResult(intent,1);
                 break;
             case R.id.check_out_layout:
                 intent.putExtra("check",1);
-                startActivity(intent);
+                startActivityForResult(intent,1);
                 break;
             case R.id.room_user_layout:
                 intent.putExtra("check",2);
-                startActivity(intent);
+                startActivityForResult(intent,1);
                 break;
         }
     }
