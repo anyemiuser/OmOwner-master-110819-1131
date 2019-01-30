@@ -25,6 +25,7 @@ public class SavedFragment extends Fragment {
 
     ArrayList<SavedHotels> savedHotelsList;
     RecyclerView recyclerViewSavedHotels;
+    Toolbar toolbar;
 
     @Nullable
     @Override
@@ -36,12 +37,13 @@ public class SavedFragment extends Fragment {
 
         View rootview = inflater.inflate(R.layout.fragment_saved, container, false);
         recyclerViewSavedHotels = rootview.findViewById(R.id.saved_rv);
+        //toolbar = getActivity().findViewById(R.id.toolbarSaved);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerViewSavedHotels.setLayoutManager(layoutManager);
 
         savedHotelsList = new ArrayList<SavedHotels>();
-        savedHotelsList.add(new SavedHotels("The Park Hotel", R.drawable.park));
+        savedHotelsList.add(new SavedHotels("The Park Hotel", R.drawable.park));git
         savedHotelsList.add(new SavedHotels("Hotel Akshaya", R.drawable.akshaya));
         savedHotelsList.add(new SavedHotels("Hotel Chandra's", R.drawable.chandras));
         savedHotelsList.add(new SavedHotels("Sai priya Beach", R.drawable.saiprlya));
@@ -51,21 +53,19 @@ public class SavedFragment extends Fragment {
         SavedHotelsAdapter savedHotelsAdapter = new SavedHotelsAdapter(savedHotelsList, getActivity());
         recyclerViewSavedHotels.setAdapter(savedHotelsAdapter);
 
-        return rootview;
+
+//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                getActivity().onBackPressed();
+//            }
+//        });
+       return rootview;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        Toolbar toolbar = getActivity().findViewById(R.id.toolbarId);
-
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().onBackPressed();
-            }
-        });
 
     }
 }
