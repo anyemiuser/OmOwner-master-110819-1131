@@ -36,7 +36,8 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Ho
     public void onBindViewHolder(@NonNull HotelAreaViewHolder holder, int position) {
         HotelArea hotelArea = hotelAreas.get(position);
         holder.hotelName.setText(hotelArea.getHotelName());
-        holder.areaCityName.setText(hotelArea.getHotelarea());
+        String areaCity = hotelArea.getHotelarea()+", "+hotelArea.getHotelCity()+","+hotelArea.getHotelPin();
+        holder.areaCityName.setText(areaCity);
 
     }
 
