@@ -13,8 +13,10 @@ import android.widget.CalendarView;
 
 import com.anyemi.omrooms.R;
 import com.anyemi.omrooms.UI.CalenderActivity;
+import com.anyemi.omrooms.Utils.ConverterUtil;
 
 import java.util.Calendar;
+import java.util.zip.Inflater;
 
 public class CalenderFragmentCheckOut extends Fragment {
     private OnFragmentInteractionListenerC mListener;
@@ -22,14 +24,24 @@ public class CalenderFragmentCheckOut extends Fragment {
 
     private CalendarView calendarView;
 
+    private View rootView;
+
     public CalenderFragmentCheckOut() {
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.e("Check out","on resume");
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 //        return super.onCreateView(inflater, container, savedInstanceState);
-        return inflater.inflate(R.layout.calender_fragment, container, false);
+        rootView = inflater.inflate(R.layout.calendar_fragment_check_out, container, false);
+        calendarView = rootView.findViewById(R.id.calendar_view_checkout);
+        return rootView;
     }
 
     @Override
@@ -40,15 +52,16 @@ public class CalenderFragmentCheckOut extends Fragment {
 //        long inactiveDate = calendar.getTime().getTime();
         calendar.add(Calendar.DAY_OF_YEAR,+1);
 
-        long date = calendar.getTime().getTime();
-
-        calendarView = view.findViewById(R.id.calendarView);
-        calendarView.setMinDate(date);
-        calendarView.setDate(date);
+//        long date = calendar.getTime().getTime();
+//        long date = ConverterUtil.ConvertDateToSetOnCalender(CalenderActivity.checkOut);
+        calendarView = view.findViewById(R.id.calendar_view_checkout);
+//        calendarView.setMinDate(date);
+//        calendarView.setDate(date);
+        Log.e("check out ra","yes");
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
-                String date = ""+i2+"/"+i1+1+"/"+i;
+                String date = ""+i2+"/"+(i1+1)+"/"+i;
                 Log.e("date",""+i+" "+i1+" "+i2+" ");
 //                CalenderActivity calenderActivity =new CalenderActivity();
 //                CalenderActivity.viewPager.setCurrentItem(1);
@@ -94,7 +107,16 @@ public class CalenderFragmentCheckOut extends Fragment {
 
             if (mListener != null ) {
                 mListener.onFragmentInteractionC("Select Check-Out Date");
+
             }
+            Log.e("Check out start",""+CalenderActivity.checkOut);
+            long date = ConverterUtil.ConvertDateToSetOnCalender(CalenderActivity.checkOut);
+//
+//            calendarView = rootView.findViewById(R.id.calendarView);
+////
+            calendarView.setMinDate(date);
+            calendarView.setDate(date);
+            Log.e("ccc",""+date);
         }else{
             // fragment is not visible
         }

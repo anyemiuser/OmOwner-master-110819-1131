@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.anyemi.omrooms.R;
+import com.anyemi.omrooms.UI.CalenderActivity;
 
 public class RoomGuestFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
@@ -32,6 +33,8 @@ public class RoomGuestFragment extends Fragment {
 
         return inflater.inflate(R.layout.room_guest_fragment, container, false);
     }
+
+
 
 
 
@@ -65,6 +68,8 @@ public class RoomGuestFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        CalenderActivity.rooms=1;
+        CalenderActivity.guests = 2;
 
 
 

@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -16,6 +17,7 @@ import com.anyemi.omrooms.Fragments.CalenderFragmentCheckOut;
 import com.anyemi.omrooms.Fragments.FragmentAdapter.CalenderFragmentAdapter;
 import com.anyemi.omrooms.Fragments.RoomGuestFragment;
 import com.anyemi.omrooms.R;
+import com.anyemi.omrooms.Utils.ConverterUtil;
 
 public class CalenderActivity extends AppCompatActivity implements RoomGuestFragment.OnFragmentInteractionListener,
         CalenderFragmentCheckIn.OnFragmentInteractionListenerC,
@@ -29,8 +31,8 @@ public class CalenderActivity extends AppCompatActivity implements RoomGuestFrag
 
     public static String checkIn;
     public static String checkOut;
-    public static String rooms;
-    public static String guests;
+    public static int rooms;
+    public static int guests;
 
     private Button applyChanges;
 
@@ -38,6 +40,8 @@ public class CalenderActivity extends AppCompatActivity implements RoomGuestFrag
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calender);
+
+        setDefaultDate();
 
         applyChanges = findViewById(R.id.apply);
         applyChanges.setOnClickListener(this);
@@ -104,6 +108,16 @@ public class CalenderActivity extends AppCompatActivity implements RoomGuestFrag
 
     }
 
+    public static void setDefaultDate(){
+        checkIn = ConverterUtil.setTodaysDate();
+        Log.e("check in in calendar",""+checkIn);
+
+        checkOut = ConverterUtil.setDefaultCheckOutDateToNextDay(checkIn);
+        Log.e("check out in calendar",""+checkOut);
+        rooms = 1;
+        guests = 1;
+    }
+
     public void setResultForCheckinCheckOut(String checkIn, String checkOut, String rooms, String guests) {
 
     }
@@ -113,8 +127,8 @@ public class CalenderActivity extends AppCompatActivity implements RoomGuestFrag
         Intent resultIntent = getIntent();
         resultIntent.putExtra("checkIn",checkIn);
         resultIntent.putExtra("checkOut",checkOut);
-//        resultIntent.putExtra("rooms",rooms);
-//        resultIntent.putExtra("guests",guests);
+        resultIntent.putExtra("rooms",rooms);
+        resultIntent.putExtra("guests",guests);
         setResult(Activity.RESULT_OK,resultIntent);
 
         onBackPressed();
