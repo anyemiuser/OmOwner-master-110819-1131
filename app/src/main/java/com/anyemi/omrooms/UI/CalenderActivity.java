@@ -18,6 +18,7 @@ import com.anyemi.omrooms.Fragments.FragmentAdapter.CalenderFragmentAdapter;
 import com.anyemi.omrooms.Fragments.RoomGuestFragment;
 import com.anyemi.omrooms.R;
 import com.anyemi.omrooms.Utils.ConverterUtil;
+import com.anyemi.omrooms.Utils.SharedPreferenceConfig;
 
 public class CalenderActivity extends AppCompatActivity implements RoomGuestFragment.OnFragmentInteractionListener,
         CalenderFragmentCheckIn.OnFragmentInteractionListenerC,
@@ -34,14 +35,19 @@ public class CalenderActivity extends AppCompatActivity implements RoomGuestFrag
     public static int rooms;
     public static int guests;
 
+    SharedPreferenceConfig sharedPreferenceConfig;
+
     private Button applyChanges;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calender);
-
-        setDefaultDate();
+        sharedPreferenceConfig = new SharedPreferenceConfig(this);
+        setDefaultDate(sharedPreferenceConfig.readCheckInDate(),
+                sharedPreferenceConfig.readCheckOutDate(),
+                sharedPreferenceConfig.readNoOfRooms(),
+                sharedPreferenceConfig.readNoOfGuests());
 
         applyChanges = findViewById(R.id.apply);
         applyChanges.setOnClickListener(this);
@@ -108,14 +114,29 @@ public class CalenderActivity extends AppCompatActivity implements RoomGuestFrag
 
     }
 
-    public static void setDefaultDate(){
-        checkIn = ConverterUtil.setTodaysDate();
-        Log.e("check in in calendar",""+checkIn);
+    public static void setDefaultDate(String checkInDate, String checkOutDate, int noOfRooms, int noOfGuests){
 
-        checkOut = ConverterUtil.setDefaultCheckOutDateToNextDay(checkIn);
-        Log.e("check out in calendar",""+checkOut);
-        rooms = 1;
-        guests = 1;
+        boolean isCurrentDate = false;
+        if(checkInDate != null){
+            isCurrentDate = ConverterUtil.checkCurrentDateIsLessThenSaved(checkInDate);
+        }
+
+        if(isCurrentDate){
+            checkIn = checkInDate;
+            checkOut = checkOutDate;
+            rooms= noOfRooms;
+            guests = noOfGuests;
+
+        }else {
+            checkIn = ConverterUtil.setTodaysDate();
+            Log.e("check in in calendar",""+checkIn);
+
+            checkOut = ConverterUtil.setDefaultCheckOutDateToNextDay(checkIn);
+            Log.e("check out in calendar",""+checkOut);
+            rooms = 1;
+            guests = 1;
+        }
+
     }
 
     public void setResultForCheckinCheckOut(String checkIn, String checkOut, String rooms, String guests) {

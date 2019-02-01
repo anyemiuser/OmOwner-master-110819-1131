@@ -11,6 +11,10 @@
 
 
     <string name="gender_prompt">Choose your Gender</string>
+    <string name="check_in_out_preference">com.anyemi.omrooms.Utils.check_in_out_preference</string>
+    <string name="check_out_preference">com.anyemi.omrooms.Utils.check_out_preference</string>
+    <string name="no_of_rooms_preference">com.anyemi.omrooms.Utils.no_of_rooms</string>
+    <string name="no_of_guests_preference">com.anyemi.omrooms.Utils.no_of_guests</string>
 
     <string-array name="gender">
         <item>Male</item>

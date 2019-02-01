@@ -66,10 +66,10 @@
                             android:id="@+id/check_in_date"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensans_regular"
                             android:text="Today"
                             android:textColor="@color/colorAccent"
-                            android:fontFamily="@font/opensans_regular"
-                            android:textSize="16sp"/>
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/check_in_time"
@@ -98,10 +98,10 @@
                             android:id="@+id/check_out_date"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensans_regular"
                             android:text="Tomorrow"
                             android:textColor="@color/colorAccent"
-                            android:fontFamily="@font/opensans_regular"
-                            android:textSize="16sp"/>
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/check_out_time"
@@ -122,10 +122,10 @@
                             android:id="@+id/no_of_rooms"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensans_regular"
                             android:text="1 Room"
                             android:textColor="@color/colorAccent"
-                            android:fontFamily="@font/opensans_regular"
-                            android:textSize="16sp"/>
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/no_of_user"
@@ -177,15 +177,41 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/search_list_rv"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@android:color/darker_gray"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toTopOf="@+id/search_area_rv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/search_list_rv" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/search_area_rv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
             </android.support.constraint.ConstraintLayout>
         </android.support.constraint.ConstraintLayout>
     </FrameLayout>

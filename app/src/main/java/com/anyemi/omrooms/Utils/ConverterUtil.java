@@ -8,6 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class ConverterUtil {
 
@@ -59,5 +60,53 @@ public class ConverterUtil {
         }
         return nextDay;
 
+    }
+
+    public static boolean checkCurrentDateIsLessThenSaved(String date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Calendar calendar = Calendar.getInstance();
+        Date currentDate = calendar.getTime();
+
+        try {
+            Date savedDate = dateFormat.parse(date);
+            calendar.setTime(savedDate);
+            Date sDate = calendar.getTime();
+
+            long diff = sDate.getTime() - currentDate.getTime();
+            long days = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+            Log.e("diff",""+days);
+            if(days>=0){
+                return true;
+            }
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        return false;
+    }
+
+    public static int noOfDays(String checkInDate, String checkOutDate){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Calendar calendar = Calendar.getInstance();
+        long days = 0;
+        try {
+            Date date1 = dateFormat.parse(checkInDate);
+            calendar.setTime(date1);
+            Date inDate = calendar.getTime();
+
+            Date date2 = dateFormat.parse(checkOutDate);
+            calendar.setTime(date2);
+            Date outDate = calendar.getTime();
+
+            long diff = outDate.getTime() - inDate.getTime();
+            days = TimeUnit.DAYS.convert(diff,TimeUnit.MILLISECONDS);
+
+            return (int) days;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return (int) days;
     }
 }

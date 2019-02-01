@@ -14,6 +14,7 @@ import android.widget.CalendarView;
 import com.anyemi.omrooms.R;
 import com.anyemi.omrooms.UI.CalenderActivity;
 import com.anyemi.omrooms.Utils.ConverterUtil;
+import com.anyemi.omrooms.Utils.SharedPreferenceConfig;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,6 +28,8 @@ public class CalenderFragmentCheckIn extends Fragment {
 
 
     private CalendarView calendarView;
+
+    SharedPreferenceConfig sharedPreferenceConfig;
 
 
     public CalenderFragmentCheckIn() {
@@ -44,15 +47,24 @@ public class CalenderFragmentCheckIn extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Calendar calendar = Calendar.getInstance();
+        sharedPreferenceConfig = new SharedPreferenceConfig(getActivity());
+        String checkInDate = sharedPreferenceConfig.readCheckInDate();
 
-        long inactiveDate = calendar.getTime().getTime();
+
+        Calendar calendar = Calendar.getInstance();
+        long date;
+        if(checkInDate != null){
+            date = ConverterUtil.ConvertDateToSetOnCalender(checkInDate);
+        }else {
+            date = calendar.getTime().getTime();
+        }
+
 //        calendar.add(Calendar.DAY_OF_YEAR,+1);
 
-        long date = calendar.getTime().getTime();
+        long inActiveDate = calendar.getTime().getTime();
 
         calendarView = view.findViewById(R.id.calendarView);
-        calendarView.setMinDate(inactiveDate);
+        calendarView.setMinDate(inActiveDate);
         calendarView.setDate(date);
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
