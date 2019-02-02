@@ -6,14 +6,25 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
+import com.anyemi.omrooms.Adapters.RoomGuestAdapter;
+import com.anyemi.omrooms.Models.RoomsGuest;
 import com.anyemi.omrooms.R;
 
+import java.util.ArrayList;
+
 public class RoomGuestFragment extends Fragment {
+
+    ArrayList<RoomsGuest> roomsGuests;
+    RecyclerView recyclerViewRoomsGuest;
+
     private OnFragmentInteractionListener mListener;
     public RoomGuestFragment() {
     }
@@ -30,7 +41,20 @@ public class RoomGuestFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.room_guest_fragment, container, false);
+        //return inflater.inflate(R.layout.room_guest_fragment, container, false);
+
+        View rootView = inflater.inflate(R.layout.room_guest_fragment, container,false);
+        recyclerViewRoomsGuest = rootView.findViewById(R.id.rooms_guest_rv);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        recyclerViewRoomsGuest.setLayoutManager(layoutManager);
+
+        roomsGuests = new ArrayList<RoomsGuest>();
+        roomsGuests.add(new RoomsGuest("Room 1"));
+
+        RoomGuestAdapter roomGuestAdapter = new RoomGuestAdapter(roomsGuests, getActivity());
+        recyclerViewRoomsGuest.setAdapter(roomGuestAdapter);
+        return rootView;
     }
 
 

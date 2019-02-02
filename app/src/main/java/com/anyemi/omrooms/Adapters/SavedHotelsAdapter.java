@@ -30,7 +30,7 @@ public class SavedHotelsAdapter extends RecyclerView.Adapter<SavedHotelsAdapter.
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.test_lay, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.saved_items, viewGroup, false);
         return new MyViewHolder(view);
     }
 

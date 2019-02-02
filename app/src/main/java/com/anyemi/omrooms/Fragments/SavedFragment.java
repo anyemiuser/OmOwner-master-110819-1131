@@ -43,7 +43,7 @@ public class SavedFragment extends Fragment {
         recyclerViewSavedHotels.setLayoutManager(layoutManager);
 
         savedHotelsList = new ArrayList<SavedHotels>();
-        savedHotelsList.add(new SavedHotels("The Park Hotel", R.drawable.park));git
+        savedHotelsList.add(new SavedHotels("The Park Hotel", R.drawable.park));
         savedHotelsList.add(new SavedHotels("Hotel Akshaya", R.drawable.akshaya));
         savedHotelsList.add(new SavedHotels("Hotel Chandra's", R.drawable.chandras));
         savedHotelsList.add(new SavedHotels("Sai priya Beach", R.drawable.saiprlya));
