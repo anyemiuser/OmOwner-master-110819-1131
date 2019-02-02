@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import com.anyemi.omrooms.Adapters.RoomGuestAdapter;
 import com.anyemi.omrooms.Models.RoomsGuest;
 import com.anyemi.omrooms.R;
+import com.anyemi.omrooms.UI.CalenderActivity;
 
 import java.util.ArrayList;
 
@@ -59,6 +60,8 @@ public class RoomGuestFragment extends Fragment {
 
 
 
+
+
     @Override
     public void onResume() {
         super.onResume();
@@ -89,6 +92,8 @@ public class RoomGuestFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        CalenderActivity.rooms=1;
+        CalenderActivity.guests = 2;
 
 
 

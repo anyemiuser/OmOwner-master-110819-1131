@@ -1,5 +1,6 @@
 package com.anyemi.omrooms.api;
 
+import com.anyemi.omrooms.Model.HotelAreaList;
 import com.anyemi.omrooms.Model.UserRequest;
 import com.anyemi.omrooms.Model.UserResponse;
 
@@ -23,8 +24,13 @@ public interface OmRoomApi {
 //    @GET("lapi.php")
 //    Call<ReportDetails> getResponse(@Query("rquest") String typeReport);
 //
-//    @GET("lapi.php")
-//    Call<CategoryDetails> getTotalService(@Query("rquest") String typeReport);
+    @GET("api.php")
+    Call<HotelAreaList> getHotelList(@Query("f") String typeReport,
+                                        @Query("city") String city,
+                                        @Query("string") String string,
+                                        @Query("CheckinDate") String checkIn,
+                                        @Query("CheckoutDate") String checkOut,
+                                        @Query("NumberofRooms") String noOfRooms);
 //
 //    @GET("lapi.php")
 //    Call<UnbilledServices> getUnbilledServices(@Query("rquest") String typeReport,

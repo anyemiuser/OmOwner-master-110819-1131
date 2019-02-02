@@ -6,6 +6,8 @@ import android.util.Log;
 
 import com.anyemi.omrooms.R;
 
+import java.util.Set;
+
 
 public class SharedPreferenceConfig {
     private SharedPreferences sharedPreferences;
@@ -15,6 +17,54 @@ public class SharedPreferenceConfig {
         this.context = context;
         sharedPreferences = context.getSharedPreferences(context.getResources().getString(R.string.login_prferance), Context.MODE_PRIVATE);
 
+    }
+
+    public void writeCheckInDate(String setCheck){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(context.getResources().getString(R.string.check_in_out_preference),setCheck);
+        editor.apply();
+    }
+
+    public String readCheckInDate(){
+        String checkIn;
+        checkIn = sharedPreferences.getString(context.getResources().getString(R.string.check_in_out_preference),null);
+        return checkIn;
+    }
+
+    public void writeCheckOutDate(String setCheck){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(context.getResources().getString(R.string.check_out_preference),setCheck);
+        editor.apply();
+    }
+
+    public String readCheckOutDate(){
+        String checkIn;
+        checkIn = sharedPreferences.getString(context.getResources().getString(R.string.check_out_preference),null);
+        return checkIn;
+    }
+
+    public void writeNoOfRooms(int rooms){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(context.getResources().getString(R.string.no_of_rooms_preference),rooms);
+        editor.apply();
+    }
+
+    public int readNoOfRooms(){
+        int rooms;
+        rooms = sharedPreferences.getInt(context.getResources().getString(R.string.no_of_rooms_preference),1);
+        return rooms;
+    }
+
+    public void writeNoOfGuests(int guests){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(context.getResources().getString(R.string.no_of_guests_preference),guests);
+        editor.apply();
+    }
+
+    public int readNoOfGuests(){
+        int guests;
+        guests = sharedPreferences.getInt(context.getResources().getString(R.string.no_of_guests_preference),1);
+        return guests;
     }
 
 
