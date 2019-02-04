@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".UI.AreaHotelsActivity"></activity>
+        <activity android:name=".RoomActivity"></activity>
         <activity android:name=".UI.HotelActivity" />
         <activity
             android:name=".UI.CalenderActivity"
