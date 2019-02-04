@@ -40,12 +40,12 @@ public class BookingFragment extends Fragment {
 
         Toolbar toolbar = getActivity().findViewById(R.id.toolbarId);
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().onBackPressed();
-            }
-        });
+//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                getActivity().onBackPressed();
+//            }
+//        });
 
     }
 }
