@@ -83,8 +83,9 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onClick(View view, int position) {
                 HotelArea hotelArea = searchedHotelAreas.get(position);
-                Toast.makeText(SearchActivity.this, ""+hotelArea.getHotelName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(SearchActivity.this, ""+hotelArea.getHotelId()+hotelArea.getHotelName(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(SearchActivity.this,HotelActivity.class);
+                intent.putExtra("hotelId",hotelArea.getHotelId());
                 startActivity(intent);
 //                finish();
 
@@ -95,6 +96,24 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
             }
         }));
+
+        areaRv.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), areaRv, new RecyclerTouchListener.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                HotelArea hotelArea = searchedHotelAreas.get(position);
+                Toast.makeText(SearchActivity.this, ""+hotelArea.getHotelarea()+hotelArea.getHotelName(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(SearchActivity.this,AreaHotelsActivity.class);
+                intent.putExtra("area",hotelArea.getHotelarea());
+                startActivity(intent);
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
+
+
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
