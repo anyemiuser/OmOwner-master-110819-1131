@@ -11,11 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.anyemi.omrooms.Adapters.LocationAdapter;
 import com.anyemi.omrooms.Adapters.SavedHotelsAdapter;
-import com.anyemi.omrooms.MainActivity;
-import com.anyemi.omrooms.Models.Hotels;
-import com.anyemi.omrooms.Models.Location;
 import com.anyemi.omrooms.Models.SavedHotels;
 import com.anyemi.omrooms.R;
 

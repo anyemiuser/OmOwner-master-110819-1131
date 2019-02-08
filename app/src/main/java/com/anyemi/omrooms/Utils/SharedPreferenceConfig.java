@@ -95,5 +95,17 @@ public class SharedPreferenceConfig {
         Log.i("SharedPreferanceRead: ",""+name);
         return name;
     }
+    public void writeCityName(String name){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(context.getResources().getString(R.string.city_name_preference), name);
+        Log.i("SharedPreferanceWrite: ",""+name);
+        editor.apply();
+    }
 
+    public String readCityName() {
+        String name;
+        name = sharedPreferences.getString(context.getResources().getString(R.string.city_name_preference),"Vizag");
+        Log.i("SharedPreferanceRead: ",""+name);
+        return name;
+    }
 }

@@ -67,19 +67,24 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields {
         Toast.makeText(this, ""+hotelId, Toast.LENGTH_SHORT).show();
 
         OmRoomApi omRoomApi = ApiUtils.getOmRoomApi();
-        omRoomApi.getHotelDetails("HotelDetails","1")
+        omRoomApi.getHotelDetails("HotelDetails",hotelId)
                 .enqueue(new Callback<HotelDetails>() {
                     @Override
                     public void onResponse(Call<HotelDetails> call, Response<HotelDetails> response) {
                         if(response.isSuccessful()){
                             HotelDetails hotelDetails = response.body();
 
-                            Log.e("hotel area",""+hotelDetails.getHoteldetails().getHotel_area());
-                            Log.e("room type",""+hotelDetails.getHoteldetails().getRoomdetails().get(0).getRoom_type());
-                            Log.e("Response successful",""+response.toString());
-                            List<RoomFacility> facilities = ConverterUtil.checkFacilityAvailable(hotelDetails.getHoteldetails().getRoomdetails());
-                            setFacilityRv(facilities);
-                            setRoomTypeRv(hotelDetails.getHoteldetails().getRoomdetails());
+                            if (hotelDetails != null && hotelDetails.getMsg().equals("Successfully send") && response.code() == 200) {
+                                List<RoomFacility> facilities = ConverterUtil.checkFacilityAvailable(hotelDetails.getHoteldetails().getRoomdetails());
+                                setFacilityRv(facilities);
+                                setRoomTypeRv(hotelDetails.getHoteldetails().getRoomdetails());
+                            }else {
+                                Toast.makeText(HotelActivity.this, ""+hotelDetails.getMsg(), Toast.LENGTH_SHORT).show();
+                            }
+//                            Log.e("hotel area",""+hotelDetails.getHoteldetails().getHotel_area());
+//                            Log.e("room type",""+hotelDetails.getHoteldetails().getRoomdetails().get(0).getRoom_type());
+//                            Log.e("Response successful",""+response.toString());
+
                         }else{
                             Log.e("Response not successful",""+response.toString());
                         }

@@ -9,18 +9,23 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.anyemi.omrooms.Model.Top10Hotel;
+import com.anyemi.omrooms.Model.TopHotels;
 import com.anyemi.omrooms.Models.Hotels;
 import com.anyemi.omrooms.R;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.MyHotelViewHolder> {
 
 
-    private ArrayList<Hotels> hotels;
+    private List<Top10Hotel> hotels;
     private Context context;
 
-    public HotelAdapter(ArrayList<Hotels> hotels, Context context) {
+    public HotelAdapter(List<Top10Hotel> hotels, Context context) {
         this.hotels = hotels;
         this.context = context;
     }
@@ -28,16 +33,46 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.MyHotelViewH
     @NonNull
     @Override
     public MyHotelViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.hotels_items, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recomonded_hotel, viewGroup, false);
         return new MyHotelViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyHotelViewHolder myHotelViewHolder, int i) {
+    public void onBindViewHolder(@NonNull MyHotelViewHolder holder, int position) {
 
-        Hotels hotel = hotels.get(i);
-        myHotelViewHolder.hotelsTextView.setText(hotel.getHotelName());
-        myHotelViewHolder.hotelsImageView.setImageResource(hotel.getHotelImage());
+        Top10Hotel hotel = hotels.get(position);
+        holder.hotelsTextView.setText(hotel.getHotel_name());
+//        myHotelViewHolder.hotelsImageView.setImageResource(hotel.getHotelImage());
+        Glide.with(context)
+                .load(hotel.getHotel_image_url())
+                .error(R.drawable.ic_location_city)
+                // read original from cache (if present) otherwise download it and decode it
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .into(holder.hotelsImageView);
+        long rating = 0;
+//        hotel.setHotel_rating("null");
+        if(hotel.getHotel_rating() != null && hotel.getHotel_rating().length()>0){
+            try {
+                rating = Long.parseLong(hotel.getHotel_rating());
+            }catch (NumberFormatException e){
+                rating =1;
+            }
+
+        }
+
+        String rate= null;
+        if(rating>=4.5){
+            rate = String.valueOf(rating)+" Excellent";
+        }else if(rating>=4 && (rating < 4.5)){
+            rate = String.valueOf(rating)+" Very Good";
+        }else {
+            rate = String.valueOf(rating)+" Good";
+        }
+        holder.rating.setText(rate);
+        String range = "₹"+hotel.getHotel_low_range()+" - "+"₹"+hotel.getHotel_high_range();
+        holder.priceRange.setText(range);
+
+        holder.area.setText(hotel.getHotel_area());
 
     }
 
@@ -48,7 +83,7 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.MyHotelViewH
 
     public class MyHotelViewHolder extends RecyclerView.ViewHolder {
 
-        TextView hotelsTextView;
+        TextView hotelsTextView,rating,priceRange,area;
         ImageView hotelsImageView;
 
         public MyHotelViewHolder(@NonNull View itemView) {
@@ -56,6 +91,9 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.MyHotelViewH
 
             hotelsTextView = itemView.findViewById(R.id.hotels_name);
             hotelsImageView = itemView.findViewById(R.id.hotels_image);
+            rating = itemView.findViewById(R.id.hotel_rating);
+            priceRange = itemView.findViewById(R.id.price_range);
+            area = itemView.findViewById(R.id.area_name);
         }
     }
 }

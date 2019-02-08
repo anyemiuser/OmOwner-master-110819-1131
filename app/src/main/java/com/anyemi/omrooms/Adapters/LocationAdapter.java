@@ -9,18 +9,21 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.anyemi.omrooms.Models.Location;
+import com.anyemi.omrooms.Model.Location;
 import com.anyemi.omrooms.R;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.MyViewHolder> {
 
 
-    private ArrayList<Location> locations;
+    private List<Location> locations;
     private Context context;
 
-    public LocationAdapter(ArrayList<Location> locations, Context context) {
+    public LocationAdapter(List<Location> locations, Context context) {
         this.locations = locations;
         this.context = context;
     }
@@ -36,8 +39,13 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.MyView
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
         Location location = locations.get(i);
-        myViewHolder.locationsTextView.setText(location.getLocationName());
-        myViewHolder.locationsImageView.setImageResource(location.getLocationImage());
+        myViewHolder.locationsTextView.setText(location.getHotel_area());
+        Glide.with(context)
+                .load(location.getHotel_image_url())
+                .error(R.drawable.ic_location_city)
+                // read original from cache (if present) otherwise download it and decode it
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .into(myViewHolder.locationsImageView);
 
     }
 

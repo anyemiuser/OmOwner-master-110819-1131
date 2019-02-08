@@ -15,11 +15,17 @@
     <string name="check_out_preference">com.anyemi.omrooms.Utils.check_out_preference</string>
     <string name="no_of_rooms_preference">com.anyemi.omrooms.Utils.no_of_rooms</string>
     <string name="no_of_guests_preference">com.anyemi.omrooms.Utils.no_of_guests</string>
+    <string name="city_name_preference">com.anyemi.omrooms.Utils.city_name_preference</string>
+    <string name="select_city">Select City</string>
 
     <string-array name="gender">
         <item>Male</item>
         <item>Female</item>
         <item>Transgender</item>
+    </string-array>
+
+    <string-array name="city">
+        <item>Vizag</item>
     </string-array>
 
 </resources>

@@ -180,7 +180,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                             if(response.isSuccessful()){
 
                                 HotelAreaList hotelAreaList = response.body();
-                                if(hotelAreaList.getMsg().equals("Successfully send")){
+                                if(hotelAreaList!= null && hotelAreaList.getMsg().equals("Successfully send")){
                                     searchedHotelAreas.clear();
                                     // master list (hotelAreas) contains all hotel and area list
                                     hotelAreas= hotelAreaList.getHotels();
@@ -200,6 +200,8 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
                                 }else if(hotelAreaList.getMsg().equals("No Records")){
                                     Toast.makeText(SearchActivity.this, ""+hotelAreaList.getMsg()+" Found", Toast.LENGTH_SHORT).show();
+                                }else {
+                                    Toast.makeText(SearchActivity.this, ""+hotelAreaList.getMsg(), Toast.LENGTH_SHORT).show();
                                 }
 
                             }

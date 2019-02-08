@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.anyemi.omrooms.Models.Location;
 import com.anyemi.omrooms.Models.SavedHotels;
 import com.anyemi.omrooms.R;
 
