@@ -49,8 +49,8 @@ public class FacilityListAdapter extends RecyclerView.Adapter<FacilityListAdapte
         private TextView facilityType, roomType;
         public FacilityViewHolder(@NonNull View itemView) {
             super(itemView);
-            facilityImage = itemView.findViewById(R.id.type_image);
-            facilityType = itemView.findViewById(R.id.facility_name);
+            facilityImage = itemView.findViewById(R.id.facility_image);
+            facilityType = itemView.findViewById(R.id.facility_title);
             roomType = itemView.findViewById(R.id.room_type);
         }
     }

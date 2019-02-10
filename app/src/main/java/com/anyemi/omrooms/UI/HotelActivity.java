@@ -47,7 +47,9 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(null);
         ActionBar actionbar = getSupportActionBar();
+
         if (getSupportActionBar() != null) {
             actionbar.setDisplayHomeAsUpEnabled(true);
 //            actionbar.setTitle(category);
@@ -126,12 +128,12 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields {
 //        private RecyclerView facilityRv,roomTypeRv;
 //        private Button bookRoom;
         hotelImage = findViewById(R.id.hotel_image);
-        locImage = findViewById(R.id.location_image);
+        locImage = findViewById(R.id.location_placeholder);
         hotelName = findViewById(R.id.hotels_name);
-        nearBy = findViewById(R.id.near_by_area_text);
+        nearBy = findViewById(R.id.hotel_address);
         rating = findViewById(R.id.rating);
         ratingTitle = findViewById(R.id.rating_title);
-        noOfRating = findViewById(R.id.no_of_rating);
+        noOfRating = findViewById(R.id.no_of_ratings);
         bookRoom = findViewById(R.id.book_room);
 
         facilityRv = findViewById(R.id.facility_rv);

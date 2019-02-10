@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_hotel">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,58 +16,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/location_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/hotel_name"
-                tools:srcCompat="@tools:sample/avatars" />
-
-            <TextView
-                android:id="@+id/near_by_area_text"
-                android:layout_width="251dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:text="TextView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/location_image"
-                app:layout_constraintTop_toBottomOf="@+id/hotel_name" />
-
-            <TextView
-                android:id="@+id/rating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:text="TextView"
-                app:layout_constraintStart_toEndOf="@+id/location_image"
-                app:layout_constraintTop_toBottomOf="@+id/near_by_area_text" />
-
-            <TextView
-                android:id="@+id/rating_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="TextView"
-                app:layout_constraintStart_toEndOf="@+id/rating"
-                app:layout_constraintTop_toBottomOf="@+id/near_by_area_text" />
-
-            <TextView
-                android:id="@+id/no_of_rating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:text="TextView"
-                app:layout_constraintStart_toEndOf="@+id/rating_title"
-                app:layout_constraintTop_toBottomOf="@+id/near_by_area_text" />
-
             <TextView
                 android:id="@+id/hotel_name"
                 android:layout_width="0dp"
@@ -74,17 +23,92 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
-                android:text="TextView"
+                android:text="Hotel Akshaya"
+                android:textColor="@android:color/black"
+                android:textSize="22sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/location_placeholder"
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_map"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/hotel_name" />
+
+            <TextView
+                android:id="@+id/hotel_address"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/opensans_regular"
+                android:gravity="start"
+                android:maxLines="3"
+                android:text="23rd Cross, Ejipura Main Road, Near Ejipure Signal, Koramangla,Ejipura, vishakapatanam"
+                android:textStyle="normal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.095"
+                app:layout_constraintStart_toEndOf="@+id/location_placeholder"
+                app:layout_constraintTop_toBottomOf="@+id/hotel_name" />
+
+            <TextView
+                android:id="@+id/rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="4dp"
+                android:background="#008000"
+                android:padding="3dp"
+                android:text="4.6"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                app:layout_constraintHorizontal_bias="0.095"
+                app:layout_constraintStart_toEndOf="@+id/location_placeholder"
+                app:layout_constraintTop_toBottomOf="@+id/hotel_address" />
+
+            <TextView
+                android:id="@+id/rating_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="#90EE90"
+                android:padding="3dp"
+                android:text="Excellent"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textColor="#006400"
+                android:textStyle="normal"
+                app:layout_constraintStart_toEndOf="@+id/rating"
+                app:layout_constraintTop_toBottomOf="@+id/hotel_address" />
+
+            <TextView
+                android:id="@+id/no_of_ratings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:padding="3dp"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:text="3760 Ratings > "
+                app:layout_constraintStart_toEndOf="@+id/rating_title"
+                app:layout_constraintTop_toBottomOf="@+id/hotel_address" />
         </android.support.constraint.ConstraintLayout>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/facility_rv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
 
         </android.support.v7.widget.RecyclerView>
 
@@ -159,8 +183,9 @@
             android:id="@+id/room_guest"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="1 Classic Room,2 Adults >"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:text="1 Classic Room,2 Adults >" />
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/room_types_rv"
             android:layout_width="match_parent"
@@ -172,7 +197,7 @@
             android:id="@+id/book_room"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Book Room"/>
+            android:text="Book Room" />
 
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

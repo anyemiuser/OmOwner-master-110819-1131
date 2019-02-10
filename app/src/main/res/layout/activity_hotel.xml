@@ -8,14 +8,13 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBar"
         android:layout_width="match_parent"
-        android:layout_height="300dp">
+        android:layout_height="220dp">
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/colapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_scrollFlags="exitUntilCollapsed|scroll"
             app:contentScrim="@color/colorPrimary"
-            app:title="Hotel"
             app:expandedTitleMarginStart="48dp"
             app:expandedTitleMarginEnd="64dp">
             <ImageView
