@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -51,6 +53,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     LocationAdapter locationAdapter;
     SharedPreferenceConfig sharedPreferenceConfig;
     private ProgressBar progressBarArea;
+    ImageButton notificationButton;
 
 
     @Nullable
@@ -61,8 +64,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 //        return inflater.inflate(R.layout.fragment_home,null);
         View rootview = inflater.inflate(R.layout.fragment_home, container, false);
         sharedPreferenceConfig = new SharedPreferenceConfig(getActivity());
+        notificationButton = rootview.findViewById(R.id.notification_button);
 
 
+        notificationButton.setOnClickListener(this);
         return rootview;
     }
 
@@ -226,11 +231,23 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
+        Fragment fragment = null;
         switch (view.getId()) {
             case R.id.toolbar:
                 Intent intent = new Intent(getActivity(), SearchActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.notification_button:
+                fragment = new NotificationsFragment();
+                openNotificationFragment(fragment);
+                break;
         }
+    }
+
+    public void openNotificationFragment(Fragment notifFrag){
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, notifFrag);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 }
