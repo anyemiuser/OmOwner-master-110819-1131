@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">नमस्ते</string>
+    <string name="checkin">चेक-इन दिनांक का चयन करें</string>
+    <string name="check_in_date">चेक-इन दिनांक का चयन करें</string>
+    <string name="gender_prompt">अपना लिंग चुनें</string>
+    <string name="select_city">शहर चुनें</string>
+</resources>

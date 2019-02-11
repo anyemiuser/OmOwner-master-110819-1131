@@ -1,8 +1,7 @@
 package com.anyemi.omrooms.Model;
 
-import java.util.List;
+public class Hotels {
 
-public class HotelDetail {
     private String hotel_id;
     private String hotel_name;
     private String hotel_latitude;
@@ -22,12 +21,10 @@ public class HotelDetail {
     private String hotel_other_rate;
     private String hotel_image_url;
 
-    private List<RoomDetails> roomdetails;
-
-    public HotelDetail() {
+    public Hotels() {
     }
 
-    public HotelDetail(String hotel_id, String hotel_name, String hotel_latitude, String hotel_longitude, String hotel_state, String hotel_district, String hotel_city, String hotel_area, String hotel_pin, String hotel_owner_id, String hotel_low_range, String hotel_high_range, String hotel_rating, String hotel_no_of_ratings, String hotel_gst_rate, String hotel_service_rate, String hotel_other_rate, String hotel_image_url, List<RoomDetails> roomdetails) {
+    public Hotels(String hotel_id, String hotel_name, String hotel_latitude, String hotel_longitude, String hotel_state, String hotel_district, String hotel_city, String hotel_area, String hotel_pin, String hotel_owner_id, String hotel_low_range, String hotel_high_range, String hotel_rating, String hotel_no_of_ratings, String hotel_gst_rate, String hotel_service_rate, String hotel_other_rate, String hotel_image_url) {
         this.hotel_id = hotel_id;
         this.hotel_name = hotel_name;
         this.hotel_latitude = hotel_latitude;
@@ -45,15 +42,6 @@ public class HotelDetail {
         this.hotel_gst_rate = hotel_gst_rate;
         this.hotel_service_rate = hotel_service_rate;
         this.hotel_other_rate = hotel_other_rate;
-        this.hotel_image_url = hotel_image_url;
-        this.roomdetails = roomdetails;
-    }
-
-    public String getHotel_image_url() {
-        return hotel_image_url;
-    }
-
-    public void setHotel_image_url(String hotel_image_url) {
         this.hotel_image_url = hotel_image_url;
     }
 
@@ -193,11 +181,11 @@ public class HotelDetail {
         this.hotel_other_rate = hotel_other_rate;
     }
 
-    public List<RoomDetails> getRoomdetails() {
-        return roomdetails;
+    public String getHotel_image_url() {
+        return hotel_image_url;
     }
 
-    public void setRoomdetails(List<RoomDetails> roomdetails) {
-        this.roomdetails = roomdetails;
+    public void setHotel_image_url(String hotel_image_url) {
+        this.hotel_image_url = hotel_image_url;
     }
 }

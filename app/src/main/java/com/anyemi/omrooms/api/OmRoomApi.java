@@ -3,6 +3,7 @@ package com.anyemi.omrooms.api;
 import com.anyemi.omrooms.Model.AreaUnderCity;
 import com.anyemi.omrooms.Model.HotelAreaList;
 import com.anyemi.omrooms.Model.HotelDetails;
+import com.anyemi.omrooms.Model.HotelList;
 import com.anyemi.omrooms.Model.TopHotels;
 import com.anyemi.omrooms.Model.UserRequest;
 import com.anyemi.omrooms.Model.UserResponse;
@@ -49,6 +50,17 @@ public interface OmRoomApi {
                                         @Query("state") String state,
                                         @Query("district") String district,
                                         @Query("city") String city);
+
+    @GET("api.php")
+    Call<HotelList> getHotelListOnIndexAreaWise(@Query("f") String typeReport,
+                                        @Query("State") String state,
+                                        @Query("District") String district,
+                                        @Query("city") String city,
+                                        @Query("Area") String area,
+                                        @Query("CheckinDate") String checkIn,
+                                        @Query("CheckoutDate") String checkOut,
+                                        @Query("NumberofRooms") String noORooms,
+                                        @Query("index") String index);
 
 
 //

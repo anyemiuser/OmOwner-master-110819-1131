@@ -1,18 +1,16 @@
 package com.anyemi.omrooms.Model;
 
-import java.util.List;
-
 public class HotelDetails {
     private String status;
     private String msg;
-    private HotelDetail hoteldetails;
+    private HotelAndRoomDetail hoteldetails;
     private String hotel_images_url;
     private String room_images_url;
 
     public HotelDetails() {
     }
 
-    public HotelDetails(String status, String msg, HotelDetail hoteldetails, String hotel_images_url, String room_images_url) {
+    public HotelDetails(String status, String msg, HotelAndRoomDetail hoteldetails, String hotel_images_url, String room_images_url) {
         this.status = status;
         this.msg = msg;
         this.hoteldetails = hoteldetails;
@@ -36,11 +34,11 @@ public class HotelDetails {
         this.msg = msg;
     }
 
-    public HotelDetail getHoteldetails() {
+    public HotelAndRoomDetail getHoteldetails() {
         return hoteldetails;
     }
 
-    public void setHoteldetails(HotelDetail hoteldetails) {
+    public void setHoteldetails(HotelAndRoomDetail hoteldetails) {
         this.hoteldetails = hoteldetails;
     }
 

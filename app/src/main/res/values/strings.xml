@@ -1,21 +1,21 @@
 <resources>
     <string name="app_name">Om Rooms</string>
-    <string name="login_prferance">com.anyemi.omrooms.Utils.login_preference</string>
-    <string name="phone_no_preference">com.anyemi.omrooms.Utils.phone_no_preference</string>
-    <string name="name_preference">com.anyemi.omrooms.Utils.customer_name</string>
+    <string name="login_prferance" translatable="false">com.anyemi.omrooms.Utils.login_preference</string>
+    <string name="phone_no_preference" translatable="false">com.anyemi.omrooms.Utils.phone_no_preference</string>
+    <string name="name_preference" translatable="false">com.anyemi.omrooms.Utils.customer_name</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="checkin">Select Check-in Date</string>
     <string name="check_in_date">Select Check-In Date</string>
 
 
     <string name="gender_prompt">Choose your Gender</string>
-    <string name="check_in_out_preference">com.anyemi.omrooms.Utils.check_in_out_preference</string>
-    <string name="check_out_preference">com.anyemi.omrooms.Utils.check_out_preference</string>
-    <string name="no_of_rooms_preference">com.anyemi.omrooms.Utils.no_of_rooms</string>
-    <string name="no_of_guests_preference">com.anyemi.omrooms.Utils.no_of_guests</string>
-    <string name="city_name_preference">com.anyemi.omrooms.Utils.city_name_preference</string>
+    <string name="check_in_out_preference" translatable="false">com.anyemi.omrooms.Utils.check_in_out_preference</string>
+    <string name="check_out_preference" translatable="false">com.anyemi.omrooms.Utils.check_out_preference</string>
+    <string name="no_of_rooms_preference" translatable="false">com.anyemi.omrooms.Utils.no_of_rooms</string>
+    <string name="no_of_guests_preference" translatable="false">com.anyemi.omrooms.Utils.no_of_guests</string>
+    <string name="city_name_preference" translatable="false">com.anyemi.omrooms.Utils.city_name_preference</string>
     <string name="select_city">Select City</string>
 
     <string-array name="gender">
