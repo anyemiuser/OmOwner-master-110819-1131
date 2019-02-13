@@ -10,13 +10,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.anyemi.omrooms.Model.Top10Hotel;
-import com.anyemi.omrooms.Model.TopHotels;
-import com.anyemi.omrooms.Models.Hotels;
 import com.anyemi.omrooms.R;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.MyHotelViewHolder> {
@@ -33,7 +30,7 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.MyHotelViewH
     @NonNull
     @Override
     public MyHotelViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recomonded_hotel, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recommended_hotel, viewGroup, false);
         return new MyHotelViewHolder(view);
     }
 
