@@ -1,5 +1,6 @@
 package com.anyemi.omrooms.UI;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import com.anyemi.omrooms.Adapters.FacilityListAdapter;
 import com.anyemi.omrooms.Adapters.RoomTypeAdapter;
 import com.anyemi.omrooms.Adapters.SearchListAdapter;
+import com.anyemi.omrooms.Model.HotelAndRoomDetail;
 import com.anyemi.omrooms.Model.HotelDetails;
 import com.anyemi.omrooms.Model.RoomDetails;
 import com.anyemi.omrooms.Model.RoomFacility;
@@ -23,6 +25,8 @@ import com.anyemi.omrooms.Utils.ConstantFields;
 import com.anyemi.omrooms.Utils.ConverterUtil;
 import com.anyemi.omrooms.api.ApiUtils;
 import com.anyemi.omrooms.api.OmRoomApi;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +37,7 @@ import retrofit2.Response;
 
 public class HotelActivity extends AppCompatActivity implements ConstantFields {
 
+    private static final String TAG_HOTEL = HotelActivity.class.getName();
     private ImageView hotelImage, locImage;
     private TextView hotelName,nearBy,rating,ratingTitle,noOfRating;
     private RecyclerView facilityRv,roomTypeRv;
@@ -45,19 +50,22 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hotel);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(null);
-        ActionBar actionbar = getSupportActionBar();
 
-        if (getSupportActionBar() != null) {
-            actionbar.setDisplayHomeAsUpEnabled(true);
-//            actionbar.setTitle(category);
-        }
 
         init();
+        Intent intent =getIntent();
+        String hotelId = intent.getStringExtra("hotelId");
+        String hotelName = intent.getStringExtra("hotelName");
 
-        String hotelId = getIntent().getStringExtra("hotelId");
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionbar = getSupportActionBar();
+
+        if (actionbar != null) {
+            actionbar.setDisplayHomeAsUpEnabled(true);
+            actionbar.setTitle(hotelName);
+        }
+
         if(hotelId != null){
             showHotelDetails(hotelId);
         }
@@ -78,6 +86,8 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields {
 
                             if (hotelDetails != null && hotelDetails.getMsg().equals("Successfully send") && response.code() == 200) {
                                 List<RoomFacility> facilities = ConverterUtil.checkFacilityAvailable(hotelDetails.getHoteldetails().getRoomdetails());
+                                setDataToUI(hotelDetails.getHoteldetails());
+                                Log.e(TAG_HOTEL,""+hotelDetails.getHoteldetails().getHotel_name());
                                 setFacilityRv(facilities);
                                 setRoomTypeRv(hotelDetails.getHoteldetails().getRoomdetails());
                             }else {
@@ -104,6 +114,7 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields {
 
 
 
+
     private void setRoomTypeRv(List<RoomDetails> roomdetails) {
         LinearLayoutManager layoutManager = new LinearLayoutManager(HotelActivity.this);
         roomTypeRv.setLayoutManager(layoutManager);
@@ -122,6 +133,22 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields {
 
     }
 
+    private void setDataToUI(HotelAndRoomDetail hotel) {
+
+        Glide.with(this)
+                .load(hotel.getHotel_image_url())
+                .error(R.drawable.ic_location_city)
+                // read original from cache (if present) otherwise download it and decode it
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .into(hotelImage);
+        hotelName.setText(hotel.getHotel_name());
+        String nearByPlace = hotel.getHotel_area()+", "+hotel.getHotel_city()+", "+hotel.getHotel_district();
+        nearBy.setText(nearByPlace);
+        ratingTitle.setText(hotel.getHotel_rating());
+        noOfRating.setText(hotel.getHotel_no_of_ratings());
+
+    }
+
     private void init() {
 //        private ImageView hotelImage;
 //        private TextView hotelName,nearBy,rating,ratingTitle,noOfRating;
@@ -129,7 +156,7 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields {
 //        private Button bookRoom;
         hotelImage = findViewById(R.id.hotel_image);
         locImage = findViewById(R.id.location_placeholder);
-        hotelName = findViewById(R.id.hotels_name);
+        hotelName = findViewById(R.id.hotel_name_h);
         nearBy = findViewById(R.id.hotel_address);
         rating = findViewById(R.id.rating);
         ratingTitle = findViewById(R.id.rating_title);

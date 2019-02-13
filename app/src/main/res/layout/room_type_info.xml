@@ -17,7 +17,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/hotel_name"
+                android:id="@+id/hotel_name_h"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -39,7 +39,7 @@
                 android:layout_marginTop="16dp"
                 android:src="@drawable/ic_map"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/hotel_name" />
+                app:layout_constraintTop_toBottomOf="@+id/hotel_name_h" />
 
             <TextView
                 android:id="@+id/hotel_address"
@@ -56,7 +56,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.095"
                 app:layout_constraintStart_toEndOf="@+id/location_placeholder"
-                app:layout_constraintTop_toBottomOf="@+id/hotel_name" />
+                app:layout_constraintTop_toBottomOf="@+id/hotel_name_h" />
 
             <TextView
                 android:id="@+id/rating"

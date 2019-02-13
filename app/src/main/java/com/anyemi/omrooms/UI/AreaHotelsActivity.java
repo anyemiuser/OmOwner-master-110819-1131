@@ -80,7 +80,7 @@ public class AreaHotelsActivity extends AppCompatActivity {
     private void showAllHotelsUnderTheArea(String area) {
         OmRoomApi omRoomApi = ApiUtils.getOmRoomApi();
         omRoomApi.getHotelListOnIndexAreaWise("SearchCiCdav","Andhra Pradesh","Visakhapatnam",
-                "Vizag","Seethamdhara","5","5","1","1")
+                "Visakhapatnam",area,"5","5","1","1")
                 .enqueue(new Callback<HotelList>() {
                     @Override
                     public void onResponse(Call<HotelList> call, Response<HotelList> response) {
@@ -114,5 +114,11 @@ public class AreaHotelsActivity extends AppCompatActivity {
         areaHotelsRv.setHasFixedSize(true);
         HotelListAdapter hotelListAdapter = new HotelListAdapter(hotels,AreaHotelsActivity.this);
         areaHotelsRv.setAdapter(hotelListAdapter);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

@@ -125,6 +125,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 Top10Hotel top10Hotel = hotelsList.get(position);
                 Intent intent = new Intent(getActivity(),HotelActivity.class);
                 intent.putExtra("hotelId",top10Hotel.getHotel_id());
+                intent.putExtra("hotelName",top10Hotel.getHotel_name());
                 startActivity(intent);
             }
 
