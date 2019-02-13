@@ -163,7 +163,9 @@
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
                     android:background="@android:color/white"/>
+
                 <Spinner
+                    android:id="@+id/city_spinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:entries="@array/city"

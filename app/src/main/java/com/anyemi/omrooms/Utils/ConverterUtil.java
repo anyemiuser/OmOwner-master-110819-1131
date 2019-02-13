@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.anyemi.omrooms.Model.RoomDetails;
 import com.anyemi.omrooms.Model.RoomFacility;
+import com.anyemi.omrooms.R;
 import com.anyemi.omrooms.UI.CalenderActivity;
 
 import java.text.ParseException;
@@ -290,6 +291,19 @@ public class ConverterUtil implements ConstantFields{
 
         }
         return roomFacilities;
+    }
+
+    public static int getFacilityImageResourceId(String facilityType){
+        if(facilityType.equals(ac)){
+            return R.drawable.ic_ac_unit;
+        }
+        if (facilityType.equals(cctv_camera)){
+            return R.drawable.ic_cctv;
+        }
+        if(facilityType.equals(tv)){
+            return R.drawable.ic_tv;
+        }
+        return R.drawable.ic_wifi;
     }
 
 }

@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.anyemi.omrooms.Model.RoomFacility;
 import com.anyemi.omrooms.R;
+import com.anyemi.omrooms.Utils.ConverterUtil;
 
 import java.util.List;
 
@@ -36,6 +37,8 @@ public class FacilityListAdapter extends RecyclerView.Adapter<FacilityListAdapte
         RoomFacility facility = facilityList.get(position);
         holder.facilityType.setText(facility.getFacility());
         holder.roomType.setText(facility.getRoomType());
+
+        holder.facilityImage.setImageResource(ConverterUtil.getFacilityImageResourceId(facility.getFacility()));
 
     }
 

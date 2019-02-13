@@ -1,5 +1,6 @@
 package com.anyemi.omrooms.UI;
 
+import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -22,9 +23,11 @@ import com.anyemi.omrooms.Adapters.RoomTypeAdapter;
 import com.anyemi.omrooms.Model.HotelList;
 import com.anyemi.omrooms.Model.Hotels;
 import com.anyemi.omrooms.R;
+import com.anyemi.omrooms.Utils.RecyclerTouchListener;
 import com.anyemi.omrooms.api.ApiUtils;
 import com.anyemi.omrooms.api.OmRoomApi;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -36,6 +39,7 @@ public class AreaHotelsActivity extends AppCompatActivity {
     private final String TAG_AREA_HOTEL = AreaHotelsActivity.class.getName();
     private CoordinatorLayout coordinatorLayout;
     private RecyclerView areaHotelsRv;
+    private List<Hotels> hotelListDetails = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,20 +65,38 @@ public class AreaHotelsActivity extends AppCompatActivity {
             showAllHotelsUnderTheArea(area);
         }
 
-        LayoutInflater inflater = getLayoutInflater();
-        View layout = inflater.inflate(R.layout.custom_toast,
-                (ViewGroup) findViewById(R.id.custom_toast_container));
+        areaHotelsRv.addOnItemTouchListener(new RecyclerTouchListener(this, areaHotelsRv, new RecyclerTouchListener.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Hotels hotel = hotelListDetails.get(position);
+                Intent intent = new Intent(AreaHotelsActivity.this,HotelActivity.class);
+                intent.putExtra("hotelId",hotel.getHotel_id());
+                intent.putExtra("hotelName",hotel.getHotel_name());
+                startActivity(intent);
+            }
 
-        TextView text = (TextView) layout.findViewById(R.id.text);
-        text.setText("This is a custom toast");
+            @Override
+            public void onLongClick(View view, int position) {
 
-        Toast toast = new Toast(getApplicationContext());
-        toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-        toast.setDuration(Toast.LENGTH_LONG);
-        toast.setView(layout);
-        toast.show();
+            }
+        }));
 
-        Snackbar.make(coordinatorLayout, "Hello "+getString(R.string.app_name)+area,Snackbar.LENGTH_LONG).show();
+
+        //Custome Toast
+//        LayoutInflater inflater = getLayoutInflater();
+//        View layout = inflater.inflate(R.layout.custom_toast,
+//                (ViewGroup) findViewById(R.id.custom_toast_container));
+//
+//        TextView text = (TextView) layout.findViewById(R.id.text);
+//        text.setText("This is a custom toast");
+//
+//        Toast toast = new Toast(getApplicationContext());
+//        toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+//        toast.setDuration(Toast.LENGTH_LONG);
+//        toast.setView(layout);
+//        toast.show();
+
+//        Snackbar.make(coordinatorLayout, "Hello "+getString(R.string.app_name)+area,Snackbar.LENGTH_LONG).show();
     }
 
     private void showAllHotelsUnderTheArea(String area) {
@@ -89,8 +111,8 @@ public class AreaHotelsActivity extends AppCompatActivity {
                             if (hotelList != null && hotelList.getMsg().equals("Successfully send") && response.code() == 200) {
                                 Log.e(TAG_AREA_HOTEL,""+hotelList.getHotels().get(0).getHotel_area()
                                 +hotelList.getHotels().get(0).getHotel_name());
-
-                                setHotelListRv(hotelList.getHotels());
+                                hotelListDetails = hotelList.getHotels();
+                                setHotelListRv();
 
                             }else {
                                 Snackbar.make(coordinatorLayout, "Hello "+hotelList.getMsg()+response.message()+response.code(),Snackbar.LENGTH_LONG).show();
@@ -108,11 +130,11 @@ public class AreaHotelsActivity extends AppCompatActivity {
         Toast.makeText(this, ""+area, Toast.LENGTH_SHORT).show();
     }
 
-    private void setHotelListRv(List<Hotels> hotels) {
+    private void setHotelListRv() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(AreaHotelsActivity.this);
         areaHotelsRv.setLayoutManager(layoutManager);
         areaHotelsRv.setHasFixedSize(true);
-        HotelListAdapter hotelListAdapter = new HotelListAdapter(hotels,AreaHotelsActivity.this);
+        HotelListAdapter hotelListAdapter = new HotelListAdapter(hotelListDetails,AreaHotelsActivity.this);
         areaHotelsRv.setAdapter(hotelListAdapter);
     }
 

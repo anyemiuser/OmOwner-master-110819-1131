@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
@@ -14,8 +15,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.anyemi.omrooms.Adapters.HotelAdapter;
@@ -54,6 +58,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     SharedPreferenceConfig sharedPreferenceConfig;
     private ProgressBar progressBarArea;
     ImageButton notificationButton;
+    private Spinner citySpinner;
 
 
     @Nullable
@@ -82,6 +87,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         progressBarArea = view.findViewById(R.id.area_progressBar);
         recyclerViewLocations = view.findViewById(R.id.locations_rv);
         recyclerViewHotels = view.findViewById(R.id.hotels_rv);
+        citySpinner = view.findViewById(R.id.city_spinner);
+
+        getCityList();
+
+//        setUpSpinner();
+
+
 
 
 //        searchListRv.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), searchListRv, new RecyclerTouchListener.ClickListener() {
@@ -101,6 +113,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 //
 //            }
 //        }));
+
         setHotelRV();
         setLocationRV();
 
@@ -135,16 +148,55 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             }
         }));
 
+    }
 
-
-        if(locationList.size()== 0){
-            getAreaUnderCity(sharedPreferenceConfig.readCityName());
+    private void getCityList() {
+        if(sharedPreferenceConfig.readCityName() != null){
+            if(locationList.size()== 0){
+                getAreaUnderCity(sharedPreferenceConfig.readCityName());
+            }
+            if(hotelsList.size() == 0){
+                getTop10HotelUnderCity(sharedPreferenceConfig.readCityName());
+            }
+        }else {
+            setUpSpinner();
         }
-        if(hotelsList.size() == 0){
-            getTop10HotelUnderCity(sharedPreferenceConfig.readCityName());
-        }
+    }
 
+    private void setUpSpinner() {
+        List<String> cityList = new ArrayList<>();
+        cityList.add("Select City");
+        cityList.add("Visakhapatnam");
+//        cityList.add("Hyderabad");
+        ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(),R.layout.support_simple_spinner_dropdown_item,cityList);
+//        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        citySpinner.setAdapter(arrayAdapter);
 
+        citySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
+                if(parent.getSelectedItem().toString().equals("Select City")){
+
+                }else {
+
+                    sharedPreferenceConfig.writeCityName(parent.getSelectedItem().toString());
+
+                    if(locationList.size()== 0){
+                        getAreaUnderCity(sharedPreferenceConfig.readCityName());
+                    }
+                    if(hotelsList.size() == 0){
+                        getTop10HotelUnderCity(sharedPreferenceConfig.readCityName());
+                    }
+                    Toast.makeText(getActivity(), ""+parent.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
     }
 
     private void getTop10HotelUnderCity(String cityName) {

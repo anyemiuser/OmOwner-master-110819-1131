@@ -104,7 +104,7 @@ public class SharedPreferenceConfig {
 
     public String readCityName() {
         String name;
-        name = sharedPreferences.getString(context.getResources().getString(R.string.city_name_preference),"Visakhapatnam");
+        name = sharedPreferences.getString(context.getResources().getString(R.string.city_name_preference),null);
         Log.i("SharedPreferanceRead: ",""+name);
         return name;
     }
