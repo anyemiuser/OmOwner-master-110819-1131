@@ -16,9 +16,15 @@ import com.anyemi.omrooms.Fragments.CalenderFragmentCheckIn;
 import com.anyemi.omrooms.Fragments.CalenderFragmentCheckOut;
 import com.anyemi.omrooms.Fragments.FragmentAdapter.CalenderFragmentAdapter;
 import com.anyemi.omrooms.Fragments.RoomGuestFragment;
+import com.anyemi.omrooms.Model.RoomsGuest;
 import com.anyemi.omrooms.R;
 import com.anyemi.omrooms.Utils.ConverterUtil;
 import com.anyemi.omrooms.Utils.SharedPreferenceConfig;
+import com.google.gson.Gson;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CalenderActivity extends AppCompatActivity implements RoomGuestFragment.OnFragmentInteractionListener,
         CalenderFragmentCheckIn.OnFragmentInteractionListenerC,
@@ -32,6 +38,7 @@ public class CalenderActivity extends AppCompatActivity implements RoomGuestFrag
 
     public static String checkIn;
     public static String checkOut;
+    public static List<RoomsGuest> roomsGuests = new ArrayList<>();
     public static int rooms;
     public static int guests;
 
@@ -46,8 +53,8 @@ public class CalenderActivity extends AppCompatActivity implements RoomGuestFrag
         sharedPreferenceConfig = new SharedPreferenceConfig(this);
         setDefaultDate(sharedPreferenceConfig.readCheckInDate(),
                 sharedPreferenceConfig.readCheckOutDate(),
-                sharedPreferenceConfig.readNoOfRooms(),
-                sharedPreferenceConfig.readNoOfGuests());
+                1,
+                1);
 
         applyChanges = findViewById(R.id.apply);
         applyChanges.setOnClickListener(this);
@@ -137,6 +144,8 @@ public class CalenderActivity extends AppCompatActivity implements RoomGuestFrag
             guests = 1;
         }
 
+//        roomsGuests.clear();
+
     }
 
     public void setResultForCheckinCheckOut(String checkIn, String checkOut, String rooms, String guests) {
@@ -150,7 +159,18 @@ public class CalenderActivity extends AppCompatActivity implements RoomGuestFrag
         resultIntent.putExtra("checkOut",checkOut);
         resultIntent.putExtra("rooms",rooms);
         resultIntent.putExtra("guests",guests);
+//        ArrayList<Object> object = new ArrayList<Object>();
+//        Intent intent = new Intent(Current.class, Transfer.class);
+        if(roomsGuests.size()>0){
+            Bundle args = new Bundle();
+            args.putSerializable("ARRAYLIST",(Serializable)roomsGuests);
+            resultIntent.putExtra("BUNDLE",args);
+        }
+
+//        startActivity(intent);
+//        resultIntent.putExtra("roomG",new Gson().toJson(roomsGuests));
         setResult(Activity.RESULT_OK,resultIntent);
+//        roomsGuests.clear();
 
         onBackPressed();
         return true;

@@ -108,4 +108,32 @@ public class SharedPreferenceConfig {
         Log.i("SharedPreferanceRead: ",""+name);
         return name;
     }
+
+    public void writeStateName(String name){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(context.getResources().getString(R.string.state_name_preference), name);
+        Log.i("SharedPreferanceWrite: ",""+name);
+        editor.apply();
+    }
+
+    public String readStateName() {
+        String name;
+        name = sharedPreferences.getString(context.getResources().getString(R.string.state_name_preference),null);
+        Log.i("SharedPreferanceRead: ",""+name);
+        return name;
+    }
+
+    public void writeDistrictName(String name){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(context.getResources().getString(R.string.district_name_preference), name);
+        Log.i("SharedPreferanceWrite: ",""+name);
+        editor.apply();
+    }
+
+    public String readDistrictName() {
+        String name;
+        name = sharedPreferences.getString(context.getResources().getString(R.string.district_name_preference),null);
+        Log.i("SharedPreferanceRead: ",""+name);
+        return name;
+    }
 }

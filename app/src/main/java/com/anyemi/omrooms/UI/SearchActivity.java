@@ -20,12 +20,14 @@ import com.anyemi.omrooms.Adapters.SearchAreaCityAdapter;
 import com.anyemi.omrooms.Adapters.SearchListAdapter;
 import com.anyemi.omrooms.Model.HotelArea;
 import com.anyemi.omrooms.Model.HotelAreaList;
+import com.anyemi.omrooms.Model.RoomsGuest;
 import com.anyemi.omrooms.R;
 import com.anyemi.omrooms.Utils.ConverterUtil;
 import com.anyemi.omrooms.Utils.RecyclerTouchListener;
 import com.anyemi.omrooms.Utils.SharedPreferenceConfig;
 import com.anyemi.omrooms.api.ApiUtils;
 import com.anyemi.omrooms.api.OmRoomApi;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +51,8 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     List<HotelArea> areaList = new ArrayList<>();
 
     private String searchText="a";
+
+    private static List<RoomsGuest> roomsGuests = new ArrayList<>();
 
     SharedPreferenceConfig sharedPreferenceConfig;
     private TextView checkInDate,checkOutDate,rooms,guests,nights;
@@ -86,6 +90,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                 Toast.makeText(SearchActivity.this, ""+hotelArea.getHotelId()+hotelArea.getHotelName(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(SearchActivity.this,HotelActivity.class);
                 intent.putExtra("hotelId",hotelArea.getHotelId());
+                intent.putExtra("hotelName",hotelArea.getHotelName());
                 startActivity(intent);
 //                finish();
 
@@ -173,7 +178,12 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
         }else {
             OmRoomApi omRoomApi = ApiUtils.getOmRoomApi();
-            omRoomApi.getHotelList("SearchCiCd","visakhapatnam",newText," "," ","2")
+            omRoomApi.getHotelList("SearchCiCd",
+                    sharedPreferenceConfig.readCityName(),
+                    newText,
+                    sharedPreferenceConfig.readCheckInDate(),
+                    sharedPreferenceConfig.readCheckOutDate(),
+                    String.valueOf(sharedPreferenceConfig.readNoOfRooms()))
                     .enqueue(new Callback<HotelAreaList>() {
                         @Override
                         public void onResponse(Call<HotelAreaList> call, Response<HotelAreaList> response) {
@@ -258,6 +268,12 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             String cOut = data.getStringExtra("checkOut");
             int rooms = data.getIntExtra("rooms",1);
             int guests = data.getIntExtra("guests",1);
+//            String roomGS= data.getStringExtra("roomG");
+
+            Bundle args = data.getBundleExtra("BUNDLE");
+            if(args!=null){
+                roomsGuests = (List<RoomsGuest>) args.getSerializable("ARRAYLIST");
+            }
 
             sharedPreferenceConfig.writeCheckInDate(cIn);
             sharedPreferenceConfig.writeCheckOutDate(cOut);
@@ -346,7 +362,28 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             checkOutDate.setText(sharedPreferenceConfig.readCheckOutDate());
             String noNights = String.valueOf(ConverterUtil.noOfDays(sharedPreferenceConfig.readCheckInDate(),sharedPreferenceConfig.readCheckOutDate())).concat("N");
             nights.setText(noNights);
+            int roomsCount= 0;
+            int guestCount = 0;
+            if(roomsGuests.size()>0){
+                for(int i=0;i<roomsGuests.size();i++){
+                    guestCount = guestCount + roomsGuests.get(i).getGuests();
+                }
+                roomsCount = roomsGuests.size();
+            }
+            if(roomsCount>0){
+                sharedPreferenceConfig.writeNoOfRooms(roomsCount);
+
+            }else {
+                sharedPreferenceConfig.writeNoOfRooms(1);
+
+            }
             rooms.setText(String.valueOf(sharedPreferenceConfig.readNoOfRooms()).concat(" Rooms"));
+
+            if(guestCount>0){
+                sharedPreferenceConfig.writeNoOfGuests(guestCount);
+            }else {
+                sharedPreferenceConfig.writeNoOfGuests(1);
+            }
             guests.setText(String.valueOf(sharedPreferenceConfig.readNoOfGuests()).concat(" Guests"));
         }
 

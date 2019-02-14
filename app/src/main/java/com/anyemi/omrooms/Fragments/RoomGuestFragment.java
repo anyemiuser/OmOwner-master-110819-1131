@@ -1,21 +1,18 @@
 package com.anyemi.omrooms.Fragments;
 
 import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import com.anyemi.omrooms.Adapters.RoomGuestAdapter;
-import com.anyemi.omrooms.Models.RoomsGuest;
+import com.anyemi.omrooms.Model.RoomsGuest;
 import com.anyemi.omrooms.R;
 import com.anyemi.omrooms.UI.CalenderActivity;
 
@@ -23,7 +20,7 @@ import java.util.ArrayList;
 
 public class RoomGuestFragment extends Fragment {
 
-    ArrayList<RoomsGuest> roomsGuests;
+
     RecyclerView recyclerViewRoomsGuest;
 
     private OnFragmentInteractionListener mListener;
@@ -50,10 +47,14 @@ public class RoomGuestFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerViewRoomsGuest.setLayoutManager(layoutManager);
 
-        roomsGuests = new ArrayList<RoomsGuest>();
-        roomsGuests.add(new RoomsGuest("Room 1"));
+//        roomsGuests = new ArrayList<RoomsGuest>();
+        if(CalenderActivity.roomsGuests.size() == 0){
+            CalenderActivity.roomsGuests.add(new RoomsGuest(1,2));
+        }
 
-        RoomGuestAdapter roomGuestAdapter = new RoomGuestAdapter(roomsGuests, getActivity());
+//        roomsGuests.add(new RoomsGuest(1,3));
+
+        RoomGuestAdapter roomGuestAdapter = new RoomGuestAdapter(CalenderActivity.roomsGuests, getActivity());
         recyclerViewRoomsGuest.setAdapter(roomGuestAdapter);
         return rootView;
     }
@@ -92,6 +93,8 @@ public class RoomGuestFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+//        CalenderActivity.roomsGuests.add(new RoomsGuest(1,2));
+//        CalenderActivity.roomsGuests.add(new RoomsGuest(1,3));
         CalenderActivity.rooms=1;
         CalenderActivity.guests = 2;
 

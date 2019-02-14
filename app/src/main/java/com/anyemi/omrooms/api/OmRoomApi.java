@@ -1,6 +1,7 @@
 package com.anyemi.omrooms.api;
 
 import com.anyemi.omrooms.Model.AreaUnderCity;
+import com.anyemi.omrooms.Model.CityList;
 import com.anyemi.omrooms.Model.HotelAreaList;
 import com.anyemi.omrooms.Model.HotelDetails;
 import com.anyemi.omrooms.Model.HotelList;
@@ -61,6 +62,9 @@ public interface OmRoomApi {
                                         @Query("CheckoutDate") String checkOut,
                                         @Query("NumberofRooms") String noORooms,
                                         @Query("index") String index);
+
+    @GET("api.php")
+    Call<CityList> getCityList(@Query("f") String typeReport);
 
 
 //

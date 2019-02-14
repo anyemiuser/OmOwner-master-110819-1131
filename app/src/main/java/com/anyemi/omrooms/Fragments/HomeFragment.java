@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -25,11 +26,10 @@ import android.widget.Toast;
 import com.anyemi.omrooms.Adapters.HotelAdapter;
 import com.anyemi.omrooms.Adapters.LocationAdapter;
 import com.anyemi.omrooms.Model.AreaUnderCity;
-import com.anyemi.omrooms.Model.HotelArea;
-import com.anyemi.omrooms.Model.HotelDetails;
+import com.anyemi.omrooms.Model.CityDistrictState;
+import com.anyemi.omrooms.Model.CityList;
 import com.anyemi.omrooms.Model.Top10Hotel;
 import com.anyemi.omrooms.Model.TopHotels;
-import com.anyemi.omrooms.Models.Hotels;
 import com.anyemi.omrooms.Model.Location;
 import com.anyemi.omrooms.R;
 import com.anyemi.omrooms.UI.AreaHotelsActivity;
@@ -59,6 +59,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private ProgressBar progressBarArea;
     ImageButton notificationButton;
     private Spinner citySpinner;
+    private static List<String> cityList = new ArrayList<>();
+    private static List<CityDistrictState> cityDistrictStates = new ArrayList<>();
+    private CoordinatorLayout coordinatorLayout;
 
 
     @Nullable
@@ -70,7 +73,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         View rootview = inflater.inflate(R.layout.fragment_home, container, false);
         sharedPreferenceConfig = new SharedPreferenceConfig(getActivity());
         notificationButton = rootview.findViewById(R.id.notification_button);
-
+        coordinatorLayout = rootview.findViewById(R.id.home_coordinatorLyt);
 
         notificationButton.setOnClickListener(this);
         return rootview;
@@ -89,8 +92,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         recyclerViewHotels = view.findViewById(R.id.hotels_rv);
         citySpinner = view.findViewById(R.id.city_spinner);
 
+//        intializeHome();
         getCityList();
-
 //        setUpSpinner();
 
 
@@ -150,45 +153,97 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     }
 
+
     private void getCityList() {
-        if(sharedPreferenceConfig.readCityName() != null){
-            if(locationList.size()== 0){
-                getAreaUnderCity(sharedPreferenceConfig.readCityName());
+        OmRoomApi omRoomApi = ApiUtils.getOmRoomApi();
+        omRoomApi.getCityList("CityList").enqueue(new Callback<CityList>() {
+            @Override
+            public void onResponse(Call<CityList> call, Response<CityList> response) {
+                if(response.isSuccessful()){
+                    CityList cityListDetails = response.body();
+                    if(cityListDetails != null && cityListDetails.getMsg().equals("Successfully send") && response.code() == 200) {
+                        cityDistrictStates = cityListDetails.getCity();
+                        for (int i=0; i<cityDistrictStates.size();i++){
+                            if(!cityList.contains(cityDistrictStates.get(i).getCity())){
+                                cityList.add(cityDistrictStates.get(i).getCity());
+                            }
+
+                        }
+                        setUpSpinner();
+                    }else {
+                        Toast.makeText(getActivity(), ""+cityListDetails.getMsg(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+
             }
-            if(hotelsList.size() == 0){
-                getTop10HotelUnderCity(sharedPreferenceConfig.readCityName());
+
+            @Override
+            public void onFailure(Call<CityList> call, Throwable t) {
+
             }
-        }else {
-            setUpSpinner();
-        }
+        });
     }
 
     private void setUpSpinner() {
-        List<String> cityList = new ArrayList<>();
-        cityList.add("Select City");
-        cityList.add("Visakhapatnam");
+
+        cityList.add(0,"Select City");
 //        cityList.add("Hyderabad");
         ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(),R.layout.support_simple_spinner_dropdown_item,cityList);
 //        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         citySpinner.setAdapter(arrayAdapter);
+        if(sharedPreferenceConfig.readCityName() != null){
+            int pos = arrayAdapter.getPosition(sharedPreferenceConfig.readCityName());
+            citySpinner.setSelection(pos);
+        }
 
         citySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
                 if(parent.getSelectedItem().toString().equals("Select City")){
+                    Toast.makeText(getActivity(), "Select City", Toast.LENGTH_SHORT).show();
+                }else if(sharedPreferenceConfig.readCityName()== null){
 
-                }else {
+                    Toast.makeText(getActivity(), ""+parent.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+
+                    CityDistrictState districtState = cityDistrictStates.get(i-1);
 
                     sharedPreferenceConfig.writeCityName(parent.getSelectedItem().toString());
+                    sharedPreferenceConfig.writeStateName(districtState.getState());
+                    sharedPreferenceConfig.writeDistrictName(districtState.getDistrict());
 
+                    getAreaUnderCity(sharedPreferenceConfig.readCityName());
+
+                    getTop10HotelUnderCity(sharedPreferenceConfig.readCityName());
+                    cityList.remove("Select City");
+
+                }else if(!sharedPreferenceConfig.readCityName().equals(parent.getSelectedItem().toString())){
+
+
+
+                    CityDistrictState districtState = cityDistrictStates.get(i-1);
+
+
+                    sharedPreferenceConfig.writeCityName(parent.getSelectedItem().toString());
+                    sharedPreferenceConfig.writeStateName(districtState.getState());
+                    sharedPreferenceConfig.writeDistrictName(districtState.getDistrict());
+
+                    getAreaUnderCity(sharedPreferenceConfig.readCityName());
+
+                    getTop10HotelUnderCity(sharedPreferenceConfig.readCityName());
+                    cityList.remove("Select City");
+
+                }else {
                     if(locationList.size()== 0){
                         getAreaUnderCity(sharedPreferenceConfig.readCityName());
                     }
                     if(hotelsList.size() == 0){
-                        getTop10HotelUnderCity(sharedPreferenceConfig.readCityName());
+                         getTop10HotelUnderCity(sharedPreferenceConfig.readCityName());
                     }
-                    Toast.makeText(getActivity(), ""+parent.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+                    cityList.remove("Select City");
+                        Toast.makeText(getActivity(), "You Are Searching in "+sharedPreferenceConfig.readCityName(), Toast.LENGTH_SHORT).show();
                 }
+
+
 
             }
 
@@ -200,8 +255,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     private void getTop10HotelUnderCity(String cityName) {
+        hotelsList.clear();
         OmRoomApi omRoomApi = ApiUtils.getOmRoomApi();
-        omRoomApi.getTop10HotelInCity("RocomondedHotel","Andhra Pradesh","visakhapatnam",cityName)
+        omRoomApi.getTop10HotelInCity("RocomondedHotel",sharedPreferenceConfig.readStateName(),sharedPreferenceConfig.readDistrictName(),cityName)
                 .enqueue(new Callback<TopHotels>() {
                     @Override
                     public void onResponse(Call<TopHotels> call, Response<TopHotels> response) {
@@ -236,6 +292,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private void getAreaUnderCity(String cityName) {
         progressBarArea.setVisibility(View.VISIBLE);
+        locationList.clear();
         OmRoomApi omRoomApi = ApiUtils.getOmRoomApi();
         omRoomApi.getAreasInCity("AllArea",cityName)
                 .enqueue(new Callback<AreaUnderCity>() {
@@ -287,8 +344,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         Fragment fragment = null;
         switch (view.getId()) {
             case R.id.toolbar:
-                Intent intent = new Intent(getActivity(), SearchActivity.class);
-                startActivity(intent);
+                if(sharedPreferenceConfig.readCityName() != null){
+                    Intent intent = new Intent(getActivity(), SearchActivity.class);
+                    startActivity(intent);
+                }else {
+                    Snackbar.make(coordinatorLayout,"Select City before you search",Snackbar.LENGTH_LONG).show();
+                }
+
                 break;
             case R.id.notification_button:
                 fragment = new NotificationsFragment();
