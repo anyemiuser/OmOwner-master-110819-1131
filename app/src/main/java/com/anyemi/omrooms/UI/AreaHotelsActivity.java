@@ -1,5 +1,6 @@
 package com.anyemi.omrooms.UI;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
@@ -32,6 +33,7 @@ import com.anyemi.omrooms.Utils.SharedPreferenceConfig;
 import com.anyemi.omrooms.api.ApiUtils;
 import com.anyemi.omrooms.api.OmRoomApi;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -210,6 +212,22 @@ public class AreaHotelsActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public boolean onSupportNavigateUp() {
+        Intent resultIntent = getIntent();
+        resultIntent.putExtra("checkIn",sharedPreferenceConfig.readCheckInDate());
+        resultIntent.putExtra("checkOut",sharedPreferenceConfig.readCheckOutDate());
+        resultIntent.putExtra("rooms",sharedPreferenceConfig.readNoOfRooms());
+        resultIntent.putExtra("guests",sharedPreferenceConfig.readNoOfGuests());
+//        ArrayList<Object> object = new ArrayList<Object>();
+//        Intent intent = new Intent(Current.class, Transfer.class);
+        if(roomsGuests.size()>0){
+            Bundle args = new Bundle();
+            args.putSerializable("ARRAYLIST",(Serializable)roomsGuests);
+            resultIntent.putExtra("BUNDLE",args);
+        }
+
+//        startActivity(intent);
+//        resultIntent.putExtra("roomG",new Gson().toJson(roomsGuests));
+        setResult(Activity.RESULT_OK,resultIntent);
         onBackPressed();
         return true;
     }

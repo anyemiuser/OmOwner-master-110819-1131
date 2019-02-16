@@ -91,7 +91,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                 Intent intent = new Intent(SearchActivity.this,HotelActivity.class);
                 intent.putExtra("hotelId",hotelArea.getHotelId());
                 intent.putExtra("hotelName",hotelArea.getHotelName());
-                startActivity(intent);
+                startActivityForResult(intent,1);
 //                finish();
 
             }
@@ -109,7 +109,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                 Toast.makeText(SearchActivity.this, ""+hotelArea.getHotelarea()+hotelArea.getHotelName(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(SearchActivity.this,AreaHotelsActivity.class);
                 intent.putExtra("area",hotelArea.getHotelarea());
-                startActivity(intent);
+                startActivityForResult(intent,1);
             }
 
             @Override
