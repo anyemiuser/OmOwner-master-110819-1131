@@ -51,7 +51,7 @@ public class SharedPreferenceConfig {
 
     public int readNoOfRooms(){
         int rooms;
-        rooms = sharedPreferences.getInt(context.getResources().getString(R.string.no_of_rooms_preference),1);
+        rooms = sharedPreferences.getInt(context.getResources().getString(R.string.no_of_rooms_preference),0);
         return rooms;
     }
 
@@ -63,7 +63,7 @@ public class SharedPreferenceConfig {
 
     public int readNoOfGuests(){
         int guests;
-        guests = sharedPreferences.getInt(context.getResources().getString(R.string.no_of_guests_preference),1);
+        guests = sharedPreferences.getInt(context.getResources().getString(R.string.no_of_guests_preference),0);
         return guests;
     }
 

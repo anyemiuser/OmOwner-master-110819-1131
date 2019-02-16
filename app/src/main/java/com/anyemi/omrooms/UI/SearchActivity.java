@@ -52,7 +52,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
     private String searchText="a";
 
-    private static List<RoomsGuest> roomsGuests = new ArrayList<>();
+    private List<RoomsGuest> roomsGuests = new ArrayList<>();
 
     SharedPreferenceConfig sharedPreferenceConfig;
     private TextView checkInDate,checkOutDate,rooms,guests,nights;
@@ -271,6 +271,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 //            String roomGS= data.getStringExtra("roomG");
 
             Bundle args = data.getBundleExtra("BUNDLE");
+            roomsGuests = new ArrayList<>();
             if(args!=null){
                 roomsGuests = (List<RoomsGuest>) args.getSerializable("ARRAYLIST");
             }
@@ -312,7 +313,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                 startActivityForResult(intent,1);
                 break;
             case R.id.check_out_layout:
-                intent.putExtra("check",0);
+                intent.putExtra("check",1);
                 startActivityForResult(intent,1);
                 break;
             case R.id.room_user_layout:
@@ -362,7 +363,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             checkOutDate.setText(sharedPreferenceConfig.readCheckOutDate());
             String noNights = String.valueOf(ConverterUtil.noOfDays(sharedPreferenceConfig.readCheckInDate(),sharedPreferenceConfig.readCheckOutDate())).concat("N");
             nights.setText(noNights);
-            int roomsCount= 0;
+            int roomsCount= sharedPreferenceConfig.readNoOfRooms();
             int guestCount = 0;
             if(roomsGuests.size()>0){
                 for(int i=0;i<roomsGuests.size();i++){
@@ -382,7 +383,10 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             if(guestCount>0){
                 sharedPreferenceConfig.writeNoOfGuests(guestCount);
             }else {
-                sharedPreferenceConfig.writeNoOfGuests(1);
+                if(sharedPreferenceConfig.readNoOfGuests() == 0){
+                    sharedPreferenceConfig.writeNoOfGuests(1);
+                }
+
             }
             guests.setText(String.valueOf(sharedPreferenceConfig.readNoOfGuests()).concat(" Guests"));
         }

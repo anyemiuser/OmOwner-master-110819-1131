@@ -27,7 +27,7 @@ public class CalenderFragmentCheckIn extends Fragment {
     private OnFragmentChangeListner changeListner;
 
 
-    private CalendarView calendarView;
+    private CalendarView calendarViewCheckIn;
 
     SharedPreferenceConfig sharedPreferenceConfig;
 
@@ -63,10 +63,10 @@ public class CalenderFragmentCheckIn extends Fragment {
 
         long inActiveDate = calendar.getTime().getTime();
 
-        calendarView = view.findViewById(R.id.calendarView);
-        calendarView.setMinDate(inActiveDate);
-        calendarView.setDate(date);
-        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+        calendarViewCheckIn = view.findViewById(R.id.calendarView);
+        calendarViewCheckIn.setMinDate(inActiveDate);
+        calendarViewCheckIn.setDate(date);
+        calendarViewCheckIn.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
                 String date = ""+i2+"/"+(i1+1)+"/"+i;
@@ -128,6 +128,10 @@ public class CalenderFragmentCheckIn extends Fragment {
 
     public interface OnFragmentChangeListner{
         public void onFragmentChange(int position);
+    }
+
+    public interface passCheckOutDate{
+        public void CheckOutDateFed(String dateS);
     }
 
     @Override

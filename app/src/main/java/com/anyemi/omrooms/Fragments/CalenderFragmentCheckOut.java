@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CalendarView;
+import android.widget.Toast;
 
 import com.anyemi.omrooms.R;
 import com.anyemi.omrooms.UI.CalenderActivity;
@@ -47,14 +48,10 @@ public class CalenderFragmentCheckOut extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Calendar calendar = Calendar.getInstance();
 
-//        long inactiveDate = calendar.getTime().getTime();
-        calendar.add(Calendar.DAY_OF_YEAR,+1);
+        setCalenderDate();
 
-//        long date = calendar.getTime().getTime();
-//        long date = ConverterUtil.ConvertDateToSetOnCalender(CalenderActivity.checkOut);
-        calendarView = view.findViewById(R.id.calendar_view_checkout);
+
 //        calendarView.setMinDate(date);
 //        calendarView.setDate(date);
         Log.e("check out ra","yes");
@@ -65,13 +62,35 @@ public class CalenderFragmentCheckOut extends Fragment {
                 Log.e("date",""+i+" "+i1+" "+i2+" ");
 //                CalenderActivity calenderActivity =new CalenderActivity();
 //                CalenderActivity.viewPager.setCurrentItem(1);
-                changeListner.onFragmentChange(2);
-                CalenderActivity.checkOut=date;
+                if(ConverterUtil.noOfDays(CalenderActivity.checkIn,date) > 0){
+                    changeListner.onFragmentChange(2);
+                    CalenderActivity.checkOut=date;
+                }else {
+                    Toast.makeText(getActivity(), "Check-In Date is "+CalenderActivity.checkIn, Toast.LENGTH_SHORT).show();
+                }
+
 
 
             }
         });
     }
+
+    private void setCalenderDate() {
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.add(Calendar.DAY_OF_YEAR,+1);
+
+//        calendarView = view.findViewById(R.id.calendar_view_checkout);
+
+        long date = ConverterUtil.ConvertDateToSetOnCalender(CalenderActivity.checkOut);
+        calendarView.setMinDate(calendar.getTime().getTime());
+        calendarView.setDate(date);
+
+
+
+        Log.e("ccc",""+date);
+    }
+
 
     @Override
     public void onAttach(Context context) {
@@ -107,16 +126,16 @@ public class CalenderFragmentCheckOut extends Fragment {
 
             if (mListener != null ) {
                 mListener.onFragmentInteractionC("Select Check-Out Date");
-
+                setCalenderDate();
             }
             Log.e("Check out start",""+CalenderActivity.checkOut);
             long date = ConverterUtil.ConvertDateToSetOnCalender(CalenderActivity.checkOut);
-//
+
 //            calendarView = rootView.findViewById(R.id.calendarView);
 ////
-            calendarView.setMinDate(date);
-            calendarView.setDate(date);
-            Log.e("ccc",""+date);
+//            calendarView.setMinDate(date);
+//            calendarView.setDate(date);
+//            Log.e("ccc",""+date);
         }else{
             // fragment is not visible
         }

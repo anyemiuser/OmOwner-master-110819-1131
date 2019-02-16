@@ -179,17 +179,25 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void onFailure(Call<CityList> call, Throwable t) {
-
+                Toast.makeText(getActivity(), ""+t.toString(), Toast.LENGTH_SHORT).show();
             }
         });
+
+        Toast.makeText(getActivity(), "hi", Toast.LENGTH_SHORT).show();
     }
 
     private void setUpSpinner() {
+        // Select City to show customer
+        if(!cityList.contains("Select City")){
+            cityList.add(0,"Select City");
+        }
 
-        cityList.add(0,"Select City");
 //        cityList.add("Hyderabad");
         ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(),R.layout.support_simple_spinner_dropdown_item,cityList);
 //        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // If previously customer saved location/city then set spinned position to that city
+        //else show "Select City" first
         citySpinner.setAdapter(arrayAdapter);
         if(sharedPreferenceConfig.readCityName() != null){
             int pos = arrayAdapter.getPosition(sharedPreferenceConfig.readCityName());
@@ -199,8 +207,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         citySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
+                //for the first time show select city and automaticilly run the code
+                // It wont do any thing if " Select City" choosed by customer
                 if(parent.getSelectedItem().toString().equals("Select City")){
                     Toast.makeText(getActivity(), "Select City", Toast.LENGTH_SHORT).show();
+                    //For the first time after installation customer choose city from spinner
                 }else if(sharedPreferenceConfig.readCityName()== null){
 
                     Toast.makeText(getActivity(), ""+parent.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
@@ -215,7 +226,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
                     getTop10HotelUnderCity(sharedPreferenceConfig.readCityName());
                     cityList.remove("Select City");
-
+                    //For Next time onwords if the last selected city get changed by user
+                    //run the below code
                 }else if(!sharedPreferenceConfig.readCityName().equals(parent.getSelectedItem().toString())){
 
 
@@ -231,7 +243,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
                     getTop10HotelUnderCity(sharedPreferenceConfig.readCityName());
                     cityList.remove("Select City");
-
+                    //If the last time selected city  and present selected city are same
+                    //then run below code
                 }else {
                     if(locationList.size()== 0){
                         getAreaUnderCity(sharedPreferenceConfig.readCityName());

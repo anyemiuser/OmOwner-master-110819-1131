@@ -26,7 +26,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CalenderActivity extends AppCompatActivity implements RoomGuestFragment.OnFragmentInteractionListener,
+public class CalenderActivity extends AppCompatActivity implements
+        RoomGuestFragment.OnFragmentInteractionListener,
         CalenderFragmentCheckIn.OnFragmentInteractionListenerC,
         CalenderFragmentCheckOut.OnFragmentInteractionListenerC,
         CalenderFragmentCheckIn.OnFragmentChangeListner,

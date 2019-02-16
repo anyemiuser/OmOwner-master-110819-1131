@@ -117,9 +117,8 @@ public class LoginActivity extends AppCompatActivity {
 
                             registerOnSuccess(phoneNumber);
 
-
                         }else {
-                            Toast.makeText(LoginActivity.this,"Unsuccesful",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this,"Unsuccesful"+task.getException().getMessage(),Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

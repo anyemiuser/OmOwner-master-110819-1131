@@ -1,6 +1,8 @@
 package com.anyemi.omrooms.UI;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,8 +10,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,14 +24,17 @@ import com.anyemi.omrooms.Model.HotelAndRoomDetail;
 import com.anyemi.omrooms.Model.HotelDetails;
 import com.anyemi.omrooms.Model.RoomDetails;
 import com.anyemi.omrooms.Model.RoomFacility;
+import com.anyemi.omrooms.Model.RoomsGuest;
 import com.anyemi.omrooms.R;
 import com.anyemi.omrooms.Utils.ConstantFields;
 import com.anyemi.omrooms.Utils.ConverterUtil;
+import com.anyemi.omrooms.Utils.SharedPreferenceConfig;
 import com.anyemi.omrooms.api.ApiUtils;
 import com.anyemi.omrooms.api.OmRoomApi;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +42,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HotelActivity extends AppCompatActivity implements ConstantFields {
+public class HotelActivity extends AppCompatActivity implements ConstantFields, View.OnClickListener {
 
     private static final String TAG_HOTEL = HotelActivity.class.getName();
     private ImageView hotelImage, locImage;
@@ -45,6 +52,11 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields {
 
     private List<String> facilityList = new ArrayList<>();
 
+    private LinearLayout checkInLayout, checkOutLayOut, roomUserLayout;
+    private TextView checkInDate,checkOutDate,rooms,guests,nights;
+    SharedPreferenceConfig sharedPreferenceConfig;
+    private List<RoomsGuest> roomsGuests = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +65,8 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields {
 
 
         init();
+        assignValue();
+
         Intent intent =getIntent();
         String hotelId = intent.getStringExtra("hotelId");
         String hotelName = intent.getStringExtra("hotelName");
@@ -166,13 +180,135 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields {
         facilityRv = findViewById(R.id.facility_rv);
         roomTypeRv = findViewById(R.id.room_types_rv);
 
+        checkInLayout = findViewById(R.id.check_in_layout);
+        checkInLayout.setOnClickListener(this);
+
+        checkOutLayOut = findViewById(R.id.check_out_layout);
+        checkOutLayOut.setOnClickListener(this);
+
+        roomUserLayout = findViewById(R.id.room_user_layout);
+        roomUserLayout.setOnClickListener(this);
+
+        sharedPreferenceConfig = new SharedPreferenceConfig(this);
+
+        checkInDate = findViewById(R.id.check_in_date);
+        checkOutDate = findViewById(R.id.check_out_date);
+        nights = findViewById(R.id.no_of_nights);
+        rooms = findViewById(R.id.no_of_rooms);
+        guests = findViewById(R.id.no_of_user);
+
     }
 
     @Override
     public boolean onSupportNavigateUp() {
+        Intent resultIntent = getIntent();
+        resultIntent.putExtra("checkIn",sharedPreferenceConfig.readCheckInDate());
+        resultIntent.putExtra("checkOut",sharedPreferenceConfig.readCheckOutDate());
+        resultIntent.putExtra("rooms",sharedPreferenceConfig.readNoOfRooms());
+        resultIntent.putExtra("guests",sharedPreferenceConfig.readNoOfGuests());
+//        ArrayList<Object> object = new ArrayList<Object>();
+//        Intent intent = new Intent(Current.class, Transfer.class);
+        if(roomsGuests.size()>0){
+            Bundle args = new Bundle();
+            args.putSerializable("ARRAYLIST",(Serializable)roomsGuests);
+            resultIntent.putExtra("BUNDLE",args);
+        }
+
+//        startActivity(intent);
+//        resultIntent.putExtra("roomG",new Gson().toJson(roomsGuests));
+        setResult(Activity.RESULT_OK,resultIntent);
+//        roomsGuests.clear();
         onBackPressed();
         return true;
     }
 
+    private void assignValue() {
+        if(sharedPreferenceConfig.readCheckInDate() != null){
+            checkInDate.setText(sharedPreferenceConfig.readCheckInDate());
+            checkOutDate.setText(sharedPreferenceConfig.readCheckOutDate());
+            String noNights = String.valueOf(ConverterUtil.noOfDays(sharedPreferenceConfig.readCheckInDate(),sharedPreferenceConfig.readCheckOutDate())).concat("N");
+            nights.setText(noNights);
+            int roomsCount= sharedPreferenceConfig.readNoOfRooms();
+            int guestCount = 0;
+            if(roomsGuests.size()>0){
+                for(int i=0;i<roomsGuests.size();i++){
+                    guestCount = guestCount + roomsGuests.get(i).getGuests();
+                }
+                roomsCount = roomsGuests.size();
+            }
+            if(roomsCount>0){
+                sharedPreferenceConfig.writeNoOfRooms(roomsCount);
 
+            }else {
+                sharedPreferenceConfig.writeNoOfRooms(1);
+
+            }
+            rooms.setText(String.valueOf(sharedPreferenceConfig.readNoOfRooms()).concat(" Rooms"));
+
+            if(guestCount>0){
+                sharedPreferenceConfig.writeNoOfGuests(guestCount);
+            }else {
+                if(sharedPreferenceConfig.readNoOfGuests() == 0){
+                    sharedPreferenceConfig.writeNoOfGuests(1);
+                }else {
+
+                }
+
+            }
+            guests.setText(String.valueOf(sharedPreferenceConfig.readNoOfGuests()).concat(" Guests"));
+        }
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        Intent intent = new Intent(HotelActivity.this,CalenderActivity.class);
+        switch (view.getId()){
+            case R.id.check_in_layout:
+                intent.putExtra("check",0);
+                startActivityForResult(intent,1);
+                break;
+            case R.id.check_out_layout:
+                intent.putExtra("check",1);
+                startActivityForResult(intent,1);
+                break;
+            case R.id.room_user_layout:
+                intent.putExtra("check",2);
+                startActivityForResult(intent,1);
+                break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1 && resultCode == RESULT_OK){
+//            Bundle extras = data.getExtras();
+
+            String cIn = data.getStringExtra("checkIn");
+            String cOut = data.getStringExtra("checkOut");
+            int rooms = data.getIntExtra("rooms",1);
+            int guests = data.getIntExtra("guests",1);
+//            String roomGS= data.getStringExtra("roomG");
+
+            Bundle args = data.getBundleExtra("BUNDLE");
+            roomsGuests = new ArrayList<>();
+            if(args!=null){
+                roomsGuests = (List<RoomsGuest>) args.getSerializable("ARRAYLIST");
+            }
+
+            sharedPreferenceConfig.writeCheckInDate(cIn);
+            sharedPreferenceConfig.writeCheckOutDate(cOut);
+            sharedPreferenceConfig.writeNoOfRooms(rooms);
+            sharedPreferenceConfig.writeNoOfGuests(guests);
+
+            String checkInDate = sharedPreferenceConfig.readCheckInDate();
+            if(cOut != null){
+                assignValue();
+                Toast.makeText(this, ""+checkInDate+sharedPreferenceConfig.readCheckOutDate()+sharedPreferenceConfig.readNoOfRooms()+sharedPreferenceConfig.readNoOfGuests(), Toast.LENGTH_SHORT).show();
+            }else
+                Toast.makeText(this, ""+cIn+"he", Toast.LENGTH_SHORT).show();
+        }
+
+    }
 }
