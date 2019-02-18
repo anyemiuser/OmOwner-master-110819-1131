@@ -279,17 +279,23 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                             if(topHotels != null && topHotels.getMsg().equals("Successfully send") && response.code() == 200) {
 
                                 hotelsList = topHotels.getHotels();
+                                Log.e(HOME_TAG, "" + topHotels.getMsg());
 
                                 setHotelRV();
 
-
                             }
+                            else{
+                                Log.v(HOME_TAG, "message: "+topHotels.getMsg()+response.code());
+                        }
+                        }
+                        else{
+                            Log.v(HOME_TAG, "response :"+response.toString());
                         }
                     }
 
                     @Override
                     public void onFailure(Call<TopHotels> call, Throwable t) {
-
+                        Log.v(HOME_TAG, "error :"+t.toString());
                     }
                 });
 
