@@ -60,7 +60,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
-                    android:drawableStart="@drawable/ic_outline_location"
+                    android:drawableStart="@drawable/ic_location_outline"
                     android:fontFamily="@font/opensans_regular"
                     android:maxLines="1"
                     android:text="Electronic City, Banglore"

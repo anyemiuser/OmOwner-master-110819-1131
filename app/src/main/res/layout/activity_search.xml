@@ -31,8 +31,11 @@
                 android:id="@+id/search_material"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="60dp"
+                android:layout_marginStart="35dp"
                 android:background="@color/white"
+                app:defaultQueryHint="Search for Hotel,City or Location"
+                app:searchHintIcon="@drawable/ic_search"
+                android:textAlignment="viewStart"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
