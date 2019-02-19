@@ -27,7 +27,6 @@ import com.anyemi.omrooms.Utils.RecyclerTouchListener;
 import com.anyemi.omrooms.Utils.SharedPreferenceConfig;
 import com.anyemi.omrooms.api.ApiUtils;
 import com.anyemi.omrooms.api.OmRoomApi;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +37,7 @@ import retrofit2.Response;
 
 public class SearchActivity extends AppCompatActivity implements View.OnClickListener{
 
+    private static final String TAG_SEARCH = SearchActivity.class.getSimpleName();
     private ConstraintLayout areaHistoryLayout, searchListLayout;
 
     private LinearLayout checkInLayout, checkOutLayOut, roomUserLayout;
@@ -57,13 +57,16 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     SharedPreferenceConfig sharedPreferenceConfig;
     private TextView checkInDate,checkOutDate,rooms,guests,nights;
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
         init();
-        assignValue();
+        assignValue(null, null);
 
         Toolbar toolbar = findViewById(R.id.material_search_toolbar);
         SearchView searchView = findViewById(R.id.search_material);//new SearchView(this);
@@ -263,11 +266,15 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 1 && resultCode == RESULT_OK){
 //            Bundle extras = data.getExtras();
+            String cIn = null;
+            String cOut = null;
+            if (data != null) {
+                cIn = data.getStringExtra("checkIn");
+                cOut = data.getStringExtra("checkOut");
+            }
 
-            String cIn = data.getStringExtra("checkIn");
-            String cOut = data.getStringExtra("checkOut");
-            int rooms = data.getIntExtra("rooms",1);
-            int guests = data.getIntExtra("guests",1);
+//            int rooms = data.getIntExtra("rooms",1);
+//            int guests = data.getIntExtra("guests",1);
 //            String roomGS= data.getStringExtra("roomG");
 
             Bundle args = data.getBundleExtra("BUNDLE");
@@ -276,14 +283,11 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                 roomsGuests = (List<RoomsGuest>) args.getSerializable("ARRAYLIST");
             }
 
-            sharedPreferenceConfig.writeCheckInDate(cIn);
-            sharedPreferenceConfig.writeCheckOutDate(cOut);
-            sharedPreferenceConfig.writeNoOfRooms(rooms);
-            sharedPreferenceConfig.writeNoOfGuests(guests);
+
 
             String checkInDate = sharedPreferenceConfig.readCheckInDate();
             if(cOut != null){
-                assignValue();
+                assignValue(cIn,cOut);
                 Toast.makeText(this, ""+checkInDate+sharedPreferenceConfig.readCheckOutDate()+sharedPreferenceConfig.readNoOfRooms()+sharedPreferenceConfig.readNoOfGuests(), Toast.LENGTH_SHORT).show();
             }else
                 Toast.makeText(this, ""+cIn+"he", Toast.LENGTH_SHORT).show();
@@ -357,8 +361,23 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
-    private void assignValue() {
+    private void assignValue(String cIn, String cOut) {
         if(sharedPreferenceConfig.readCheckInDate() != null){
+
+            boolean isChanged = false;
+            if(cIn != null && cOut != null){
+
+                if(cIn.equals(sharedPreferenceConfig.readCheckInDate())
+                        && cOut.equals(sharedPreferenceConfig.readCheckOutDate())){
+                    Log.e(TAG_SEARCH," date NOT CHANGED");
+                }else {
+                    Log.e(TAG_SEARCH,"date CHANGED");
+                    sharedPreferenceConfig.writeCheckInDate(cIn);
+                    sharedPreferenceConfig.writeCheckOutDate(cOut);
+                    isChanged = true;
+                }
+
+            }
             checkInDate.setText(sharedPreferenceConfig.readCheckInDate());
             checkOutDate.setText(sharedPreferenceConfig.readCheckOutDate());
             String noNights = String.valueOf(ConverterUtil.noOfDays(sharedPreferenceConfig.readCheckInDate(),sharedPreferenceConfig.readCheckOutDate())).concat("N");
@@ -372,6 +391,12 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                 roomsCount = roomsGuests.size();
             }
             if(roomsCount>0){
+                if(roomsCount != sharedPreferenceConfig.readNoOfRooms()){
+                    Log.e(TAG_SEARCH,"Room changed");
+                    isChanged = true;
+                }else {
+                    Log.e(TAG_SEARCH,"Room  Not changed");
+                }
                 sharedPreferenceConfig.writeNoOfRooms(roomsCount);
 
             }else {
@@ -381,6 +406,14 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             rooms.setText(String.valueOf(sharedPreferenceConfig.readNoOfRooms()).concat(" Rooms"));
 
             if(guestCount>0){
+                if(guestCount != sharedPreferenceConfig.readNoOfGuests()){
+                    Log.e(TAG_SEARCH,"Guest changed");
+                    isChanged = true;
+                }else {
+                    Log.e(TAG_SEARCH,"Guest Not changed");
+                }
+
+
                 sharedPreferenceConfig.writeNoOfGuests(guestCount);
             }else {
                 if(sharedPreferenceConfig.readNoOfGuests() == 0){

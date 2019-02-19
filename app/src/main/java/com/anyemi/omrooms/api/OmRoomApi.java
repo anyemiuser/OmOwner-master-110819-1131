@@ -39,7 +39,10 @@ public interface OmRoomApi {
 
     @GET("api.php")
     Call<HotelDetails> getHotelDetails(@Query("f") String typeReport,
-                                       @Query("hotel_id") String hotelId);
+                                       @Query("hotel_id") String hotelId,
+                                       @Query("CheckinDate") String checkIn,
+                                       @Query("CheckoutDate") String checkOut,
+                                       @Query("NumberofRooms") String noOfRooms);
 
     @GET("api.php")
     Call<AreaUnderCity> getAreasInCity(@Query("f") String typeReport,

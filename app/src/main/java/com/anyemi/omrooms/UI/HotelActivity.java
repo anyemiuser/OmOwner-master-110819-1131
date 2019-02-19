@@ -19,7 +19,6 @@ import android.widget.Toast;
 
 import com.anyemi.omrooms.Adapters.FacilityListAdapter;
 import com.anyemi.omrooms.Adapters.RoomTypeAdapter;
-import com.anyemi.omrooms.Adapters.SearchListAdapter;
 import com.anyemi.omrooms.Model.HotelAndRoomDetail;
 import com.anyemi.omrooms.Model.HotelDetails;
 import com.anyemi.omrooms.Model.RoomDetails;
@@ -57,6 +56,8 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields, 
     SharedPreferenceConfig sharedPreferenceConfig;
     private List<RoomsGuest> roomsGuests = new ArrayList<>();
 
+    private String hotelId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,10 +66,10 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields, 
 
 
         init();
-        assignValue();
+        assignValue(null,null);
 
         Intent intent =getIntent();
-        String hotelId = intent.getStringExtra("hotelId");
+        hotelId = intent.getStringExtra("hotelId");
         String hotelName = intent.getStringExtra("hotelName");
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -91,7 +92,7 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields, 
         Toast.makeText(this, ""+hotelId, Toast.LENGTH_SHORT).show();
 
         OmRoomApi omRoomApi = ApiUtils.getOmRoomApi();
-        omRoomApi.getHotelDetails("HotelDetails",hotelId)
+        omRoomApi.getHotelDetails("HotelDetails",hotelId,"2019-01-12","2019-01-16","2")
                 .enqueue(new Callback<HotelDetails>() {
                     @Override
                     public void onResponse(Call<HotelDetails> call, Response<HotelDetails> response) {
@@ -107,9 +108,6 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields, 
                             }else {
                                 Toast.makeText(HotelActivity.this, ""+hotelDetails.getMsg(), Toast.LENGTH_SHORT).show();
                             }
-//                            Log.e("hotel area",""+hotelDetails.getHoteldetails().getHotel_area());
-//                            Log.e("room type",""+hotelDetails.getHoteldetails().getRoomdetails().get(0).getRoom_type());
-//                            Log.e("Response successful",""+response.toString());
 
                         }else{
                             Log.e("Response not successful",""+response.toString());
@@ -222,8 +220,23 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields, 
         return true;
     }
 
-    private void assignValue() {
+    private void assignValue(String cIn, String cOut) {
         if(sharedPreferenceConfig.readCheckInDate() != null){
+
+            boolean isChanged = false;
+            if(cIn != null && cOut != null){
+
+                if(cIn.equals(sharedPreferenceConfig.readCheckInDate())
+                        && cOut.equals(sharedPreferenceConfig.readCheckOutDate())){
+                    Log.e(TAG_HOTEL," date NOT CHANGED");
+                }else {
+                    Log.e(TAG_HOTEL,"date CHANGED");
+                    sharedPreferenceConfig.writeCheckInDate(cIn);
+                    sharedPreferenceConfig.writeCheckOutDate(cOut);
+                    isChanged = true;
+                }
+
+            }
             checkInDate.setText(sharedPreferenceConfig.readCheckInDate());
             checkOutDate.setText(sharedPreferenceConfig.readCheckOutDate());
             String noNights = String.valueOf(ConverterUtil.noOfDays(sharedPreferenceConfig.readCheckInDate(),sharedPreferenceConfig.readCheckOutDate())).concat("N");
@@ -237,6 +250,12 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields, 
                 roomsCount = roomsGuests.size();
             }
             if(roomsCount>0){
+                if(roomsCount != sharedPreferenceConfig.readNoOfRooms()){
+                    Log.e(TAG_HOTEL,"Room changed");
+                    isChanged = true;
+                }else {
+                    Log.e(TAG_HOTEL,"Room  Not changed");
+                }
                 sharedPreferenceConfig.writeNoOfRooms(roomsCount);
 
             }else {
@@ -246,16 +265,28 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields, 
             rooms.setText(String.valueOf(sharedPreferenceConfig.readNoOfRooms()).concat(" Rooms"));
 
             if(guestCount>0){
+                if(guestCount != sharedPreferenceConfig.readNoOfGuests()){
+                    Log.e(TAG_HOTEL,"Guest changed");
+                    isChanged = true;
+                }else {
+                    Log.e(TAG_HOTEL,"Guest Not changed");
+                }
+
+
                 sharedPreferenceConfig.writeNoOfGuests(guestCount);
             }else {
                 if(sharedPreferenceConfig.readNoOfGuests() == 0){
                     sharedPreferenceConfig.writeNoOfGuests(1);
-                }else {
-
                 }
 
             }
             guests.setText(String.valueOf(sharedPreferenceConfig.readNoOfGuests()).concat(" Guests"));
+
+            if(isChanged){
+                showHotelDetails(hotelId);
+                Log.e(TAG_HOTEL,"Queried resh data: showHotelDetails(hotelId)");
+                isChanged = false;
+            }
         }
 
     }
@@ -285,11 +316,12 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields, 
         if(requestCode == 1 && resultCode == RESULT_OK){
 //            Bundle extras = data.getExtras();
 
-            String cIn = data.getStringExtra("checkIn");
-            String cOut = data.getStringExtra("checkOut");
-            int rooms = data.getIntExtra("rooms",1);
-            int guests = data.getIntExtra("guests",1);
-//            String roomGS= data.getStringExtra("roomG");
+            String cIn = null;
+            String cOut = null;
+            if (data != null) {
+                cIn = data.getStringExtra("checkIn");
+                cOut = data.getStringExtra("checkOut");
+            }
 
             Bundle args = data.getBundleExtra("BUNDLE");
             roomsGuests = new ArrayList<>();
@@ -297,14 +329,10 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields, 
                 roomsGuests = (List<RoomsGuest>) args.getSerializable("ARRAYLIST");
             }
 
-            sharedPreferenceConfig.writeCheckInDate(cIn);
-            sharedPreferenceConfig.writeCheckOutDate(cOut);
-            sharedPreferenceConfig.writeNoOfRooms(rooms);
-            sharedPreferenceConfig.writeNoOfGuests(guests);
 
             String checkInDate = sharedPreferenceConfig.readCheckInDate();
             if(cOut != null){
-                assignValue();
+                assignValue(cIn,cOut);
                 Toast.makeText(this, ""+checkInDate+sharedPreferenceConfig.readCheckOutDate()+sharedPreferenceConfig.readNoOfRooms()+sharedPreferenceConfig.readNoOfGuests(), Toast.LENGTH_SHORT).show();
             }else
                 Toast.makeText(this, ""+cIn+"he", Toast.LENGTH_SHORT).show();

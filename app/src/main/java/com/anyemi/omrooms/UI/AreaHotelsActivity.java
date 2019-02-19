@@ -3,7 +3,6 @@ package com.anyemi.omrooms.UI;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
@@ -13,16 +12,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anyemi.omrooms.Adapters.HotelListAdapter;
-import com.anyemi.omrooms.Adapters.RoomTypeAdapter;
 import com.anyemi.omrooms.Model.HotelList;
 import com.anyemi.omrooms.Model.Hotels;
 import com.anyemi.omrooms.Model.RoomsGuest;
@@ -53,18 +48,22 @@ public class AreaHotelsActivity extends AppCompatActivity implements View.OnClic
     SharedPreferenceConfig sharedPreferenceConfig;
     private List<RoomsGuest> roomsGuests = new ArrayList<>();
 
+    private String area = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_area_hotels);
 
+        Log.e(TAG_AREA_HOTEL,"On Create");
+
         init();
-        assignValue();
+        assignValue(null,null);
 
         coordinatorLayout = findViewById(R.id.areaHotelConstraintL);
         areaHotelsRv = findViewById(R.id.hotel_list_rv);
 
-        String area = getIntent().getStringExtra("area");
+        area = getIntent().getStringExtra("area");
 
         Toolbar toolbar = findViewById(R.id.toolBar_area_hotel);
         setSupportActionBar(toolbar);
@@ -133,8 +132,23 @@ public class AreaHotelsActivity extends AppCompatActivity implements View.OnClic
         guests = findViewById(R.id.no_of_user);
     }
 
-    private void assignValue() {
+    private void assignValue(String cIn, String cOut) {
         if(sharedPreferenceConfig.readCheckInDate() != null){
+
+            boolean isChanged = false;
+            if(cIn != null && cOut != null){
+
+                if(cIn.equals(sharedPreferenceConfig.readCheckInDate())
+                        && cOut.equals(sharedPreferenceConfig.readCheckOutDate())){
+                    Log.e(TAG_AREA_HOTEL," date NOT CHANGED");
+                }else {
+                    Log.e(TAG_AREA_HOTEL,"date CHANGED");
+                    sharedPreferenceConfig.writeCheckInDate(cIn);
+                    sharedPreferenceConfig.writeCheckOutDate(cOut);
+                    isChanged = true;
+                }
+
+            }
             checkInDate.setText(sharedPreferenceConfig.readCheckInDate());
             checkOutDate.setText(sharedPreferenceConfig.readCheckOutDate());
             String noNights = String.valueOf(ConverterUtil.noOfDays(sharedPreferenceConfig.readCheckInDate(),sharedPreferenceConfig.readCheckOutDate())).concat("N");
@@ -148,6 +162,12 @@ public class AreaHotelsActivity extends AppCompatActivity implements View.OnClic
                 roomsCount = roomsGuests.size();
             }
             if(roomsCount>0){
+                if(roomsCount != sharedPreferenceConfig.readNoOfRooms()){
+                    Log.e(TAG_AREA_HOTEL,"Room changed");
+                    isChanged = true;
+                }else {
+                    Log.e(TAG_AREA_HOTEL,"Room  Not changed");
+                }
                 sharedPreferenceConfig.writeNoOfRooms(roomsCount);
 
             }else {
@@ -157,17 +177,30 @@ public class AreaHotelsActivity extends AppCompatActivity implements View.OnClic
             rooms.setText(String.valueOf(sharedPreferenceConfig.readNoOfRooms()).concat(" Rooms"));
 
             if(guestCount>0){
+                if(guestCount != sharedPreferenceConfig.readNoOfGuests()){
+                    Log.e(TAG_AREA_HOTEL,"Guest changed");
+                    isChanged = true;
+                }else {
+                    Log.e(TAG_AREA_HOTEL,"Guest Not changed");
+                }
+
+
                 sharedPreferenceConfig.writeNoOfGuests(guestCount);
             }else {
                 if(sharedPreferenceConfig.readNoOfGuests() == 0){
                     sharedPreferenceConfig.writeNoOfGuests(1);
-                }else {
-
                 }
 
             }
             guests.setText(String.valueOf(sharedPreferenceConfig.readNoOfGuests()).concat(" Guests"));
+
+            if(isChanged){
+                showAllHotelsUnderTheArea(area);
+                Log.e(TAG_AREA_HOTEL,"Queried resh data: showAllHotelsUnderTheArea(area");
+                isChanged = false;
+            }
         }
+
 
     }
 
@@ -183,6 +216,7 @@ public class AreaHotelsActivity extends AppCompatActivity implements View.OnClic
                             if (hotelList != null && hotelList.getMsg().equals("Successfully send") && response.code() == 200) {
                                 Log.e(TAG_AREA_HOTEL,""+hotelList.getHotels().get(0).getHotel_area()
                                 +hotelList.getHotels().get(0).getHotel_name());
+                                hotelListDetails.clear();
                                 hotelListDetails = hotelList.getHotels();
                                 setHotelListRv();
 
@@ -255,13 +289,13 @@ public class AreaHotelsActivity extends AppCompatActivity implements View.OnClic
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 1 && resultCode == RESULT_OK){
-//            Bundle extras = data.getExtras();
 
-            String cIn = data.getStringExtra("checkIn");
-            String cOut = data.getStringExtra("checkOut");
-            int rooms = data.getIntExtra("rooms",1);
-            int guests = data.getIntExtra("guests",1);
-//            String roomGS= data.getStringExtra("roomG");
+            String cIn = null;
+            String cOut = null;
+            if (data != null) {
+                cIn = data.getStringExtra("checkIn");
+                cOut = data.getStringExtra("checkOut");
+            }
 
             Bundle args = data.getBundleExtra("BUNDLE");
             roomsGuests = new ArrayList<>();
@@ -269,17 +303,15 @@ public class AreaHotelsActivity extends AppCompatActivity implements View.OnClic
                 roomsGuests = (List<RoomsGuest>) args.getSerializable("ARRAYLIST");
             }
 
-            sharedPreferenceConfig.writeCheckInDate(cIn);
-            sharedPreferenceConfig.writeCheckOutDate(cOut);
-            sharedPreferenceConfig.writeNoOfRooms(rooms);
-            sharedPreferenceConfig.writeNoOfGuests(guests);
-
             String checkInDate = sharedPreferenceConfig.readCheckInDate();
             if(cOut != null){
-                assignValue();
+                assignValue(cIn,cOut);
                 Toast.makeText(this, ""+checkInDate+sharedPreferenceConfig.readCheckOutDate()+sharedPreferenceConfig.readNoOfRooms()+sharedPreferenceConfig.readNoOfGuests(), Toast.LENGTH_SHORT).show();
             }else
                 Toast.makeText(this, ""+cIn+"he", Toast.LENGTH_SHORT).show();
+
+
+
         }
 
     }
