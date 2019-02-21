@@ -1,6 +1,7 @@
 package com.anyemi.omrooms.UI;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
@@ -19,6 +20,9 @@ import android.widget.Toast;
 
 import com.anyemi.omrooms.Adapters.FacilityListAdapter;
 import com.anyemi.omrooms.Adapters.RoomTypeAdapter;
+import com.anyemi.omrooms.Model.Booking;
+import com.anyemi.omrooms.Model.BookingModel;
+import com.anyemi.omrooms.Model.BookingResponse;
 import com.anyemi.omrooms.Model.HotelAndRoomDetail;
 import com.anyemi.omrooms.Model.HotelDetails;
 import com.anyemi.omrooms.Model.RoomDetails;
@@ -32,6 +36,7 @@ import com.anyemi.omrooms.api.ApiUtils;
 import com.anyemi.omrooms.api.OmRoomApi;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.gson.Gson;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -57,6 +62,10 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields, 
     private List<RoomsGuest> roomsGuests = new ArrayList<>();
 
     private String hotelId;
+
+    private HotelDetails hotelDetails;
+
+    private Booking booking;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,17 +101,22 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields, 
         Toast.makeText(this, ""+hotelId, Toast.LENGTH_SHORT).show();
 
         OmRoomApi omRoomApi = ApiUtils.getOmRoomApi();
-        omRoomApi.getHotelDetails("HotelDetails",hotelId,"2019-01-12","2019-01-16","2")
+        omRoomApi.getHotelDetails("HotelDetails",hotelId,"2019-02-24","2019-02-28","2")
                 .enqueue(new Callback<HotelDetails>() {
                     @Override
                     public void onResponse(Call<HotelDetails> call, Response<HotelDetails> response) {
                         if(response.isSuccessful()){
-                            HotelDetails hotelDetails = response.body();
+                            hotelDetails = null;
+                            hotelDetails = response.body();
 
                             if (hotelDetails != null && hotelDetails.getMsg().equals("Successfully send") && response.code() == 200) {
                                 List<RoomFacility> facilities = ConverterUtil.checkFacilityAvailable(hotelDetails.getHoteldetails().getRoomdetails());
                                 setDataToUI(hotelDetails.getHoteldetails());
+                                Gson ggg = new Gson();
+
+                                Log.e(TAG_HOTEL,""+ggg.toJson(hotelDetails));
                                 Log.e(TAG_HOTEL,""+hotelDetails.getHoteldetails().getHotel_name());
+                                Log.e(TAG_HOTEL,""+hotelDetails.getHoteldetails().getRoomdetails().get(0).getRoom_prices().get(0).getAvailable_rooms());
                                 setFacilityRv(facilities);
                                 setRoomTypeRv(hotelDetails.getHoteldetails().getRoomdetails());
                             }else {
@@ -174,6 +188,7 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields, 
         ratingTitle = findViewById(R.id.rating_title);
         noOfRating = findViewById(R.id.no_of_ratings);
         bookRoom = findViewById(R.id.book_room);
+        bookRoom.setOnClickListener(this);
 
         facilityRv = findViewById(R.id.facility_rv);
         roomTypeRv = findViewById(R.id.room_types_rv);
@@ -307,7 +322,91 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields, 
                 intent.putExtra("check",2);
                 startActivityForResult(intent,1);
                 break;
+            case R.id.book_room:
+                bookRoomsWithDetails();
+                break;
         }
+    }
+
+    private void bookRoomsWithDetails() {
+
+        booking = new Booking();
+
+        int hotelId = Integer.parseInt(hotelDetails.getHoteldetails().getHotel_id());
+        booking.setUser_id(sharedPreferenceConfig.readPhoneNo());
+
+        List<BookingModel> modelsForBooking = new ArrayList<>();
+
+        for(int i = 0;i<hotelDetails.getHoteldetails().getRoomdetails().size();i++){
+
+            RoomDetails roomDetails = hotelDetails.getHoteldetails().getRoomdetails().get(i);
+
+            BookingModel bookingModel = new BookingModel(hotelId,roomDetails.getRoom_type(),1,2,"2019-02-24","2019-02-26","q","u","2","2500.0");
+            modelsForBooking.add(bookingModel);
+        }
+
+        booking.setBookingModels(modelsForBooking);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Select Your Booking Procedure");
+        builder.setCancelable(false);
+        View mView = getLayoutInflater().inflate(R.layout.alert_layout, null);
+        builder.setView(mView);
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+        alertDialog.setCancelable(false);
+        mView.findViewById(R.id.pay_at_hotel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.setCancelable(true);
+                alertDialog.dismiss();
+                booking.setTransaction_id(null);
+                booking.setTransaction_status(null);
+                Log.e(TAG_HOTEL,"pay at hotel: "+new Gson().toJson(booking));
+//                bookRooms(booking);
+
+            }
+        });
+        mView.findViewById(R.id.payment).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.setCancelable(true);
+                alertDialog.dismiss();
+                Intent intent = new Intent(HotelActivity.this,PaymentActivity.class);
+                intent.putExtra("price","5000");
+                startActivityForResult(intent,5);
+
+            }
+        });
+
+
+
+
+
+
+
+    }
+
+    private void bookRooms(Booking booking) {
+        OmRoomApi omRoomApi = ApiUtils.getOmRoomApi();
+        omRoomApi.bookRooms(booking).enqueue(new Callback<BookingResponse>() {
+            @Override
+            public void onResponse(Call<BookingResponse> call, Response<BookingResponse> response) {
+                if(response.isSuccessful()){
+                    BookingResponse bookingResponse = response.body();
+                    Log.e(TAG_HOTEL,response.message()+bookingResponse.getBooking_id());
+                }else {
+                    Log.e(TAG_HOTEL,response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BookingResponse> call, Throwable t) {
+                Log.e(TAG_HOTEL,t.toString());
+            }
+        });
+
+        Log.e(TAG_HOTEL,""+new Gson().toJson(booking));
     }
 
     @Override
@@ -336,6 +435,22 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields, 
                 Toast.makeText(this, ""+checkInDate+sharedPreferenceConfig.readCheckOutDate()+sharedPreferenceConfig.readNoOfRooms()+sharedPreferenceConfig.readNoOfGuests(), Toast.LENGTH_SHORT).show();
             }else
                 Toast.makeText(this, ""+cIn+"he", Toast.LENGTH_SHORT).show();
+        }else if(requestCode == 5 && resultCode == RESULT_OK){
+
+            String transactionId = null;
+            String status = null;
+            if(data!= null){
+                transactionId = data.getStringExtra("transactionId");
+                status = data.getStringExtra("status");
+
+                Log.e(TAG_HOTEL,""+transactionId);
+
+                booking.setTransaction_id(transactionId);
+                booking.setTransaction_status(status);
+                Log.e(TAG_HOTEL,"check : "+new Gson().toJson(booking));
+//                bookRooms(booking);
+            }
+
         }
 
     }

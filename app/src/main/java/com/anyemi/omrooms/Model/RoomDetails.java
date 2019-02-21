@@ -1,5 +1,7 @@
 package com.anyemi.omrooms.Model;
 
+import java.util.List;
+
 public class RoomDetails {
     private String noofrooms;
     private String room_type;
@@ -35,11 +37,12 @@ public class RoomDetails {
     private String room_gst_rate;
     private String room_service_rate;
     private String room_other_rate;
+    private List<RoomPriceOnDate> room_prices;
 
     public RoomDetails() {
     }
 
-    public RoomDetails(String noofrooms, String room_type, String ac, String non_ac, String tv, String wheelchair, String bar, String laptop_friendly, String banquet_hall, String room_heater, String dinning_area, String mini_fridge, String power_backup, String elevator, String swimming_pool, String pre_book_meal, String parking_facility, String free_wifi, String card_payment, String gym, String hair_dryer, String laundry, String pet_friendly, String cctv_camera, String geyser, String conference_room, String room_master_image_url, String pay_at_hotel, String room_base_price, String room_discount_percentage, String room_occupation, String room_gst_rate, String room_service_rate, String room_other_rate) {
+    public RoomDetails(String noofrooms, String room_type, String ac, String non_ac, String tv, String wheelchair, String bar, String laptop_friendly, String banquet_hall, String room_heater, String dinning_area, String mini_fridge, String power_backup, String elevator, String swimming_pool, String pre_book_meal, String parking_facility, String free_wifi, String card_payment, String gym, String hair_dryer, String laundry, String pet_friendly, String cctv_camera, String geyser, String conference_room, String room_master_image_url, String pay_at_hotel, String room_base_price, String room_discount_percentage, String room_occupation, String room_gst_rate, String room_service_rate, String room_other_rate, List<RoomPriceOnDate> room_prices) {
         this.noofrooms = noofrooms;
         this.room_type = room_type;
         this.ac = ac;
@@ -74,15 +77,7 @@ public class RoomDetails {
         this.room_gst_rate = room_gst_rate;
         this.room_service_rate = room_service_rate;
         this.room_other_rate = room_other_rate;
-    }
-
-
-    public String getRoom_master_image_url() {
-        return room_master_image_url;
-    }
-
-    public void setRoom_master_image_url(String room_master_image_url) {
-        this.room_master_image_url = room_master_image_url;
+        this.room_prices = room_prices;
     }
 
     public String getNoofrooms() {
@@ -293,6 +288,14 @@ public class RoomDetails {
         this.conference_room = conference_room;
     }
 
+    public String getRoom_master_image_url() {
+        return room_master_image_url;
+    }
+
+    public void setRoom_master_image_url(String room_master_image_url) {
+        this.room_master_image_url = room_master_image_url;
+    }
+
     public String getPay_at_hotel() {
         return pay_at_hotel;
     }
@@ -347,5 +350,13 @@ public class RoomDetails {
 
     public void setRoom_other_rate(String room_other_rate) {
         this.room_other_rate = room_other_rate;
+    }
+
+    public List<RoomPriceOnDate> getRoom_prices() {
+        return room_prices;
+    }
+
+    public void setRoom_prices(List<RoomPriceOnDate> room_prices) {
+        this.room_prices = room_prices;
     }
 }

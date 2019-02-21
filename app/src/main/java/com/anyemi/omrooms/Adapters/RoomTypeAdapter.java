@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.anyemi.omrooms.Model.RoomDetails;
+import com.anyemi.omrooms.Model.RoomPriceOnDate;
 import com.anyemi.omrooms.R;
 import com.anyemi.omrooms.UI.HotelActivity;
 
@@ -37,8 +38,21 @@ public class RoomTypeAdapter extends RecyclerView.Adapter<RoomTypeAdapter.RoomVi
     public void onBindViewHolder(@NonNull RoomViewHolder holder, int position) {
 
         RoomDetails room =roomDetails.get(position);
+        List<RoomPriceOnDate> roomPriceOnDates = room.getRoom_prices();
+        if(roomPriceOnDates != null){
+            float roomPrice = 0;
+            for(int i=0; i<roomPriceOnDates.size();i++){
+                try{
+                    roomPrice=roomPrice+Float.parseFloat(roomPriceOnDates.get(i).getPrice());
 
-        holder.price.setText(room.getRoom_base_price());
+                }catch (NumberFormatException e){
+
+                }
+
+            }
+            holder.price.setText(String.valueOf(roomPrice));
+        }
+
     }
 
     @Override

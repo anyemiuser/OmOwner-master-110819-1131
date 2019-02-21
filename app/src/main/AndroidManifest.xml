@@ -9,11 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UI.AreaHotelsActivity"
-            android:theme="@style/AppThemeNoBar"/>
-        <activity android:name=".RoomActivity"></activity>
-        <activity android:name=".UI.HotelActivity"
-            android:theme="@style/AppThemeNoBar"/>
+        <activity android:name=".UI.PaymentActivity"></activity>
+        <activity
+            android:name=".UI.AreaHotelsActivity"
+            android:theme="@style/AppThemeNoBar" />
+        <activity android:name=".RoomActivity" />
+        <activity
+            android:name=".UI.HotelActivity"
+            android:theme="@style/AppThemeNoBar" />
         <activity
             android:name=".UI.CalenderActivity"
             android:theme="@style/AppThemeNoBar" />

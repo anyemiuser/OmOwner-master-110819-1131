@@ -1,27 +1,27 @@
 package com.anyemi.omrooms.Model;
 
 public class RoomPriceOnDate {
-    private String dateX;
+    private String date;
     private String price;
     private String discount;
-    private String noOfRoomAvOnDate;
+    private int available_rooms;
 
     public RoomPriceOnDate() {
     }
 
-    public RoomPriceOnDate(String dateX, String price, String discount, String noOfRoomAvOnDate) {
-        this.dateX = dateX;
+    public RoomPriceOnDate(String date, String price, String discount, int available_rooms) {
+        this.date = date;
         this.price = price;
         this.discount = discount;
-        this.noOfRoomAvOnDate = noOfRoomAvOnDate;
+        this.available_rooms = available_rooms;
     }
 
-    public String getDateX() {
-        return dateX;
+    public String getDate() {
+        return date;
     }
 
-    public void setDateX(String dateX) {
-        this.dateX = dateX;
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getPrice() {
@@ -40,11 +40,11 @@ public class RoomPriceOnDate {
         this.discount = discount;
     }
 
-    public String getNoOfRoomAvOnDate() {
-        return noOfRoomAvOnDate;
+    public int getAvailable_rooms() {
+        return available_rooms;
     }
 
-    public void setNoOfRoomAvOnDate(String noOfRoomAvOnDate) {
-        this.noOfRoomAvOnDate = noOfRoomAvOnDate;
+    public void setAvailable_rooms(int available_rooms) {
+        this.available_rooms = available_rooms;
     }
 }
