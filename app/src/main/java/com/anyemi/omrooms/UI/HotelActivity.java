@@ -25,6 +25,7 @@ import com.anyemi.omrooms.Model.BookingModel;
 import com.anyemi.omrooms.Model.BookingResponse;
 import com.anyemi.omrooms.Model.HotelAndRoomDetail;
 import com.anyemi.omrooms.Model.HotelDetails;
+import com.anyemi.omrooms.Model.PaymentRequestModel;
 import com.anyemi.omrooms.Model.RoomDetails;
 import com.anyemi.omrooms.Model.RoomFacility;
 import com.anyemi.omrooms.Model.RoomsGuest;
@@ -373,7 +374,18 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields, 
                 alertDialog.setCancelable(true);
                 alertDialog.dismiss();
                 Intent intent = new Intent(HotelActivity.this,PaymentActivity.class);
-                intent.putExtra("price","5000");
+//                int id = Integer.parseInt(sharedPreferenceConfig.readPhoneNo());
+
+                PaymentRequestModel paymentRequestModel = new PaymentRequestModel(sharedPreferenceConfig.readPhoneNo(),
+                        booking.getUser_id(),
+                        "1500.99",
+                        "3000.99",
+                        sharedPreferenceConfig.readPhoneNo(),
+                        "0",
+                        "Om Room Payment");
+
+                intent.putExtra("payment",new Gson().toJson(paymentRequestModel));
+//                intent.putExtra("user_id",sharedPreferenceConfig.readPhoneNo());
                 startActivityForResult(intent,5);
 
             }

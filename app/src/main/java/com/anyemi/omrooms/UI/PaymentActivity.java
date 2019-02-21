@@ -4,11 +4,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.anyemi.omrooms.Model.PaymentRequestModel;
 import com.anyemi.omrooms.R;
+import com.google.gson.Gson;
 
 public class PaymentActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -19,16 +22,18 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
-
-        String priceT = getIntent().getStringExtra("price");
-
+        Intent intent = getIntent();
+        String model = intent.getStringExtra("payment");
+        Gson gson = new Gson();
+        PaymentRequestModel paymentRequestModel = gson.fromJson(model, PaymentRequestModel.class);
+        Log.e("test",""+new Gson().toJson(paymentRequestModel));
         price = findViewById(R.id.price_text);
         success = findViewById(R.id.success);
         success.setOnClickListener(this);
         failure = findViewById(R.id.failure);
         failure.setOnClickListener(this);
 
-        price.setText(priceT);
+        price.setText(paymentRequestModel.getTotal_amount());
     }
 
     @Override
