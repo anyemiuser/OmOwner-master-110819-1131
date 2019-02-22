@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anyemi.omrooms.Adapters.HotelListAdapter;
+import com.anyemi.omrooms.Helper.RGuest;
 import com.anyemi.omrooms.Model.HotelList;
 import com.anyemi.omrooms.Model.Hotels;
 import com.anyemi.omrooms.Model.RoomsGuest;
@@ -46,7 +47,7 @@ public class AreaHotelsActivity extends AppCompatActivity implements View.OnClic
     private LinearLayout checkInLayout, checkOutLayOut, roomUserLayout;
     private TextView checkInDate,checkOutDate,rooms,guests,nights;
     SharedPreferenceConfig sharedPreferenceConfig;
-    private List<RoomsGuest> roomsGuests = new ArrayList<>();
+//    private List<RoomsGuest> roomsGuests = new ArrayList<>();
 
     private String area = null;
 
@@ -135,6 +136,13 @@ public class AreaHotelsActivity extends AppCompatActivity implements View.OnClic
     private void assignValue(String cIn, String cOut) {
         if(sharedPreferenceConfig.readCheckInDate() != null){
 
+            if(RGuest.roomsGuests.size() == 0){
+                RGuest.roomsGuests.add(new RoomsGuest(1,2));
+                sharedPreferenceConfig.writeNoOfRooms(1);
+                sharedPreferenceConfig.writeNoOfGuests(2);
+
+            }
+
             boolean isChanged = false;
             if(cIn != null && cOut != null){
 
@@ -155,11 +163,11 @@ public class AreaHotelsActivity extends AppCompatActivity implements View.OnClic
             nights.setText(noNights);
             int roomsCount= sharedPreferenceConfig.readNoOfRooms();
             int guestCount = 0;
-            if(roomsGuests.size()>0){
-                for(int i=0;i<roomsGuests.size();i++){
-                    guestCount = guestCount + roomsGuests.get(i).getGuests();
+            if(RGuest.roomsGuests.size()>0){
+                for(int i=0;i<RGuest.roomsGuests.size();i++){
+                    guestCount = guestCount + RGuest.roomsGuests.get(i).getGuests();
                 }
-                roomsCount = roomsGuests.size();
+                roomsCount = RGuest.roomsGuests.size();
             }
             if(roomsCount>0){
                 if(roomsCount != sharedPreferenceConfig.readNoOfRooms()){
@@ -253,9 +261,9 @@ public class AreaHotelsActivity extends AppCompatActivity implements View.OnClic
         resultIntent.putExtra("guests",sharedPreferenceConfig.readNoOfGuests());
 //        ArrayList<Object> object = new ArrayList<Object>();
 //        Intent intent = new Intent(Current.class, Transfer.class);
-        if(roomsGuests.size()>0){
+        if(RGuest.roomsGuests.size()>0){
             Bundle args = new Bundle();
-            args.putSerializable("ARRAYLIST",(Serializable)roomsGuests);
+            args.putSerializable("ARRAYLIST",(Serializable)RGuest.roomsGuests);
             resultIntent.putExtra("BUNDLE",args);
         }
 
@@ -298,9 +306,9 @@ public class AreaHotelsActivity extends AppCompatActivity implements View.OnClic
             }
 
             Bundle args = data.getBundleExtra("BUNDLE");
-            roomsGuests = new ArrayList<>();
+
             if(args!=null){
-                roomsGuests = (List<RoomsGuest>) args.getSerializable("ARRAYLIST");
+                RGuest.roomsGuests = (List<RoomsGuest>) args.getSerializable("ARRAYLIST");
             }
 
             String checkInDate = sharedPreferenceConfig.readCheckInDate();

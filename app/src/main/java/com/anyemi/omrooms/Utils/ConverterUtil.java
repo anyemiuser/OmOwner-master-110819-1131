@@ -67,6 +67,28 @@ public class ConverterUtil implements ConstantFields{
 
     }
 
+    public static String changeDateFormate(String date){
+        SimpleDateFormat comingFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+        SimpleDateFormat returnFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String formatedDate = null;
+        try {
+            Date date1 = comingFormat.parse(date);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date1);
+            Date newDate = calendar.getTime();
+            formatedDate = returnFormat.format(newDate);
+            Log.e("next day a",""+formatedDate+" p day a: "+date);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }catch (NullPointerException e){
+            e.printStackTrace();
+        }
+
+        return formatedDate;
+    }
+
     public static boolean checkCurrentDateIsLessThenSaved(String date) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Calendar calendar = Calendar.getInstance();

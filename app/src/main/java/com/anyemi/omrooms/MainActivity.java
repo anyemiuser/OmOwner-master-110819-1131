@@ -8,16 +8,22 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.anyemi.omrooms.Fragments.BookingFragment;
 import com.anyemi.omrooms.Fragments.HomeFragment;
 import com.anyemi.omrooms.Fragments.ProfileFragment;
 import com.anyemi.omrooms.Fragments.SavedFragment;
+import com.anyemi.omrooms.Helper.RGuest;
+import com.anyemi.omrooms.Utils.ConverterUtil;
+import com.anyemi.omrooms.Utils.SharedPreferenceConfig;
 
 public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
+    RGuest rGuest;
+    private SharedPreferenceConfig sharedPreferenceConfig;
 
     public static Intent getStartIntent(Context context) {
 
@@ -30,8 +36,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 //                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
+        rGuest = new RGuest();
         setContentView(R.layout.activity_main);
+        sharedPreferenceConfig = new SharedPreferenceConfig(this);
+        setDefaultDateAndRooms();
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         loadFragment(new HomeFragment());
@@ -63,6 +71,35 @@ public class MainActivity extends AppCompatActivity {
                 return loadFragment(fragment);
             }
         });
+    }
+
+    private void setDefaultDateAndRooms() {
+        boolean isCurrentDate = false;
+        if(sharedPreferenceConfig.readCheckInDate() == null){
+            String checkIn = ConverterUtil.setTodaysDate();
+            Log.e("check in in calendar",""+checkIn);
+            String  checkOut = ConverterUtil.setDefaultCheckOutDateToNextDay(checkIn);
+            sharedPreferenceConfig.writeCheckInDate(checkIn);
+            sharedPreferenceConfig.writeCheckOutDate(checkOut);
+            Log.e("check out in calendar",""+checkOut);
+            sharedPreferenceConfig.writeNoOfRooms(1);
+            sharedPreferenceConfig.writeNoOfGuests(2);
+        }else {
+            isCurrentDate = ConverterUtil.checkCurrentDateIsLessThenSaved(sharedPreferenceConfig.readCheckInDate());
+            if(isCurrentDate){
+                //no need to change
+            }else {
+                String checkIn = ConverterUtil.setTodaysDate();
+                Log.e("check in in calendar",""+checkIn);
+                String  checkOut = ConverterUtil.setDefaultCheckOutDateToNextDay(checkIn);
+                sharedPreferenceConfig.writeCheckInDate(checkIn);
+                sharedPreferenceConfig.writeCheckOutDate(checkOut);
+                Log.e("check out in calendar",""+checkOut);
+                sharedPreferenceConfig.writeNoOfRooms(1);
+                sharedPreferenceConfig.writeNoOfGuests(2);
+            }
+        }
+
     }
 
     private boolean loadFragment(Fragment fragment) {

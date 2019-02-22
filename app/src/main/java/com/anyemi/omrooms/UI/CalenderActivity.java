@@ -16,6 +16,7 @@ import com.anyemi.omrooms.Fragments.CalenderFragmentCheckIn;
 import com.anyemi.omrooms.Fragments.CalenderFragmentCheckOut;
 import com.anyemi.omrooms.Fragments.FragmentAdapter.CalenderFragmentAdapter;
 import com.anyemi.omrooms.Fragments.RoomGuestFragment;
+import com.anyemi.omrooms.Helper.RGuest;
 import com.anyemi.omrooms.Model.RoomsGuest;
 import com.anyemi.omrooms.R;
 import com.anyemi.omrooms.Utils.ConverterUtil;
@@ -39,7 +40,7 @@ public class CalenderActivity extends AppCompatActivity implements
 
     public static String checkIn;
     public static String checkOut;
-    public static List<RoomsGuest> roomsGuests = new ArrayList<>();
+
     public static int rooms;
     public static int guests;
 
@@ -122,7 +123,7 @@ public class CalenderActivity extends AppCompatActivity implements
 
     }
 
-    public static void setDefaultDate(String checkInDate, String checkOutDate, int noOfRooms, int noOfGuests){
+    public void setDefaultDate(String checkInDate, String checkOutDate, int noOfRooms, int noOfGuests){
 
         boolean isCurrentDate = false;
         if(checkInDate != null){
@@ -138,11 +139,13 @@ public class CalenderActivity extends AppCompatActivity implements
         }else {
             checkIn = ConverterUtil.setTodaysDate();
             Log.e("check in in calendar",""+checkIn);
-
             checkOut = ConverterUtil.setDefaultCheckOutDateToNextDay(checkIn);
+            sharedPreferenceConfig.writeCheckInDate(checkIn);
+            sharedPreferenceConfig.writeCheckOutDate(checkOut);
             Log.e("check out in calendar",""+checkOut);
             rooms = 1;
             guests = 1;
+
         }
 
 //        roomsGuests.clear();
@@ -162,9 +165,9 @@ public class CalenderActivity extends AppCompatActivity implements
         resultIntent.putExtra("guests",guests);
 //        ArrayList<Object> object = new ArrayList<Object>();
 //        Intent intent = new Intent(Current.class, Transfer.class);
-        if(roomsGuests.size()>0){
+        if(RGuest.roomsGuests.size()>0){
             Bundle args = new Bundle();
-            args.putSerializable("ARRAYLIST",(Serializable)roomsGuests);
+            args.putSerializable("ARRAYLIST",(Serializable)RGuest.roomsGuests);
             resultIntent.putExtra("BUNDLE",args);
         }
 
