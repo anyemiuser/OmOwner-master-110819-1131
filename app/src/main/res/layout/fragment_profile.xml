@@ -12,8 +12,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        app:layout_constraintBottom_toTopOf="@+id/view2"
-        app:layout_constraintTop_toTopOf="@+id/view2">
+        app:layout_constraintBottom_toTopOf="@+id/toolbar_profile"
+        app:layout_constraintTop_toTopOf="@+id/toolbar_profile">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/profile_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <View
             android:id="@+id/view2"
