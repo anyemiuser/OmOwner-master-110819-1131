@@ -16,6 +16,6 @@ public class BookingConActivity extends AppCompatActivity {
         setContentView(R.layout.activity_booking_con);
         bookinIdV = findViewById(R.id.booking_id);
         String bid = getIntent().getStringExtra("bid");
-        bookinIdV.setText("Booking Id :"+bid);
+        bookinIdV.setText("Booking Id : "+bid);
     }
 }
