@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.anyemi.omrooms.Adapters.RoomGuestAdapter;
+import com.anyemi.omrooms.Helper.RGuest;
 import com.anyemi.omrooms.Model.RoomsGuest;
 import com.anyemi.omrooms.R;
 import com.anyemi.omrooms.UI.CalenderActivity;
@@ -48,13 +49,13 @@ public class RoomGuestFragment extends Fragment {
         recyclerViewRoomsGuest.setLayoutManager(layoutManager);
 
 //        roomsGuests = new ArrayList<RoomsGuest>();
-        if(CalenderActivity.roomsGuests.size() == 0){
-            CalenderActivity.roomsGuests.add(new RoomsGuest(1,2));
+        if(RGuest.roomsGuests.size() == 0){
+            RGuest.roomsGuests.add(new RoomsGuest(1,2));
         }
 
 //        roomsGuests.add(new RoomsGuest(1,3));
 
-        RoomGuestAdapter roomGuestAdapter = new RoomGuestAdapter(CalenderActivity.roomsGuests, getActivity());
+        RoomGuestAdapter roomGuestAdapter = new RoomGuestAdapter(RGuest.roomsGuests, getActivity());
         recyclerViewRoomsGuest.setAdapter(roomGuestAdapter);
         return rootView;
     }

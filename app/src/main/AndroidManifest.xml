@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UI.PaymentActivity"></activity>
+        <activity android:name=".UI.BookingConActivity"></activity>
+        <activity android:name=".UI.PaymentActivity" />
         <activity
             android:name=".UI.AreaHotelsActivity"
             android:theme="@style/AppThemeNoBar" />
