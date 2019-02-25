@@ -20,11 +20,12 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.anyEMI.paystarr.R;
-import com.anyEMI.paystarr.bgtask.BackgroundTask;
-import com.anyEMI.paystarr.bgtask.BackgroundThread;
-import com.anyEMI.paystarr.connection.HomeServices;
-import com.anyEMI.paystarr.model.CheckValidResponseModel;
+
+import com.anyemi.omrooms.Model.CheckValidResponseModel;
+import com.anyemi.omrooms.R;
+import com.anyemi.omrooms.payment.bgtask.BackgroundTask;
+import com.anyemi.omrooms.payment.bgtask.BackgroundThread;
+import com.anyemi.omrooms.payment.connection.HomeServices;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;

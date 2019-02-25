@@ -36,15 +36,18 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.anyEMI.paystarr.R;
-import com.anyEMI.paystarr.bgtask.BackgroundTask;
-import com.anyEMI.paystarr.bgtask.BackgroundThread;
-import com.anyEMI.paystarr.connection.HomeServices;
-import com.anyEMI.paystarr.model.CheckValidResponseModel;
-import com.anyEMI.paystarr.model.PaymentChooserModel;
-import com.anyEMI.paystarr.model.SbiCheckPaymentStatus;
-import com.anyEMI.paystarr.model.SbiPayInitResaponseModel;
-import com.anyEMI.paystarr.model.VpaListModel;
+
+import com.anyemi.omrooms.Model.CheckValidResponseModel;
+import com.anyemi.omrooms.Model.PaymentChooserModel;
+import com.anyemi.omrooms.Model.SbiCheckPaymentStatus;
+import com.anyemi.omrooms.Model.SbiPayInitResaponseModel;
+import com.anyemi.omrooms.Model.VpaListModel;
+import com.anyemi.omrooms.R;
+import com.anyemi.omrooms.UI.CollectionsTabbedActivity;
+import com.anyemi.omrooms.UI.PaymentTransactionStatusActivity;
+import com.anyemi.omrooms.payment.bgtask.BackgroundTask;
+import com.anyemi.omrooms.payment.bgtask.BackgroundThread;
+import com.anyemi.omrooms.payment.connection.HomeServices;
 import com.google.gson.Gson;
 
 import org.json.JSONException;

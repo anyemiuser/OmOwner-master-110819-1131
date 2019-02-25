@@ -55,6 +55,8 @@ dependencies {
 
     implementation 'com.google.code.gson:gson:2.8.4'
 
+    implementation 'com.paytm.pgsdk:pgsdk:1.0.8'
+
     //adding annotation for room
     annotationProcessor "android.arch.persistence.room:compiler:$room_version"
     annotationProcessor "android.arch.lifecycle:compiler:$room_version"

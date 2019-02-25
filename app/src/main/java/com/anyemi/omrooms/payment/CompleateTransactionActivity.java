@@ -30,16 +30,17 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.anyEMI.paystarr.R;
-import com.anyEMI.paystarr.bgtask.BackgroundTask;
-import com.anyEMI.paystarr.bgtask.BackgroundThread;
-import com.anyEMI.paystarr.connection.HomeServices;
-import com.anyEMI.paystarr.model.CheckSumModel;
-import com.anyEMI.paystarr.model.PaymentIdModel;
-import com.anyEMI.paystarr.utils.PrintLog;
+
+import com.anyemi.omrooms.Model.CheckSumModel;
+import com.anyemi.omrooms.Model.PaymentIdModel;
+import com.anyemi.omrooms.R;
+import com.anyemi.omrooms.UI.CollectionsTabbedActivity;
+import com.anyemi.omrooms.payment.apkkit.WisePadController;
+import com.anyemi.omrooms.payment.apkkit.WisePadControllerListener;
+import com.anyemi.omrooms.payment.bgtask.BackgroundTask;
+import com.anyemi.omrooms.payment.bgtask.BackgroundThread;
+import com.anyemi.omrooms.payment.connection.HomeServices;
 import com.google.gson.Gson;
-import com.mswipe.wisepad.apkkit.WisePadController;
-import com.mswipe.wisepad.apkkit.WisePadControllerListener;
 import com.paytm.pgsdk.PaytmOrder;
 import com.paytm.pgsdk.PaytmPGService;
 import com.paytm.pgsdk.PaytmPaymentTransactionCallback;
@@ -231,7 +232,7 @@ public class CompleateTransactionActivity extends AppCompatActivity implements T
                     checkSumModel = gson.fromJson(data.toString(), CheckSumModel.class);
                     if (checkSumModel.getStatus().equals("success")) {
                         hash = checkSumModel.getCheckSum();
-                        PrintLog.print("HASH KEY", hash);
+                        Log.e("HASH KEY", hash);
                         onStartTransaction();
                     } else {
                         Globals.showToast(getApplicationContext(), "Unable to generate hash");

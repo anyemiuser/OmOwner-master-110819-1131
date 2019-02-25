@@ -24,8 +24,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.anyEMI.paystarr.R;
-import com.anyEMI.paystarr.model.CollectionsModel;
+import com.anyemi.omrooms.Model.CollectionsModel;
+import com.anyemi.omrooms.R;
 import com.google.gson.Gson;
 
 import java.text.DecimalFormat;

@@ -24,8 +24,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.anyEMI.paystarr.R;
-import com.anyEMI.paystarr.model.CollectionsModel;
+
+import com.anyemi.omrooms.Model.CollectionsModel;
+import com.anyemi.omrooms.R;
 import com.google.gson.Gson;
 
 import java.text.DecimalFormat;
@@ -56,7 +57,7 @@ public class PaymentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_payment);
+        setContentView(R.layout.activity_payment2);
 
 
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
