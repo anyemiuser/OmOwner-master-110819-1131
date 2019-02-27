@@ -15,8 +15,10 @@ import com.anyemi.omrooms.Fragments.FragmentAdapter.BookingHistoryAdapter;
 import com.anyemi.omrooms.R;
 
 public class BookingFragment extends Fragment {
+    //Toolbar toolbarBookings;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -24,7 +26,17 @@ public class BookingFragment extends Fragment {
 //        View view = inflater.inflate(R.layout.fragment_home, container, false);
         return inflater.inflate(R.layout.fragment_booking, container, false);
 //        return inflater.inflate(R.layout.fragment_home,null);
+//        View view = inflater.inflate(R.layout.fragment_booking, container, false);
+//        toolbarBookings = view.findViewById(R.id.toolbar_booking);
+//        toolbarBookings.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                getActivity().onBackPressed();
+//            }
+//        });
+//        return view;
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -32,20 +44,11 @@ public class BookingFragment extends Fragment {
         viewPager = view.findViewById(R.id.view_pager);
         //child fragment inside fragment
         BookingHistoryAdapter adapter = new BookingHistoryAdapter(getChildFragmentManager());
-        adapter.addFragment(new BookingHistoryFragment(),"Booking");
-        adapter.addFragment(new BookingHistoryFragment(),"Cancelled");
-        adapter.addFragment(new BookingHistoryFragment(),"Stayed");
+        adapter.addFragment(new BookingHistoryFragment(), "Booking");
+        adapter.addFragment(new BookingHistoryFragment(), "Cancelled");
+        adapter.addFragment(new BookingHistoryFragment(), "Stayed");
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
-
-        Toolbar toolbar = getActivity().findViewById(R.id.toolbarId);
-
-//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-////                getActivity().onBackPressed();
-//            }
-//        });
 
     }
 }

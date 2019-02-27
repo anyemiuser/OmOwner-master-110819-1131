@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -113,5 +115,19 @@ public class MainActivity extends AppCompatActivity {
         }
         return false;
     }
+
+//    @Override
+//    public void onBackPressed() {
+//        int stackCount = getSupportFragmentManager().getBackStackEntryCount();
+//        if (stackCount == 1) {
+//            super.onBackPressed();
+//        } else  {
+//            FragmentManager fragmentManager = getSupportFragmentManager();
+//            fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+//            FragmentTransaction transaction = fragmentManager.beginTransaction();
+//            transaction.replace(R.id.fragment_container, new HomeFragment());
+//            transaction.commit();
+//        }
+//    }
 
 }

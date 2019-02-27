@@ -21,19 +21,20 @@ public class SavedFragment extends Fragment {
 
     ArrayList<SavedHotels> savedHotelsList;
     RecyclerView recyclerViewSavedHotels;
-    Toolbar toolbar;
+    //Toolbar toolbar;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
 //        return inflater.inflate(R.layout.fragment_saved,null);
-       //return inflater.inflate(R.layout.fragment_saved, container, false);
+        //return inflater.inflate(R.layout.fragment_saved, container, false);
 //        return super.onCreateView(inflater, container, savedInstanceState);
 
         View rootview = inflater.inflate(R.layout.fragment_saved, container, false);
         recyclerViewSavedHotels = rootview.findViewById(R.id.saved_rv);
-        //toolbar = getActivity().findViewById(R.id.toolbarSaved);
+        //toolbar = rootview.findViewById(R.id.toolbar_saved);
+
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerViewSavedHotels.setLayoutManager(layoutManager);
@@ -56,7 +57,8 @@ public class SavedFragment extends Fragment {
 //                getActivity().onBackPressed();
 //            }
 //        });
-       return rootview;
+
+        return rootview;
     }
 
     @Override
@@ -64,4 +66,5 @@ public class SavedFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
     }
+
 }
