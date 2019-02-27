@@ -14,8 +14,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_scrollFlags="exitUntilCollapsed|scroll"
-            app:contentScrim="@color/colorPrimary"
+            app:contentScrim="@android:color/white"
             app:expandedTitleMarginStart="48dp"
+            app:expandedTitleTextAppearance="@style/CollapsingToolbarLayoutExpandedTextStyle"
+            app:collapsedTitleTextAppearance="@style/CollapsingToolbarLayoutExpandedTextStyle"
+            app:statusBarScrim="@color/colorPrimary"
             app:expandedTitleMarginEnd="64dp">
             <ImageView
                 android:id="@+id/hotel_image"

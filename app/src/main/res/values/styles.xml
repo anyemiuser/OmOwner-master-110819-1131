@@ -74,8 +74,13 @@
         <item name="android:singleLine">true</item>
     </style>
 
+    <style name="CollapsingToolbarLayoutExpandedTextStyle" parent="AppTheme">
+        <item name="android:textColor">@android:color/transparent</item>
+        <item name="android:textSize">0sp</item>
+    </style>
 
-
-
-
+    <style name="AppTheme.CustomButton" parent="Widget.AppCompat.Button.Borderless.Colored">
+        <item name="colorButtonNormal">@color/colorPrimary</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
 </resources>

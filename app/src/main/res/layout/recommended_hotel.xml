@@ -29,7 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingBottom="14dp">
+                android:paddingBottom="2dp">
 
                 <ImageView
                     android:id="@+id/hotels_image"
