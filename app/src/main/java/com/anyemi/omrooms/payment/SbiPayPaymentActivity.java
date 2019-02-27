@@ -43,7 +43,6 @@ import com.anyemi.omrooms.Model.SbiCheckPaymentStatus;
 import com.anyemi.omrooms.Model.SbiPayInitResaponseModel;
 import com.anyemi.omrooms.Model.VpaListModel;
 import com.anyemi.omrooms.R;
-import com.anyemi.omrooms.UI.CollectionsTabbedActivity;
 import com.anyemi.omrooms.UI.PaymentTransactionStatusActivity;
 import com.anyemi.omrooms.payment.bgtask.BackgroundTask;
 import com.anyemi.omrooms.payment.bgtask.BackgroundThread;
@@ -648,10 +647,10 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
                             startActivity(intent);
 
                         } else {
-                            Intent intent = new Intent(getApplicationContext(), CollectionsTabbedActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            intent.putExtra("FRAGMENT", "COLLECTION");
-                            startActivity(intent);
+//                            Intent intent = new Intent(getApplicationContext(), CollectionsTabbedActivity.class);
+//                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                            intent.putExtra("FRAGMENT", "COLLECTION");
+//                            startActivity(intent);
                         }
                     }
                 }

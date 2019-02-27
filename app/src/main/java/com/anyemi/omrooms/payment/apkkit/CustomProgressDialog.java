@@ -6,6 +6,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.anyemi.omrooms.R;
+
 public class CustomProgressDialog extends Dialog 
 {
 

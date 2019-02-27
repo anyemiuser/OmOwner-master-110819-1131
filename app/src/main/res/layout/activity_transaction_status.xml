@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/logo_back_ground"
+    android:orientation="vertical"
+    >
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/transparent"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            android:scrollbars="none">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="15dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+                            android:id="@+id/tv_trns_status"
+                            style="@style/TextView.Header"
+                            android:layout_width="0dp"
+                            android:layout_height="60dp"
+                            android:layout_weight="1"
+                            android:gravity="left|center"
+                            android:text="Money Transfer Successful "
+                            android:textSize="22sp" />
+
+                        <ImageView
+                            android:id="@+id/iv_status"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/approved"
+                            android:visibility="visible"/>
+
+                    </LinearLayout>
+
+
+
+                    <TextView
+                        android:id="@+id/tv_amount"
+                        style="@style/TextView.Standard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="left|center"
+                        android:text="1"
+                        android:textSize="22sp" />
+
+
+                    <TextView
+                        android:id="@+id/tv_reason"
+                        style="@style/TextView.Standard"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_weight="4"
+                        android:layout_marginTop="10dp"
+                        android:gravity="left|center"
+                        android:text="123456789"
+                        android:textSize="18sp" />
+
+
+
+
+
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/gray"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:orientation="vertical"
+                    android:paddingLeft="15dp">
+
+
+                    <TextView
+                        style="@style/TextView.Header"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:gravity="left|center"
+                        android:text="To"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_payment_to"
+                        style="@style/TextView.Standard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="left|center"
+                        android:singleLine="false"
+                        android:text="Hindustan Petroleum Corporation Limited(Hpcl KR Nagar) "
+                        android:textColor="@color/TextColor.Black"
+                        android:textSize="18sp" />
+
+
+                    <TextView
+                        style="@style/TextView.Header"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_weight="3"
+                        android:gravity="left|center"
+                        android:text="Bank Account Linked to"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_upi_id"
+                        style="@style/TextView.Standard"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_weight="4"
+                        android:gravity="left|center"
+                        android:text="123456789"
+                        android:textSize="18sp" />
+
+
+                    <TextView
+                        style="@style/TextView.Header"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_weight="3"
+                        android:gravity="left|center"
+                        android:text="Transaction Id"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_transaction_id"
+                        style="@style/TextView.Standard"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_weight="4"
+                        android:gravity="left|center"
+                        android:text="123456789"
+                        android:textSize="18sp" />
+
+
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <Button
+            android:id="@+id/btn_print_on_device"
+            style="@style/TextView.Header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="-2dp"
+            android:background="@color/primary"
+            android:text="Print Invoice"
+            android:textColor="@color/white"
+            android:visibility="gone"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>

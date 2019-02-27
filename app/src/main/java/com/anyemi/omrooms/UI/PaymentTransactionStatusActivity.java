@@ -17,6 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.anyemi.omrooms.R;
+import com.anyemi.omrooms.payment.Constants;
 import com.anyemi.omrooms.payment.PaymentRequestModel;
 import com.google.gson.Gson;
 
@@ -130,10 +131,10 @@ public class PaymentTransactionStatusActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
 
-                Intent intent = new Intent(getApplicationContext(), NavigationActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-              //  intent.putExtra("FRAGMENT", "COLLECTION");
-                startActivity(intent);
+//                Intent intent = new Intent(getApplicationContext(), NavigationActivity.class);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//              //  intent.putExtra("FRAGMENT", "COLLECTION");
+//                startActivity(intent);
                 break;
 
                 default:

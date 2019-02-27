@@ -10,6 +10,7 @@
     <string name="check_in_date">Select Check-In Date</string>
 
 
+
     <string name="gender_prompt">Choose your Gender</string>
     <string name="check_in_out_preference" translatable="false">com.anyemi.omrooms.Utils.check_in_out_preference</string>
     <string name="check_out_preference" translatable="false">com.anyemi.omrooms.Utils.check_out_preference</string>
@@ -58,26 +59,7 @@
     <string name="info_txt" translatable="false">You will receive a collect request from anyEMI</string>
 
 
-    <!--<string-array name="payment_names">-->
-    <!--<item>Cheque</item>-->
-    <!--<item>CASH</item>-->
-    <!--<item>AADHAR</item>-->
-    <!--<item>ATM Transfer</item>-->
-    <!--<item>BHIM</item>-->
-    <!--<item>BioMetric</item>-->
-    <!--<item>Credit Card</item>-->
-    <!--<item>Debit Card</item>-->
-    <!--<item>FreeCharge</item>-->
-    <!--<item>Net Banking</item>-->
-    <!--<item>PhonePe</item>-->
-    <!--<item>Paytm</item>-->
-    <!--<item>PayUMoney</item>-->
-    <!--<item>Bharat QR</item>-->
-    <!--<item>UPI</item>-->
-    <!--<item>SBI UPI</item>-->
-
-    <!--</string-array>-->
-
+    <string name="loading_txt">Loading...</string>
 
     <string-array name="payment_names">
         <item>*99#</item>

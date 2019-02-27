@@ -34,7 +34,6 @@ import android.widget.Toast;
 import com.anyemi.omrooms.Model.CheckSumModel;
 import com.anyemi.omrooms.Model.PaymentIdModel;
 import com.anyemi.omrooms.R;
-import com.anyemi.omrooms.UI.CollectionsTabbedActivity;
 import com.anyemi.omrooms.payment.apkkit.WisePadController;
 import com.anyemi.omrooms.payment.apkkit.WisePadControllerListener;
 import com.anyemi.omrooms.payment.bgtask.BackgroundTask;
@@ -566,10 +565,10 @@ public class CompleateTransactionActivity extends AppCompatActivity implements T
 //                       SharedPreferenceUtil.setWalletBalance(getApplicationContext(),upDatedBalance+"");
 
                         Globals.showToast(getApplicationContext(), "Payment Success");
-                        Intent intent = new Intent(getApplicationContext(), CollectionsTabbedActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        intent.putExtra("FRAGMENT", "COLLECTION");
-                        startActivity(intent);
+//                        Intent intent = new Intent(getApplicationContext(), CollectionsTabbedActivity.class);
+//                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                        intent.putExtra("FRAGMENT", "COLLECTION");
+//                        startActivity(intent);
                     }
                 }
             }

@@ -9,4 +9,8 @@
     <color name="transparent">#00000000</color>
     <color name="gray">#F5F5F5</color>
 
+    <color name="TextColor.Black">#000000</color>
+    <color name="primary">#4685CE</color>
+    <color name="red_oval_color">#f13828</color>
+
 </resources>
