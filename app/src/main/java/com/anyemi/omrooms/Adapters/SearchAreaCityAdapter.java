@@ -51,7 +51,7 @@ public class SearchAreaCityAdapter extends RecyclerView.Adapter<SearchAreaCityAd
         TextView hotelName, areaCityName, noOfHotels;
         public HotelAreaViewHolder(@NonNull View itemView) {
             super(itemView);
-            iconType = itemView.findViewById(R.id.image_type);
+            //iconType = itemView.findViewById(R.id.image_type);
             hotelName = itemView.findViewById(R.id.hotels_name);
             areaCityName = itemView.findViewById(R.id.area_city);
             noOfHotels = itemView.findViewById(R.id.no_of_hotel);
