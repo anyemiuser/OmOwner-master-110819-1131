@@ -88,7 +88,7 @@ public class RoomGuestAdapter extends RecyclerView.Adapter<RoomGuestAdapter.Room
 //                        Toast.makeText(context, "1", Toast.LENGTH_SHORT).show();
                         roomsGuest.setGuests(1);
                         break;
-                    case R.id.tworadioButton:
+                    case R.id.twoRadioButton:
 //                        Toast.makeText(context, "2", Toast.LENGTH_SHORT).show();
                         roomsGuest.setGuests(2);
                         break;
@@ -125,7 +125,7 @@ public class RoomGuestAdapter extends RecyclerView.Adapter<RoomGuestAdapter.Room
             guestText = itemView.findViewById(R.id.guest_count);
             radioGroup = itemView.findViewById(R.id.radioGroup);
             one = itemView.findViewById(R.id.oneRadioButton);
-            two = itemView.findViewById(R.id.tworadioButton);
+            two = itemView.findViewById(R.id.twoRadioButton);
             three = itemView.findViewById(R.id.threeRadioButton);
             addRoom = itemView.findViewById(R.id.add_room);
             deleteRoom = itemView.findViewById(R.id.delete_room);
