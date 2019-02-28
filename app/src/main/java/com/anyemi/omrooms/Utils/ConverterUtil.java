@@ -359,6 +359,12 @@ public class ConverterUtil implements ConstantFields {
         if (facilityType.equals(conference_room)){
             return R.drawable.ic_room_conference;
         }
+        if (facilityType.equals(swimming_pool)){
+            return R.drawable.ic_swimming_pool;
+        }
+        if (facilityType.equals(geyser)){
+            return R.drawable.ic_geyser;
+        }
         return R.drawable.ic_wifi;
     }
 
