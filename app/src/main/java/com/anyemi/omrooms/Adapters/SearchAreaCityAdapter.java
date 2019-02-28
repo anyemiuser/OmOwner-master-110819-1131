@@ -27,7 +27,7 @@ public class SearchAreaCityAdapter extends RecyclerView.Adapter<SearchAreaCityAd
     @NonNull
     @Override
     public HotelAreaViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.search_area_hotel_item, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.search_area_location_item, viewGroup, false);
         return new HotelAreaViewHolder(view);
 
     }
