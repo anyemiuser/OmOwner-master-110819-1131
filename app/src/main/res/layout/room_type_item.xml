@@ -59,9 +59,11 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:background="@drawable/bordered_button"
-            android:minHeight="40dp"
             android:minWidth="65dp"
+            android:minHeight="40dp"
             android:text="add"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView10" />
@@ -84,10 +86,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:minHeight="35dp"
                 android:minWidth="50dp"
-                android:background="@drawable/bordered_button"
-                android:text="-" />
+                android:minHeight="35dp"
+                android:text="-"
+                android:textStyle="bold"
+                android:theme="@style/AppTheme.CustomButton" />
 
             <TextView
                 android:id="@+id/add_no_of_room"
@@ -95,20 +98,21 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/opensans_semibold"
-                android:textStyle="bold"
                 android:gravity="center"
                 android:textColor="#000"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/plus"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:minHeight="35dp"
                 android:minWidth="50dp"
-                android:background="@drawable/bordered_button"
-                android:text="+" />
+                android:minHeight="35dp"
+                android:text="+"
+                android:textStyle="bold"
+                android:theme="@style/AppTheme.CustomButton" />
         </LinearLayout>
 
         <TextView
