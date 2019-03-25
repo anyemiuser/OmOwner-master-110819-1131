@@ -6,7 +6,7 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 import android.util.Log;
 
-@Database(entities = {RoomBooking.class}, version = 4,exportSchema = false)
+@Database(entities = {RoomBooking.class}, version = 5,exportSchema = false)
 public abstract class RoomDb extends RoomDatabase {
 
     private static final String LOG_TAG = RoomDb.class.getSimpleName();

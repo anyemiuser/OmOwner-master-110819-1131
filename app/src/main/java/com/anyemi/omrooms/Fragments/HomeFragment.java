@@ -1,5 +1,6 @@
 package com.anyemi.omrooms.Fragments;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -28,6 +29,7 @@ import com.anyemi.omrooms.Adapters.LocationAdapter;
 import com.anyemi.omrooms.Model.AreaUnderCity;
 import com.anyemi.omrooms.Model.CityDistrictState;
 import com.anyemi.omrooms.Model.CityList;
+import com.anyemi.omrooms.Model.SavedHotelViewModel;
 import com.anyemi.omrooms.Model.Top10Hotel;
 import com.anyemi.omrooms.Model.TopHotels;
 import com.anyemi.omrooms.Model.Location;
@@ -39,6 +41,7 @@ import com.anyemi.omrooms.Utils.RecyclerTouchListener;
 import com.anyemi.omrooms.Utils.SharedPreferenceConfig;
 import com.anyemi.omrooms.api.ApiUtils;
 import com.anyemi.omrooms.api.OmRoomApi;
+import com.anyemi.omrooms.db.RoomBooking;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +65,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private static List<String> cityList = new ArrayList<>();
     private static List<CityDistrictState> cityDistrictStates = new ArrayList<>();
     private CoordinatorLayout coordinatorLayout;
+    private SavedHotelViewModel viewModel;
 
 
     @Nullable
@@ -91,6 +95,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         recyclerViewLocations = view.findViewById(R.id.locations_rv);
         recyclerViewHotels = view.findViewById(R.id.hotels_rv);
         citySpinner = view.findViewById(R.id.city_spinner);
+        viewModel = ViewModelProviders.of(this).get(SavedHotelViewModel.class);
 
 //        intializeHome();
         getCityList();
@@ -147,7 +152,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void onLongClick(View view, int position) {
-
+                Top10Hotel top10Hotel = hotelsList.get(position);
+                RoomBooking hotel = new RoomBooking(top10Hotel.getHotel_id(),
+                        top10Hotel.getHotel_name(),
+                        top10Hotel.getHotel_area(),
+                        top10Hotel.getHotel_low_range(),
+                        top10Hotel.getHotel_high_range(),
+                        top10Hotel.getHotel_rating(),
+                        top10Hotel.getHotel_image_url());
+                viewModel.insert(hotel);
             }
         }));
 

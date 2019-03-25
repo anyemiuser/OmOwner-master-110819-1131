@@ -2,111 +2,84 @@ package com.anyemi.omrooms.db;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
 @Entity
 public class RoomBooking {
+    @NonNull
     @PrimaryKey(autoGenerate = false)
-    private int hotel_id = 0;
-    private String room_type;
-    private int no_of_room_booked;
-    private int no_of_nights_booked;
-    private String from_date;
-    private String to_date;
-    private String status;
-    private String booked_by;
-    private String no_of_guests;
-    private String price_to_be_paid;
+    private String hotel_id;
+    private String hotel_name;
+    private String hotel_area;
+    private String hotel_low_range;
+    private String hotel_high_range;
+    private String hotel_rating;
+    private String hotel_image_url;
 
-    public RoomBooking(int hotel_id, String room_type, int no_of_room_booked, int no_of_nights_booked, String from_date, String to_date, String status, String booked_by, String no_of_guests, String price_to_be_paid) {
+    public RoomBooking(String hotel_id, String hotel_name, String hotel_area, String hotel_low_range, String hotel_high_range, String hotel_rating, String hotel_image_url) {
         this.hotel_id = hotel_id;
-        this.room_type = room_type;
-        this.no_of_room_booked = no_of_room_booked;
-        this.no_of_nights_booked = no_of_nights_booked;
-        this.from_date = from_date;
-        this.to_date = to_date;
-        this.status = status;
-        this.booked_by = booked_by;
-        this.no_of_guests = no_of_guests;
-        this.price_to_be_paid = price_to_be_paid;
+        this.hotel_name = hotel_name;
+        this.hotel_area = hotel_area;
+        this.hotel_low_range = hotel_low_range;
+        this.hotel_high_range = hotel_high_range;
+        this.hotel_rating = hotel_rating;
+        this.hotel_image_url = hotel_image_url;
     }
 
-    public int getHotel_id() {
+
+    public String getHotel_id() {
         return hotel_id;
     }
 
-    public void setHotel_id(int hotel_id) {
+    public void setHotel_id(String hotel_id) {
         this.hotel_id = hotel_id;
     }
 
-    public String getRoom_type() {
-        return room_type;
+    public String getHotel_name() {
+        return hotel_name;
     }
 
-    public void setRoom_type(String room_type) {
-        this.room_type = room_type;
+    public void setHotel_name(String hotel_name) {
+        this.hotel_name = hotel_name;
     }
 
-    public int getNo_of_room_booked() {
-        return no_of_room_booked;
+    public String getHotel_area() {
+        return hotel_area;
     }
 
-    public void setNo_of_room_booked(int no_of_room_booked) {
-        this.no_of_room_booked = no_of_room_booked;
+    public void setHotel_area(String hotel_area) {
+        this.hotel_area = hotel_area;
     }
 
-    public int getNo_of_nights_booked() {
-        return no_of_nights_booked;
+    public String getHotel_low_range() {
+        return hotel_low_range;
     }
 
-    public void setNo_of_nights_booked(int no_of_nights_booked) {
-        this.no_of_nights_booked = no_of_nights_booked;
+    public void setHotel_low_range(String hotel_low_range) {
+        this.hotel_low_range = hotel_low_range;
     }
 
-    public String getFrom_date() {
-        return from_date;
+    public String getHotel_high_range() {
+        return hotel_high_range;
     }
 
-    public void setFrom_date(String from_date) {
-        this.from_date = from_date;
+    public void setHotel_high_range(String hotel_high_range) {
+        this.hotel_high_range = hotel_high_range;
     }
 
-    public String getTo_date() {
-        return to_date;
+    public String getHotel_rating() {
+        return hotel_rating;
     }
 
-    public void setTo_date(String to_date) {
-        this.to_date = to_date;
+    public void setHotel_rating(String hotel_rating) {
+        this.hotel_rating = hotel_rating;
     }
 
-    public String getStatus() {
-        return status;
+    public String getHotel_image_url() {
+        return hotel_image_url;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getBooked_by() {
-        return booked_by;
-    }
-
-    public void setBooked_by(String booked_by) {
-        this.booked_by = booked_by;
-    }
-
-    public String getNo_of_guests() {
-        return no_of_guests;
-    }
-
-    public void setNo_of_guests(String no_of_guests) {
-        this.no_of_guests = no_of_guests;
-    }
-
-    public String getPrice_to_be_paid() {
-        return price_to_be_paid;
-    }
-
-    public void setPrice_to_be_paid(String price_to_be_paid) {
-        this.price_to_be_paid = price_to_be_paid;
+    public void setHotel_image_url(String hotel_image_url) {
+        this.hotel_image_url = hotel_image_url;
     }
 }

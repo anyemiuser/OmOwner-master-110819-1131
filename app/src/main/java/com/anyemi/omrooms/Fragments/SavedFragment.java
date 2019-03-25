@@ -1,5 +1,9 @@
 package com.anyemi.omrooms.Fragments;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
+import android.arch.paging.PagedList;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,8 +16,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.anyemi.omrooms.Adapters.SavedHotelsAdapter;
+import com.anyemi.omrooms.Model.SavedHotelViewModel;
 import com.anyemi.omrooms.Models.SavedHotels;
 import com.anyemi.omrooms.R;
+import com.anyemi.omrooms.db.RoomBooking;
 
 import java.util.ArrayList;
 
@@ -21,6 +27,7 @@ public class SavedFragment extends Fragment {
 
     ArrayList<SavedHotels> savedHotelsList;
     RecyclerView recyclerViewSavedHotels;
+    private SavedHotelViewModel viewModel;
     //Toolbar toolbar;
 
     @Nullable
@@ -39,16 +46,16 @@ public class SavedFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerViewSavedHotels.setLayoutManager(layoutManager);
 
-        savedHotelsList = new ArrayList<SavedHotels>();
-        savedHotelsList.add(new SavedHotels("The Park Hotel", R.drawable.park));
-        savedHotelsList.add(new SavedHotels("Hotel Akshaya", R.drawable.akshaya));
-        savedHotelsList.add(new SavedHotels("Hotel Chandra's", R.drawable.chandras));
-        savedHotelsList.add(new SavedHotels("Sai priya Beach", R.drawable.saiprlya));
-        savedHotelsList.add(new SavedHotels("Hotel Fortune", R.drawable.fortune));
-        savedHotelsList.add(new SavedHotels("The Port Hotel", R.drawable.port));
-
-        SavedHotelsAdapter savedHotelsAdapter = new SavedHotelsAdapter(savedHotelsList, getActivity());
-        recyclerViewSavedHotels.setAdapter(savedHotelsAdapter);
+//        savedHotelsList = new ArrayList<SavedHotels>();
+//        savedHotelsList.add(new SavedHotels("The Park Hotel", R.drawable.park));
+//        savedHotelsList.add(new SavedHotels("Hotel Akshaya", R.drawable.akshaya));
+//        savedHotelsList.add(new SavedHotels("Hotel Chandra's", R.drawable.chandras));
+//        savedHotelsList.add(new SavedHotels("Sai priya Beach", R.drawable.saiprlya));
+//        savedHotelsList.add(new SavedHotels("Hotel Fortune", R.drawable.fortune));
+//        savedHotelsList.add(new SavedHotels("The Port Hotel", R.drawable.port));
+//
+//        SavedHotelsAdapter savedHotelsAdapter = new SavedHotelsAdapter(savedHotelsList, getActivity());
+//        recyclerViewSavedHotels.setAdapter(savedHotelsAdapter);
 
 
 //        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -64,6 +71,20 @@ public class SavedFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        viewModel = ViewModelProviders.of(this).get(SavedHotelViewModel.class);
+        SavedHotelsAdapter adapter = new SavedHotelsAdapter(getActivity());
+        viewModel.getSavedHotelList().observe(this, new Observer<PagedList<RoomBooking>>() {
+            @Override
+            public void onChanged(@Nullable PagedList<RoomBooking> hotelLists) {
+                if(hotelLists != null){
+                    adapter.submitList(hotelLists);
+                    recyclerViewSavedHotels.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                }
+            }
+        });
+
 
     }
 

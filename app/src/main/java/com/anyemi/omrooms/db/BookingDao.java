@@ -10,10 +10,10 @@ import android.arch.persistence.room.Query;
 public interface BookingDao {
 
     @Query("SELECT * FROM RoomBooking")
-    DataSource.Factory<Integer, RoomBooking> allRoomBookingDetails();
+    DataSource.Factory<Integer, RoomBooking> allSavedHotelDetails();
 
-    @Query("Update RoomBooking SET no_of_room_booked = :count WHERE hotel_id = :pId")
-    void updateRoomCount(int count,int pId);
+//    @Query("Update RoomBooking SET no_of_room_booked = :count WHERE hotel_id = :pId")
+//    void updateRoomCount(int count,int pId);
 
     @Insert
     void insert(RoomBooking roomBooking);
