@@ -140,6 +140,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             }
         }));
 
+
+
         recyclerViewHotels.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerViewHotels, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
@@ -148,6 +150,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 intent.putExtra("hotelId",top10Hotel.getHotel_id());
                 intent.putExtra("hotelName",top10Hotel.getHotel_name());
                 startActivity(intent);
+
             }
 
             @Override
@@ -161,11 +164,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         top10Hotel.getHotel_rating(),
                         top10Hotel.getHotel_image_url());
                 viewModel.insert(hotel);
+                Toast.makeText(getActivity(), "saved", Toast.LENGTH_SHORT).show();
             }
         }));
 
     }
-
 
     private void getCityList() {
         OmRoomApi omRoomApi = ApiUtils.getOmRoomApi();

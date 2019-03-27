@@ -4,6 +4,7 @@ import android.arch.paging.DataSource;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
+import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 
 @Dao
@@ -15,7 +16,7 @@ public interface BookingDao {
 //    @Query("Update RoomBooking SET no_of_room_booked = :count WHERE hotel_id = :pId")
 //    void updateRoomCount(int count,int pId);
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(RoomBooking roomBooking);
 
     @Delete

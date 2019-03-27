@@ -162,7 +162,7 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields, 
                                             roomDetails.getRoom_prices().size(),
                                             checkInD,
                                             checkOutD,
-                                            "q",
+                                            "u",
                                             "u",
                                             String.valueOf(sharedPreferenceConfig.readNoOfGuests()),"0");
                                     modelsForBooking.add(bookingModel);
@@ -502,10 +502,16 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields, 
     }
 
     private void bookRooms(Booking booking) {
+        List<BookingModel> modelB = booking.getBookingModels();
+        for(BookingModel model:modelB){
+            if(model.getNo_of_room_booked() == 0){
+                modelB.remove(model);
+            }
+        }
         OmRoomApi omRoomApi = ApiUtils.getOmRoomApi();
         alertDialog = builder.create();
         alertDialog.show();
-        messageT.setText("Waiting or Conformation...");
+        messageT.setText("Waiting for Conformation...");
         alertDialog.setCancelable(false);
         omRoomApi.bookRooms(booking).enqueue(new Callback<BookingResponse>() {
             @Override

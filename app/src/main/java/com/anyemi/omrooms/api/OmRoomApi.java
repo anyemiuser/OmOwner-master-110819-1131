@@ -2,12 +2,14 @@ package com.anyemi.omrooms.api;
 
 import com.anyemi.omrooms.Model.AreaUnderCity;
 import com.anyemi.omrooms.Model.Booking;
+import com.anyemi.omrooms.Model.BookingRequest;
 import com.anyemi.omrooms.Model.BookingResponse;
 import com.anyemi.omrooms.Model.CityList;
 import com.anyemi.omrooms.Model.HotelAreaList;
 import com.anyemi.omrooms.Model.HotelDetails;
 import com.anyemi.omrooms.Model.HotelList;
 import com.anyemi.omrooms.Model.TopHotels;
+import com.anyemi.omrooms.Model.UpComing;
 import com.anyemi.omrooms.Model.UserRequest;
 import com.anyemi.omrooms.Model.UserResponse;
 
@@ -24,6 +26,11 @@ public interface OmRoomApi {
     //api.php?f=registermobilenumbercheck
     @POST("api.php?f=registermobilenumbercheck")
     Call<UserResponse> postUserRegister(@Body UserRequest userRequest);
+
+//    https://dev.anyemi.com/webservices/omrooms/Customer/api.php?f=UpcommingBooking
+
+    @POST("api.php?f=UpcommingBooking")
+    Call<UpComing> getUsersUpComingBooking(@Body BookingRequest bookingRequest);
 
 //    @POST("api.php?f=registermobilenumbercheck")
 //    Call<UserResponse> postUserRegister2(@Field(value = "mobile_number",encoded = false) String mobile_number);

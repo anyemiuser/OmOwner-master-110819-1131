@@ -82,6 +82,7 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.MyHotelViewH
 
         TextView hotelsTextView,rating,priceRange,area;
         ImageView hotelsImageView;
+        ImageView saveImage;
 
         public MyHotelViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -91,6 +92,8 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.MyHotelViewH
             rating = itemView.findViewById(R.id.hotel_rating);
             priceRange = itemView.findViewById(R.id.price_range);
             area = itemView.findViewById(R.id.area_name);
+
+            saveImage = itemView.findViewById(R.id.save_icon);
         }
     }
 }
