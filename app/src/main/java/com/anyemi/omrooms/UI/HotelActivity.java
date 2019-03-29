@@ -503,9 +503,11 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields, 
 
     private void bookRooms(Booking booking) {
         List<BookingModel> modelB = booking.getBookingModels();
-        for(BookingModel model:modelB){
+        for(int i = 0; i<modelB.size();i++){
+            BookingModel model = modelB.get(i);
             if(model.getNo_of_room_booked() == 0){
                 modelB.remove(model);
+                i--;
             }
         }
         OmRoomApi omRoomApi = ApiUtils.getOmRoomApi();
@@ -513,11 +515,13 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields, 
         alertDialog.show();
         messageT.setText("Waiting for Conformation...");
         alertDialog.setCancelable(false);
+
         omRoomApi.bookRooms(booking).enqueue(new Callback<BookingResponse>() {
             @Override
             public void onResponse(Call<BookingResponse> call, Response<BookingResponse> response) {
                 if(response.isSuccessful()){
                     alertDialog.dismiss();
+                    Log.e(TAG_HOTEL,"success"+response.message()+new Gson().toJson(response.body()));
                     BookingResponse bookingResponse = response.body();
                     Log.e(TAG_HOTEL,response.message()+bookingResponse.getBooking_id());
                     Intent intent = new Intent(HotelActivity.this,BookingConActivity.class);
@@ -526,18 +530,18 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields, 
                     finish();
                 }else {
                     alertDialog.dismiss();
-                    Log.e(TAG_HOTEL,response.message());
+                    Log.e(TAG_HOTEL,"failed: "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<BookingResponse> call, Throwable t) {
-                Log.e(TAG_HOTEL,t.toString());
+                Log.e(TAG_HOTEL,"failed: "+t.toString()+call.request());
                 alertDialog.dismiss();
             }
         });
 
-        Log.e(TAG_HOTEL,""+new Gson().toJson(booking));
+        Log.e(TAG_HOTEL,"asd : "+new Gson().toJson(booking));
     }
 
     @Override

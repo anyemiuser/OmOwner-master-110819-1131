@@ -44,9 +44,9 @@ public class BookingFragment extends Fragment {
         viewPager = view.findViewById(R.id.view_pager);
         //child fragment inside fragment
         BookingHistoryAdapter adapter = new BookingHistoryAdapter(getChildFragmentManager());
-        adapter.addFragment(new BookingHistoryFragment(), "Booking");
-        adapter.addFragment(new BookingHistoryFragment(), "Cancelled");
-        adapter.addFragment(new BookingHistoryFragment(), "Stayed");
+        adapter.addFragment(new BookingHistoryFragment(), "Up Coming");
+        adapter.addFragment(new BookingCancelledFragment(), "Cancelled");
+        adapter.addFragment(new BookingCompletedFragment(), "Completed");
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
 
