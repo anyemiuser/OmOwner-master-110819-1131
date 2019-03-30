@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.anyemi.omrooms.Adapters.BookingDetailsAdapter;
 import com.anyemi.omrooms.Adapters.HotelAdapter;
@@ -41,7 +42,7 @@ public class BookingHistoryFragment extends Fragment {
     private static final String TAG_FRAGMENTB = BookingHistoryFragment.class.getSimpleName();
     private RecyclerView upcomingRv;
     private ProgressBar progressBar;
-    private TextView statusText;
+    private TextView progressText;
     private ConstraintLayout progressLayout;
     //ViewPager viewPager;
 
@@ -61,22 +62,41 @@ public class BookingHistoryFragment extends Fragment {
 
         upcomingRv = view.findViewById(R.id.upcoming_rv);
         progressLayout = view.findViewById(R.id.progress_l);
+        progressBar = view.findViewById(R.id.progressBar3);
+        progressText = view.findViewById(R.id.progressText);
 
         OmRoomApi omRoomApi = ApiUtils.getOmRoomApi();
         BookingRequest bookingRequest = new BookingRequest("u","9666235167");
 
         progressLayout.setVisibility(View.VISIBLE);
 
-        omRoomApi.getUsersUpComingBooking(bookingRequest).enqueue(new Callback<UpComing>() {
+        omRoomApi.getUsersUpComingBooking("UpcommingBooking",bookingRequest).enqueue(new Callback<UpComing>() {
             @Override
             public void onResponse(Call<UpComing> call, Response<UpComing> response) {
                 if(response.isSuccessful()){
+                    progressBar.setVisibility(View.GONE);
                     UpComing upComingBooing = response.body();
-                    setUpcomingRv(upComingBooing.getUpcommingBooking());
-                    Log.e(TAG_FRAGMENTB,"success"+new Gson().toJson(response.body()));
-                    Log.e(TAG_FRAGMENTB,"success"+new Gson().toJson(upComingBooing));
+                    if (upComingBooing != null) {
+                        if(upComingBooing.getStatus().equals("Success")){
+                            if(upComingBooing.getUpcommingBooking() != null){
+                                progressLayout.setVisibility(View.GONE);
+                                setUpcomingRv(upComingBooing.getUpcommingBooking());
+                                Log.e(TAG_FRAGMENTB,"success"+new Gson().toJson(response.body()));
+                                Log.e(TAG_FRAGMENTB,"success"+new Gson().toJson(upComingBooing));
+                            }else {
+                                progressText.setText("No Record Found");
+                            }
+                        }else {
+                            Toast.makeText(getActivity(), ""+upComingBooing.getMsg(), Toast.LENGTH_SHORT).show();
+                            progressText.setText(upComingBooing.getMsg());
+                        }
+                    }else {
+                        progressText.setText("No Record Found");
+                    }
+
+
                 }
-                progressLayout.setVisibility(View.GONE);
+
 
 
             }
@@ -84,7 +104,8 @@ public class BookingHistoryFragment extends Fragment {
             @Override
             public void onFailure(Call<UpComing> call, Throwable t) {
                 Log.e(TAG_FRAGMENTB,"failed"+t.toString());
-                progressLayout.setVisibility(View.GONE);
+                progressBar.setVisibility(View.GONE);
+                progressText.setText("No Record Found");
             }
         });
     }

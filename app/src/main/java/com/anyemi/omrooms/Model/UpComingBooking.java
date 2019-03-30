@@ -18,6 +18,11 @@ public class UpComingBooking {
     private String payment_status;
     private String cancelled_on;
     private String cancelled_by;
+    private String checked_in_date;
+    private String checked_in_time;
+    private String checked_out_date;
+    private String checked_out_time;
+    private String rating;
     private List<BookedRoom> room_details;
 
     public UpComingBooking() {
@@ -59,6 +64,71 @@ public class UpComingBooking {
         this.cancelled_on = cancelled_on;
         this.cancelled_by = cancelled_by;
         this.room_details = room_details;
+    }
+
+    //Completed Booking
+    public UpComingBooking(String booking_id, String hotel_id, String hotel_name, String hotel_city, String hotel_state, String no_of_nights_booked, String booking_date, String from_date, String to_date, String no_of_guests, String price_to_be_paid, String status, String payment_status, String cancelled_on, String cancelled_by, String checked_in_date, String checked_in_time, String checked_out_date, String checked_out_time, String rating, List<BookedRoom> room_details) {
+        this.booking_id = booking_id;
+        this.hotel_id = hotel_id;
+        this.hotel_name = hotel_name;
+        this.hotel_city = hotel_city;
+        this.hotel_state = hotel_state;
+        this.no_of_nights_booked = no_of_nights_booked;
+        this.booking_date = booking_date;
+        this.from_date = from_date;
+        this.to_date = to_date;
+        this.no_of_guests = no_of_guests;
+        this.price_to_be_paid = price_to_be_paid;
+        this.status = status;
+        this.payment_status = payment_status;
+        this.cancelled_on = cancelled_on;
+        this.cancelled_by = cancelled_by;
+        this.checked_in_date = checked_in_date;
+        this.checked_in_time = checked_in_time;
+        this.checked_out_date = checked_out_date;
+        this.checked_out_time = checked_out_time;
+        this.rating = rating;
+        this.room_details = room_details;
+    }
+
+    public String getChecked_in_date() {
+        return checked_in_date;
+    }
+
+    public void setChecked_in_date(String checked_in_date) {
+        this.checked_in_date = checked_in_date;
+    }
+
+    public String getChecked_in_time() {
+        return checked_in_time;
+    }
+
+    public void setChecked_in_time(String checked_in_time) {
+        this.checked_in_time = checked_in_time;
+    }
+
+    public String getChecked_out_date() {
+        return checked_out_date;
+    }
+
+    public void setChecked_out_date(String checked_out_date) {
+        this.checked_out_date = checked_out_date;
+    }
+
+    public String getChecked_out_time() {
+        return checked_out_time;
+    }
+
+    public void setChecked_out_time(String checked_out_time) {
+        this.checked_out_time = checked_out_time;
+    }
+
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
     }
 
     public String getCancelled_on() {
