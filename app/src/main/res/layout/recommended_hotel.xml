@@ -26,6 +26,7 @@
             android:layout_height="wrap_content">
 
             <LinearLayout
+                android:id="@+id/linearLayoutH"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -39,7 +40,8 @@
                     android:clickable="true"
                     android:foreground="?android:attr/selectableItemBackgroundBorderless"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/hotel1" />
+                    android:src="@drawable/hotel1"
+                    android:contentDescription="Hotel Image" />
 
                 <TextView
                     android:id="@+id/hotels_name"

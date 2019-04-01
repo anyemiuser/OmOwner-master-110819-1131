@@ -28,11 +28,13 @@ import com.anyemi.omrooms.Model.UserRequest;
 import com.anyemi.omrooms.Model.UserResponse;
 import com.anyemi.omrooms.R;
 import com.anyemi.omrooms.UI.AreaHotelsActivity;
+import com.anyemi.omrooms.Utils.SharedPreferenceConfig;
 import com.anyemi.omrooms.api.ApiUtils;
 import com.anyemi.omrooms.api.OmRoomApi;
 import com.google.gson.Gson;
 
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,6 +46,9 @@ public class BookingHistoryFragment extends Fragment {
     private ProgressBar progressBar;
     private TextView progressText;
     private ConstraintLayout progressLayout;
+    private final String statusU = "u";
+
+    private SharedPreferenceConfig sharedPreferenceConfig;
     //ViewPager viewPager;
 
     public BookingHistoryFragment() {
@@ -65,8 +70,10 @@ public class BookingHistoryFragment extends Fragment {
         progressBar = view.findViewById(R.id.progressBar3);
         progressText = view.findViewById(R.id.progressText);
 
+        sharedPreferenceConfig = new SharedPreferenceConfig(Objects.requireNonNull(getActivity()));
+
         OmRoomApi omRoomApi = ApiUtils.getOmRoomApi();
-        BookingRequest bookingRequest = new BookingRequest("u","9666235167");
+        BookingRequest bookingRequest = new BookingRequest(statusU,sharedPreferenceConfig.readPhoneNo());
 
         progressLayout.setVisibility(View.VISIBLE);
 
@@ -115,7 +122,7 @@ public class BookingHistoryFragment extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         upcomingRv.setLayoutManager(layoutManager);
         upcomingRv.setHasFixedSize(true);
-        BookingDetailsAdapter adapter = new BookingDetailsAdapter(upcommingBooking,getActivity());
+        BookingDetailsAdapter adapter = new BookingDetailsAdapter(statusU,upcommingBooking,getActivity());
 
         upcomingRv.setAdapter(adapter);
 

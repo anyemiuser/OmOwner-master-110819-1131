@@ -55,6 +55,14 @@ public class SavedHotelViewModel extends AndroidViewModel {
         mRepository.insert(hotel);
     }
 
+    public void delete(RoomBooking hotel) {
+        mRepository.delete(hotel);
+    }
+
+    public boolean whetherSaved(String hotelId){
+        return mRepository.whetherSaved(hotelId);
+    }
+
 
 }
 

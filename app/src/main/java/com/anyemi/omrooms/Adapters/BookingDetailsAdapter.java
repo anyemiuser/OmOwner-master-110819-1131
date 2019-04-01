@@ -1,8 +1,8 @@
 package com.anyemi.omrooms.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.anyemi.omrooms.Model.UpComingBooking;
 import com.anyemi.omrooms.R;
+import com.anyemi.omrooms.UI.BookingDetailActivity;
+import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -20,10 +22,13 @@ public class BookingDetailsAdapter extends RecyclerView.Adapter<BookingDetailsAd
 
     private List<UpComingBooking> bookingHistoryList;
     private Context context;
+    private String status;
 
-    public BookingDetailsAdapter(List<UpComingBooking> bookingHistoryList, Context context) {
+    public BookingDetailsAdapter(String statusU, List<UpComingBooking> bookingHistoryList, Context context) {
+        this.status = statusU;
         this.bookingHistoryList = bookingHistoryList;
         this.context = context;
+
     }
 
     @NonNull
@@ -43,8 +48,24 @@ public class BookingDetailsAdapter extends RecyclerView.Adapter<BookingDetailsAd
         String bTime = booking.getFrom_date().concat(" ").concat(booking.getNo_of_nights_booked())
                 .concat(" ").concat(booking.getTo_date());
         holder.checkInOut.setText(bTime);
-        holder.cancelBook.setText("Cancel");
+        if(status.equals("u")){
+            holder.cancelBook.setText("Cancel");
+        }else if(status.equals("c")){
+            holder.cancelBook.setText("Book Again");
+        }else {
+            holder.cancelBook.setText("Book Again");
+        }
+
         holder.viewDetails.setText("View Details");
+        holder.viewDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, BookingDetailActivity.class);
+                intent.putExtra("bookingStatus",status);
+                intent.putExtra("bookingDetails",new Gson().toJson(booking));
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

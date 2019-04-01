@@ -17,8 +17,10 @@ public class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
         gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
             @Override
             public boolean onSingleTapUp(MotionEvent e) {
+
                 return true;
             }
+
 
             @Override
             public void onLongPress(MotionEvent e) {
@@ -53,6 +55,8 @@ public class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
         void onClick(View view, int position);
 
         void onLongClick(View view, int position);
+
+
     }
 
 }

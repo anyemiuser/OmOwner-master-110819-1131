@@ -10,7 +10,6 @@
     <string name="check_in_date">Select Check-In Date</string>
 
 
-
     <string name="gender_prompt">Choose your Gender</string>
     <string name="check_in_out_preference" translatable="false">com.anyemi.omrooms.Utils.check_in_out_preference</string>
     <string name="check_out_preference" translatable="false">com.anyemi.omrooms.Utils.check_out_preference</string>
@@ -21,7 +20,7 @@
     <string name="state_name_preference" translatable="false">com.anyemi.omrooms.Utils.state_name_preerence</string>
     <string name="district_name_preference" translatable="false">com.anyemi.omrooms.Utils.district_name_preference</string>
 
-    
+
     <string name="scan_barcode" translatable="false">Scan Barcode</string>
     <string name="scan_barcode_with_request_code" translatable="false">Scan Barcode with customized request code</string>
     <string name="any_orientation" translatable="false">1D Any Orientation</string>
@@ -38,7 +37,6 @@
     <string name="tabs" translatable="false">Tabs</string>
 
 
-
     <string name="start_transaction" translatable="false">Start</string>
     <string name="developed_by" translatable="false">Designed &amp; Developed by</string>
 
@@ -52,7 +50,6 @@
 
     <string name="Amount" translatable="false">Amount</string>
     <string name="cashback" translatable="false">Cashback Amount</string>
-
 
 
     <string name="Rs" translatable="false">\u20B9</string>
@@ -114,15 +111,14 @@
         <item>Yelamanchili</item>
         <item>Narsipatnam</item>
 
-    </string-array> <string-array name="area_state">
+    </string-array>
+    <string-array name="area_state">
 
-    <item>Andhra Pradesh</item>
-    <item>Telangana</item>
-    <item>Odisha</item>
-    <item>Bihar</item>
-</string-array>
-
-
+        <item>Andhra Pradesh</item>
+        <item>Telangana</item>
+        <item>Odisha</item>
+        <item>Bihar</item>
+    </string-array>
 
 
     <string-array name="ary_login_type">
@@ -793,6 +789,7 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_maps">Map</string>
+    <string name="no_record">No Record Found</string>
 
     <string-array name="gender">
         <item>Male</item>

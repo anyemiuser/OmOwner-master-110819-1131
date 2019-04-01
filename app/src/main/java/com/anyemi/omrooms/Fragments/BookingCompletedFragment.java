@@ -18,7 +18,6 @@ import android.widget.Toast;
 import com.anyemi.omrooms.Adapters.BookingDetailsAdapter;
 import com.anyemi.omrooms.Model.BookingRequest;
 import com.anyemi.omrooms.Model.CompletedBooking;
-import com.anyemi.omrooms.Model.UpComing;
 import com.anyemi.omrooms.Model.UpComingBooking;
 import com.anyemi.omrooms.R;
 import com.anyemi.omrooms.api.ApiUtils;
@@ -78,14 +77,14 @@ public class BookingCompletedFragment extends Fragment {
                                 Log.e(TAG_FRAGMENTB,"success"+new Gson().toJson(response.body()));
                                 Log.e(TAG_FRAGMENTB,"success"+new Gson().toJson(completedBooking));
                             }else {
-                                progressText.setText("No Record Found");
+                                progressText.setText(R.string.no_record);
                             }
                         }else {
                             Toast.makeText(getActivity(), ""+completedBooking.getMsg(), Toast.LENGTH_SHORT).show();
                             progressText.setText(completedBooking.getMsg());
                         }
                     }else {
-                        progressText.setText("No Record Found");
+                        progressText.setText(R.string.no_record);
                     }
 
 
@@ -109,7 +108,7 @@ public class BookingCompletedFragment extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         upcomingRv.setLayoutManager(layoutManager);
         upcomingRv.setHasFixedSize(true);
-        BookingDetailsAdapter adapter = new BookingDetailsAdapter(upcommingBooking,getActivity());
+        BookingDetailsAdapter adapter = new BookingDetailsAdapter("s", upcommingBooking,getActivity());
 
         upcomingRv.setAdapter(adapter);
 

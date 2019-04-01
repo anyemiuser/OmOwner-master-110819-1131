@@ -18,7 +18,6 @@ import android.widget.Toast;
 import com.anyemi.omrooms.Adapters.BookingDetailsAdapter;
 import com.anyemi.omrooms.Model.BookingRequest;
 import com.anyemi.omrooms.Model.CanceledBooking;
-import com.anyemi.omrooms.Model.UpComing;
 import com.anyemi.omrooms.Model.UpComingBooking;
 import com.anyemi.omrooms.R;
 import com.anyemi.omrooms.api.ApiUtils;
@@ -69,14 +68,14 @@ public class BookingCancelledFragment  extends Fragment {
                 if(response.isSuccessful()){
                     progressBar.setVisibility(View.GONE);
                     CanceledBooking canceledBooking = response.body();
-                    Log.e(TAG_FRAGMENTB,"success"+new Gson().toJson(response.body()));
+                    Log.e(TAG_FRAGMENTB,"success cancel"+new Gson().toJson(response.body()));
                     if (canceledBooking != null) {
                         if(canceledBooking.getStatus().equals("Success")){
                             if(canceledBooking.getCanellledBooking() != null){
                                 progressLayout.setVisibility(View.GONE);
                                 setUpcomingRv(canceledBooking.getCanellledBooking());
-                                Log.e(TAG_FRAGMENTB,"success"+new Gson().toJson(response.body()));
-                                Log.e(TAG_FRAGMENTB,"success"+new Gson().toJson(canceledBooking));
+//                                Log.e(TAG_FRAGMENTB,"success"+new Gson().toJson(response.body()));
+//                                Log.e(TAG_FRAGMENTB,"success"+new Gson().toJson(canceledBooking));
                             }else {
                                 progressText.setText("No Record Found");
                             }
@@ -127,7 +126,7 @@ public class BookingCancelledFragment  extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         upcomingRv.setLayoutManager(layoutManager);
         upcomingRv.setHasFixedSize(true);
-        BookingDetailsAdapter adapter = new BookingDetailsAdapter(upcommingBooking,getActivity());
+        BookingDetailsAdapter adapter = new BookingDetailsAdapter("c", upcommingBooking,getActivity());
 
         upcomingRv.setAdapter(adapter);
 

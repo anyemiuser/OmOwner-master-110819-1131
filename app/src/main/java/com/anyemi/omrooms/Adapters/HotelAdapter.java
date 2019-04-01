@@ -1,16 +1,25 @@
 package com.anyemi.omrooms.Adapters;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.anyemi.omrooms.Model.SavedHotelViewModel;
 import com.anyemi.omrooms.Model.Top10Hotel;
 import com.anyemi.omrooms.R;
+import com.anyemi.omrooms.UI.HotelActivity;
+import com.anyemi.omrooms.db.BookingDao;
+import com.anyemi.omrooms.db.RoomBooking;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
@@ -22,9 +31,12 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.MyHotelViewH
     private List<Top10Hotel> hotels;
     private Context context;
 
-    public HotelAdapter(List<Top10Hotel> hotels, Context context) {
+    private SavedHotelViewModel viewModel;
+
+    public HotelAdapter(List<Top10Hotel> hotels, Context context, SavedHotelViewModel viewModel) {
         this.hotels = hotels;
         this.context = context;
+        this.viewModel = viewModel;
     }
 
     @NonNull
@@ -71,6 +83,58 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.MyHotelViewH
 
         holder.area.setText(hotel.getHotel_area());
 
+//        new findAsyncTask(viewModel, holder,hotel.getHotel_id()).execute(hotel.getHotel_id());
+
+//        boolean isSaved = viewModel.whetherSaved(hotel.getHotel_id());
+//        if(isSaved){
+//            holder.saveImage.setImageResource(R.drawable.bhim);
+//        }else {
+//            holder.saveImage.setImageResource(R.drawable.declined);
+//        }
+        if(hotel.isSaved()){
+            holder.saveImage.setImageResource(R.drawable.ic_saved_love);
+        }else {
+            holder.saveImage.setImageResource(R.drawable.ic_favorite_black);
+        }
+        holder.saveImage.setOnClickListener(view -> {
+
+            RoomBooking hotelSaved = new RoomBooking(hotel.getHotel_id(),
+                    hotel.getHotel_name(),
+                    hotel.getHotel_area(),
+                    hotel.getHotel_low_range(),
+                    hotel.getHotel_high_range(),
+                    hotel.getHotel_rating(),
+                    hotel.getHotel_image_url());
+
+            if(hotel.isSaved()){
+                holder.saveImage.setImageResource(R.drawable.ic_favorite_black);
+                hotel.setSaved(false);
+                viewModel.delete(hotelSaved);
+                Toast.makeText(context, "Removed", Toast.LENGTH_SHORT).show();
+            }else {
+                holder.saveImage.setImageResource(R.drawable.ic_saved_love);
+                hotel.setSaved(true);
+//                    Top10Hotel top10Hotel = hotelsList.get(position);
+
+                viewModel.insert(hotelSaved);
+                Toast.makeText(context, "saved", Toast.LENGTH_SHORT).show();
+            }
+
+            notifyDataSetChanged();
+        });
+
+        holder.linearLayout.setOnClickListener(view -> navigateToHotelActivity(hotel.getHotel_id(),hotel.getHotel_name()));
+        holder.hotelsImageView.setOnClickListener(view -> navigateToHotelActivity(hotel.getHotel_id(),hotel.getHotel_name()));
+
+
+    }
+
+    private void navigateToHotelActivity(String hotelId, String hotelName) {
+
+                Intent intent = new Intent(context, HotelActivity.class);
+                intent.putExtra("hotelId",hotelId);
+                intent.putExtra("hotelName",hotelName);
+                context.startActivity(intent);
     }
 
     @Override
@@ -83,9 +147,12 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.MyHotelViewH
         TextView hotelsTextView,rating,priceRange,area;
         ImageView hotelsImageView;
         ImageView saveImage;
+        LinearLayout linearLayout;
 
         public MyHotelViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            linearLayout = itemView.findViewById(R.id.linearLayoutH);
 
             hotelsTextView = itemView.findViewById(R.id.hotels_name);
             hotelsImageView = itemView.findViewById(R.id.hotels_image);
@@ -96,4 +163,6 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.MyHotelViewH
             saveImage = itemView.findViewById(R.id.save_icon);
         }
     }
+
+
 }

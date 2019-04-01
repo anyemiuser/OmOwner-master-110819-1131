@@ -16,14 +16,25 @@ public class SavedHotelRepo {
     private BookingDao bookingDao;
     private DataSource.Factory<Integer, RoomBooking> savedHotel;
 
+
+
     public SavedHotelRepo(Application application) {
         RoomDb db = RoomDb.getsInstance(application);
         bookingDao = db.bookingDao();
         savedHotel = bookingDao.allSavedHotelDetails();
+
     }
 
     public DataSource.Factory<Integer, RoomBooking> getSavedHotel() {
         return savedHotel;
+    }
+
+    public boolean whetherSaved(String hotelId){
+        List<RoomBooking> savedHotelIcon  = bookingDao.getHotelSaved(hotelId);
+        if(savedHotelIcon != null){
+            return savedHotelIcon.size() > 0 ;
+        }
+        return false;
     }
 
 
@@ -46,4 +57,24 @@ public class SavedHotelRepo {
         }
 
     }
+    public void delete(RoomBooking hotel) {
+        new deleteAsyncTask(bookingDao).execute(hotel);
+    }
+
+    private static class deleteAsyncTask extends AsyncTask<RoomBooking, Void, Void> {
+
+        private BookingDao mAsyncTaskDao;
+
+        deleteAsyncTask(BookingDao bookingDao) {
+            mAsyncTaskDao = bookingDao;
+        }
+
+        @Override
+        protected Void doInBackground(RoomBooking... roomBookings) {
+            mAsyncTaskDao.delete(roomBookings[0]);
+            return null;
+        }
+
+    }
+
 }

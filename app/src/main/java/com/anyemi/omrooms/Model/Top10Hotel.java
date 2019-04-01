@@ -8,6 +8,8 @@ public class Top10Hotel {
     private String hotel_high_range;
     private String hotel_rating;
     private String hotel_image_url;
+    private boolean isSaved = false;
+
 
     public Top10Hotel() {
     }
@@ -20,6 +22,25 @@ public class Top10Hotel {
         this.hotel_high_range = hotel_high_range;
         this.hotel_rating = hotel_rating;
         this.hotel_image_url = hotel_image_url;
+    }
+
+    public Top10Hotel(String hotel_id, String hotel_name, String hotel_area, String hotel_low_range, String hotel_high_range, String hotel_rating, String hotel_image_url, boolean isSaved) {
+        this.hotel_id = hotel_id;
+        this.hotel_name = hotel_name;
+        this.hotel_area = hotel_area;
+        this.hotel_low_range = hotel_low_range;
+        this.hotel_high_range = hotel_high_range;
+        this.hotel_rating = hotel_rating;
+        this.hotel_image_url = hotel_image_url;
+        this.isSaved = isSaved;
+    }
+
+    public boolean isSaved() {
+        return isSaved;
+    }
+
+    public void setSaved(boolean saved) {
+        isSaved = saved;
     }
 
     public String getHotel_id() {

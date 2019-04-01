@@ -28,22 +28,22 @@ public class UpComingBooking {
     public UpComingBooking() {
     }
     //Upcomming Booking Constructor
-    public UpComingBooking(String booking_id, String hotel_id, String hotel_name, String hotel_city, String hotel_state, String no_of_nights_booked, String booking_date, String from_date, String to_date, String no_of_guests, String price_to_be_paid, String status, String payment_status, List<BookedRoom> room_details) {
-        this.booking_id = booking_id;
-        this.hotel_id = hotel_id;
-        this.hotel_name = hotel_name;
-        this.hotel_city = hotel_city;
-        this.hotel_state = hotel_state;
-        this.no_of_nights_booked = no_of_nights_booked;
-        this.booking_date = booking_date;
-        this.from_date = from_date;
-        this.to_date = to_date;
-        this.no_of_guests = no_of_guests;
-        this.price_to_be_paid = price_to_be_paid;
-        this.status = status;
-        this.payment_status = payment_status;
-        this.room_details = room_details;
-    }
+//    public UpComingBooking(String booking_id, String hotel_id, String hotel_name, String hotel_city, String hotel_state, String no_of_nights_booked, String booking_date, String from_date, String to_date, String no_of_guests, String price_to_be_paid, String status, String payment_status, List<BookedRoom> room_details) {
+//        this.booking_id = booking_id;
+//        this.hotel_id = hotel_id;
+//        this.hotel_name = hotel_name;
+//        this.hotel_city = hotel_city;
+//        this.hotel_state = hotel_state;
+//        this.no_of_nights_booked = no_of_nights_booked;
+//        this.booking_date = booking_date;
+//        this.from_date = from_date;
+//        this.to_date = to_date;
+//        this.no_of_guests = no_of_guests;
+//        this.price_to_be_paid = price_to_be_paid;
+//        this.status = status;
+//        this.payment_status = payment_status;
+//        this.room_details = room_details;
+//    }
 
 
     //Cancelled Booking Constructor

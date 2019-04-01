@@ -1,7 +1,9 @@
 package com.anyemi.omrooms.Fragments;
 
+import android.annotation.SuppressLint;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -45,6 +47,7 @@ import com.anyemi.omrooms.db.RoomBooking;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -145,30 +148,23 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         recyclerViewHotels.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerViewHotels, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                Top10Hotel top10Hotel = hotelsList.get(position);
-                Intent intent = new Intent(getActivity(),HotelActivity.class);
-                intent.putExtra("hotelId",top10Hotel.getHotel_id());
-                intent.putExtra("hotelName",top10Hotel.getHotel_name());
-                startActivity(intent);
+
+
 
             }
 
             @Override
             public void onLongClick(View view, int position) {
-                Top10Hotel top10Hotel = hotelsList.get(position);
-                RoomBooking hotel = new RoomBooking(top10Hotel.getHotel_id(),
-                        top10Hotel.getHotel_name(),
-                        top10Hotel.getHotel_area(),
-                        top10Hotel.getHotel_low_range(),
-                        top10Hotel.getHotel_high_range(),
-                        top10Hotel.getHotel_rating(),
-                        top10Hotel.getHotel_image_url());
-                viewModel.insert(hotel);
-                Toast.makeText(getActivity(), "saved", Toast.LENGTH_SHORT).show();
+
+
             }
         }));
 
+
+
     }
+
+
 
     private void getCityList() {
         OmRoomApi omRoomApi = ApiUtils.getOmRoomApi();
@@ -319,9 +315,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private void setHotelRV() {
 
-        recyclerViewHotels.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-        HotelAdapter hotelAdapter = new HotelAdapter(hotelsList, getActivity());
-        recyclerViewHotels.setAdapter(hotelAdapter);
+        new findAsyncTask(viewModel).execute();
+
+
 
     }
 
@@ -399,5 +395,31 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         fragmentTransaction.replace(R.id.fragment_container, notifFrag);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private class findAsyncTask extends AsyncTask<Void,Void,Void> {
+
+        private SavedHotelViewModel viewModel;
+        findAsyncTask(SavedHotelViewModel viewModel) {
+            this.viewModel = viewModel;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            for(Top10Hotel hotel: hotelsList){
+                boolean ss = viewModel.whetherSaved(hotel.getHotel_id());
+                hotel.setSaved(ss);
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            recyclerViewHotels.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+            HotelAdapter hotelAdapter = new HotelAdapter(hotelsList, getActivity(),viewModel);
+            recyclerViewHotels.setAdapter(hotelAdapter);
+        }
     }
 }
