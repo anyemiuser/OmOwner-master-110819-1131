@@ -42,19 +42,19 @@ public class BookingDetailsAdapter extends RecyclerView.Adapter<BookingDetailsAd
     public void onBindViewHolder(@NonNull BookedHotelViewHolder holder, int position) {
 
         UpComingBooking booking = bookingHistoryList.get(position);
-        holder.city.setText(booking.getHotel_city());
+        holder.city.setText(booking.getHotel_city().concat(" >>"));
         holder.bookedTime.setText(booking.getBooking_date());
         holder.hotelName.setText(booking.getHotel_name());
         String bTime = booking.getFrom_date().concat(" ").concat(booking.getNo_of_nights_booked())
-                .concat(" ").concat(booking.getTo_date());
+                .concat("N ").concat(booking.getTo_date());
         holder.checkInOut.setText(bTime);
-        if(status.equals("u")){
-            holder.cancelBook.setText("Cancel");
-        }else if(status.equals("c")){
-            holder.cancelBook.setText("Book Again");
-        }else {
-            holder.cancelBook.setText("Book Again");
-        }
+//        if(status.equals("u")){
+//            holder.cancelBook.setText("Cancel");
+//        }else if(status.equals("c")){
+//            holder.cancelBook.setText("Book Again");
+//        }else {
+//            holder.cancelBook.setText("Book Again");
+//        }
 
         holder.viewDetails.setText("View Details");
         holder.viewDetails.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +85,7 @@ public class BookingDetailsAdapter extends RecyclerView.Adapter<BookingDetailsAd
             bookedTime = itemView.findViewById(R.id.booked_time);
             hotelName = itemView.findViewById(R.id.hotel_name_view);
             checkInOut = itemView.findViewById(R.id.checkin_details_time);
-            cancelBook = itemView.findViewById(R.id.cancel_book);
+
             viewDetails = itemView.findViewById(R.id.view_details);
 
             hotelImage = itemView.findViewById(R.id.hotelcircleImageView);

@@ -4,6 +4,8 @@ import com.anyemi.omrooms.Model.AreaUnderCity;
 import com.anyemi.omrooms.Model.Booking;
 import com.anyemi.omrooms.Model.BookingRequest;
 import com.anyemi.omrooms.Model.BookingResponse;
+import com.anyemi.omrooms.Model.CancelRequest;
+import com.anyemi.omrooms.Model.CancelResponse;
 import com.anyemi.omrooms.Model.CanceledBooking;
 import com.anyemi.omrooms.Model.CityList;
 import com.anyemi.omrooms.Model.CompletedBooking;
@@ -91,6 +93,12 @@ public interface OmRoomApi {
 
     @POST("api.php?f=Hotelbooking")
     Call<BookingResponse> bookRooms(@Body Booking booking);
+
+    @POST("api.php")
+    Call<CancelResponse> cancelBookedHotel(@Query("f") String typeReport,
+                                                 @Body CancelRequest cancelRequest);
+
+
 
 
 //

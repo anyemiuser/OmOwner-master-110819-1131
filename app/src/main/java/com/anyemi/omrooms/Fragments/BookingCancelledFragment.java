@@ -20,11 +20,13 @@ import com.anyemi.omrooms.Model.BookingRequest;
 import com.anyemi.omrooms.Model.CanceledBooking;
 import com.anyemi.omrooms.Model.UpComingBooking;
 import com.anyemi.omrooms.R;
+import com.anyemi.omrooms.Utils.SharedPreferenceConfig;
 import com.anyemi.omrooms.api.ApiUtils;
 import com.anyemi.omrooms.api.OmRoomApi;
 import com.google.gson.Gson;
 
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -57,9 +59,9 @@ public class BookingCancelledFragment  extends Fragment {
         progressLayout = view.findViewById(R.id.progress_l);
         progressBar = view.findViewById(R.id.progressBar3);
         progressText = view.findViewById(R.id.progressText);
-
+        SharedPreferenceConfig sharedPreferenceConfig = new SharedPreferenceConfig(Objects.requireNonNull(getActivity()));
         OmRoomApi omRoomApi = ApiUtils.getOmRoomApi();
-        BookingRequest bookingRequest = new BookingRequest("c","9666235167");
+        BookingRequest bookingRequest = new BookingRequest("c",sharedPreferenceConfig.readPhoneNo());
         progressLayout.setVisibility(View.VISIBLE);
 
         omRoomApi.getUsersCanceledBooking("CanellledBooking",bookingRequest).enqueue(new Callback<CanceledBooking>() {

@@ -1,27 +1,35 @@
 package com.anyemi.omrooms.UI;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.anyemi.omrooms.Adapters.HotelAdapter;
 import com.anyemi.omrooms.Adapters.HotelListAdapter;
 import com.anyemi.omrooms.Helper.RGuest;
 import com.anyemi.omrooms.Model.HotelList;
 import com.anyemi.omrooms.Model.Hotels;
 import com.anyemi.omrooms.Model.RoomsGuest;
+import com.anyemi.omrooms.Model.SavedHotelViewModel;
+import com.anyemi.omrooms.Model.Top10Hotel;
 import com.anyemi.omrooms.R;
 import com.anyemi.omrooms.Utils.ConverterUtil;
 import com.anyemi.omrooms.Utils.RecyclerTouchListener;
@@ -50,12 +58,14 @@ public class AreaHotelsActivity extends AppCompatActivity implements View.OnClic
 //    private List<RoomsGuest> roomsGuests = new ArrayList<>();
 
     private String area = null;
+    private SavedHotelViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_area_hotels);
 
+        viewModel = ViewModelProviders.of(this).get(SavedHotelViewModel.class);
         Log.e(TAG_AREA_HOTEL,"On Create");
 
         init();
@@ -83,11 +93,8 @@ public class AreaHotelsActivity extends AppCompatActivity implements View.OnClic
         areaHotelsRv.addOnItemTouchListener(new RecyclerTouchListener(this, areaHotelsRv, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                Hotels hotel = hotelListDetails.get(position);
-                Intent intent = new Intent(AreaHotelsActivity.this,HotelActivity.class);
-                intent.putExtra("hotelId",hotel.getHotel_id());
-                intent.putExtra("hotelName",hotel.getHotel_name());
-                startActivityForResult(intent,1);
+
+                findPosition(position);
             }
 
             @Override
@@ -95,6 +102,8 @@ public class AreaHotelsActivity extends AppCompatActivity implements View.OnClic
 
             }
         }));
+
+
 
 
         //Custome Toast
@@ -112,6 +121,33 @@ public class AreaHotelsActivity extends AppCompatActivity implements View.OnClic
 //        toast.show();
 
 //        Snackbar.make(coordinatorLayout, "Hello "+getString(R.string.app_name)+area,Snackbar.LENGTH_LONG).show();
+    }
+
+    private void findPosition(int position) {
+        RecyclerView.ViewHolder holder = areaHotelsRv.findViewHolderForAdapterPosition(position);
+        if (holder != null) {
+//            ImageView imageView = holder.itemView.findViewById(R.id.saved_symbol);
+//            imageView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    Toast.makeText(AreaHotelsActivity.this, "saved clicked", Toast.LENGTH_SHORT).show();
+//
+//                }
+//            });
+            LinearLayout layout = holder.itemView.findViewById(R.id.linear_saved_item);
+            layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Hotels hotel = hotelListDetails.get(position);
+                    Intent intent = new Intent(AreaHotelsActivity.this,HotelActivity.class);
+                    intent.putExtra("hotelId",hotel.getHotel_id());
+                    intent.putExtra("hotelName",hotel.getHotel_name());
+                    startActivityForResult(intent,1);
+                    Toast.makeText(AreaHotelsActivity.this, "Layout clicked", Toast.LENGTH_SHORT).show();
+
+                }
+            });
+        }
     }
 
     private void init() {
@@ -245,11 +281,8 @@ public class AreaHotelsActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void setHotelListRv() {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(AreaHotelsActivity.this);
-        areaHotelsRv.setLayoutManager(layoutManager);
-        areaHotelsRv.setHasFixedSize(true);
-        HotelListAdapter hotelListAdapter = new HotelListAdapter(hotelListDetails,AreaHotelsActivity.this);
-        areaHotelsRv.setAdapter(hotelListAdapter);
+
+        new findAsyncTask(viewModel).execute();
     }
 
     @Override
@@ -322,5 +355,34 @@ public class AreaHotelsActivity extends AppCompatActivity implements View.OnClic
 
         }
 
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private class findAsyncTask extends AsyncTask<Void,Void,Void> {
+
+        private SavedHotelViewModel viewModel;
+        findAsyncTask(SavedHotelViewModel viewModel) {
+            this.viewModel = viewModel;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            for(Hotels hotels: hotelListDetails){
+                boolean ss = viewModel.whetherSaved(hotels.getHotel_id());
+                hotels.setSaved(ss);
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(AreaHotelsActivity.this);
+            areaHotelsRv.setLayoutManager(layoutManager);
+            areaHotelsRv.setHasFixedSize(true);
+            HotelListAdapter hotelListAdapter = new HotelListAdapter(hotelListDetails,AreaHotelsActivity.this, viewModel);
+            areaHotelsRv.setAdapter(hotelListAdapter);
+
+        }
     }
 }

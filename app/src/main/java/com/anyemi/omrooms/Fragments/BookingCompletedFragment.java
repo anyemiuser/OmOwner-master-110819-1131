@@ -20,11 +20,13 @@ import com.anyemi.omrooms.Model.BookingRequest;
 import com.anyemi.omrooms.Model.CompletedBooking;
 import com.anyemi.omrooms.Model.UpComingBooking;
 import com.anyemi.omrooms.R;
+import com.anyemi.omrooms.Utils.SharedPreferenceConfig;
 import com.anyemi.omrooms.api.ApiUtils;
 import com.anyemi.omrooms.api.OmRoomApi;
 import com.google.gson.Gson;
 
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,6 +38,7 @@ public class BookingCompletedFragment extends Fragment {
     private ProgressBar progressBar;
     private TextView progressText;
     private ConstraintLayout progressLayout;
+
     //ViewPager viewPager;
 
 
@@ -58,8 +61,11 @@ public class BookingCompletedFragment extends Fragment {
         progressBar = view.findViewById(R.id.progressBar3);
         progressText = view.findViewById(R.id.progressText);
 
+        SharedPreferenceConfig sharedPreferenceConfig = new SharedPreferenceConfig(Objects.requireNonNull(getActivity()));
+
         OmRoomApi omRoomApi = ApiUtils.getOmRoomApi();
-        BookingRequest bookingRequest = new BookingRequest("s","9666235167");
+        String statusS = "s";
+        BookingRequest bookingRequest = new BookingRequest(statusS, sharedPreferenceConfig.readPhoneNo());
 
         progressLayout.setVisibility(View.VISIBLE);
 

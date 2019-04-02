@@ -1,6 +1,6 @@
 package com.anyemi.omrooms.Model;
 
-class BookedRoom {
+public class BookedRoom {
     private String noofroomsbooked;
     private String room_type;
 

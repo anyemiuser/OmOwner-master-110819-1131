@@ -20,6 +20,7 @@ public class Hotels {
     private String hotel_service_rate;
     private String hotel_other_rate;
     private String hotel_image_url;
+    private boolean isSaved;
 
     public Hotels() {
     }
@@ -43,6 +44,14 @@ public class Hotels {
         this.hotel_service_rate = hotel_service_rate;
         this.hotel_other_rate = hotel_other_rate;
         this.hotel_image_url = hotel_image_url;
+    }
+
+    public boolean isSaved() {
+        return isSaved;
+    }
+
+    public void setSaved(boolean saved) {
+        isSaved = saved;
     }
 
     public String getHotel_id() {
