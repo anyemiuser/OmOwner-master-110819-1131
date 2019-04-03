@@ -73,7 +73,7 @@ public class SavedFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         viewModel = ViewModelProviders.of(this).get(SavedHotelViewModel.class);
-        SavedHotelsAdapter adapter = new SavedHotelsAdapter(getActivity());
+        SavedHotelsAdapter adapter = new SavedHotelsAdapter(getActivity(),viewModel);
         viewModel.getSavedHotelList().observe(this, new Observer<PagedList<RoomBooking>>() {
             @Override
             public void onChanged(@Nullable PagedList<RoomBooking> hotelLists) {

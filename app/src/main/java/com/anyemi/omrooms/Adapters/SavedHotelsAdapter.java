@@ -9,11 +9,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.anyemi.omrooms.Model.SavedHotelViewModel;
 import com.anyemi.omrooms.Models.SavedHotels;
 import com.anyemi.omrooms.R;
 import com.anyemi.omrooms.db.RoomBooking;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
 
@@ -22,6 +27,7 @@ public class SavedHotelsAdapter extends PagedListAdapter<RoomBooking,SavedHotels
 
 //    private ArrayList<SavedHotels> savedHotels;
     private Context context;
+    private SavedHotelViewModel viewModel;
     private static DiffUtil.ItemCallback<RoomBooking> DIFF_CALLBACK =
             new DiffUtil.ItemCallback<RoomBooking>() {
                 @Override
@@ -35,9 +41,10 @@ public class SavedHotelsAdapter extends PagedListAdapter<RoomBooking,SavedHotels
                 }
             };
 
-    public SavedHotelsAdapter(Context context) {
+    public SavedHotelsAdapter(Context context, SavedHotelViewModel viewModel) {
         super(DIFF_CALLBACK);
         this.context = context;
+        this.viewModel = viewModel;
     }
 
 //    public SavedHotelsAdapter(ArrayList<SavedHotels> savedHotels, Context context) {
@@ -54,12 +61,43 @@ public class SavedHotelsAdapter extends PagedListAdapter<RoomBooking,SavedHotels
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int position) {
-        RoomBooking savedHotel = getItem(position);
-        if (savedHotel != null){
-            myViewHolder.savedHotelsTextView.setText(savedHotel.getHotel_name());
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        RoomBooking hotel = getItem(position);
+        if (hotel != null){
+            holder.hotelName.setText(hotel.getHotel_name());
+
+            holder.nearByPlace.setText(hotel.getHotel_area());
+
+            String bPrice = "₹"+hotel.getHotel_low_range()+" - "+"₹"+hotel.getHotel_high_range();
+            holder.discountedPriceRange.setText(bPrice);
+
+            holder.rating.setText(hotel.getHotel_rating());
+            holder.noOfRating.setText(hotel.getHotel_rating());
+            Glide.with(context)
+                    .load(hotel.getHotel_image_url())
+                    .error(R.drawable.ic_location_city)
+                    // read original from cache (if present) otherwise download it and decode it
+                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                    .into(holder.hotelImage);
 //            myViewHolder.savedHotelsImageView.setImageResource(savedHotel.getHotel_image_url());
         }
+        holder.savedImage.setImageResource(R.drawable.ic_saved_love);
+        holder.savedImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RoomBooking hotelSaved = new RoomBooking(hotel.getHotel_id(),
+                        hotel.getHotel_name(),
+                        hotel.getHotel_area(),
+                        hotel.getHotel_low_range(),
+                        hotel.getHotel_high_range(),
+                        hotel.getHotel_rating(),
+                        hotel.getHotel_image_url());
+
+                holder.savedImage.setImageResource(R.drawable.ic_favorite_black);
+                viewModel.delete(hotelSaved);
+                Toast.makeText(context, "Removed", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
     }
@@ -71,14 +109,32 @@ public class SavedHotelsAdapter extends PagedListAdapter<RoomBooking,SavedHotels
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView savedHotelsTextView;
-        ImageView savedHotelsImageView;
+
+
+        private TextView hotelName;
+        private TextView nearByPlace;
+        private TextView basePriceRange, discountedPriceRange;
+        private TextView rating;
+        private TextView noOfRating;
+        private TextView discount;
+        private ImageView hotelImage;
+        private ImageView savedImage;
+        private LinearLayout linearLayout;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            savedHotelsTextView = itemView.findViewById(R.id.saved_hotels_name);
-            savedHotelsImageView = itemView.findViewById(R.id.saved_hotels_image);
+            hotelName = itemView.findViewById(R.id.saved_hotels_name);
+            nearByPlace = itemView.findViewById(R.id.place_details);
+            basePriceRange = itemView.findViewById(R.id.base_price_range);
+            discountedPriceRange = itemView.findViewById(R.id.discount_price_range);
+            rating = itemView.findViewById(R.id.rating_hotel);
+            noOfRating = itemView.findViewById(R.id.no_of_rating);
+            discount = itemView.findViewById(R.id.discount);
+            hotelImage = itemView.findViewById(R.id.saved_hotels_image);
+            savedImage = itemView.findViewById(R.id.saved_symbol);
+
+            linearLayout = itemView.findViewById(R.id.linear_saved_item);
         }
     }
 }
