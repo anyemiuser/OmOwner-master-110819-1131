@@ -21,7 +21,9 @@ import com.anyemi.omrooms.Helper.RGuest;
 import com.anyemi.omrooms.Utils.ConverterUtil;
 import com.anyemi.omrooms.Utils.SharedPreferenceConfig;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements
+        SavedFragment.OnFragmentBackListner,
+        BookingFragment.OnBookingFragmentBackListner{
 
     BottomNavigationView bottomNavigationView;
     RGuest rGuest;
@@ -114,6 +116,13 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return false;
+    }
+
+
+    @Override
+    public void onFragmentChange() {
+//        loadFragment(new HomeFragment());
+        bottomNavigationView.setSelectedItemId(R.id.action_home);
     }
 
 //    @Override

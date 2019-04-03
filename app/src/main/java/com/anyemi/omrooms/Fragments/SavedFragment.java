@@ -4,10 +4,13 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.arch.paging.PagedList;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -22,8 +25,11 @@ import com.anyemi.omrooms.R;
 import com.anyemi.omrooms.db.RoomBooking;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class SavedFragment extends Fragment {
+
+    private OnFragmentBackListner changeListner;
 
     ArrayList<SavedHotels> savedHotelsList;
     RecyclerView recyclerViewSavedHotels;
@@ -40,7 +46,13 @@ public class SavedFragment extends Fragment {
 
         View rootview = inflater.inflate(R.layout.fragment_saved, container, false);
         recyclerViewSavedHotels = rootview.findViewById(R.id.saved_rv);
-        //toolbar = rootview.findViewById(R.id.toolbar_saved);
+        Toolbar toolbar = rootview.findViewById(R.id.toolbar_saved);
+        ((AppCompatActivity) Objects.requireNonNull(getActivity())).setSupportActionBar(toolbar);
+        ActionBar actionbar = ((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar();
+        if (actionbar != null) {
+            actionbar.setDisplayHomeAsUpEnabled(true);
+            actionbar.setTitle("Saved Hotel");
+        }
 
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -58,12 +70,12 @@ public class SavedFragment extends Fragment {
 //        recyclerViewSavedHotels.setAdapter(savedHotelsAdapter);
 
 
-//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                getActivity().onBackPressed();
-//            }
-//        });
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changeListner.onFragmentChange();
+            }
+        });
 
         return rootview;
     }
@@ -86,6 +98,22 @@ public class SavedFragment extends Fragment {
         });
 
 
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+
+            changeListner = (OnFragmentBackListner) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    public interface OnFragmentBackListner{
+        public void onFragmentChange();
     }
 
 }
