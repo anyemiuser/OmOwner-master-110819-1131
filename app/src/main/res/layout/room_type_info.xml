@@ -140,16 +140,21 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="5dp"
             android:background="?android:attr/listDivider" />
-
+        <ProgressBar
+            android:id="@+id/room_progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
 
         <TextView
+            android:id="@+id/room_available_status"
+            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
             android:fontFamily="@font/opensans_semibold"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
-            android:text="Price for 1 Guest, 1 Classic(2X) Room,1 Night"
             android:textColor="@android:color/black"
             android:textSize="16sp"
             android:textStyle="bold" />

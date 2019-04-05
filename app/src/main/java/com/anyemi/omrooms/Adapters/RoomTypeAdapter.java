@@ -34,6 +34,7 @@ public class RoomTypeAdapter extends RecyclerView.Adapter<RoomTypeAdapter.RoomVi
         this.roomDetails = roomdetails;
         context= hotelActivity;
         this.noOfRoom = noOfRoom;
+        this.modelsForBooking = modelsForBooking;
     }
 
     @NonNull
@@ -65,7 +66,7 @@ public class RoomTypeAdapter extends RecyclerView.Adapter<RoomTypeAdapter.RoomVi
                 }
 
             }
-            HotelActivity.modelsForBooking.get(position).setPrice_to_be_paid(String.valueOf(roomPrice));
+            modelsForBooking.get(position).setPrice_to_be_paid(String.valueOf(roomPrice));
             holder.price.setText(String.valueOf(roomPrice));
             holder.detailT.setText("Rs."+roomPrice+" For "+roomPriceOnDates.size()+" Nights");
 

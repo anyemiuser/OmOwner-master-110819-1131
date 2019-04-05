@@ -12,6 +12,8 @@ import com.anyemi.omrooms.Model.CompletedBooking;
 import com.anyemi.omrooms.Model.HotelAreaList;
 import com.anyemi.omrooms.Model.HotelDetails;
 import com.anyemi.omrooms.Model.HotelList;
+import com.anyemi.omrooms.Model.Profile;
+import com.anyemi.omrooms.Model.ProfileUpdateResponse;
 import com.anyemi.omrooms.Model.TopHotels;
 import com.anyemi.omrooms.Model.UpComing;
 import com.anyemi.omrooms.Model.UserRequest;
@@ -97,6 +99,10 @@ public interface OmRoomApi {
     @POST("api.php")
     Call<CancelResponse> cancelBookedHotel(@Query("f") String typeReport,
                                                  @Body CancelRequest cancelRequest);
+
+    @POST("api.php")
+    Call<ProfileUpdateResponse> updateProfile(@Query("f") String typeReport,
+                                                  @Body Profile profile);
 
 
 

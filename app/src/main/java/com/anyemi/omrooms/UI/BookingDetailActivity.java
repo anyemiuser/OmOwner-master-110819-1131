@@ -12,8 +12,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import com.anyemi.omrooms.Model.BookedRoom;
 import com.anyemi.omrooms.Model.CancelRequest;
@@ -32,6 +34,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class BookingDetailActivity extends AppCompatActivity implements View.OnClickListener{
+    private static final String TAG_BDA = BookingDetailActivity.class.getName();
+
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
@@ -44,7 +48,10 @@ public class BookingDetailActivity extends AppCompatActivity implements View.OnC
     private Button bookCancelRating;
 
     private String status;
-    private String hotelId;
+    private String bookingId;
+
+    UpComingBooking booking;
+    private float rating = 5;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,50 +61,57 @@ public class BookingDetailActivity extends AppCompatActivity implements View.OnC
         status = intent.getStringExtra("bookingStatus");
         String model = intent.getStringExtra("bookingDetails");
         Gson gson = new Gson();
-        UpComingBooking booking = gson.fromJson(model, UpComingBooking.class);
-        hotelId = booking.getHotel_id();
+        booking = gson.fromJson(model, UpComingBooking.class);
+        bookingId = booking.getBooking_id();
 
-        Log.e("test",""+new Gson().toJson(booking));
+        Log.e("test","hotel"+bookingId+new Gson().toJson(booking));
 
         init();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionbar = getSupportActionBar();
-        String title;
-        String subTitle;
-        if(status.equals("u")){
-            title = "Confirmed Booking";
-            subTitle = "Your Booking has beed Confirmed";
-            stayedL.setVisibility(View.GONE);
-            canceledL.setVisibility(View.GONE);
-            bookCancelRating.setText(" Cancel Booking");
-            bookingImage.setImageResource(R.drawable.ic_upcomming);
-        }else if(status.equals("c")){
-            title = "Canceled Booking ";
-            subTitle = "Your Booking has beed Canceled";
-            canceledL.setVisibility(View.VISIBLE);
-            if(booking.getCancelled_on() != null){
-                cancelledOnT.setText("Cancelled On: ".concat(booking.getCancelled_on()));
+        String title = null;
+        String subTitle = null;
+        try{
+            if(status.equals("u")){
+                title = "Confirmed Booking";
+                subTitle = "Your Booking has beed Confirmed";
+                stayedL.setVisibility(View.GONE);
+                canceledL.setVisibility(View.GONE);
+                bookCancelRating.setText(" Cancel Booking");
+                bookingImage.setImageResource(R.drawable.ic_upcomming);
+            }else if(status.equals("c")){
+                title = "Canceled Booking ";
+                subTitle = "Your Booking has beed Canceled";
+                canceledL.setVisibility(View.VISIBLE);
+                if(booking.getCancelled_on() != null){
+                    cancelledOnT.setText("Cancelled On: ".concat(booking.getCancelled_on()));
+                }
+
+                stayedL.setVisibility(View.GONE);
+                bookCancelRating.setText(" Book Again");
+                bookingImage.setImageResource(R.drawable.ic_canceled);
+
+            }else {
+                title = "Already Stayed Booking ";
+                subTitle = "Your Stay at Hotel is Completed";
+                canceledL.setVisibility(View.GONE);
+                stayedL.setVisibility(View.VISIBLE);
+                bookingImage.setImageResource(R.drawable.ic_completed);
+                bookCancelRating.setText(" Give Rating");
+                if(booking.getRating() == null){
+                    ratingSubmitForBookin();
+                }
+                checkedInT.setText(" Checked In ".concat(booking.getChecked_in_date()).concat(" at ".concat(booking.getChecked_in_time())));
+                checkedOutT.setText("Checked Out ".concat(booking.getChecked_out_date()).concat(" at ").concat(booking.getChecked_out_time()));
             }
-
-            stayedL.setVisibility(View.GONE);
-            bookCancelRating.setText(" Book Again");
-            bookingImage.setImageResource(R.drawable.ic_canceled);
-
-        }else {
-            title = "Already Stayed Booking ";
-            subTitle = "Your Stay at Hotel is Completed";
-            canceledL.setVisibility(View.GONE);
-            stayedL.setVisibility(View.VISIBLE);
-            checkedInT.setText(" Checked In ".concat(booking.getChecked_in_date()).concat(" at ".concat(booking.getChecked_in_time())));
-            checkedOutT.setText("Checked Out ".concat(booking.getChecked_out_date()).concat(" at ").concat(booking.getChecked_out_time()));
-            bookCancelRating.setText(" Give Rating");
-
-            bookingImage.setImageResource(R.drawable.ic_completed);
-
+        }catch (NullPointerException e){
+            Log.e(TAG_BDA,""+e.toString());
+            Toast.makeText(this, "Proper Information Not Found", Toast.LENGTH_SHORT).show();
 
         }
+
         if (actionbar != null) {
             actionbar.setDisplayHomeAsUpEnabled(true);
             actionbar.setTitle(title);
@@ -180,9 +194,11 @@ public class BookingDetailActivity extends AppCompatActivity implements View.OnC
         OmRoomApi omRoomApi = ApiUtils.getOmRoomApi();
         SharedPreferenceConfig sharedPreferenceConfig = new SharedPreferenceConfig(this);
         String userId = sharedPreferenceConfig.readPhoneNo();
+
         switch (status){
             case "u":
-                CancelRequest cancelRequest = new CancelRequest(hotelId,userId);
+                CancelRequest cancelRequest = new CancelRequest(bookingId,userId);
+                Log.e("Body",""+new Gson().toJson(cancelRequest));
                 new AlertDialog.Builder(this)
                         .setTitle("Cancel Booking")
                         .setMessage("Are you sure to cancel the Booking")
@@ -193,7 +209,10 @@ public class BookingDetailActivity extends AppCompatActivity implements View.OnC
                                     @Override
                                     public void onResponse(Call<CancelResponse> call, Response<CancelResponse> response) {
                                         if(response.isSuccessful()){
+                                            Log.e("Response",""+new Gson().toJson(response.body()));
+
                                             CancelResponse cancelResponse = response.body();
+                                            Log.e("Response",""+new Gson().toJson(cancelResponse));
                                             if (cancelResponse != null && cancelResponse.getStatus().equals("Success")) {
                                                 if(cancelResponse.getMsg().equals("Successfully  Cancelled")){
                                                     Toast.makeText(BookingDetailActivity.this, "Cancelled Successfully", Toast.LENGTH_SHORT).show();
@@ -218,6 +237,61 @@ public class BookingDetailActivity extends AppCompatActivity implements View.OnC
 
                 Toast.makeText(this, "u", Toast.LENGTH_SHORT).show();
                 break;
+
+            case "c":
+                Intent intent = new Intent(this,HotelActivity.class);
+                intent.putExtra("hotelId",booking.getHotel_id());
+                intent.putExtra("hotelName",booking.getHotel_name());
+                startActivity(intent);
+
+                break;
+
+            case "s":
+                ratingSubmitForBookin();
+
+                break;
+
         }
+    }
+
+    private void ratingSubmitForBookin() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Thanke For the Stay ! How Was Your Stay ?");
+        builder.setCancelable(false);
+        View mView = getLayoutInflater().inflate(R.layout.rating_alert_layout, null);
+        builder.setView(mView);
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+        alertDialog.setCancelable(false);
+        mView.findViewById(R.id.submit_rating).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.setCancelable(true);
+                alertDialog.dismiss();
+//                        booking.setTransaction_id(null);
+//                        booking.setTransaction_status(null);
+//                        Log.e(TAG_HOTEL,"pay at hotel: "+new Gson().toJson(booking));
+//                        bookRooms(booking);
+
+            }
+        });
+        RatingBar ratingBar = mView.findViewById(R.id.ratingBar);
+
+        ratingBar.setMax(5);
+        ratingBar.setNumStars(5);
+        ratingBar.setRating(5);
+        ratingBar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                rating = ratingBar.getRating();
+            }
+        });
+        mView.findViewById(R.id.submit_rating).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(BookingDetailActivity.this, ""+rating, Toast.LENGTH_SHORT).show();
+                alertDialog.dismiss();
+            }
+        });
     }
 }
