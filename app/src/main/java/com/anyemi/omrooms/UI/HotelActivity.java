@@ -154,6 +154,7 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields, 
 //                                booking.setUser_id(sharedPreferenceConfig.readPhoneNo());
                                 modelsForBooking.clear();
                                 if(hotelDetails.getHoteldetails().getRoomdetails()!= null && hotelDetails.getHoteldetails().getRoomdetails().size() > 0){
+                                    List<RoomDetails> listWithNoRoomPrice = new ArrayList<>();
                                     for(int i = 0;i<hotelDetails.getHoteldetails().getRoomdetails().size();i++){
 
                                         RoomDetails roomDetails = hotelDetails.getHoteldetails().getRoomdetails().get(i);
@@ -172,10 +173,18 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields, 
                                                     "u",
                                                     String.valueOf(sharedPreferenceConfig.readNoOfGuests()),"0");
                                             modelsForBooking.add(bookingModel);
+
+                                        }else {
+                                            //if rooms are not available add to the list and then remove these from master list.
+                                            listWithNoRoomPrice.add(hotelDetails.getHoteldetails().getRoomdetails().get(i));
                                         }
 
                                     }
                                     if(modelsForBooking.size()>0){
+                                        //removing from master list.
+                                        for(RoomDetails roomDetail: listWithNoRoomPrice){
+                                            hotelDetails.getHoteldetails().getRoomdetails().remove(roomDetail);
+                                        }
                                         roomAvailStatus.setText("Select Your Room Type >>");
                                         setRoomTypeRv(hotelDetails.getHoteldetails().getRoomdetails(),modelsForBooking);
                                     }

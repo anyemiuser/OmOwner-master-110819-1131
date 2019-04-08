@@ -20,6 +20,8 @@ import android.widget.Toast;
 import com.anyemi.omrooms.Model.BookedRoom;
 import com.anyemi.omrooms.Model.CancelRequest;
 import com.anyemi.omrooms.Model.CancelResponse;
+import com.anyemi.omrooms.Model.RatingRequest;
+import com.anyemi.omrooms.Model.RatingResponse;
 import com.anyemi.omrooms.Model.UpComingBooking;
 import com.anyemi.omrooms.R;
 import com.anyemi.omrooms.Utils.SharedPreferenceConfig;
@@ -46,6 +48,7 @@ public class BookingDetailActivity extends AppCompatActivity implements View.OnC
     private ImageView hotelImageV, bookingImage;
     private ConstraintLayout stayedL, canceledL;
     private Button bookCancelRating;
+    private RatingBar ratingBar;
 
     private String status;
     private String bookingId;
@@ -81,6 +84,7 @@ public class BookingDetailActivity extends AppCompatActivity implements View.OnC
                 canceledL.setVisibility(View.GONE);
                 bookCancelRating.setText(" Cancel Booking");
                 bookingImage.setImageResource(R.drawable.ic_upcomming);
+                ratingBar.setVisibility(View.GONE);
             }else if(status.equals("c")){
                 title = "Canceled Booking ";
                 subTitle = "Your Booking has beed Canceled";
@@ -92,6 +96,7 @@ public class BookingDetailActivity extends AppCompatActivity implements View.OnC
                 stayedL.setVisibility(View.GONE);
                 bookCancelRating.setText(" Book Again");
                 bookingImage.setImageResource(R.drawable.ic_canceled);
+                ratingBar.setVisibility(View.GONE);
 
             }else {
                 title = "Already Stayed Booking ";
@@ -100,9 +105,14 @@ public class BookingDetailActivity extends AppCompatActivity implements View.OnC
                 stayedL.setVisibility(View.VISIBLE);
                 bookingImage.setImageResource(R.drawable.ic_completed);
                 bookCancelRating.setText(" Give Rating");
+                ratingBar.setVisibility(View.VISIBLE);
                 if(booking.getRating() == null){
                     ratingSubmitForBookin();
+                }else {
+                    float rate = Float.parseFloat(booking.getRating());
+                    ratingBar.setRating(rate);
                 }
+
                 checkedInT.setText(" Checked In ".concat(booking.getChecked_in_date()).concat(" at ".concat(booking.getChecked_in_time())));
                 checkedOutT.setText("Checked Out ".concat(booking.getChecked_out_date()).concat(" at ").concat(booking.getChecked_out_time()));
             }
@@ -156,7 +166,7 @@ public class BookingDetailActivity extends AppCompatActivity implements View.OnC
     private void init() {
         titleText = findViewById(R.id.title_text);
         bookinId = findViewById(R.id.booking_id_text);
-        bookedBy =  findViewById(R.id.booked_by);
+        ratingBar =  findViewById(R.id.rating_bar_user);
         fromT =  findViewById(R.id.from_text);
         noOfNightT =  findViewById(R.id.no_nighit_text);
         toT =  findViewById(R.id.to_text);
@@ -256,41 +266,76 @@ public class BookingDetailActivity extends AppCompatActivity implements View.OnC
 
     private void ratingSubmitForBookin() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Thanke For the Stay ! How Was Your Stay ?");
+        builder.setTitle("Thanks For the Stay ! How Was Your Stay ?");
         builder.setCancelable(false);
         View mView = getLayoutInflater().inflate(R.layout.rating_alert_layout, null);
         builder.setView(mView);
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
         alertDialog.setCancelable(false);
-        mView.findViewById(R.id.submit_rating).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                alertDialog.setCancelable(true);
-                alertDialog.dismiss();
-//                        booking.setTransaction_id(null);
-//                        booking.setTransaction_status(null);
-//                        Log.e(TAG_HOTEL,"pay at hotel: "+new Gson().toJson(booking));
-//                        bookRooms(booking);
 
-            }
-        });
         RatingBar ratingBar = mView.findViewById(R.id.ratingBar);
 
         ratingBar.setMax(5);
         ratingBar.setNumStars(5);
         ratingBar.setRating(5);
-        ratingBar.setOnClickListener(new View.OnClickListener() {
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
-            public void onClick(View view) {
+            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
                 rating = ratingBar.getRating();
             }
         });
+        ratingBar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                rating = ratingBar.getRating();
+            }
+        });
+
+//        mView.findViewById(R.id.submit_rating).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(BookingDetailActivity.this, ""+rating, Toast.LENGTH_SHORT).show();
+//                alertDialog.dismiss();
+//            }
+//        });
         mView.findViewById(R.id.submit_rating).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(BookingDetailActivity.this, ""+rating, Toast.LENGTH_SHORT).show();
+                alertDialog.setCancelable(true);
                 alertDialog.dismiss();
+                RatingRequest ratingRequest = new RatingRequest(booking.getBooking_id(),booking.getHotel_id(),String.valueOf(rating));
+                OmRoomApi omRoomApi = ApiUtils.getOmRoomApi();
+                omRoomApi.updateRating("rating ",ratingRequest).enqueue(new Callback<RatingResponse>() {
+                    @Override
+                    public void onResponse(Call<RatingResponse> call, Response<RatingResponse> response) {
+                        if(response.isSuccessful()){
+                            RatingResponse ratingResponse = response.body();
+                            Log.e("rating",""+new Gson().toJson(response.body()));
+                            if (ratingResponse != null && ratingResponse.getStatus().equals("Success") &&
+                                    ratingResponse.getMsg().equals("Successfully  Updated")) {
+
+                                Log.e("rating success",""+new Gson().toJson(ratingResponse));
+                                ratingBar.setRating(rating);
+                                bookCancelRating.setVisibility(View.GONE);
+                                Toast.makeText(BookingDetailActivity.this, "Rating Updated: "+rating, Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<RatingResponse> call, Throwable t) {
+
+                        Log.e("rating failed",""+t.toString());
+
+
+                    }
+                });
+//                        booking.setTransaction_id(null);
+//                        booking.setTransaction_status(null);
+//                        Log.e(TAG_HOTEL,"pay at hotel: "+new Gson().toJson(booking));
+//                        bookRooms(booking);
+
             }
         });
     }
