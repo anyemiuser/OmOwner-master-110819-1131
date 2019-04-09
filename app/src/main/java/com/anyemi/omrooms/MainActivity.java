@@ -3,6 +3,7 @@ package com.anyemi.omrooms;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.anyemi.omrooms.Fragments.BookingFragment;
 import com.anyemi.omrooms.Fragments.HomeFragment;
@@ -28,6 +30,8 @@ public class MainActivity extends AppCompatActivity implements
     BottomNavigationView bottomNavigationView;
     RGuest rGuest;
     private SharedPreferenceConfig sharedPreferenceConfig;
+
+    boolean doubleBackToExitPressedOnce = false;
 
     public static Intent getStartIntent(Context context) {
 
@@ -138,5 +142,24 @@ public class MainActivity extends AppCompatActivity implements
 //            transaction.commit();
 //        }
 //    }
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please Click BACK again to Exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
+    }
 
 }
