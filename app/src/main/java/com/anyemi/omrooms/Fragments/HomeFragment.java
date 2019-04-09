@@ -181,7 +181,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                             }
 
                         }
-                        setUpSpinner();
+                        if(getActivity()!= null)
+                            setUpSpinner();
                     }else {
                         Toast.makeText(getActivity(), ""+cityListDetails.getMsg(), Toast.LENGTH_SHORT).show();
                     }
