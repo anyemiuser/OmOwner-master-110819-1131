@@ -37,6 +37,9 @@ import com.anyemi.omrooms.Utils.ConverterUtil;
 import com.anyemi.omrooms.Utils.SharedPreferenceConfig;
 import com.anyemi.omrooms.api.ApiUtils;
 import com.anyemi.omrooms.api.OmRoomApi;
+import com.anyemi.omrooms.payment.Constants;
+import com.anyemi.omrooms.payment.PaymentModeActivityNew;
+import com.anyemi.omrooms.payment.PaymentModesActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.gson.Gson;
@@ -496,15 +499,16 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields, 
                     for(int i= 0; i<modelsForBooking.size();i++){
                         totalPrice = totalPrice+ modelsForBooking.get(i).getNo_of_room_booked()*Double.parseDouble(modelsForBooking.get(i).getPrice_to_be_paid());
                     }
-                    PaymentRequestModel paymentRequestModel = new PaymentRequestModel(sharedPreferenceConfig.readPhoneNo(),
-                            booking.getUser_id(),
-                            "1500.99",
-                            String.valueOf(totalPrice),
-                            sharedPreferenceConfig.readPhoneNo(),
-                            "0",
-                            "Om Room Payment");
-                    Intent intent = new Intent(HotelActivity.this,PaymentActivity.class);
-                    intent.putExtra("payment",new Gson().toJson(paymentRequestModel));
+
+                    PaymentRequestModel paymentRequestModel = new PaymentRequestModel();
+
+                    paymentRequestModel.setMobile_number(sharedPreferenceConfig.readPhoneNo());
+                    paymentRequestModel.setEmi_ids( booking.getUser_id());
+                    paymentRequestModel.setTotal_amount( String.valueOf(totalPrice));
+
+//                    Intent intent = new Intent(HotelActivity.this,PaymentActivity.class);
+                    Intent intent = new Intent(HotelActivity.this, PaymentModeActivityNew.class);
+                    intent.putExtra(Constants.PAYMENT_REQUEST_MODEL,new Gson().toJson(paymentRequestModel));
 //                intent.putExtra("user_id",sharedPreferenceConfig.readPhoneNo());
                     startActivityForResult(intent,5);
 

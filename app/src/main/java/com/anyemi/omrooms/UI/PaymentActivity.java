@@ -47,6 +47,7 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
                 setResult(Activity.RESULT_OK,resultIntent);
                 finish();
                 break;
+
             case R.id.failure:
 
                 resultIntent.putExtra("transactionId","125442");

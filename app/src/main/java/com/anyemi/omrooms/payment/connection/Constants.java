@@ -53,6 +53,9 @@ public class Constants {
     public static final String PAYMENT_REMARKS = "HPCL";
     public static final String PAYMENT_REMARKS_ANNA = "ANNA_CANTEEN";
 
+    public static final String FIN_ID_HPCL="47";
+    public static final String FIN_ID_ANNA="5";
+
 
 
 

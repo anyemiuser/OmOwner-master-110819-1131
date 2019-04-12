@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.anyEMI.paystarr.NavigationActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:theme="@style/AppTheme.AppBarOverlay">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+    <android.support.v7.widget.Toolbar
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="?attr/colorPrimary"
+    app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
 
@@ -43,7 +41,7 @@
                 android:padding="10dp">
 
 
-                <com.anyEMI.paystarr.ui_components.MyTextViewBoldGotham
+                <TextView
                     style="@style/TextView.Header"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -51,7 +49,7 @@
                     android:gravity="left|center"
                     android:text="Amount to be Paid" />
 
-                <com.anyEMI.paystarr.ui_components.MyTextViewArial
+                <TextView
                     android:id="@+id/tv_amount"
                     style="@style/TextView.Standard"
                     android:layout_width="0dp"
@@ -148,14 +146,12 @@
                     android:id="@+id/lv_collection"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:divider="@null"
                     android:layout_weight="1"
+                    android:divider="@null"
                     android:nestedScrollingEnabled="true"
                     android:visibility="visible" />
 
             </LinearLayout>
-
-
 
 
             <View
@@ -168,11 +164,11 @@
                 style="@style/TextView.Header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
                 android:background="@color/colorPrimary"
                 android:text="Print on Device"
-                android:layout_gravity="bottom"
                 android:textColor="@color/white"
-                android:visibility="visible"/>
+                android:visibility="visible" />
         </LinearLayout>
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

@@ -15,6 +15,7 @@ public class Constants {
     public static final String PAYMENT_REQUEST_MODEL = "PAYMENT_REQUEST_MODEL";
     public static final String PAYMENTS_DATA = "PAYMENTS_DATA";
     public static final String INTENT_DATA = "DATA";
+    public static final String LOGIN_TYPE_AGENT = "11";
 
     public static final String PRINT_HEADER_APEPDCL = "APEPDCL";
     public static final String PRINT_HEADER_CDMA = "CDMA";
@@ -25,6 +26,8 @@ public class Constants {
     public static final String CASH_POINT_SERVICE_ID = "46";
     public static final String GVMC_SERVICE_ID = "2";
     public static final String VERSION_ID = "0.3";
+
+    public static final String PAYMENT_REQ_ERROR = "Unable To Handle Request";
 
 
 
@@ -42,7 +45,7 @@ public class Constants {
     public static final String PAYMENT_MODE_PAYTM_PG = "Paytm";
     public static final String PAYMENT_MODE_PHONE_PE = "PhonePe";
     public static final String PAYMENT_MODE_PAYTM_QR= "PQ";
-    public static final String PAYMENT_MODE_PAYTM_SBI_UPI= "UPI";
+    public static final String PAYMENT_MODE_PAYTM_SBI_UPI= "SBIUPI";
     public static final String PAYMENT_MODE_PAY_U_MONEY = "PayU";
     public static final String PAYMENT_MODE_FREE_CHARGE = "FC";
     public static final String PAYMENT_MODE_FREE_AIRTEL = "Airtel";
@@ -52,6 +55,9 @@ public class Constants {
     public static final String PAYMENT_MODE_ANNA_CANTEEN = "anna_canteen";
     public static final String PAYMENT_REMARKS = "HPCL";
     public static final String PAYMENT_REMARKS_ANNA = "ANNA_CANTEEN";
+
+    public static final String FIN_ID_HPCL="47";
+    public static final String FIN_ID_ANNA="5";
 
 
 

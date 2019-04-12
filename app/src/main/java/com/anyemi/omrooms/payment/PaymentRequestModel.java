@@ -6,20 +6,7 @@ package com.anyemi.omrooms.payment;
 
 public class PaymentRequestModel {
 
-    /**
-     * user_id : 614
-     * emi_ids : 2519&2520
-     * payment_type : SBIUPI
-     * total_amount : 2000
-     * checkno : 111
-     * bankname : bankname
-     * branch : branch
-     * checkdate : checkdate
-     * rr_number : rr_number
-     * mobile_number : 1234567890
-     * upi_id : upi_id
-     * assessment_id : 1137002482
-     */
+
 
     private int user_id;
     private String emi_ids;
@@ -48,6 +35,49 @@ public class PaymentRequestModel {
     private String discount_amount;
     private String remarks;
     private String service_list_id;
+    private String operator_type;
+    private String recharge_type;
+    private String biller_data;
+    private String refId;
+    private String FIN_ID;
+
+    public String getRechargeMobileNumber() {
+        return RechargeMobileNumber;
+    }
+
+    public void setRechargeMobileNumber(String rechargeMobileNumber) {
+        RechargeMobileNumber = rechargeMobileNumber;
+    }
+
+    private String RechargeMobileNumber;
+
+    public String getRefId() {
+        return refId;
+    }
+
+    public void setRefId(String refId) {
+        this.refId = refId;
+    }
+
+
+
+    public String getOperator_type() {
+        return operator_type;
+    }
+
+    public void setOperator_type(String operator_type) {
+        this.operator_type = operator_type;
+    }
+
+    public String getRecharge_type() {
+        return recharge_type;
+    }
+
+    public void setRecharge_type(String recharge_type) {
+        this.recharge_type = recharge_type;
+    }
+
+
 
     public String getService_list_id() {
         return service_list_id;
@@ -297,5 +327,21 @@ public class PaymentRequestModel {
 
     public void setAssessment_id(String assessment_id) {
         this.assessment_id = assessment_id;
+    }
+
+    public String getBiller_data() {
+        return biller_data;
+    }
+
+    public void setBiller_data(String biller_data) {
+        this.biller_data = biller_data;
+    }
+
+    public String getFIN_ID() {
+        return FIN_ID;
+    }
+
+    public void setFIN_ID(String FIN_ID) {
+        this.FIN_ID = FIN_ID;
     }
 }

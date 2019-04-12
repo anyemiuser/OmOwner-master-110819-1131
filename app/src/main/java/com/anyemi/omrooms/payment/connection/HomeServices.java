@@ -167,7 +167,7 @@ public class HomeServices {
     }
 
 
-    public static Object getCollections(Context aContext, String id) {
+    public static Object getCollections(Context aContext) {
         try {
             return Connection.callHttpGetRequestsV2(aContext, Constants.GET_SERVICES_LIST, null);
         } catch (Exception e) {

@@ -105,6 +105,8 @@ public class LoginActivity extends AppCompatActivity {
             signInWithCredential(credential);
         }else {
             Toast.makeText(this, "verify code", Toast.LENGTH_SHORT).show();
+
+            registerOnSuccess(phoneNumber);
         }
 
     }

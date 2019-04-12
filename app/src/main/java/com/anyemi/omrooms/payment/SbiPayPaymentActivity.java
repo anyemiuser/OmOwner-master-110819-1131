@@ -36,7 +36,6 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-
 import com.anyemi.omrooms.Model.CheckValidResponseModel;
 import com.anyemi.omrooms.Model.PaymentChooserModel;
 import com.anyemi.omrooms.Model.SbiCheckPaymentStatus;
@@ -77,7 +76,6 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
     TextView tv_amount;
 
 
-    String amount = "", ids = "", assessment_num = "", data;
     boolean mButtonClicked, mTransDone;
 
     PaymentRequestModel paymentRequestModel;
@@ -121,17 +119,13 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
         /*
         //Getting Parameters from intent
          */
-        try {
-            Bundle parametros = getIntent().getExtras();
-            data = parametros.getString(Constants.PAYMENT_REQUEST_MODEL);
-            paymentRequestModel = gson.fromJson(data, PaymentRequestModel.class);
-            amount = String.valueOf(paymentRequestModel.getTotal_amount());
-            ids = paymentRequestModel.getEmi_ids();
+        paymentRequestModel = Globals.getPaymentRequestModes(getIntent().getExtras());
 
-            assessment_num = paymentRequestModel.getAssessment_id();
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (paymentRequestModel == null) {
+            Globals.showToast(getApplicationContext(), Constants.PAYMENT_REQ_ERROR);
+            finish();
         }
+
 
         initializeView();
 
@@ -139,17 +133,20 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
         if (SharedPreferenceUtil.getGroupId(getApplicationContext()).equals(Constants.LOGIN_TYPE_CUSTOMER)) {
 
             ll_sbi.setVisibility(View.GONE);
-            if (paymentRequestModel.getRemarks().equals("HPCL") || paymentRequestModel.getRemarks().equals("ANNA_CANTEEN")) {
+
+            if (paymentRequestModel.getFIN_ID().equals(Constants.FIN_ID_HPCL)
+                    || paymentRequestModel.getFIN_ID().equals(Constants.FIN_ID_ANNA)) {
                 try {
                     et_sbi_id.setText(paymentRequestModel.getUpi_id());
                     et_amount.setText(paymentRequestModel.getTotal_amount());
                     et_phone_num.setText(paymentRequestModel.getMobile_number());
+                    initPaymentRequest();
 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
 
-                initPaymentRequest();
+
             } else {
                 ll_sbi.setVisibility(View.VISIBLE);
             }
@@ -161,7 +158,6 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
 
 
     private void createActionBar() {
-
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -200,7 +196,6 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
         et_sbi_id.addTextChangedListener(this);
         et_phone_num.addTextChangedListener(this);
         til_phone_id = (TextInputLayout) findViewById(R.id.til_phone_id);
-        tv_amount.setText("Rs." + amount + " /-");
         String resultStr = Utils.parseAmount(paymentRequestModel.getTotal_amount());
         tv_amount.setText("Rs." + resultStr + " /-");
         btn_pay.setText("Proceed Payment");
@@ -211,7 +206,7 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
         lv_my_account.setAdapter(mAdapter);
 
 
-        if (paymentRequestModel.getRemarks() != null && paymentRequestModel.getRemarks().equals("HPCL")) {
+        if (paymentRequestModel.getFIN_ID().equals(Constants.FIN_ID_HPCL)) {
             tv_amount.setVisibility(View.GONE);
             til_amount.setVisibility(View.VISIBLE);
         } else {
@@ -231,33 +226,9 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
 
                     mButtonClicked = true;
                     mTransDone = false;
-                    //paymentRequestModel = new PaymentRequestModel();
-                    paymentRequestModel.setUser_id(Integer.parseInt(SharedPreferenceUtil.getUserId(getApplicationContext())));
-                    paymentRequestModel.setEmi_ids(ids);
-                    paymentRequestModel.setPayment_type(Constants.PAYMENT_MODE_PAYTM_SBI_UPI);
-                    paymentRequestModel.setTotal_amount(amount);
-                    // paymentRequestModel.setTotal_amount("1");
-                    paymentRequestModel.setBankname("");
-                    paymentRequestModel.setCheckdate("");
-                    paymentRequestModel.setRr_number("");
-                    paymentRequestModel.setMobile_number(et_phone_num.getText().toString());
-                    paymentRequestModel.setUpi_id(et_sbi_id.getText().toString());
-                    paymentRequestModel.setAssessment_id(assessment_num);
-
-                    if (paymentRequestModel.getRemarks() != null && paymentRequestModel.getRemarks().equals("HPCL")) {
-                        paymentRequestModel.setPayment_type(Constants.PAYMENT_MODE_HPCL);
-                        paymentRequestModel.setTotal_amount(et_amount.getText().toString());
-                    } else if (paymentRequestModel.getRemarks() != null && paymentRequestModel.getRemarks().equals("ANNA_CANTEEN")) {
-                        paymentRequestModel.setPayment_type(Constants.PAYMENT_MODE_ANNA_CANTEEN);
-                        paymentRequestModel.setTotal_amount(amount);
-                    }
-
-
                     btn_pay.setEnabled(false);
 
                     checkValidVpa();
-
-
                 }
                 break;
         }
@@ -281,12 +252,7 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
         } else if (!et_sbi_id.getText().toString().contains("@")) {
             til_sbi_id.setError("Please enter a valid VPA");
             et_sbi_id.requestFocus();
-        }
-//        else if (!et_sbi_id.getText().toString().endsWith("@sbi")) {
-//            openInfoDialog("Invalid VPA.Please enter a valid Virtual payment address");
-//        }
-
-        else if (et_sbi_id.getText().toString().length() > 255) {
+        } else if (et_sbi_id.getText().toString().length() > 255) {
             til_sbi_id.setError("More than 255 character are not allowed");
             et_sbi_id.requestFocus();
         } else if (et_phone_num.getText().toString().equals("")) {
@@ -299,12 +265,14 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
                 || number.startsWith("5")) {
             til_phone_id.setError("Invalid Mobile Number");
             et_phone_num.requestFocus();
-        } else if (paymentRequestModel.getRemarks() != null && paymentRequestModel.getRemarks().equals(Constants.PAYMENT_REMARKS) &&
-                et_amount.getText().toString().equals("")) {
+        } else if (
+                paymentRequestModel.getFIN_ID().equals(Constants.FIN_ID_HPCL) &&
+                        et_amount.getText().toString().equals("")) {
             til_amount.setError("Please Enter Amount");
             et_amount.requestFocus();
-        } else if (paymentRequestModel.getRemarks() != null && paymentRequestModel.getRemarks().equals(Constants.PAYMENT_REMARKS) &&
-                Integer.parseInt(et_amount.getText().toString()) < 20) {
+        } else if (
+                paymentRequestModel.getFIN_ID().equals(Constants.FIN_ID_HPCL) &&
+                        Integer.parseInt(et_amount.getText().toString()) < 20) {
             til_amount.setError("Minimum Refil amount should more than 20");
             et_amount.requestFocus();
 
@@ -360,17 +328,18 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
             }
 
             public void taskCompleted(Object data) {
-
                 if (data != null || data.equals("")) {
-
                     try {
-
                         CheckValidResponseModel checkValidResponseModel = new CheckValidResponseModel();
                         checkValidResponseModel = gson.fromJson(data.toString(), CheckValidResponseModel.class);
-
                         if (checkValidResponseModel.getStatus().equals("VE")) {  // VE > VPA VALID, VN > VPA INVALID
                             service_list_id = String.valueOf(checkValidResponseModel.getService_list_id());
-                            //paymentRequestModel.setService_list_id(service_list_id);
+
+                            paymentRequestModel.setService_list_id(service_list_id);
+
+                            paymentRequestModel.setUpi_id(et_sbi_id.getText().toString());
+                            paymentRequestModel.setMobile_number(et_phone_num.getText().toString());
+
                             initPaymentRequest();
                         } else {
                             openInfoDialog(checkValidResponseModel.getStatusDesc());
@@ -389,12 +358,13 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
         CheackValidVpaModel vpaModel = new CheackValidVpaModel();
         vpaModel.setPayment_type(Constants.PAYMENT_MODE_PAYTM_SBI_UPI);
         vpaModel.setPayment_type("UPI");
+        vpaModel.setUpi_id(et_sbi_id.getText().toString());
 
-        if (paymentRequestModel.getRemarks() != null && paymentRequestModel.getRemarks().equals(Constants.PAYMENT_REMARKS)) {
-            vpaModel.setUpi_id(paymentRequestModel.getUpi_id());
-        } else {
-            vpaModel.setUpi_id(et_sbi_id.getText().toString());
-        }
+//        if (paymentRequestModel.getFIN_ID().equals(Constants.FIN_ID_HPCL)) {
+//            vpaModel.setUpi_id(paymentRequestModel.getUpi_id());
+//        } else {
+//            vpaModel.setUpi_id(et_sbi_id.getText().toString());
+//        }
 
         return vpaModel;
 
@@ -406,6 +376,7 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
      */
 
     private void initPaymentRequest() {
+
         new BackgroundTask(SbiPayPaymentActivity.this, new BackgroundThread() {
             @Override
             public Object runTask() {
@@ -463,7 +434,6 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
 
 
     private void openPaymentDialog() {
-
 
         if (chooserDialog == null) {
             chooserDialog = new Dialog(SbiPayPaymentActivity.this);
@@ -581,9 +551,28 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
                             countDownTimer.cancel();
                             openInfoDialog("Payment Success");
                         } else if (mResponsedata.getApiResp().getStatus().equals("R")) {
+//                            openInfoDialog(mResponsedata.getApiResp().getStatusDesc());
+
+                            if (infoDialog != null) {
+                                infoDialog.dismiss();
+                            }
+
                             mTransDone = true;
-                            // openInfoDialog("Payment Rejected By Customer");
-                            openInfoDialog(mResponsedata.getApiResp().getStatusDesc());
+                            paymentRequestModel.setRemarks(mResponsedata.getApiResp().getStatusDesc());
+                            try {
+                                paymentRequestModel.setRr_number(jsonObject.getString("custRefNo"));
+                                paymentRequestModel.setTrsno(jsonObject.getString("custRefNo"));
+                                paymentRequestModel.setExtrafield(mResponsedata.getApiResp().getPayeeVPA());
+
+                                Intent intent = new Intent(getApplicationContext(), PaymentTransactionStatusActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                intent.putExtra(Constants.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
+                                startActivity(intent);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+
                         } else if (mResponsedata.getApiResp().getStatus().equals("F")) {
                             mTransDone = true;
                             openInfoDialog(mResponsedata.getApiResp().getStatusDesc() + " : " + mResponsedata.getApiResp().getResponseMsg());
@@ -639,19 +628,7 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
             public void taskCompleted(Object data) {
                 if (data != null || data.equals("")) {
                     if (data.toString().contains("SUCCESS")) {
-
-                        if (paymentRequestModel.getPayment_type().equals("HPCL")) {
-                            Intent intent = new Intent(getApplicationContext(), PaymentTransactionStatusActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            intent.putExtra(Constants.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
-                            startActivity(intent);
-
-                        } else {
-//                            Intent intent = new Intent(getApplicationContext(), CollectionsTabbedActivity.class);
-//                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                            intent.putExtra("FRAGMENT", "COLLECTION");
-//                            startActivity(intent);
-                        }
+                        Globals.ProceedNextScreen(getApplicationContext(), paymentRequestModel);
                     }
                 }
             }
@@ -661,19 +638,10 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
     private PaymentRequestModel finalPaymentrequest() {
 
         try {
-            paymentRequestModel.setUser_id(Integer.parseInt(SharedPreferenceUtil.getUserId(getApplicationContext())));
-            paymentRequestModel.setEmi_ids(ids);
-            //paymentRequestModel.setPayment_type(Constants.PAYMENT_MODE_PAYTM_SBI_UPI);
-            paymentRequestModel.setTotal_amount(Utils.parseTwoDigitAmount(amount));
-            //  paymentRequestModel.setTotal_amount("1");
-            paymentRequestModel.setBankname("");
-            paymentRequestModel.setCheckdate("");
+
             paymentRequestModel.setRr_number(jsonObject.getString("pspRefNo"));
             paymentRequestModel.setRr_number(jsonObject.getString("custRefNo"));
             paymentRequestModel.setTrsno(jsonObject.getString("custRefNo"));
-            // paymentRequestModel.setMobile_number(et_phone_num.getText().toString());
-            //paymentRequestModel.setUpi_id(et_sbi_id.getText().toString());
-            paymentRequestModel.setAssessment_id(assessment_num);
             paymentRequestModel.setPayment_id(payment_id);
         } catch (Exception e) {
             e.printStackTrace();
@@ -701,13 +669,12 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
             paymentRequestModel.setRemarks(s);
             try {
                 paymentRequestModel.setRr_number(jsonObject.getString("custRefNo"));
-
                 paymentRequestModel.setTrsno(jsonObject.getString("custRefNo"));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
-            if (paymentRequestModel.getRemarks().equals("HPCL")) {
+            if (paymentRequestModel.getFIN_ID().equals(Constants.FIN_ID_HPCL)) {
                 Intent intent = new Intent(getApplicationContext(), PaymentTransactionStatusActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.putExtra(Constants.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
@@ -734,7 +701,8 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
 //                }
 
 
-                if (paymentRequestModel.getRemarks().equals("HPCL") || paymentRequestModel.getRemarks().equals("ANNA_CANTEEN")) {
+                if (paymentRequestModel.getFIN_ID().equals(Constants.FIN_ID_HPCL) ||
+                        paymentRequestModel.getFIN_ID().equals(Constants.FIN_ID_ANNA)) {
                     finish();
                 }
             }
@@ -807,6 +775,7 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
         }, getString(R.string.loading_txt)).execute();
     }
 
+
     private String upiRequest() {
 
         JSONObject requestObject = new JSONObject();
@@ -876,6 +845,10 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
                     public void onClick(View view) {
                         et_sbi_id.setText(tenant_matches_listings.get(position).getUpi_id());
 
+                        if (paymentRequestModel.getMobile_number() != null &&
+                                !paymentRequestModel.getMobile_number().equals("")) {
+                            et_phone_num.setText(paymentRequestModel.getMobile_number());
+                        }
 
                     }
                 });

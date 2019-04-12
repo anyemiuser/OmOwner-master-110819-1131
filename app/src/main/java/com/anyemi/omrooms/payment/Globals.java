@@ -1,12 +1,15 @@
 package com.anyemi.omrooms.payment;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.TypedValue;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
+import com.anyemi.omrooms.UI.PaymentTransactionStatusActivity;
+import com.google.gson.Gson;
 
 
 /**
@@ -26,5 +29,29 @@ public class Globals {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+    public static PaymentRequestModel getPaymentRequestModes(Bundle parametros) {
+
+        try {
+            String data = parametros.getString(Constants.PAYMENT_REQUEST_MODEL);
+            PaymentRequestModel paymentRequestModel = new Gson().fromJson(data, PaymentRequestModel.class);
+            return paymentRequestModel;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+
+    public static void ProceedNextScreen(final Context context, final PaymentRequestModel paymentRequestModel) {
+
+        Intent intent = new Intent(context, PaymentTransactionStatusActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.putExtra(Constants.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
+        context.startActivity(intent);
     }
 }

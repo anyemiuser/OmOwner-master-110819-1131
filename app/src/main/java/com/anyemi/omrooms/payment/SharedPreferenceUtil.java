@@ -89,23 +89,22 @@ public class SharedPreferenceUtil {
         }
     }
 
-
-    public static String setCurrentService(Context context, String service_id) {
+    public static String setFIN_ID(Context context, String service_id) {
 
         try {
             saveInPreference(context, "CURRENT_SERVICE", service_id);
         } catch (Exception e) {
-
+            //PrintLog.print(TAG, e.getMessage());
             e.printStackTrace();
         }
         return service_id;
     }
 
-    public static String getCurrentService(Context context) {
+    public static String getFIN_ID(Context context) {
         try {
             return getFromPreference(context, "CURRENT_SERVICE", "");
         } catch (Exception e) {
-
+           // PrintLog.print(TAG, e.getMessage());
             e.printStackTrace();
             return "0";
         }
