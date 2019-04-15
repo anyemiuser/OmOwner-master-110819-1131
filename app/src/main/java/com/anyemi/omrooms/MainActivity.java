@@ -25,7 +25,8 @@ import com.anyemi.omrooms.Utils.SharedPreferenceConfig;
 
 public class MainActivity extends AppCompatActivity implements
         SavedFragment.OnFragmentBackListner,
-        BookingFragment.OnBookingFragmentBackListner{
+        BookingFragment.OnBookingFragmentBackListner,
+        ProfileFragment.OnProfileFragmentBackListner{
 
     BottomNavigationView bottomNavigationView;
     RGuest rGuest;

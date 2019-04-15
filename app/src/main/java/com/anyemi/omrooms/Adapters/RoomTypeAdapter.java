@@ -1,6 +1,7 @@
 package com.anyemi.omrooms.Adapters;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.anyemi.omrooms.Model.BookingModel;
+import com.anyemi.omrooms.Model.DiscountDetail;
 import com.anyemi.omrooms.Model.RoomDetails;
 import com.anyemi.omrooms.Model.RoomPriceOnDate;
 import com.anyemi.omrooms.R;
@@ -19,6 +21,7 @@ import com.anyemi.omrooms.UI.HotelActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class RoomTypeAdapter extends RecyclerView.Adapter<RoomTypeAdapter.RoomViewHolder> {
@@ -56,19 +59,69 @@ public class RoomTypeAdapter extends RecyclerView.Adapter<RoomTypeAdapter.RoomVi
         List<RoomPriceOnDate> roomPriceOnDates = room.getRoom_prices();
         if(roomPriceOnDates != null){
             int noODays = roomPriceOnDates.size();
-            float roomPrice = 0;
+            double roomPrice = 0.00;
+            //total discount on room on selected dates
+            double discountPrice = 0.00;
+
+            double basePrice = 0.00;
             for(int i=0; i<roomPriceOnDates.size();i++){
                 try{
-                    roomPrice=roomPrice+Float.parseFloat(roomPriceOnDates.get(i).getPrice());
+                    double discountpercentage;
+                    // price of each room before discount
+                    double onDatePrice;
+                    //discount price on each date
+                    double dPrice;
+
+                    double bPrice;
+
+
+                    onDatePrice = Double.parseDouble(roomPriceOnDates.get(i).getPrice());
+
+                    basePrice = basePrice+onDatePrice;
+
+                    discountpercentage = Double.parseDouble(roomPriceOnDates.get(i).getDiscount());
+                    dPrice = (onDatePrice*(discountpercentage/100));
+                    discountPrice= discountPrice+dPrice;
+
+                    onDatePrice = onDatePrice - dPrice;
+
+                    roomPrice=roomPrice+onDatePrice;
 
                 }catch (NumberFormatException e){
 
                 }
 
             }
-            modelsForBooking.get(position).setPrice_to_be_paid(String.valueOf(roomPrice));
-            holder.price.setText(String.valueOf(roomPrice));
-            holder.detailT.setText("Rs."+roomPrice+" For "+roomPriceOnDates.size()+" Nights");
+
+            int noOfRoomInEach = HotelActivity.modelsForBooking.get(position).getNo_of_room_booked();
+            if(noOfRoomInEach == 0){
+                noOfRoomInEach = 1;
+            }
+            HotelActivity.modelsForBooking.get(position).setPrice_to_be_paid(String.valueOf(roomPrice));
+            holder.price.setText(String.valueOf(roomPrice*noOfRoomInEach));
+            holder.detailT.setText(new DecimalFormat("##.##").format(roomPrice)
+                    .concat(" X ")
+                    .concat(String.valueOf(roomPriceOnDates.size()))
+                    .concat(" Night").concat(" X ").concat(String.valueOf(noOfRoomInEach))
+                    .concat("Room"));
+
+            holder.roomType.setText(room.getRoom_type().concat(" >>"));
+            holder.basePrice.setText(new DecimalFormat("##.##").format(basePrice*noOfRoomInEach));
+            holder.basePrice.setPaintFlags(holder.discountPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            holder.payblePrice.setText(new DecimalFormat("##.##").format(roomPrice*noOfRoomInEach));
+
+            holder.discountPrice.setText(new DecimalFormat("##.##").format(discountPrice*noOfRoomInEach));
+
+            HotelActivity.discountDetails.get(position).setBasePrice(basePrice*noOfRoomInEach);
+            HotelActivity.discountDetails.get(position).setPaybalePrice(roomPrice*noOfRoomInEach);
+            HotelActivity.discountDetails.get(position).setDisCountPrice(discountPrice*noOfRoomInEach);
+
+
+            holder.roomNightPrice.setText(new DecimalFormat("##.##").format(roomPrice)
+                    .concat(" X ")
+                    .concat(String.valueOf(roomPriceOnDates.size()))
+                    .concat(" Night").concat(" X ").concat(String.valueOf(noOfRoomInEach))
+                    .concat("Room"));
 
             holder.add.setOnClickListener(view -> {
 
@@ -85,6 +138,7 @@ public class RoomTypeAdapter extends RecyclerView.Adapter<RoomTypeAdapter.RoomVi
                     if(noOfRoomBooked == noOfRoom){
 
                     }
+
                 }
 
 //                notifyDataSetChanged();
@@ -117,7 +171,7 @@ public class RoomTypeAdapter extends RecyclerView.Adapter<RoomTypeAdapter.RoomVi
                             //Toast you have selected only 2 rooms
                         }
 
-//                        notifyDataSetChanged();
+                        notifyDataSetChanged();
 
 
 //                    }
@@ -145,7 +199,7 @@ public class RoomTypeAdapter extends RecyclerView.Adapter<RoomTypeAdapter.RoomVi
                         //Toast you have selected only 2 rooms
                     }
 
-//                    notifyDataSetChanged();
+                    notifyDataSetChanged();
                 }
             });
         }
@@ -171,6 +225,8 @@ public class RoomTypeAdapter extends RecyclerView.Adapter<RoomTypeAdapter.RoomVi
         private Button add, plus,minus;
         private LinearLayout addDeleteLayout;
         private TextView noOfRoom;
+        private TextView roomType;
+        private TextView payblePrice,discountPrice,basePrice,roomNightPrice;
         public RoomViewHolder(@NonNull View itemView) {
             super(itemView);
             roomImage = itemView.findViewById(R.id.room_image);
@@ -181,6 +237,12 @@ public class RoomTypeAdapter extends RecyclerView.Adapter<RoomTypeAdapter.RoomVi
             plus = itemView.findViewById(R.id.plus);
             minus = itemView.findViewById(R.id.minus);
             noOfRoom = itemView.findViewById(R.id.add_no_of_room);
+            roomType = itemView.findViewById(R.id.room_type);
+            basePrice = itemView.findViewById(R.id.base_price);
+            payblePrice = itemView.findViewById(R.id.payble_price);
+            discountPrice = itemView.findViewById(R.id.discount_price);
+
+            roomNightPrice = itemView.findViewById(R.id.room_night_price);
         }
     }
 }

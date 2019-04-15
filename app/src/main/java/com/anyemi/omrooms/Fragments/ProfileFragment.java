@@ -1,12 +1,15 @@
 package com.anyemi.omrooms.Fragments;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
@@ -61,6 +64,8 @@ public class ProfileFragment extends Fragment {
     AlertDialog.Builder builder;
     private TextView messageT;
 
+    private OnProfileFragmentBackListner changeListner;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -68,9 +73,17 @@ public class ProfileFragment extends Fragment {
 //        View view = inflater.inflate(R.layout.fragment_home, container, false);
         View view =  inflater.inflate(R.layout.fragment_profile, container, false);
         Toolbar toolbarProfile = view.findViewById(R.id.toolbar_profile);
-//        return inflater.inflate(R.layout.fragment_home,null);
         toolbarProfile.inflateMenu(R.menu.account_options);
         toolbarProfile.setOnMenuItemClickListener(this::onOptionsItemSelected);
+//        ((AppCompatActivity) Objects.requireNonNull(getActivity())).setSupportActionBar(toolbarProfile);
+//        ActionBar actionbar = ((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar();
+//        if (actionbar != null) {
+//            actionbar.setDisplayHomeAsUpEnabled(true);
+//            actionbar.setTitle("Profile");
+//        }
+
+//        return inflater.inflate(R.layout.fragment_home,null);
+
 
         builder = new AlertDialog.Builder(getActivity());
 //        builder.setTitle("Select Your Booking Procedure");
@@ -78,6 +91,13 @@ public class ProfileFragment extends Fragment {
         View aView = getLayoutInflater().inflate(R.layout.progress_alert, null);
         messageT = aView.findViewById(R.id.progress_message);
         builder.setView(aView);
+
+        toolbarProfile.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changeListner.onFragmentChange();
+            }
+        });
 
         return view;
     }
@@ -176,6 +196,7 @@ public class ProfileFragment extends Fragment {
                 if(response.isSuccessful()){
                     Log.e("profileFragment success",""+new Gson().toJson(response.body()));
                     Toast.makeText(getActivity(), "Profile Updated Successfully", Toast.LENGTH_SHORT).show();
+                    changeListner.onFragmentChange();
                     progressText.setText("Profile Updated Successfully");
                 }else {
                     progressText.setText("Profile Not Updated");
@@ -223,5 +244,20 @@ public class ProfileFragment extends Fragment {
         return false;
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+
+            changeListner = (OnProfileFragmentBackListner) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    public interface OnProfileFragmentBackListner{
+        public void onFragmentChange();
+    }
 
 }
