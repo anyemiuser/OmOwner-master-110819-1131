@@ -6,11 +6,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,8 +44,16 @@ public class RoomGuestAdapter extends RecyclerView.Adapter<RoomGuestAdapter.Room
     public void onBindViewHolder(@NonNull RoomsGuestHolder holder, int position) {
         RoomsGuest roomsGuest = roomsGuests.get(position);
 
-        holder.roomText.setText(String.valueOf(position));
-        holder.guestText.setText(String.valueOf(roomsGuest.getGuests()));
+        holder.roomText.setText(context.getString(R.string.room_no_text).concat(String.valueOf(position+1)));
+        holder.guestText.setText(String.valueOf(roomsGuest.getGuests()).concat(" Adults ")
+                .concat(String.valueOf(roomsGuest.getChildren())).concat(" Children"));
+
+        if(roomsGuest.getChildren()>0){
+            holder.childrenCheck.setChecked(true);
+            holder.childrenL.setVisibility(View.VISIBLE);
+            holder.spinner.setSelection(roomsGuest.getChildren()-1);
+
+        }
         if(position == 0){
             holder.deleteRoom.setVisibility(View.GONE);
         }else
@@ -87,6 +98,7 @@ public class RoomGuestAdapter extends RecyclerView.Adapter<RoomGuestAdapter.Room
                     case R.id.oneRadioButton:
 //                        Toast.makeText(context, "1", Toast.LENGTH_SHORT).show();
                         roomsGuest.setGuests(1);
+
                         break;
                     case R.id.twoRadioButton:
 //                        Toast.makeText(context, "2", Toast.LENGTH_SHORT).show();
@@ -97,10 +109,39 @@ public class RoomGuestAdapter extends RecyclerView.Adapter<RoomGuestAdapter.Room
                         roomsGuest.setGuests(3);
                         break;
                 }
+
+                notifyDataSetChanged();
 //                Toast.makeText(context, ""+i, Toast.LENGTH_SHORT).show();
             }
         });
 
+        holder.childrenCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    holder.childrenL.setVisibility(View.VISIBLE);
+                    holder.spinner.setSelection(0);
+                }else {
+                    holder.childrenL.setVisibility(View.GONE);
+                    roomsGuest.setChildren(0);
+
+                }
+                notifyDataSetChanged();
+            }
+        });
+
+        holder.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
+                roomsGuest.setChildren(Integer.parseInt(parent.getSelectedItem().toString()));
+                notifyDataSetChanged();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
     }
 
@@ -118,7 +159,8 @@ public class RoomGuestAdapter extends RecyclerView.Adapter<RoomGuestAdapter.Room
         private RadioButton one,two,three;
         private Button addRoom, deleteRoom;
         private CheckBox childrenCheck;
-        private LinearLayout addDeleteLayout;
+        private LinearLayout addDeleteLayout, childrenL;
+        private Spinner spinner;
         public RoomsGuestHolder(@NonNull View itemView) {
             super(itemView);
             roomText = itemView.findViewById(R.id.room_count);
@@ -131,6 +173,8 @@ public class RoomGuestAdapter extends RecyclerView.Adapter<RoomGuestAdapter.Room
             deleteRoom = itemView.findViewById(R.id.delete_room);
             childrenCheck = itemView.findViewById(R.id.check_children);
             addDeleteLayout = itemView.findViewById(R.id.add_delete_layout);
+            childrenL = itemView.findViewById(R.id.children_layout);
+            spinner = itemView.findViewById(R.id.spinner_child);
         }
     }
 }

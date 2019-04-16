@@ -91,7 +91,7 @@ public class SharedPreferenceConfig {
 
     public String readName(){
         String name;
-        name = sharedPreferences.getString(context.getResources().getString(R.string.name_preference),"no");
+        name = sharedPreferences.getString(context.getResources().getString(R.string.name_preference),null);
         Log.i("SharedPreferanceRead: ",""+name);
         return name;
     }
@@ -136,4 +136,55 @@ public class SharedPreferenceConfig {
         Log.i("SharedPreferanceRead: ",""+name);
         return name;
     }
+
+
+
+    public void writeUserEmail(String email){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(context.getResources().getString(R.string.email_user),email);
+        editor.apply();
+    }
+
+    public String readUserEmail(){
+        String email;
+        email = sharedPreferences.getString(context.getResources().getString(R.string.email_user),null);
+        return email;
+    }
+
+    public void writeGenger(int gender){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(context.getResources().getString(R.string.gender_user),gender);
+        editor.apply();
+    }
+
+    public int readGender(){
+        int gender;
+        gender = sharedPreferences.getInt(context.getResources().getString(R.string.gender_user),0);
+        return gender;
+    }
+
+    public void writeDateOfBirth(String dob){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(context.getResources().getString(R.string.dob_user),dob);
+        editor.apply();
+    }
+
+    public String readDateOfBirth(){
+        String dob;
+        dob = sharedPreferences.getString(context.getResources().getString(R.string.dob_user),null);
+        return dob;
+    }
+
+    public void writeAddress(String address){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(context.getResources().getString(R.string.user_address),address);
+        editor.apply();
+    }
+
+    public String readAddress(){
+        String dob;
+        dob = sharedPreferences.getString(context.getResources().getString(R.string.user_address),null);
+        return dob;
+    }
+
 }

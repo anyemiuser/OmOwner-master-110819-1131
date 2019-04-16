@@ -368,4 +368,18 @@ public class ConverterUtil implements ConstantFields {
         return R.drawable.ic_wifi;
     }
 
+    public static String getRatingText(double rating) {
+        String ratingText = "Excellent";
+        if(rating>=4 ){
+            ratingText = "Excellent";
+        }else if(rating>=3 && rating<4){
+            ratingText = "Very Good";
+        }else{
+            ratingText = "Good";
+        }
+        return ratingText;
+    }
+
+
+
 }

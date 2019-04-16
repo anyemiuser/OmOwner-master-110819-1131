@@ -788,10 +788,18 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string name="title_activity_maps">Map</string>
-    <string name="no_record">No Record Found</string>
+    <string name="title_activity_maps" translatable="false">Map</string>
+    <string name="no_record" translatable="false">No Record Found</string>
+    <string name="one" translatable="false">1</string>
+    <string name="room_no_text">Room No :</string>
+    <string name="user_name">com.anyemi.sharedpreference.user_name</string>
+    <string name="email_user">com.anyemi.shared_preference.email_user</string>
+    <string name="gender_user">com.anyemi.shared_preference.gender_user</string>
+    <string name="dob_user">com.anyemi.shared_pref_dob_user</string>
+    <string name="user_address">com.anyemi.ushared_pref_user_address</string>
 
     <string-array name="gender">
+        <item>Select Gender</item>
         <item>Male</item>
         <item>Female</item>
         <item>Transgender</item>
@@ -800,5 +808,11 @@
     <string-array name="city">
         <item>Vizag</item>
     </string-array>
+
+    <string-array name="child_count">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
 
 </resources>

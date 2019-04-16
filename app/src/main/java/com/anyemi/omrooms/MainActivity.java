@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.anyemi.omrooms.Fragments.BookingFragment;
 import com.anyemi.omrooms.Fragments.HomeFragment;
+import com.anyemi.omrooms.Fragments.NotificationsFragment;
 import com.anyemi.omrooms.Fragments.ProfileFragment;
 import com.anyemi.omrooms.Fragments.SavedFragment;
 import com.anyemi.omrooms.Helper.RGuest;
@@ -25,8 +26,10 @@ import com.anyemi.omrooms.Utils.SharedPreferenceConfig;
 
 public class MainActivity extends AppCompatActivity implements
         SavedFragment.OnFragmentBackListner,
+
         BookingFragment.OnBookingFragmentBackListner,
-        ProfileFragment.OnProfileFragmentBackListner{
+        ProfileFragment.OnProfileFragmentBackListner,
+        NotificationsFragment.OnFragmentNotificationBackListner {
 
     BottomNavigationView bottomNavigationView;
     RGuest rGuest;

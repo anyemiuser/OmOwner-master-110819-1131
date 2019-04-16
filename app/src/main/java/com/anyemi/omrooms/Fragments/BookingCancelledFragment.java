@@ -1,5 +1,6 @@
 package com.anyemi.omrooms.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +22,7 @@ import com.anyemi.omrooms.Model.BookingRequest;
 import com.anyemi.omrooms.Model.CanceledBooking;
 import com.anyemi.omrooms.Model.UpComingBooking;
 import com.anyemi.omrooms.R;
+import com.anyemi.omrooms.UI.SearchActivity;
 import com.anyemi.omrooms.Utils.SharedPreferenceConfig;
 import com.anyemi.omrooms.api.ApiUtils;
 import com.anyemi.omrooms.api.OmRoomApi;
@@ -59,6 +62,16 @@ public class BookingCancelledFragment  extends Fragment {
         progressLayout = view.findViewById(R.id.progress_l);
         progressBar = view.findViewById(R.id.progressBar3);
         progressText = view.findViewById(R.id.progressText);
+
+        Button bookHotel = view.findViewById(R.id.book_hotel);
+        bookHotel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), SearchActivity.class);
+                startActivity(intent);
+            }
+        });
+
         SharedPreferenceConfig sharedPreferenceConfig = new SharedPreferenceConfig(Objects.requireNonNull(getActivity()));
         OmRoomApi omRoomApi = ApiUtils.getOmRoomApi();
         BookingRequest bookingRequest = new BookingRequest("c",sharedPreferenceConfig.readPhoneNo());

@@ -64,6 +64,8 @@ public class ProfileFragment extends Fragment {
     AlertDialog.Builder builder;
     private TextView messageT;
 
+    private SharedPreferenceConfig sharedPreferenceConfig;
+
     private OnProfileFragmentBackListner changeListner;
 
     @Nullable
@@ -119,19 +121,30 @@ public class ProfileFragment extends Fragment {
         phone.setEnabled(false);
         spinner = view.findViewById(R.id.gender_spinner);
         update = view.findViewById(R.id.update_button);
-        String userId =
-                new SharedPreferenceConfig(getActivity()).readPhoneNo();
+
+        sharedPreferenceConfig = new SharedPreferenceConfig(getActivity());
+
+        String userId = sharedPreferenceConfig.readPhoneNo();
+
+        updateUI();
+
+
+
 
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
-                gender = parent.getSelectedItem().toString();
+
+                    gender = parent.getSelectedItem().toString();
+                sharedPreferenceConfig.writeGenger(i);
+
+
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
+                adapterView.setSelection(1);
             }
         });
 
@@ -139,16 +152,26 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if(gender!= null && !name.getText().toString().trim().isEmpty() ){
-                    if(isValidEmail(email.getText().toString().trim())){
-                        if(isLegalDate(birthDay.getText().toString().trim())){
-                            updateProfile();
-                        }else {
-                            Toast.makeText(getActivity(), "Enter yyyy-DD-mm format date", Toast.LENGTH_SHORT).show();
-                        }
+                    if(!gender.equals("Select Gender")){
+                        if(isValidEmail(email.getText().toString().trim())){
+                            if(!birthDay.getText().toString().trim().isEmpty()){
+                                if(isLegalDate(birthDay.getText().toString().trim())){
+                                    updateProfile();
+                                }else {
+                                    Toast.makeText(getActivity(), "Enter yyyy-DD-mm format date", Toast.LENGTH_SHORT).show();
+                                }
+                            }else {
+                                Toast.makeText(getActivity(), "Date Of Birth Should Not Be Empty", Toast.LENGTH_SHORT).show();
+                            }
 
+
+                        }else {
+                            Toast.makeText(getActivity(), "Enter Vaild Email", Toast.LENGTH_SHORT).show();
+                        }
                     }else {
-                        Toast.makeText(getActivity(), "Enter Vaild Email", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Select Gender", Toast.LENGTH_SHORT).show();
                     }
+
 
                 }else {
                     Toast.makeText(getActivity(), "Fill the Form Properly", Toast.LENGTH_SHORT).show();
@@ -157,6 +180,15 @@ public class ProfileFragment extends Fragment {
         });
 
 
+    }
+
+    private void updateUI() {
+        name.setText(sharedPreferenceConfig.readName());
+        email.setText(sharedPreferenceConfig.readUserEmail());
+        spinner.setSelection(sharedPreferenceConfig.readGender());
+        birthDay.setText(sharedPreferenceConfig.readDateOfBirth());
+        birthDay.setText(sharedPreferenceConfig.readDateOfBirth());
+        address.setText(sharedPreferenceConfig.readAddress());
     }
 
     public static boolean isLegalDate(String s) {
@@ -170,6 +202,12 @@ public class ProfileFragment extends Fragment {
     }
 
     private void updateProfile() {
+
+        sharedPreferenceConfig.writeName(name.getText().toString().trim());
+        sharedPreferenceConfig.writeUserEmail(email.getText().toString().trim());
+        sharedPreferenceConfig.writeDateOfBirth(birthDay.getText().toString().trim());
+        sharedPreferenceConfig.writeAddress(address.getText().toString().trim());
+
 
         Profile profile = new Profile(new SharedPreferenceConfig(getActivity()).readPhoneNo(),
                 name.getText().toString().trim(),
@@ -199,6 +237,7 @@ public class ProfileFragment extends Fragment {
                     changeListner.onFragmentChange();
                     progressText.setText("Profile Updated Successfully");
                 }else {
+                    Log.e("profileFragment fail",""+new Gson().toJson(response.body()));
                     progressText.setText("Profile Not Updated");
                     Toast.makeText(getActivity(), "Profile Not Updated", Toast.LENGTH_SHORT).show();
 

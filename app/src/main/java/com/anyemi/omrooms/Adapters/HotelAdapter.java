@@ -18,11 +18,13 @@ import com.anyemi.omrooms.Model.SavedHotelViewModel;
 import com.anyemi.omrooms.Model.Top10Hotel;
 import com.anyemi.omrooms.R;
 import com.anyemi.omrooms.UI.HotelActivity;
+import com.anyemi.omrooms.Utils.ConverterUtil;
 import com.anyemi.omrooms.db.BookingDao;
 import com.anyemi.omrooms.db.RoomBooking;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.MyHotelViewHolder> {
@@ -58,26 +60,26 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.MyHotelViewH
                 // read original from cache (if present) otherwise download it and decode it
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .into(holder.hotelsImageView);
-        long rating = 0;
+        double rating = 0;
 //        hotel.setHotel_rating("null");
-        if(hotel.getHotel_rating() != null && hotel.getHotel_rating().length()>0){
-            try {
-                rating = Long.parseLong(hotel.getHotel_rating());
-            }catch (NumberFormatException e){
-                rating =1;
-            }
+        if(hotel.getHotel_rating() != null){
+//            try {
+                rating = Double.parseDouble(hotel.getHotel_rating());
+//            }catch (NumberFormatException e){
+//                rating =1;
+//            }
 
         }
 
-        String rate= null;
-        if(rating>=4.5){
-            rate = String.valueOf(rating)+" Excellent";
-        }else if(rating>=4 && (rating < 4.5)){
-            rate = String.valueOf(rating)+" Very Good";
-        }else {
-            rate = String.valueOf(rating)+" Good";
-        }
-        holder.rating.setText(rate);
+        String rate= "";
+//        if(rating>=4.5){
+//            rate = String.valueOf(rating)+" Excellent";
+//        }else if(rating>=4 && (rating < 4.5)){
+//            rate = String.valueOf(rating)+" Very Good";
+//        }else {
+//            rate = String.valueOf(rating)+" Good";
+//        }
+        holder.rating.setText(new DecimalFormat("##.#").format(rating).concat(" ").concat(ConverterUtil.getRatingText(rating)));
         String range = "₹"+hotel.getHotel_low_range()+" - "+"₹"+hotel.getHotel_high_range();
         holder.priceRange.setText(range);
 

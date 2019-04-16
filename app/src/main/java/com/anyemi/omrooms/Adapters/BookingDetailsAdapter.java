@@ -73,6 +73,11 @@ public class BookingDetailsAdapter extends RecyclerView.Adapter<BookingDetailsAd
         return bookingHistoryList.size();
     }
 
+    public void update(List<UpComingBooking> upcommingBooking) {
+        this.bookingHistoryList = upcommingBooking;
+
+    }
+
     public class BookedHotelViewHolder extends RecyclerView.ViewHolder{
 
         private TextView city,bookedTime,hotelName,checkInOut,cancelBook,viewDetails;

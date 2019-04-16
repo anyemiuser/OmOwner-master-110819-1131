@@ -2,6 +2,7 @@ package com.anyemi.omrooms.Adapters;
 
 import android.arch.paging.PagedListAdapter;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
@@ -10,16 +11,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anyemi.omrooms.Model.SavedHotelViewModel;
 import com.anyemi.omrooms.Models.SavedHotels;
 import com.anyemi.omrooms.R;
+import com.anyemi.omrooms.UI.HotelActivity;
+import com.anyemi.omrooms.Utils.ConverterUtil;
 import com.anyemi.omrooms.db.RoomBooking;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class SavedHotelsAdapter extends PagedListAdapter<RoomBooking,SavedHotelsAdapter.MyViewHolder> {
@@ -64,14 +69,19 @@ public class SavedHotelsAdapter extends PagedListAdapter<RoomBooking,SavedHotels
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         RoomBooking hotel = getItem(position);
         if (hotel != null){
+            holder.noOfRating.setVisibility(View.GONE);
             holder.hotelName.setText(hotel.getHotel_name());
 
             holder.nearByPlace.setText(hotel.getHotel_area());
 
             String bPrice = "₹"+hotel.getHotel_low_range()+" - "+"₹"+hotel.getHotel_high_range();
             holder.discountedPriceRange.setText(bPrice);
-
-            holder.rating.setText(hotel.getHotel_rating());
+            double ratingT = 5;
+            if(hotel.getHotel_rating()!= null){
+                ratingT = Double.parseDouble(hotel.getHotel_rating());
+            }
+            holder.rating.setText(new DecimalFormat("##.#").format(ratingT));
+            holder.ratingText.setText(ConverterUtil.getRatingText(ratingT));
             holder.noOfRating.setText(hotel.getHotel_rating());
             Glide.with(context)
                     .load(hotel.getHotel_image_url())
@@ -99,6 +109,19 @@ public class SavedHotelsAdapter extends PagedListAdapter<RoomBooking,SavedHotels
             }
         });
 
+        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, HotelActivity.class);
+                if (hotel != null) {
+                    intent.putExtra("hotelId",hotel.getHotel_id());
+                    intent.putExtra("hotelName",hotel.getHotel_name());
+                    context.startActivity(intent);
+                }
+
+
+            }
+        });
 
     }
 
@@ -114,12 +137,13 @@ public class SavedHotelsAdapter extends PagedListAdapter<RoomBooking,SavedHotels
         private TextView hotelName;
         private TextView nearByPlace;
         private TextView basePriceRange, discountedPriceRange;
-        private TextView rating;
+        private TextView rating, ratingText;
         private TextView noOfRating;
         private TextView discount;
         private ImageView hotelImage;
         private ImageView savedImage;
         private LinearLayout linearLayout;
+        private RelativeLayout relativeLayout;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -129,12 +153,15 @@ public class SavedHotelsAdapter extends PagedListAdapter<RoomBooking,SavedHotels
             basePriceRange = itemView.findViewById(R.id.base_price_range);
             discountedPriceRange = itemView.findViewById(R.id.discount_price_range);
             rating = itemView.findViewById(R.id.rating_hotel);
+            ratingText = itemView.findViewById(R.id.rating_text);
             noOfRating = itemView.findViewById(R.id.no_of_rating);
             discount = itemView.findViewById(R.id.discount);
             hotelImage = itemView.findViewById(R.id.saved_hotels_image);
             savedImage = itemView.findViewById(R.id.saved_symbol);
 
+
             linearLayout = itemView.findViewById(R.id.linear_saved_item);
+            relativeLayout = itemView.findViewById(R.id.relativeLayout);
         }
     }
 }

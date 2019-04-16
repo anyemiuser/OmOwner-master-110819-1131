@@ -10,8 +10,7 @@
     app:cardElevation="8dp"
     app:cardUseCompatPadding="true">
 
-    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
@@ -139,6 +138,7 @@
                 android:textStyle="normal" />
         </LinearLayout>
 
+
         <LinearLayout
             android:id="@+id/add_delete_layout"
             android:layout_width="match_parent"
@@ -147,16 +147,16 @@
             android:gravity="center_horizontal"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.105"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view6">
+            app:layout_constraintTop_toBottomOf="@+id/children_layout">
 
             <Button
                 android:id="@+id/add_room"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
                 android:layout_marginStart="15dp"
+                android:layout_marginBottom="15dp"
                 android:layout_weight="0.5"
                 android:fontFamily="@font/opensans_bold"
                 android:minWidth="50dp"
@@ -194,5 +194,36 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+
+        <LinearLayout
+            android:id="@+id/children_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/view6">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="No Of Children" />
+
+            <Spinner
+                android:id="@+id/spinner_child"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:dropDownWidth="wrap_content"
+                android:entries="@array/child_count"
+                android:prompt="@string/one" />
+        </LinearLayout>
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

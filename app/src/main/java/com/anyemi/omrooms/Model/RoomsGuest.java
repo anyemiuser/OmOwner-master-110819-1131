@@ -6,6 +6,7 @@ public class RoomsGuest implements Serializable {
 
     private int rooms;
     private int guests;
+    private int children;
 
     public RoomsGuest() {
     }
@@ -13,6 +14,20 @@ public class RoomsGuest implements Serializable {
     public RoomsGuest(int rooms, int guests) {
         this.rooms = rooms;
         this.guests = guests;
+    }
+
+    public RoomsGuest(int rooms, int guests, int children) {
+        this.rooms = rooms;
+        this.guests = guests;
+        this.children = children;
+    }
+
+    public int getChildren() {
+        return children;
+    }
+
+    public void setChildren(int children) {
+        this.children = children;
     }
 
     public int getRooms() {

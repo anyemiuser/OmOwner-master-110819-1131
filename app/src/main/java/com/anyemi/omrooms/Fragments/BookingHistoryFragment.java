@@ -1,5 +1,6 @@
 package com.anyemi.omrooms.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,11 +30,15 @@ import com.anyemi.omrooms.Model.UserRequest;
 import com.anyemi.omrooms.Model.UserResponse;
 import com.anyemi.omrooms.R;
 import com.anyemi.omrooms.UI.AreaHotelsActivity;
+import com.anyemi.omrooms.UI.BookingDetailActivity;
+import com.anyemi.omrooms.UI.SearchActivity;
+import com.anyemi.omrooms.Utils.RecyclerTouchListener;
 import com.anyemi.omrooms.Utils.SharedPreferenceConfig;
 import com.anyemi.omrooms.api.ApiUtils;
 import com.anyemi.omrooms.api.OmRoomApi;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -48,11 +54,25 @@ public class BookingHistoryFragment extends Fragment {
     private ConstraintLayout progressLayout;
     private final String statusU = "u";
 
+    List<UpComingBooking> upBooking = new ArrayList<>();
+
+    BookingDetailsAdapter adapter;
+
+
     private SharedPreferenceConfig sharedPreferenceConfig;
     //ViewPager viewPager;
 
     public BookingHistoryFragment() {
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Toast.makeText(getActivity(), "resume", Toast.LENGTH_SHORT).show();
+        RetrieveUpComingBooking();
+
+    }
+
 
     @Nullable
     @Override
@@ -69,9 +89,29 @@ public class BookingHistoryFragment extends Fragment {
         progressLayout = view.findViewById(R.id.progress_l);
         progressBar = view.findViewById(R.id.progressBar3);
         progressText = view.findViewById(R.id.progressText);
-
+        Button bookHotel = view.findViewById(R.id.book_hotel);
         sharedPreferenceConfig = new SharedPreferenceConfig(Objects.requireNonNull(getActivity()));
 
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        upcomingRv.setLayoutManager(layoutManager);
+        upcomingRv.setHasFixedSize(true);
+        adapter = new BookingDetailsAdapter(statusU,upBooking,getActivity());
+        upcomingRv.setAdapter(adapter);
+
+        bookHotel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), SearchActivity.class);
+                startActivity(intent);
+            }
+        });
+//        RetrieveUpComingBooking();
+
+
+    }
+
+    private void RetrieveUpComingBooking() {
         OmRoomApi omRoomApi = ApiUtils.getOmRoomApi();
         BookingRequest bookingRequest = new BookingRequest(statusU,sharedPreferenceConfig.readPhoneNo());
 
@@ -92,6 +132,7 @@ public class BookingHistoryFragment extends Fragment {
                                 Log.e(TAG_FRAGMENTB,"success"+new Gson().toJson(upComingBooing));
                             }else {
                                 progressText.setText("No Record Found");
+                                setUpcomingRvToNull();
                             }
                         }else {
                             Toast.makeText(getActivity(), ""+upComingBooing.getMsg(), Toast.LENGTH_SHORT).show();
@@ -115,16 +156,26 @@ public class BookingHistoryFragment extends Fragment {
                 progressText.setText("No Record Found");
             }
         });
+
+    }
+
+    private void setUpcomingRvToNull() {
+        upcomingRv.setAdapter(null);
+        adapter.notifyDataSetChanged();
     }
 
     private void setUpcomingRv(List<UpComingBooking> upcommingBooking) {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        upcomingRv.setLayoutManager(layoutManager);
-        upcomingRv.setHasFixedSize(true);
-        BookingDetailsAdapter adapter = new BookingDetailsAdapter(statusU,upcommingBooking,getActivity());
+//        upBooking = upcommingBooking;
+//        upcomingRv.setAdapter(null);
+        adapter.update(upcommingBooking);
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+//        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+//        upcomingRv.setLayoutManager(layoutManager);
+//        upcomingRv.setHasFixedSize(true);
+//        BookingDetailsAdapter adapter = new BookingDetailsAdapter(statusU,upcommingBooking,getActivity());
 
-        upcomingRv.setAdapter(adapter);
+
+        adapter.notifyDataSetChanged();
 
     }
 

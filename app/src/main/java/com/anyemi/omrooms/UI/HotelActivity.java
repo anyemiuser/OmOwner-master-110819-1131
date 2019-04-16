@@ -514,13 +514,12 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields, 
             if(model.getNo_of_room_booked() == 0){
                 modelB.remove(model);
 
-                for(int j = 0;i<discountDetails.size();j++){
+                for(int j = 0;j<discountDetails.size();j++){
                     DiscountDetail detail = discountDetails.get(j);
                     if(detail.getRoomType().equals(model.getRoom_type())){
                         discountDetails.remove(detail);
                         j--;
                     }
-
 
                 }
                 i--;
@@ -585,7 +584,7 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields, 
         }
 
         roomNGP = (TextView) view.findViewById(R.id.aroom_night_price);
-        roomNGP.setText(""+noOfRoom+"room for"+noOfG+"guests for"+noNight+" night");
+        roomNGP.setText(""+noOfRoom+" room for"+noOfG+" guests for"+noNight+" night");
 
         roomD = (TextView) view.findViewById(R.id.aroom_details);
         roomD.setText(roomDetails);
