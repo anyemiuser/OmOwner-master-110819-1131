@@ -68,7 +68,7 @@ public class BookingHistoryFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Toast.makeText(getActivity(), "resume", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getActivity(), "resume", Toast.LENGTH_SHORT).show();
         RetrieveUpComingBooking();
 
     }

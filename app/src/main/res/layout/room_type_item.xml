@@ -40,26 +40,12 @@
             app:layout_constraintStart_toEndOf="@+id/textView6"
             app:layout_constraintTop_toBottomOf="@+id/dis_text" />
 
-        <TextView
-            android:id="@+id/price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:drawableStart="@drawable/ic_rupee_indian"
-            android:fontFamily="@font/opensans_semibold"
-            android:text="TextView"
-            android:textColor="#000000"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView6" />
-
         <Button
             android:id="@+id/add"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/bordered_button"
@@ -71,7 +57,7 @@
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/room_image" />
+            app:layout_constraintTop_toBottomOf="@+id/base_price" />
 
         <LinearLayout
             android:id="@+id/add_layout"
@@ -84,7 +70,7 @@
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/add"
-            app:layout_constraintTop_toBottomOf="@+id/room_image">
+            app:layout_constraintTop_toBottomOf="@+id/base_price">
 
             <Button
                 android:id="@+id/minus"
@@ -119,20 +105,6 @@
                 android:textStyle="bold"
                 android:theme="@style/AppTheme.CustomButton" />
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/detail_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:fontFamily="@font/opensans_regular"
-            android:text="TextView"
-            android:textColor="#000000"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/price" />
 
         <TextView
             android:id="@+id/room_type"
@@ -187,7 +159,9 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
             android:text="Payble Price:"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/payble_price"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dis_text" />

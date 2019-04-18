@@ -2,9 +2,9 @@ package com.anyemi.omrooms.Model;
 
 public class DiscountDetail {
     private String roomType;
-    private double disCountPrice;
-    private double paybalePrice;
-    private double basePrice;
+    private int disCountPrice;
+    private int paybalePrice;
+    private int basePrice;
 
     public DiscountDetail() {
     }
@@ -13,7 +13,7 @@ public class DiscountDetail {
         this.roomType = roomType;
     }
 
-    public DiscountDetail(String roomType, double disCountPrice, double paybalePrice, double basePrice) {
+    public DiscountDetail(String roomType, int disCountPrice, int paybalePrice, int basePrice) {
         this.roomType = roomType;
         this.disCountPrice = disCountPrice;
         this.paybalePrice = paybalePrice;
@@ -28,27 +28,27 @@ public class DiscountDetail {
         this.roomType = roomType;
     }
 
-    public double getDisCountPrice() {
+    public int getDisCountPrice() {
         return disCountPrice;
     }
 
-    public void setDisCountPrice(double disCountPrice) {
+    public void setDisCountPrice(int disCountPrice) {
         this.disCountPrice = disCountPrice;
     }
 
-    public double getPaybalePrice() {
+    public int getPaybalePrice() {
         return paybalePrice;
     }
 
-    public void setPaybalePrice(double paybalePrice) {
+    public void setPaybalePrice(int paybalePrice) {
         this.paybalePrice = paybalePrice;
     }
 
-    public double getBasePrice() {
+    public int getBasePrice() {
         return basePrice;
     }
 
-    public void setBasePrice(double basePrice) {
+    public void setBasePrice(int basePrice) {
         this.basePrice = basePrice;
     }
 }

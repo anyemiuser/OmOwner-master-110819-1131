@@ -24,6 +24,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anyemi.omrooms.Adapters.HotelAdapter;
@@ -90,8 +91,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        TextView welcomeUser = view.findViewById(R.id.welcome_user);
+
+        welcomeUser.setText(getString(R.string.have_a_good_day).concat(sharedPreferenceConfig.readName() == null ? getString(R.string.vizag):sharedPreferenceConfig.readName()));
+
+
         Toolbar toolbar = view.findViewById(R.id.toolbar);
         toolbar.setOnClickListener(this);
+
 
 
         progressBarArea = view.findViewById(R.id.area_progressBar);

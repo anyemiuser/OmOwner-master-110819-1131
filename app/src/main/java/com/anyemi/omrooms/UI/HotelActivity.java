@@ -268,8 +268,16 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields, 
         hotelName.setText(hotel.getHotel_name());
         String nearByPlace = hotel.getHotel_area()+", "+hotel.getHotel_city()+", "+hotel.getHotel_district();
         nearBy.setText(nearByPlace);
-        ratingTitle.setText(hotel.getHotel_rating());
-        noOfRating.setText(hotel.getHotel_no_of_ratings());
+        double ratingHotel = 5;
+        try{
+            ratingHotel = Double.parseDouble(hotel.getHotel_rating());
+        }catch (NullPointerException e){
+            ratingHotel = 5;
+        }
+
+        rating.setText(new DecimalFormat("##.#").format(ratingHotel));
+        ratingTitle.setText(ConverterUtil.getRatingText(ratingHotel));
+        noOfRating.setText(hotel.getHotel_no_of_ratings().concat(" Review"));
 
     }
 
@@ -548,17 +556,17 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields, 
             payblePrice = payblePrice + discountD.getPaybalePrice();
         }
         tBasePrice = (TextView)view.findViewById(R.id.original_price);
-        tBasePrice.setText(new DecimalFormat("##.##").format(basePrice));
+        tBasePrice.setText(getString(R.string.rupee_symbol).concat(new DecimalFormat("##.##").format(basePrice)));
 
         tBaseStrickOut = (TextView)view.findViewById(R.id.abase_price);
-        tBaseStrickOut.setText(new DecimalFormat("##.##").format(basePrice));
+        tBaseStrickOut.setText(getString(R.string.rupee_symbol).concat(new DecimalFormat("##.##").format(basePrice)));
         tBaseStrickOut.setPaintFlags(tBaseStrickOut.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
         tPayblePrice = (TextView)view.findViewById(R.id.apayble_price);
-        tPayblePrice.setText(new DecimalFormat("##.##").format(payblePrice));
+        tPayblePrice.setText(getString(R.string.rupee_symbol).concat(new DecimalFormat("##.##").format(payblePrice)));
 
         tDiscountBenifits = (TextView)view.findViewById(R.id.discunt_benifits);
-        tDiscountBenifits.setText(new DecimalFormat("##.##").format(discount));
+        tDiscountBenifits.setText(getString(R.string.rupee_symbol).concat(new DecimalFormat("##.##").format(discount)));
 
         int noOfRoom = 0;
         int noOfG= 0;
@@ -584,7 +592,9 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields, 
         }
 
         roomNGP = (TextView) view.findViewById(R.id.aroom_night_price);
-        roomNGP.setText(""+noOfRoom+" room for"+noOfG+" guests for"+noNight+" night");
+        roomNGP.setText(String.valueOf(noOfRoom).concat(" ").concat(getString(R.string.room_for))
+                .concat(String.valueOf(noOfG).concat(" ").concat(getString(R.string.guest_for))
+                        .concat(String.valueOf(noNight)).concat(" ").concat(getString(R.string.night_small))));
 
         roomD = (TextView) view.findViewById(R.id.aroom_details);
         roomD.setText(roomDetails);

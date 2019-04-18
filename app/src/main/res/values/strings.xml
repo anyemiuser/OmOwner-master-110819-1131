@@ -797,6 +797,20 @@
     <string name="gender_user">com.anyemi.shared_preference.gender_user</string>
     <string name="dob_user">com.anyemi.shared_pref_dob_user</string>
     <string name="user_address">com.anyemi.ushared_pref_user_address</string>
+    <string name="room_for">room for</string>
+    <string name="guest_for">guests for</string>
+    <string name="night_small">night</string>
+    <string name="rupee_symbol">₹</string>
+    <string name="yes">Yes</string>
+    <string name="no_cancel">No</string>
+    <string name="went_wrong">Something Went Wrong</string>
+    <string name="cancelled_success">Cancelled Successfully</string>
+    <string name="success">Success</string>
+    <string name="cancel_title">May We Know The Reson Of Cancellation. We Will Try To Improvise Your Experience Further</string>
+    <string name="cancel_alert">Do Yoy Really Want To Cancel This Booking ?</string>
+    <string name="reason">Reason:</string>
+    <string name="have_a_good_day">Have a Good Day,</string>
+    <string name="vizag">Vizag</string>
 
     <string-array name="gender">
         <item>Select Gender</item>
@@ -812,6 +826,13 @@
     <string-array name="child_count">
         <item>1</item>
         <item>2</item>
+    </string-array>
+
+    <string-array name="cancel_array">
+        <item>Plan Got Changed</item>
+        <item>Rescheduling It</item>
+        <item>Got Better Option</item>
+        <item>Others</item>
     </string-array>
 
 

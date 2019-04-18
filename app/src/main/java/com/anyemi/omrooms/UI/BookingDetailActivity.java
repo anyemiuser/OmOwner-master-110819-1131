@@ -10,9 +10,11 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,6 +54,8 @@ public class BookingDetailActivity extends AppCompatActivity implements View.OnC
 
     private String status;
     private String bookingId;
+
+    String reasonCancel = "";
 
     UpComingBooking booking;
     private float rating = 5;
@@ -207,45 +211,96 @@ public class BookingDetailActivity extends AppCompatActivity implements View.OnC
 
         switch (status){
             case "u":
-                CancelRequest cancelRequest = new CancelRequest(bookingId,userId);
-                Log.e("Body",""+new Gson().toJson(cancelRequest));
-                new AlertDialog.Builder(this)
-                        .setTitle("Cancel Booking")
-                        .setMessage("Are you sure to cancel the Booking")
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setCancelable(false);
+                View view = getLayoutInflater().inflate(R.layout.alert_cancel_booking_reason, null);
+                builder.setView(view);
+                Spinner spinner = (Spinner)view.findViewById(R.id.spinner_cancel_reson);
+
+                spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                        reasonCancel = adapterView.getSelectedItem().toString().trim();
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+
+                    }
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+                alertDialog.setCancelable(false);
+
+                view.findViewById(R.id.yes_cancel).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        CancelRequest cancelRequest = new CancelRequest(bookingId,userId,reasonCancel);
+                        Log.e("Body",""+new Gson().toJson(cancelRequest));
+                        omRoomApi.cancelBookedHotel("CancelBookedHotel ",cancelRequest).enqueue(new Callback<CancelResponse>() {
                             @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                omRoomApi.cancelBookedHotel("CancelBookedHotel ",cancelRequest).enqueue(new Callback<CancelResponse>() {
-                                    @Override
-                                    public void onResponse(Call<CancelResponse> call, Response<CancelResponse> response) {
-                                        if(response.isSuccessful()){
-                                            Log.e("Response",""+new Gson().toJson(response.body()));
+                            public void onResponse(Call<CancelResponse> call, Response<CancelResponse> response) {
+                                alertDialog.dismiss();
+                                if(response.isSuccessful()){
+                                    Log.e("cancel Response",""+new Gson().toJson(response.body()));
 
-                                            CancelResponse cancelResponse = response.body();
-                                            Log.e("Response",""+new Gson().toJson(cancelResponse));
-                                            if (cancelResponse != null && cancelResponse.getStatus().equals("Success")) {
-                                                if(cancelResponse.getMsg().equals("Successfully  Cancelled")){
-                                                    Toast.makeText(BookingDetailActivity.this, "Cancelled Successfully", Toast.LENGTH_SHORT).show();
-
-                                                }
-                                            }
+                                    CancelResponse cancelResponse = response.body();
+                                    Log.e("Response",""+new Gson().toJson(cancelResponse));
+                                    if (cancelResponse != null && cancelResponse.getStatus().equals(getString(R.string.success))) {
+                                        if(cancelResponse.getMsg().equals("Successfully  Cancelled")){
+                                            Toast.makeText(BookingDetailActivity.this, R.string.cancelled_success, Toast.LENGTH_SHORT).show();
+//                                            alertDialog.dismiss();
+                                            finish();
+                                        }
+                                    }else {
+                                        if (cancelResponse != null) {
+                                            Toast.makeText(BookingDetailActivity.this, ""+cancelResponse.getMsg(), Toast.LENGTH_SHORT).show();
                                         }
                                     }
+                                }else {
+                                    Toast.makeText(BookingDetailActivity.this, R.string.went_wrong, Toast.LENGTH_SHORT).show();
+                                }
 
-                                    @Override
-                                    public void onFailure(Call<CancelResponse> call, Throwable t) {
-
-                                    }
-                                });
-                                dialogInterface.dismiss();
-                                finish();
                             }
-                        })
-                        .setNegativeButton(android.R.string.no, null)
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .show();
 
-                Toast.makeText(this, "u", Toast.LENGTH_SHORT).show();
+                            @Override
+                            public void onFailure(Call<CancelResponse> call, Throwable t) {
+                                Log.e("failed",""+t.toString());
+
+                            }
+                        });
+
+                        alertDialog.dismiss();
+//                        finish();
+
+                    }
+                });
+
+                view.findViewById(R.id.no_cancel).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        alertDialog.dismiss();
+                    }
+                });
+
+
+
+//                new AlertDialog.Builder(this)
+//                        .setTitle("Cancel Booking")
+//                        .setMessage("Are you sure to cancel the Booking")
+//                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//
+//                                dialogInterface.dismiss();
+//                                finish();
+//                            }
+//                        })
+//                        .setNegativeButton(android.R.string.no, null)
+//                        .setIcon(android.R.drawable.ic_dialog_alert)
+//                        .show();
+
+//                Toast.makeText(this, "u", Toast.LENGTH_SHORT).show();
                 break;
 
             case "c":

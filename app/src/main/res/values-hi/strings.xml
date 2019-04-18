@@ -5,4 +5,7 @@
     <string name="check_in_date">चेक-इन दिनांक का चयन करें</string>
     <string name="gender_prompt">अपना लिंग चुनें</string>
     <string name="select_city">शहर चुनें</string>
+    <string name="cancelled_success">Cancelled Successfully</string>
+    <string name="have_a_good_day">Have a Good Day,</string>
+    <string name="vizag">Vizag</string>
 </resources>

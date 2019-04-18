@@ -98,26 +98,21 @@ public class RoomTypeAdapter extends RecyclerView.Adapter<RoomTypeAdapter.RoomVi
                 noOfRoomInEach = 1;
             }
             HotelActivity.modelsForBooking.get(position).setPrice_to_be_paid(String.valueOf(roomPrice));
-            holder.price.setText(String.valueOf(roomPrice*noOfRoomInEach));
-            holder.detailT.setText(new DecimalFormat("##.##").format(roomPrice)
-                    .concat(" X ")
-                    .concat(String.valueOf(roomPriceOnDates.size()))
-                    .concat(" Night").concat(" X ").concat(String.valueOf(noOfRoomInEach))
-                    .concat("Room"));
 
             holder.roomType.setText(room.getRoom_type().concat(" >>"));
-            holder.basePrice.setText(new DecimalFormat("##.##").format(basePrice*noOfRoomInEach));
+
+            holder.basePrice.setText(String.valueOf((int)Math.round(basePrice*noOfRoomInEach)));
             holder.basePrice.setPaintFlags(holder.discountPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-            holder.payblePrice.setText(new DecimalFormat("##.##").format(roomPrice*noOfRoomInEach));
+            holder.payblePrice.setText(String.valueOf((int)Math.round(roomPrice*noOfRoomInEach)));
 
-            holder.discountPrice.setText(new DecimalFormat("##.##").format(discountPrice*noOfRoomInEach));
+            holder.discountPrice.setText(String.valueOf((int)Math.round(discountPrice*noOfRoomInEach)));
 
-            HotelActivity.discountDetails.get(position).setBasePrice(basePrice*noOfRoomInEach);
-            HotelActivity.discountDetails.get(position).setPaybalePrice(roomPrice*noOfRoomInEach);
-            HotelActivity.discountDetails.get(position).setDisCountPrice(discountPrice*noOfRoomInEach);
+            HotelActivity.discountDetails.get(position).setBasePrice((int)Math.round(basePrice*noOfRoomInEach));
+            HotelActivity.discountDetails.get(position).setPaybalePrice((int)Math.round(roomPrice*noOfRoomInEach));
+            HotelActivity.discountDetails.get(position).setDisCountPrice((int)Math.round(discountPrice*noOfRoomInEach));
 
 
-            holder.roomNightPrice.setText(new DecimalFormat("##.##").format(roomPrice)
+            holder.roomNightPrice.setText(String.valueOf((int)Math.round(roomPrice))
                     .concat(" X ")
                     .concat(String.valueOf(roomPriceOnDates.size()))
                     .concat(" Night").concat(" X ").concat(String.valueOf(noOfRoomInEach))
@@ -221,7 +216,6 @@ public class RoomTypeAdapter extends RecyclerView.Adapter<RoomTypeAdapter.RoomVi
 
     public class RoomViewHolder extends RecyclerView.ViewHolder{
         private ImageView roomImage;
-        private TextView price,detailT;
         private Button add, plus,minus;
         private LinearLayout addDeleteLayout;
         private TextView noOfRoom;
@@ -230,9 +224,9 @@ public class RoomTypeAdapter extends RecyclerView.Adapter<RoomTypeAdapter.RoomVi
         public RoomViewHolder(@NonNull View itemView) {
             super(itemView);
             roomImage = itemView.findViewById(R.id.room_image);
-            price = itemView.findViewById(R.id.price);
+
             add = itemView.findViewById(R.id.add);
-            detailT = itemView.findViewById(R.id.detail_text);
+
             addDeleteLayout = itemView.findViewById(R.id.add_layout);
             plus = itemView.findViewById(R.id.plus);
             minus = itemView.findViewById(R.id.minus);
