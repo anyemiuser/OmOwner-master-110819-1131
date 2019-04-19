@@ -1,5 +1,6 @@
 package com.anyemi.omrooms.UI;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -36,11 +37,15 @@ public class PaymentTransactionStatusActivity extends AppCompatActivity {
     PaymentRequestModel paymentRequestModel;
     TextView tv_amount, tv_payment_to, tv_upi_id, tv_transaction_id,tv_trns_status;
 
+    Intent resultIntent;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction_status);
+
+        resultIntent = getIntent();
 
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
@@ -63,6 +68,27 @@ public class PaymentTransactionStatusActivity extends AppCompatActivity {
             data = parametros.getString(Constants.PAYMENT_REQUEST_MODEL);
             Gson gson = new Gson();
             paymentRequestModel = gson.fromJson(data, PaymentRequestModel.class);
+
+//            String trn=paymentRequestModel.getRr_number();
+//            trn=paymentRequestModel.getTrsno();
+//            trn=paymentRequestModel.();
+
+
+            if(paymentRequestModel.getRemarks().equals("SUCCESS"))
+            {
+                resultIntent.putExtra("transactionId",paymentRequestModel.getTrsno());
+                resultIntent.putExtra("status","s");
+                setResult(Activity.RESULT_OK,resultIntent);
+                finish();
+             //Success
+
+            }else{
+                resultIntent.putExtra("transactionId",paymentRequestModel.getTrsno());
+                resultIntent.putExtra("status","f");
+                setResult(Activity.RESULT_OK,resultIntent);
+                finish();
+                //pay ment failureh
+            }
 
 
         } catch (Exception e) {

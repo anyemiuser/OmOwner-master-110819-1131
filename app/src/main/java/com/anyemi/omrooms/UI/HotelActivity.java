@@ -669,7 +669,8 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields, 
 
                 paymentRequestModel.setMobile_number(sharedPreferenceConfig.readPhoneNo());
                 paymentRequestModel.setEmi_ids( booking.getUser_id());
-                paymentRequestModel.setTotal_amount( String.valueOf(totalPrice));
+//                paymentRequestModel.setTotal_amount( String.valueOf(totalPrice));
+                paymentRequestModel.setTotal_amount( String.valueOf(1));
 
 //                    Intent intent = new Intent(HotelActivity.this,PaymentActivity.class);
                 Intent intent = new Intent(HotelActivity.this, PaymentModeActivityNew.class);

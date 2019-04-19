@@ -3,6 +3,7 @@ package com.anyemi.omrooms.Adapters;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,13 +42,13 @@ public class RoomGuestAdapter extends RecyclerView.Adapter<RoomGuestAdapter.Room
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RoomsGuestHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RoomsGuestHolder holder, final int position) {
         RoomsGuest roomsGuest = roomsGuests.get(position);
 
         holder.roomText.setText(context.getString(R.string.room_no_text).concat(String.valueOf(position+1)));
         holder.guestText.setText(String.valueOf(roomsGuest.getGuests()).concat(" Adults ")
                 .concat(String.valueOf(roomsGuest.getChildren())).concat(" Children"));
-
+        Log.e("childeren:",""+roomsGuest.getChildren());
         if(roomsGuest.getChildren()>0){
             holder.childrenCheck.setChecked(true);
             holder.childrenL.setVisibility(View.VISIBLE);
@@ -65,7 +66,7 @@ public class RoomGuestAdapter extends RecyclerView.Adapter<RoomGuestAdapter.Room
 
                 holder.addDeleteLayout.setVisibility(View.GONE);
 
-                RoomsGuest roomsGuest1 = new RoomsGuest(1,2);
+                RoomsGuest roomsGuest1 = new RoomsGuest(1,2,0);
                 roomsGuests.add(roomsGuest1);
                 notifyDataSetChanged();
             }
@@ -124,9 +125,10 @@ public class RoomGuestAdapter extends RecyclerView.Adapter<RoomGuestAdapter.Room
                 }else {
                     holder.childrenL.setVisibility(View.GONE);
                     roomsGuest.setChildren(0);
+                    notifyDataSetChanged();
 
                 }
-                notifyDataSetChanged();
+//                notifyDataSetChanged();
             }
         });
 

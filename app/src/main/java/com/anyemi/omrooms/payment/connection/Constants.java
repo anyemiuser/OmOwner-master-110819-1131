@@ -64,7 +64,7 @@ public class Constants {
     public static final String PHONE_NUMBER = "P_NUMBER";
 
     public static final String base_url_dev_http = "https://dev.anyemi.com/webservices/anyemi/";
-    public static final String production_base_url = "https://app.anyemi.com/anyemi/";
+    public static final String production_base_url = "https://dev.anyemi.com/webservices/omrooms/Customer/api.php?f=";
 
     public static final String dev_base_url_image = "https://dev.anyemi.com/anyemi_live/app/";
     public static final String production_url_image = "https://anyemi.com/app/";

@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.anyemi.omrooms.UI.HotelActivity;
 import com.anyemi.omrooms.UI.PaymentTransactionStatusActivity;
 import com.google.gson.Gson;
 

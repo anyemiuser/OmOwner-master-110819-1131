@@ -811,6 +811,8 @@
     <string name="reason">Reason:</string>
     <string name="have_a_good_day">Have a Good Day,</string>
     <string name="vizag">Vizag</string>
+    <string name="sucess">Success</string>
+    <string name="profile_update_sucess">Profile Updated Successfully</string>
 
     <string-array name="gender">
         <item>Select Gender</item>

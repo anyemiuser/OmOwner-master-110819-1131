@@ -129,9 +129,6 @@ public class ProfileFragment extends Fragment {
         updateUI();
 
 
-
-
-
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
@@ -232,10 +229,17 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onResponse(Call<ProfileUpdateResponse> call, Response<ProfileUpdateResponse> response) {
                 if(response.isSuccessful()){
-                    Log.e("profileFragment success",""+new Gson().toJson(response.body()));
-                    Toast.makeText(getActivity(), "Profile Updated Successfully", Toast.LENGTH_SHORT).show();
-                    changeListner.onFragmentChange();
-                    progressText.setText("Profile Updated Successfully");
+                    ProfileUpdateResponse updateResponse = response.body();
+                    if(updateResponse!= null){
+                        Toast.makeText(getActivity(), ""+updateResponse.getMsg(), Toast.LENGTH_SHORT).show();
+                        if(updateResponse.getStatus().equals(getString(R.string.sucess))){
+                            changeListner.onFragmentChange();
+                            progressText.setText(R.string.profile_update_sucess);
+                        }
+                    }
+//                    Log.e("profileFragment success",""+new Gson().toJson(response.body()));
+//                    Toast.makeText(getActivity(), "Profile Updated Successfully", Toast.LENGTH_SHORT).show();
+
                 }else {
                     Log.e("profileFragment fail",""+new Gson().toJson(response.body()));
                     progressText.setText("Profile Not Updated");

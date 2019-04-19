@@ -1,5 +1,6 @@
 package com.anyemi.omrooms.payment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -9,6 +10,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,6 +26,7 @@ import android.widget.TextView;
 
 import com.anyemi.omrooms.Model.ServicesResponseModel;
 import com.anyemi.omrooms.R;
+import com.anyemi.omrooms.Utils.SharedPreferenceConfig;
 import com.anyemi.omrooms.payment.bgtask.BackgroundTask;
 import com.anyemi.omrooms.payment.bgtask.BackgroundThread;
 import com.anyemi.omrooms.payment.connection.HomeServices;
@@ -36,6 +39,7 @@ import java.util.ArrayList;
 
 public class PaymentModeActivityNew extends AppCompatActivity {
 
+    private static final String TAG_PAYMENTMODE = PaymentModeActivityNew.class.getName();
     //Action Bar
     TextView aTitle, notification_count;
     RelativeLayout rl_new_mails;
@@ -51,16 +55,20 @@ public class PaymentModeActivityNew extends AppCompatActivity {
     PaymentRequestModel paymentRequestModel;
     TextView tv_amount;
 
+    Intent resultIntent;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_modes);
+
+        resultIntent = getIntent();
 /*
 
 
  */
         SharedPreferenceUtil.setFIN_ID(getApplicationContext(), "2");  // Pass Finacier Id Her
-        SharedPreferenceUtil.setUserId(getApplicationContext(), "1");  //Pass User Id Here
+        SharedPreferenceUtil.setUserId(getApplicationContext(), "1");//"a".concat(new SharedPreferenceConfig(this).readPhoneNo()));  //Pass User Id Here
 
         applicationData = (ApplicationData) getApplication();
 
@@ -82,6 +90,7 @@ public class PaymentModeActivityNew extends AppCompatActivity {
         }
 
         paymentRequestModel = Globals.getPaymentRequestModes(getIntent().getExtras());
+        Log.e(TAG_PAYMENTMODE,"data at "+new Gson().toJson(paymentRequestModel));
 
         if (paymentRequestModel == null) {
             Globals.showToast(getApplicationContext(), Constants.PAYMENT_REQ_ERROR);
@@ -167,16 +176,23 @@ public class PaymentModeActivityNew extends AppCompatActivity {
 
         if (payment_mode.equals(Constants.PAYMENT_MODE_PAYTM_SBI_UPI)) {
             paymentIntent = new Intent(getApplicationContext(), SbiPayPaymentActivity.class);
+            paymentIntent.putExtra(Constants.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
+            startActivityForResult(paymentIntent,5);
         } else if (payment_mode.equals(Constants.PAYMENT_MODE_CASH)) {
             paymentIntent = new Intent(getApplicationContext(), CompleateTransactionActivity.class);
+            paymentIntent.putExtra(Constants.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
+            startActivity(paymentIntent);
         } else if (payment_mode.equals(Constants.PAYMENT_MODE_ANYEMI_WALLET)) {
             paymentIntent = new Intent(getApplicationContext(), CompleateTransactionActivity.class);
+            paymentIntent.putExtra(Constants.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
+            startActivity(paymentIntent);
         } else {
             paymentIntent = new Intent(getApplicationContext(), CompleateTransactionActivity.class);
+            paymentIntent.putExtra(Constants.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
+            startActivity(paymentIntent);
         }
 
-        paymentIntent.putExtra(Constants.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
-        startActivity(paymentIntent);
+
     }
 
 
@@ -335,4 +351,29 @@ public class PaymentModeActivityNew extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == 5 && resultCode == RESULT_OK){
+
+            String transactionId = null;
+            String status = null;
+            if(data!= null){
+
+
+
+                transactionId = data.getStringExtra("transactionId");
+                status = data.getStringExtra("status");
+                resultIntent.putExtra("transactionId",transactionId);
+                resultIntent.putExtra("status",status);
+                setResult(Activity.RESULT_OK,resultIntent);
+                finish();
+
+                Log.e(TAG_PAYMENTMODE,""+transactionId);
+
+            }
+
+        }
+    }
 }

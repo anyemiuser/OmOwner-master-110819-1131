@@ -1,6 +1,7 @@
 package com.anyemi.omrooms.payment;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -60,6 +61,7 @@ import java.util.concurrent.TimeUnit;
  */
 
 public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher {
+    private static final String TAG_SBIPAYACTIVITY = SbiPayPaymentActivity.class.getName();
 
     //ACTION BAR UI COMPONENTS
 
@@ -95,10 +97,14 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
     ListView lv_my_account;
     UpiListAdapter mAdapter;
 
+    Intent resultIntent;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sbi_pay);
+
+        resultIntent = getIntent();
 
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         Window window = this.getWindow();
@@ -565,9 +571,9 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
                                 paymentRequestModel.setExtrafield(mResponsedata.getApiResp().getPayeeVPA());
 
                                 Intent intent = new Intent(getApplicationContext(), PaymentTransactionStatusActivity.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 intent.putExtra(Constants.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
-                                startActivity(intent);
+                                startActivityForResult(intent,5);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -583,6 +589,7 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
                     } catch (Exception e) {
                         mTransDone = true;
                         e.printStackTrace();
+                        Log.e(TAG_SBIPAYACTIVITY,""+e.toString());
                         Globals.showToast(getApplicationContext(), "Payment Failed");
                         countDownTimer.cancel();
                         btn_pay.setEnabled(true);
@@ -628,6 +635,7 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
             public void taskCompleted(Object data) {
                 if (data != null || data.equals("")) {
                     if (data.toString().contains("SUCCESS")) {
+                        paymentRequestModel.setRemarks("SUCCESS");
                         Globals.ProceedNextScreen(getApplicationContext(), paymentRequestModel);
                     }
                 }
@@ -662,7 +670,17 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
         final ProgressBar prgs_load = (ProgressBar) infoDialog.findViewById(R.id.prgs_load);
         if (s.equals("Payment Success")) {
             // Globals.showToast(getApplicationContext(),"hvhvjhvjh potiiii peonnnn");
-            submitPaymentDetails();
+           // submitPaymentDetails();
+
+            paymentRequestModel.setRemarks("SUCCESS");
+            // transaction status
+//            String trsss = paymentRequestModel.getRemarks();
+//            String tid = paymentRequestModel.getTrsno();
+//            Globals.ProceedNextScreen(getApplicationContext(), paymentRequestModel);
+            Intent intent = new Intent(getApplicationContext(), PaymentTransactionStatusActivity.class);
+//                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.putExtra(Constants.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
+            startActivityForResult(intent,5);
         }
 
         if (s.contains("Collect Request rejected by customer")) {
@@ -676,9 +694,9 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
 
             if (paymentRequestModel.getFIN_ID().equals(Constants.FIN_ID_HPCL)) {
                 Intent intent = new Intent(getApplicationContext(), PaymentTransactionStatusActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.putExtra(Constants.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
-                startActivity(intent);
+                startActivityForResult(intent,5);
             }
 
 
@@ -948,5 +966,34 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == 5 && resultCode == RESULT_OK){
+
+            String transactionId = null;
+            String status = null;
+            if(data!= null){
+
+
+//                chooserDialog.dismiss();
+                transactionId = data.getStringExtra("transactionId");
+                status = data.getStringExtra("status");
+
+                Log.e(TAG_SBIPAYACTIVITY,transactionId+" s : "+status);
+
+                resultIntent.putExtra("transactionId",transactionId);
+                resultIntent.putExtra("status",status);
+                setResult(Activity.RESULT_OK,resultIntent);
+                finish();
+
+                Log.e(TAG_SBIPAYACTIVITY,""+transactionId);
+
+            }
+
+        }
     }
 }
