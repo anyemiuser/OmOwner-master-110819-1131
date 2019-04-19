@@ -764,7 +764,12 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields, 
                 booking.setTransaction_id(transactionId);
                 booking.setTransaction_status(status);
                 Log.e(TAG_HOTEL,"check : "+new Gson().toJson(booking));
-                bookRooms(booking);
+                if(status.equals("s")){
+                    bookRooms(booking);
+                }else {
+                    Toast.makeText(this, "Payment Failed, Try Again", Toast.LENGTH_SHORT).show();
+                }
+
             }
 
         }
