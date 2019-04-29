@@ -677,6 +677,7 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
 //            String trsss = paymentRequestModel.getRemarks();
 //            String tid = paymentRequestModel.getTrsno();
 //            Globals.ProceedNextScreen(getApplicationContext(), paymentRequestModel);
+            Log.e("payment Success:",""+new Gson().toJson(paymentRequestModel));
             Intent intent = new Intent(getApplicationContext(), PaymentTransactionStatusActivity.class);
 //                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             intent.putExtra(Constants.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));

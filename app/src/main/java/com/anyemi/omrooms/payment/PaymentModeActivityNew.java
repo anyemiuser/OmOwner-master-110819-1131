@@ -68,7 +68,7 @@ public class PaymentModeActivityNew extends AppCompatActivity {
 
  */
         SharedPreferenceUtil.setFIN_ID(getApplicationContext(), "2");  // Pass Finacier Id Her
-        SharedPreferenceUtil.setUserId(getApplicationContext(), "1");//"a".concat(new SharedPreferenceConfig(this).readPhoneNo()));  //Pass User Id Here
+        SharedPreferenceUtil.setUserId(getApplicationContext(), "11");//"a".concat(new SharedPreferenceConfig(this).readPhoneNo()));  //Pass User Id Here
 
         applicationData = (ApplicationData) getApplication();
 
@@ -177,6 +177,7 @@ public class PaymentModeActivityNew extends AppCompatActivity {
         if (payment_mode.equals(Constants.PAYMENT_MODE_PAYTM_SBI_UPI)) {
             paymentIntent = new Intent(getApplicationContext(), SbiPayPaymentActivity.class);
             paymentIntent.putExtra(Constants.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
+            Log.e("payment activity new",""+new Gson().toJson(paymentRequestModel));
             startActivityForResult(paymentIntent,5);
         } else if (payment_mode.equals(Constants.PAYMENT_MODE_CASH)) {
             paymentIntent = new Intent(getApplicationContext(), CompleateTransactionActivity.class);
