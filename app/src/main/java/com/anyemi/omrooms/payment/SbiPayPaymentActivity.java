@@ -126,6 +126,7 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
         //Getting Parameters from intent
          */
         paymentRequestModel = Globals.getPaymentRequestModes(getIntent().getExtras());
+        Log.e("Sbi pay activity",new Gson().toJson(paymentRequestModel));
 
         if (paymentRequestModel == null) {
             Globals.showToast(getApplicationContext(), Constants.PAYMENT_REQ_ERROR);
@@ -569,7 +570,7 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
                                 paymentRequestModel.setRr_number(jsonObject.getString("custRefNo"));
                                 paymentRequestModel.setTrsno(jsonObject.getString("custRefNo"));
                                 paymentRequestModel.setExtrafield(mResponsedata.getApiResp().getPayeeVPA());
-
+                                Log.e("sbi pay cust ref no",""+paymentRequestModel.getTrsno()+new Gson().toJson(paymentRequestModel));
                                 Intent intent = new Intent(getApplicationContext(), PaymentTransactionStatusActivity.class);
 //                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 intent.putExtra(Constants.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
@@ -586,6 +587,7 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
                             mTransDone = true;
                             openInfoDialog(mResponsedata.getApiResp().getStatusDesc() + " : " + mResponsedata.getApiResp().getResponseMsg());
                         }
+                        Log.e("sbi payment status",""+mResponsedata.getApiResp().getStatus());
                     } catch (Exception e) {
                         mTransDone = true;
                         e.printStackTrace();
@@ -668,7 +670,7 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
         final TextView tv_info = (TextView) infoDialog.findViewById(R.id.tv_info);
         final Button btn_send_sms = (Button) infoDialog.findViewById(R.id.btn_send_sms);
         final ProgressBar prgs_load = (ProgressBar) infoDialog.findViewById(R.id.prgs_load);
-        if (s.equals("Payment Success")) {
+        if (s.equals("Payment Success")) { //Payment Success
             // Globals.showToast(getApplicationContext(),"hvhvjhvjh potiiii peonnnn");
            // submitPaymentDetails();
 
@@ -694,6 +696,7 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
             }
 
             if (paymentRequestModel.getFIN_ID().equals(Constants.FIN_ID_HPCL)) {
+                Log.e("payment rej:",""+new Gson().toJson(paymentRequestModel));
                 Intent intent = new Intent(getApplicationContext(), PaymentTransactionStatusActivity.class);
 //                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.putExtra(Constants.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
@@ -979,12 +982,13 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
             String status = null;
             if(data!= null){
 
+                infoDialog.dismiss();
+                chooserDialog.dismiss();
 
-//                chooserDialog.dismiss();
                 transactionId = data.getStringExtra("transactionId");
                 status = data.getStringExtra("status");
 
-                Log.e(TAG_SBIPAYACTIVITY,transactionId+" s : "+status);
+//                Log.e(TAG_SBIPAYACTIVITY,transactionId+" s : "+status);
 
                 resultIntent.putExtra("transactionId",transactionId);
                 resultIntent.putExtra("status",status);

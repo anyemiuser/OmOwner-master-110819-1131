@@ -70,27 +70,13 @@ public class PaymentTransactionStatusActivity extends AppCompatActivity {
             Gson gson = new Gson();
             paymentRequestModel = gson.fromJson(data, PaymentRequestModel.class);
 
+            Log.e("payment Tran S Activity",""+paymentRequestModel.getTrsno()+new Gson().toJson(paymentRequestModel));
 //            String trn=paymentRequestModel.getRr_number();
 //            trn=paymentRequestModel.getTrsno();
 //            trn=paymentRequestModel.();
 
 
-            if(paymentRequestModel.getRemarks().equals("SUCCESS"))
-            {
-                Log.e("tansaction id:",paymentRequestModel.getTrsno());
-                resultIntent.putExtra("transactionId",paymentRequestModel.getTrsno());
-                resultIntent.putExtra("status","s");
-                setResult(Activity.RESULT_OK,resultIntent);
-                finish();
-             //Success
 
-            }else{
-                resultIntent.putExtra("transactionId",paymentRequestModel.getTrsno());
-                resultIntent.putExtra("status","f");
-                setResult(Activity.RESULT_OK,resultIntent);
-                finish();
-                //pay ment failureh
-            }
 
 
         } catch (Exception e) {
@@ -100,6 +86,22 @@ public class PaymentTransactionStatusActivity extends AppCompatActivity {
 
         createActionBar();
         initView();
+        if(paymentRequestModel.getRemarks().equals("SUCCESS")) //SUCCESS
+        {
+//            Log.e("tansaction id:",paymentRequestModel.getTrsno());
+            resultIntent.putExtra("transactionId",paymentRequestModel.getTrsno());
+            resultIntent.putExtra("status","s");
+            setResult(Activity.RESULT_OK,resultIntent);
+            finish();
+            //Success
+
+        }else{
+            resultIntent.putExtra("transactionId",paymentRequestModel.getTrsno());
+            resultIntent.putExtra("status","f");
+            setResult(Activity.RESULT_OK,resultIntent);
+            finish();
+            //pay ment failureh
+        }
 
     }
 

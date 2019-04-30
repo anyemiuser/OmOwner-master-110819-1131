@@ -368,13 +368,16 @@ public class PaymentModeActivityNew extends AppCompatActivity {
                 status = data.getStringExtra("status");
                 resultIntent.putExtra("transactionId",transactionId);
                 resultIntent.putExtra("status",status);
+
                 setResult(Activity.RESULT_OK,resultIntent);
                 finish();
 
-                Log.e(TAG_PAYMENTMODE,""+transactionId);
+                Log.e(TAG_PAYMENTMODE,"aaaaa "+transactionId+status);
 
             }
 
         }
+
+        Log.e("payment Mode new",""+requestCode+resultCode);
     }
 }
