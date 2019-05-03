@@ -144,6 +144,7 @@ public class AreaHotelsActivity extends AppCompatActivity implements View.OnClic
                     intent.putExtra("hotelName",hotel.getHotel_name());
                     startActivityForResult(intent,1);
                     Toast.makeText(AreaHotelsActivity.this, "Layout clicked", Toast.LENGTH_SHORT).show();
+                    Log.e(TAG_AREA_HOTEL,"Layout clicked");
 
                 }
             });

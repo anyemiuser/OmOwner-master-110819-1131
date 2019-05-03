@@ -531,7 +531,7 @@ public class CompleateTransactionActivity extends AppCompatActivity implements T
 
                 } else if (performValidation()) {
 
-//                    if (!paymentRequestModel.getPayment_type().equals(Constants.PAYMENT_MODE_ANYEMI_WALLET)) {
+//                    if (!paymentRequestModel.getPayment_type().equals(ConstantsData.PAYMENT_MODE_ANYEMI_WALLET)) {
 //
 //                    }
 

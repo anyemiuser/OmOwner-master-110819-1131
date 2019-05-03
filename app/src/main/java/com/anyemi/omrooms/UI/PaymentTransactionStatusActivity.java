@@ -90,13 +90,21 @@ public class PaymentTransactionStatusActivity extends AppCompatActivity {
         {
 //            Log.e("tansaction id:",paymentRequestModel.getTrsno());
             resultIntent.putExtra("transactionId",paymentRequestModel.getTrsno());
+//            resultIntent.putExtra("transactionId","12465");
             resultIntent.putExtra("status","s");
             setResult(Activity.RESULT_OK,resultIntent);
             finish();
             //Success
 
+        }else if(paymentRequestModel.getRemarks().equals("Collect Request rejected by customer")){
+//            resultIntent.putExtra("transactionId",paymentRequestModel.getTrsno());
+            resultIntent.putExtra("transactionId","12546");
+            resultIntent.putExtra("status","r");
+            setResult(Activity.RESULT_OK,resultIntent);
+            finish();
         }else{
-            resultIntent.putExtra("transactionId",paymentRequestModel.getTrsno());
+//            resultIntent.putExtra("transactionId",paymentRequestModel.getTrsno());
+            resultIntent.putExtra("transactionId","12546");
             resultIntent.putExtra("status","f");
             setResult(Activity.RESULT_OK,resultIntent);
             finish();

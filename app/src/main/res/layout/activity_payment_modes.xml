@@ -6,19 +6,19 @@
     android:layout_height="match_parent"
     >
 
-    <!--<android.support.design.widget.AppBarLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:theme="@style/AppTheme.AppBarOverlay">-->
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-        <!--<android.support.v7.widget.Toolbar-->
-            <!--android:id="@+id/toolbar"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="57dp"-->
-            <!--android:background="@color/colorPrimary"-->
-            <!--app:popupTheme="@style/AppTheme.PopupOverlay" />-->
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_payment_selection"
+            android:layout_width="match_parent"
+            android:layout_height="57dp"
+            android:background="@color/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-    <!--</android.support.design.widget.AppBarLayout>-->
+    </android.support.design.widget.AppBarLayout>
 
 
     <LinearLayout
@@ -54,6 +54,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="3"
                         android:gravity="left|center"
+
                         android:text="Total Amount to be Paid" />
 
                     <TextView
@@ -73,6 +74,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
                     android:gravity="left|center"
+                    android:layout_marginTop="10dp"
                     android:text="Select Options to pay" />
 
 

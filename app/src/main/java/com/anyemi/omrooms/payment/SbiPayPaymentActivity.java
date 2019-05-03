@@ -367,7 +367,7 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
         vpaModel.setPayment_type("UPI");
         vpaModel.setUpi_id(et_sbi_id.getText().toString());
 
-//        if (paymentRequestModel.getFIN_ID().equals(Constants.FIN_ID_HPCL)) {
+//        if (paymentRequestModel.getFIN_ID().equals(ConstantsData.FIN_ID_HPCL)) {
 //            vpaModel.setUpi_id(paymentRequestModel.getUpi_id());
 //        } else {
 //            vpaModel.setUpi_id(et_sbi_id.getText().toString());
@@ -691,6 +691,7 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
             try {
                 paymentRequestModel.setRr_number(jsonObject.getString("custRefNo"));
                 paymentRequestModel.setTrsno(jsonObject.getString("custRefNo"));
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -702,6 +703,13 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
                 intent.putExtra(Constants.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
                 startActivityForResult(intent,5);
             }
+//            else {
+//                Log.e("payment rej:",""+new Gson().toJson(paymentRequestModel));
+//                Intent intent = new Intent(getApplicationContext(), PaymentTransactionStatusActivity.class);
+////                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                intent.putExtra(Constants.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
+//                startActivityForResult(intent,5);
+//            }
 
 
         }

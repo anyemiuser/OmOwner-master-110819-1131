@@ -97,7 +97,7 @@ public class PaymentModeActivityNew extends AppCompatActivity {
             finish();
         }
 
-       // createActionBar();
+        createActionBar();
         initView();
     }
 
@@ -182,15 +182,15 @@ public class PaymentModeActivityNew extends AppCompatActivity {
         } else if (payment_mode.equals(Constants.PAYMENT_MODE_CASH)) {
             paymentIntent = new Intent(getApplicationContext(), CompleateTransactionActivity.class);
             paymentIntent.putExtra(Constants.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
-            startActivity(paymentIntent);
+//            startActivity(paymentIntent);
         } else if (payment_mode.equals(Constants.PAYMENT_MODE_ANYEMI_WALLET)) {
             paymentIntent = new Intent(getApplicationContext(), CompleateTransactionActivity.class);
             paymentIntent.putExtra(Constants.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
-            startActivity(paymentIntent);
+//            startActivity(paymentIntent);
         } else {
             paymentIntent = new Intent(getApplicationContext(), CompleateTransactionActivity.class);
             paymentIntent.putExtra(Constants.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
-            startActivity(paymentIntent);
+//            startActivity(paymentIntent);
         }
 
 
@@ -236,7 +236,7 @@ public class PaymentModeActivityNew extends AppCompatActivity {
 
     private void createActionBar() {
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_payment_selection);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);

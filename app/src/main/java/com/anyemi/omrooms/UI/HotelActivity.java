@@ -35,6 +35,7 @@ import com.anyemi.omrooms.Model.RoomFacility;
 import com.anyemi.omrooms.Model.RoomsGuest;
 import com.anyemi.omrooms.R;
 import com.anyemi.omrooms.Utils.ConstantFields;
+import com.anyemi.omrooms.Utils.ConstantsData;
 import com.anyemi.omrooms.Utils.ConverterUtil;
 import com.anyemi.omrooms.Utils.SharedPreferenceConfig;
 import com.anyemi.omrooms.api.ApiUtils;
@@ -58,7 +59,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HotelActivity extends AppCompatActivity implements ConstantFields, View.OnClickListener {
+public class HotelActivity extends AppCompatActivity implements ConstantFields, View.OnClickListener, ConstantsData {
 
     private static final String TAG_HOTEL = HotelActivity.class.getName();
     private ImageView hotelImage, locImage;
@@ -89,6 +90,8 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields, 
 
     private ProgressBar roomRvProgress;
     private TextView roomAvailStatus;
+    private Intent resultIntent;
+    private String hotelNameT = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,9 +111,10 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields, 
         init();
         assignValue(null,null);
 
+        resultIntent = getIntent();
         Intent intent =getIntent();
         hotelId = intent.getStringExtra("hotelId");
-        String hotelName = intent.getStringExtra("hotelName");
+        hotelNameT = intent.getStringExtra("hotelName");
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -118,7 +122,7 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields, 
 
         if (actionbar != null) {
             actionbar.setDisplayHomeAsUpEnabled(true);
-            actionbar.setTitle(hotelName);
+            actionbar.setTitle(hotelNameT);
         }
 
         if(hotelId != null){
@@ -704,10 +708,13 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields, 
                     alertDialog.dismiss();
                     Log.e(TAG_HOTEL,"success"+response.message()+new Gson().toJson(response.body()));
                     BookingResponse bookingResponse = response.body();
-                    Log.e(TAG_HOTEL,response.message()+bookingResponse.getBooking_id());
+//                    Log.e(TAG_HOTEL,response.message()+bookingResponse.getBooking_id());
                     Intent intent = new Intent(HotelActivity.this,BookingConActivity.class);
                     intent.putExtra("bid",""+bookingResponse.getBooking_id());
+                    intent.putExtra("hotelName",hotelNameT);
+                    intent.putExtra("bookingD",""+new Gson().toJson(booking));
                     startActivity(intent);
+//                    startActivityForResult(intent,sucessIntent);
                     finish();
                 }else {
                     alertDialog.dismiss();
@@ -766,11 +773,17 @@ public class HotelActivity extends AppCompatActivity implements ConstantFields, 
                 Log.e(TAG_HOTEL,"check : "+new Gson().toJson(booking));
                 if(status.equals("s")){
                     bookRooms(booking);
+                }else if(status.equals("r")){
+                    Toast.makeText(this, "Payment Declined by Customer! Try Again", Toast.LENGTH_SHORT).show();
                 }else {
                     Toast.makeText(this, "Payment Failed, Try Again", Toast.LENGTH_SHORT).show();
                 }
 
             }
+
+        }else if(requestCode == sucessIntent && resultCode == RESULT_OK){
+            setResult(Activity.RESULT_OK,resultIntent);
+            finish();
 
         }
 

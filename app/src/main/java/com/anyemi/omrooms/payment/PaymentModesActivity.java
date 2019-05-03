@@ -271,7 +271,7 @@ public class PaymentModesActivity extends AppCompatActivity implements View.OnCl
                 getSelectedPayment(Constants.PAYMENT_MODE_PAYTM_SBI_UPI);
                 break;
             case R.id.ll_cash:
-             //   getSelectedPayment(Constants.PAYMENT_MODE_CASH);
+             //   getSelectedPayment(ConstantsData.PAYMENT_MODE_CASH);
                 getSelectedPayment(Constants.PAYMENT_MODE_ANYEMI_WALLET);
                 break;
             case R.id.ll_cheque:
@@ -303,27 +303,27 @@ public class PaymentModesActivity extends AppCompatActivity implements View.OnCl
         Intent paymentIntent;
 
         if (payment_mode.equals(Constants.PAYMENT_MODE_PAYTM_SBI_UPI)) {
-//            paymentRequestModel.setPayment_type(Constants.PAYMENT_MODE_PAYTM_SBI_UPI);
+//            paymentRequestModel.setPayment_type(ConstantsData.PAYMENT_MODE_PAYTM_SBI_UPI);
 //            paymentIntent = new Intent(getApplicationContext(), SbiPayPaymentActivity.class);
-//            paymentIntent.putExtra(Constants.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
+//            paymentIntent.putExtra(ConstantsData.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
 //            startActivity(paymentIntent);
         } else if (payment_mode.equals(Constants.PAYMENT_MODE_CASH)) {
-//            paymentRequestModel.setPayment_type(Constants.PAYMENT_MODE_CASH);
+//            paymentRequestModel.setPayment_type(ConstantsData.PAYMENT_MODE_CASH);
 //            paymentIntent = new Intent(getApplicationContext(), CompleateTransactionActivity.class);
-//            paymentIntent.putExtra(Constants.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
+//            paymentIntent.putExtra(ConstantsData.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
 //            startActivity(paymentIntent);
         }else if (payment_mode.equals(Constants.PAYMENT_MODE_ANYEMI_WALLET)) {
-//            paymentRequestModel.setPayment_type(Constants.PAYMENT_MODE_ANYEMI_WALLET);
+//            paymentRequestModel.setPayment_type(ConstantsData.PAYMENT_MODE_ANYEMI_WALLET);
 //            paymentIntent = new Intent(getApplicationContext(), CompleateTransactionActivity.class);
-//            paymentIntent.putExtra(Constants.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
+//            paymentIntent.putExtra(ConstantsData.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
 //            startActivity(paymentIntent);
         } else if (payment_mode.equals(Constants.PAYMENT_MODE_CHEQUE)) {
 //            paymentIntent = new Intent(getApplicationContext(), CheckActivity.class);
-//            paymentIntent.putExtra(Constants.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
+//            paymentIntent.putExtra(ConstantsData.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
 //            startActivity(paymentIntent);
         } else if (payment_mode.equals(Constants.PAYMENT_MODE_CREDIT_CARD)) {
 //            paymentIntent = new Intent(getApplicationContext(), CreditAndDebitCardActivity.class);
-//            paymentIntent.putExtra(Constants.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
+//            paymentIntent.putExtra(ConstantsData.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
 //            startActivity(paymentIntent);
 
             //initMSwipe();
@@ -331,25 +331,25 @@ public class PaymentModesActivity extends AppCompatActivity implements View.OnCl
 
         } else if (payment_mode.equals(Constants.PAYMENT_MODE_PAYTM_QR)) {
 //            paymentIntent = new Intent(getApplicationContext(), ScanAndPayActivity.class);
-//            paymentIntent.putExtra(Constants.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
+//            paymentIntent.putExtra(ConstantsData.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
 //            startActivity(paymentIntent);
         } else if (payment_mode.equals(Constants.PAYMENT_MODE_BHIM)) {
 //            paymentIntent = new Intent(getApplicationContext(), BhimActivity.class);
-//            paymentIntent.putExtra(Constants.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
+//            paymentIntent.putExtra(ConstantsData.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
 //            startActivity(paymentIntent);
         } else if (payment_mode.equals(Constants.PAYMENT_MODE_NET_BANKING)) {
             paymentRequestModel.setPayment_type(Constants.PAYMENT_MODE_NET_BANKING);
 //            paymentIntent = new Intent(getApplicationContext(), CompleateTransactionActivity.class);
-//            paymentIntent.putExtra(Constants.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
+//            paymentIntent.putExtra(ConstantsData.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
 //            startActivity(paymentIntent);
         } else if (payment_mode.equals(Constants.PAYMENT_MODE_AADHAR)) {
-//            paymentRequestModel.setPayment_type(Constants.PAYMENT_MODE_AADHAR);
+//            paymentRequestModel.setPayment_type(ConstantsData.PAYMENT_MODE_AADHAR);
 //            paymentIntent = new Intent(getApplicationContext(), CompleateTransactionActivity.class);
-//            paymentIntent.putExtra(Constants.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
+//            paymentIntent.putExtra(ConstantsData.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
 //            startActivity(paymentIntent);
         } else if (payment_mode.equals(Constants.PAYMENT_MODE_PAYTM_PG)) {
 //            paymentIntent = new Intent(getApplicationContext(), PaymentWalletActivity.class);
-//            paymentIntent.putExtra(Constants.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
+//            paymentIntent.putExtra(ConstantsData.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
 //            startActivity(paymentIntent);
 
 

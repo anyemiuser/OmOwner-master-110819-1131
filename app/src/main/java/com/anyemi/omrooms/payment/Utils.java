@@ -319,7 +319,7 @@ public class Utils {
 //     * Save string value from SharedPreference for the given key
 //     */
 //    public static void saveStringInSP(Context context, String key, String value) {
-//        SharedPreferences preferences = context.getSharedPreferences(Constants.SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
+//        SharedPreferences preferences = context.getSharedPreferences(ConstantsData.SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
 //        SharedPreferences.Editor editor = preferences.edit();
 //        editor.putString(key, value);
 //        editor.commit();
@@ -329,7 +329,7 @@ public class Utils {
 //     * Retrieve string value from SharedPreference for the given key
 //     */
 //    public static String getStringFromSP(Context context, String key) {
-//        SharedPreferences preferences = context.getSharedPreferences(Constants.SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
+//        SharedPreferences preferences = context.getSharedPreferences(ConstantsData.SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
 //        return preferences.getString(key, null);
 //    }
 //
@@ -337,7 +337,7 @@ public class Utils {
 //     * Delete value from SharedPreference for the given key
 //     */
 //    public static void deleteFromSP(Context context, String key) {
-//        SharedPreferences preferences = context.getSharedPreferences(Constants.SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
+//        SharedPreferences preferences = context.getSharedPreferences(ConstantsData.SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
 //        SharedPreferences.Editor editor = preferences.edit();
 //        editor.remove(key);
 //        editor.commit();
