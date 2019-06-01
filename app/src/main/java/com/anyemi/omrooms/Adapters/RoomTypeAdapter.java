@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.anyemi.omrooms.Model.BookingModel;
 import com.anyemi.omrooms.Model.DiscountDetail;
@@ -118,6 +119,11 @@ public class RoomTypeAdapter extends RecyclerView.Adapter<RoomTypeAdapter.RoomVi
                     .concat(" Night").concat(" X ").concat(String.valueOf(noOfRoomInEach))
                     .concat("Room"));
 
+
+            if(roomPriceOnDates.get(0).getAvailable_rooms()  == 0){
+//                Toast.makeText(context, ""+"Rooms Are Filled On this Date", Toast.LENGTH_SHORT).show();
+                holder.add.setVisibility(View.GONE);
+            }
             holder.add.setOnClickListener(view -> {
 
                 if(noOfRoomBooked< noOfRoom){

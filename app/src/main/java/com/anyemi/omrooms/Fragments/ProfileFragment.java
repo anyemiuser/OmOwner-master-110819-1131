@@ -51,7 +51,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ProfileFragment extends Fragment {
-    private FirebaseAuth mAuth;
     private EditText name, email, address, phone,birthDay;
     private Button update;
     private Spinner spinner;
@@ -272,7 +271,8 @@ public class ProfileFragment extends Fragment {
                 // Not implemented here
                 return false;
             case R.id.action_logout:
-                mAuth.getInstance().signOut();
+                FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                mAuth.signOut();
                 new SharedPreferenceConfig(Objects.requireNonNull(getActivity())).writePhoneNo(null);
                 Intent i = new Intent(getActivity(),
                         LoginActivity.class);
