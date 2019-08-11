@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">Om Receptionist</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="login_prferance">org.sairaa.omowner.shared_preference</string>
+    <string name="phone_no_preference">org.sairaa.omroom.owner.phone_no</string>
+    <string name="action_sign_out">Sign Out</string>
+    <string name="user_type_preference">org.sairaa.omowner_user_type</string>
+    <string name="hotel_id">org.sairaa.omowner.hotel_id_preference</string>
+    <string name="hotel_name">org.sairaa.omowner.hotel_name_preference</string>
+    <string name="one">1</string>
+    <string name="higher_date">Select higher date</string>
+    <string name="enter_phone_no">Enter Phone Number</string>
+    <string name="hotel_image_url">org.sairaa.omowner.hotel_image_url</string>
+    <string name="max_guest">Maximun Guest Can Allowed:</string>
+    <string name="no_of_rooms">Number Of Rooms</string>
+    <string name="minimum_price">Minimu Price</string>
+    <string name="avg_price">Average Price</string>
+    <string name="max_price">Maximum Price</string>
+    <string name="discount_per">Discount Percentage</string>
+    <string name="update">Update</string>
+    <string name="cancel_booking">Cancel</string>
+    <string name="success">Success</string>
+    <string name="cancelled_success">Cancelled Successfully</string>
+
+    <string-array name="recent">
+        <item>Today</item>
+        <item>Select Date</item>
+    </string-array>
+
+    <string-array name="child_count">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="gender">
+        <item>Select Gender</item>
+        <item>M</item>
+        <item>F</item>
+        <item>O</item>
+    </string-array>
+</resources>

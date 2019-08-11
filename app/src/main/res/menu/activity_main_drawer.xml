@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_camera"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="New Booking" />
+        <item
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Price Update" />
+        <item
+            android:id="@+id/nav_slideshow"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Amentities" />
+
+        <item
+            android:id="@+id/nav_utility"
+            android:icon="@drawable/ic_utility"
+            android:title="Utility" />
+
+        <item
+            android:id="@+id/nav_room"
+            android:icon="@drawable/ic_room"
+            android:title="Rooms"
+            android:visible="false"/>
+        <item
+            android:id="@+id/nav_guest_reviews"
+            android:icon="@drawable/ic_guest"
+            android:title="Guest Reviews"
+            android:visible="false"/>
+        <item
+            android:id="@+id/nav_hotel_rules"
+            android:icon="@drawable/ic_rules"
+            android:title="Hotel Rules"
+            android:visible="false"/>
+        <item
+            android:id="@+id/nav_your_hotel_Contacts"
+            android:icon="@drawable/ic_contacts"
+            android:title="Your Hotel Contact"
+            android:visible="false" />
+
+        <item
+            android:id="@+id/nav_omsupport"
+            android:icon="@drawable/ic_help"
+            android:title="Om Support"
+            android:visible="false"/>
+        <item
+            android:id="@+id/nav_raiseissue"
+            android:icon="@drawable/ic_raise_issue"
+            android:title="Raise Issue"
+            android:visible="false"/>
+        <item
+            android:id="@+id/nav_policies"
+            android:icon="@drawable/ic_policy"
+            android:title="Policies"
+            android:visible="false"/>
+        <item
+            android:id="@+id/nav_help"
+            android:icon="@drawable/ic_help_videos"
+            android:title="Help Videos"
+            android:visible="false"/>
+
+        <item
+            android:id="@+id/nav_signout"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Sign Out" />
+    </group>
+
+    <!--<item android:title="Communicate">-->
+        <!--<menu>-->
+            <!--<item-->
+                <!--android:id="@+id/nav_share"-->
+                <!--android:icon="@drawable/ic_menu_share"-->
+                <!--android:title="Share" />-->
+            <!--<item-->
+                <!--android:id="@+id/nav_send"-->
+                <!--android:icon="@drawable/ic_menu_send"-->
+                <!--android:title="Send" />-->
+        <!--</menu>-->
+    <!--</item>-->
+
+</menu>

@@ -1,0 +1,130 @@
+{
+  "project_info": {
+    "project_number": "544705663440",
+    "firebase_url": "https://omrooms-89efc.firebaseio.com",
+    "project_id": "omrooms-89efc",
+    "storage_bucket": "omrooms-89efc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:544705663440:android:9f920b75d4c0991f",
+        "android_client_info": {
+          "package_name": "com.anyemi.omroomoye"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "544705663440-bbsnhoqkvlbnsipdv7ofke0o2pg8ju33.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anyemi.omroomoye",
+            "certificate_hash": "4286262f76d9e98b7e9573a7d6b4bda17c2d7366"
+          }
+        },
+        {
+          "client_id": "544705663440-mpliqgigpted5bmog9ir3ugd2ivglbgr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkRzedcWtNjOVzRToSaAY4-wIeCJ3fN3s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "544705663440-mpliqgigpted5bmog9ir3ugd2ivglbgr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:544705663440:android:98d13d53dcffa055",
+        "android_client_info": {
+          "package_name": "com.anyemi.omrooms"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "544705663440-73uea5cacbt8p6ns3g1k6q2pq9rl4066.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anyemi.omrooms",
+            "certificate_hash": "4286262f76d9e98b7e9573a7d6b4bda17c2d7366"
+          }
+        },
+        {
+          "client_id": "544705663440-gfj3olc0l4bfagnd0t5sjo0mbhtaij5u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anyemi.omrooms",
+            "certificate_hash": "217c6a353ab7e9fd981c69bfb309598becbed5f5"
+          }
+        },
+        {
+          "client_id": "544705663440-mpliqgigpted5bmog9ir3ugd2ivglbgr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkRzedcWtNjOVzRToSaAY4-wIeCJ3fN3s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "544705663440-mpliqgigpted5bmog9ir3ugd2ivglbgr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:544705663440:android:73d9d59c316db0e0",
+        "android_client_info": {
+          "package_name": "org.sairaa.omowner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "544705663440-k0rdeine4p1hcrmq7ekki8ogq4s2870s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.sairaa.omowner",
+            "certificate_hash": "4286262f76d9e98b7e9573a7d6b4bda17c2d7366"
+          }
+        },
+        {
+          "client_id": "544705663440-mpliqgigpted5bmog9ir3ugd2ivglbgr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkRzedcWtNjOVzRToSaAY4-wIeCJ3fN3s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "544705663440-mpliqgigpted5bmog9ir3ugd2ivglbgr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

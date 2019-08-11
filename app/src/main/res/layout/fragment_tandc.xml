@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp">
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tandchead"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tandchd"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tandch1"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tandc1"/>
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tandch2"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tandc2"
+        />
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tandch3"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tandc3"
+        />
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tandch4"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tandc41"
+        />
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tandc42"
+        />
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tandc43"
+        />
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tandc44"
+        />
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tandc45"
+        />
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tandc46"
+        />
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tandc47"
+        />
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tandc48"
+        />
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tandc49"
+        />
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tandc411"
+        /> <TextView
+
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/tandc412"
+    /> <TextView
+
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/tandc413"
+    /> <TextView
+
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/tandc414"
+    /> <TextView
+
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/tandc415"
+    /> <TextView
+
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/tandc416"
+    /> <TextView
+
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/tandc417"
+    /> <TextView
+
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/tandc418"
+    /> <TextView
+
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/tandc419"
+    /> <TextView
+
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/tandc420"
+    />
+    <TextView
+
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/tandc421"
+    />
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tandc422"
+        />
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tandc423"
+        />
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tandc424"
+        />
+
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tandch5"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tandc5"
+        />
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tandch6"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tandc6"
+        />
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tandch7"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tandc7"
+        />
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tandch8"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tandc8"
+        />
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tandch9"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tandc9"
+        />
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tandch10"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tandc10"
+        />
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tandch11"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tandc11"
+        />
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tandch12"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tandc12"
+        />
+</LinearLayout>
+</ScrollView>

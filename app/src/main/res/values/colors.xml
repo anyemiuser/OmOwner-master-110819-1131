@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#cd4f00</color>
+    <color name="colorPrimaryDark">#cd4f00</color>
+    <color name="colorAccent">#DF2A24</color>
+    <color name="colorAppricat">#ffba74</color>
+    <color name="colorApricot">#ffba74</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorOrange">#f25252</color>
+    <color name="colorGunMetal">#4A4D5B</color>
+    <color name="colorWarmGray">#9a9a9a</color>
+    <color name="colorGreen">#228B22</color>
+</resources>
