@@ -36,6 +36,9 @@ import org.sairaa.omowner.RoomUtility.Model.UtilityRequest;
 import org.sairaa.omowner.RoomUtility.Model.UtilityResponse;
 import org.sairaa.omowner.RoomUtility.Model.UtilityUpdateRequest;
 import org.sairaa.omowner.RoomUtility.Model.UtilityUpdateResponse;
+import org.sairaa.omowner.instamojo.GetOrderIDRequest;
+import org.sairaa.omowner.instamojo.model.InstamojoPaymentModel;
+import org.sairaa.omowner.instamojo.model.IstamojoModel;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -113,5 +116,12 @@ public interface OmRoomApi {
 
   /*  @POST("Owner/api.php?f=hotelcontacts")
     Call<OmContacts> omcontact(@Body OmContacts omcontactsRequest);*/
+
+    @GET("Customer/api.php")
+    Call<InstamojoPaymentModel> getInstaMojoPaymentModes(@Query("f") String typeReport);
+
+
+    @POST("Customer/api.php?f=instamojoorderid")
+    Call<IstamojoModel> generateOrderId(@Body GetOrderIDRequest getOrderIDRequest);
     
     }

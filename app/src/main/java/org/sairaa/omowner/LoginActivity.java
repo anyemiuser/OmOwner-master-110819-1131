@@ -141,6 +141,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void verifyCode(String code){
         Log.e("verification id",""+verificationId);
+
+        registerOnSuccess(phoneNumber);
         if(verificationId != null){
             PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId,code);
 //        Log.e("verification id",""+verificationId);

@@ -54,6 +54,9 @@
                     android:scheme="http" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".instamojo.InstamojoActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

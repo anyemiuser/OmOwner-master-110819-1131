@@ -36,6 +36,8 @@ import org.sairaa.omowner.R;
 import org.sairaa.omowner.Utils.Constants;
 import org.sairaa.omowner.Utils.ConverterUtil;
 import org.sairaa.omowner.Utils.SharedPreferenceConfig;
+import org.sairaa.omowner.instamojo.InstamojoActivity;
+import org.sairaa.omowner.instamojo.model.PaymentRequestModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -209,15 +211,26 @@ public class BookingDetailsActivity extends AppCompatActivity implements Booking
                         // navigate for check in
                         if(ConverterUtil.isDateToday(list.getFrom_date())
                             || ConverterUtil.checkCurrentDateIsLessThenSaved(ConverterUtil.parseDateToddMMMyyyy(list.getFrom_date()))){
-                            Intent checkInIntent = new Intent(this, CheckInForm.class);
+                            Intent checkInIntent = new Intent(this, InstamojoActivity.class);
                             //checkInIntent.putExtra("bookingD", ""+new Gson().toJson(list));
+
+                            PaymentRequestModel paymentRequestModel= new PaymentRequestModel();
+
+                            paymentRequestModel.setAssessment_id(list.getBooking_id());
+                            paymentRequestModel.setExtrafield(list.getUser_name());
+                            paymentRequestModel.setMobile_number(list.getPhone_no());
+                            paymentRequestModel.setTotal_amount("300");
+                            paymentRequestModel.setActualDueAmount("300");
+                            paymentRequestModel.setActualDueAmount("300");
+                            paymentRequestModel.setServiceCharge("0");
 
                             Log.d("id",list.getBooking_id());
                             Log.d("name",list.getUser_name());
                             Log.d("no",list.getPhone_no());
-                            checkInIntent.putExtra("bookingD", list.getBooking_id());
-                            checkInIntent.putExtra("bookingD", list.getUser_name());
-                            checkInIntent.putExtra("bookingD", list.getPhone_no());
+                            //checkInIntent.putExtra("bookingD", list.getBooking_id());
+                            //checkInIntent.putExtra("bookingD", list.getUser_name());
+                            //checkInIntent.putExtra("bookingD", list.getPhone_no());
+                            checkInIntent.putExtra(org.sairaa.omowner.instamojo.Constants.PAYMENT_REQUEST_MODEL,new Gson().toJson(paymentRequestModel));
                             startActivityForResult(checkInIntent,CheckInRequestCode);
                         }else {
                             Toast.makeText(this, "Today is not the Check In Date", Toast.LENGTH_LONG).show();
