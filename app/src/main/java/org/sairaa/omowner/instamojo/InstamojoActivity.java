@@ -25,6 +25,7 @@ import org.sairaa.omowner.Api.ApiUtils;
 import org.sairaa.omowner.Api.OmRoomApi;
 import org.sairaa.omowner.CheckIn.CheckInActivity;
 import org.sairaa.omowner.CheckIn.CheckInForm;
+import org.sairaa.omowner.Model.PaymentResponseModel;
 import org.sairaa.omowner.R;
 import org.sairaa.omowner.instamojo.adapter.PaymentModesAdapter;
 import org.sairaa.omowner.instamojo.model.InstamojoPaymentModel;
@@ -79,7 +80,7 @@ public class InstamojoActivity extends AppCompatActivity implements Instamojo.In
 
         mCurrentEnv = Instamojo.Environment.PRODUCTION;
 
-        Instamojo.getInstance().initialize(InstamojoActivity.this, mCurrentEnv);
+       Instamojo.getInstance().initialize(InstamojoActivity.this, mCurrentEnv);
 
         initView();
         //createActionBar();
@@ -413,32 +414,53 @@ public class InstamojoActivity extends AppCompatActivity implements Instamojo.In
     private void submitPayment() {
 
         Globals.showToast(getApplicationContext(), "Payment Successful");
-//        new BackgroundTask(InstamojoActivity.this, new BackgroundThread() {
-//            @Override
-//            public Object runTask() {
-//                return HomeServices.submitPayment(InstamojoActivity.this, paymentRequestModel);
-//            }
-//
-//            public void taskCompleted(Object data) {
-//                if (data != null || data.equals("")) {
-//                    if (data.toString().contains("SUCCESS")) {
-//                        if (data.toString().contains("SUCCESS")) {
-//                            Globals.showToast(getApplicationContext(), "Payment Successful");
-//                            Intent intent = new Intent(getApplicationContext(), NavigationActivity.class);
-//                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                            intent.putExtra("FRAGMENT", "COLLECTION");
-//                            startActivity(intent);
-//                        }
-//                    }
-//                }
-//            }
-//        }, getString(R.string.loading_txt)).execute();
-//
-//
 
 
-        Intent it = new Intent(InstamojoActivity.this, CheckInActivity.class);
-        startActivity(it);
+        //GetOrderIDRequest getOrderIDRequest = prepRq(type);
+
+
+        OmRoomApi omRoomApi = ApiUtils.getOmRoomApi();
+        //  UserTypeRequest user = new UserTypeRequest(phoneNumber);
+        //  Log.e(LOGIN_TAG,""+new Gson().toJson(user));
+        // omRoomApi.generateOrderId().enqueue(new Callback<getOrderIDRequest>() {
+        omRoomApi.postPay(paymentRequestModel).enqueue(new Callback<PaymentResponseModel>() {
+            @Override
+            public void onResponse(Call<PaymentResponseModel> call, Response<PaymentResponseModel> response) {
+
+                if (response.isSuccessful()) {
+                    PaymentResponseModel paymentResponseModel = response.body();
+                    //Log.e(LOGIN_TAG,""+new Gson().toJson(userTypeResponse));
+
+                    if (paymentResponseModel != null) {
+                        if (paymentResponseModel.getStatus().equals("Success")) {
+
+                            Intent it = new Intent(InstamojoActivity.this, CheckInActivity.class);
+                            startActivity(it);
+
+                            // initiateCustomPayment(checkSumModel.getOrder_id());
+                        } else {
+                            Globals.showToast(getApplicationContext(), "Unable to generate hash");
+                        }
+
+
+                    } else {
+
+                        Toast.makeText(getApplicationContext(), paymentResponseModel.getMsg(), Toast.LENGTH_LONG);
+                    }
+
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<PaymentResponseModel> call, Throwable t) {
+                // Log.e(LOGIN_TAG,""+t.toString());
+                Toast.makeText(InstamojoActivity.this, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
     }
 
 

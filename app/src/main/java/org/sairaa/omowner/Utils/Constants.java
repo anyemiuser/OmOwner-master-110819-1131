@@ -19,6 +19,7 @@ public interface Constants {
 
     String Extend = "extend";
     String CheckInOut = "checkInOut";
+    String CollectAmount = "collectAmount";
     String Cancel = "cancel";
 
     String UpcomingCheckIn = "Check In";

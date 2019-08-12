@@ -9,6 +9,7 @@ import org.sairaa.omowner.Model.CancelRequest;
 import org.sairaa.omowner.Model.CancelResponse;
 import org.sairaa.omowner.Model.CheckOutRequest;
 import org.sairaa.omowner.Model.CheckOutResponse;
+import org.sairaa.omowner.Model.PaymentResponseModel;
 import org.sairaa.omowner.Model.RoomAvailabilityRequest;
 import org.sairaa.omowner.Model.RoomAvailabilityResponse;
 import org.sairaa.omowner.Model.CustomerBookingDetailsRequest;
@@ -39,6 +40,7 @@ import org.sairaa.omowner.RoomUtility.Model.UtilityUpdateResponse;
 import org.sairaa.omowner.instamojo.GetOrderIDRequest;
 import org.sairaa.omowner.instamojo.model.InstamojoPaymentModel;
 import org.sairaa.omowner.instamojo.model.IstamojoModel;
+import org.sairaa.omowner.instamojo.model.PaymentRequestModel;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -123,5 +125,8 @@ public interface OmRoomApi {
 
     @POST("Customer/api.php?f=instamojoorderid")
     Call<IstamojoModel> generateOrderId(@Body GetOrderIDRequest getOrderIDRequest);
+
+    @POST("Customer/api.php?f=pay")
+    Call<PaymentResponseModel> postPay(@Body PaymentRequestModel PaymentRequestModel);
     
     }

@@ -194,7 +194,8 @@ public class BookingDetailsHolder extends RecyclerView.ViewHolder implements Con
                 collectAmount.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        mAdapterCallback.setPaymentRequest(finalBalanceAmount);
+                     //   mAdapterCallback.setPaymentRequest(finalBalanceAmount);
+                        mAdapterCallback.getActionAndBookingList(CollectAmount,bookings);
                     }
                 });
 

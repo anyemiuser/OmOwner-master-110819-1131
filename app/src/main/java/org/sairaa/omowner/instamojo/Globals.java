@@ -44,6 +44,8 @@ public class Globals {
             InstamojoPaymentModel InstamojoPaymentModel,
             String type) {
 
+        paymentRequestModel.setPayment_type("INSTAMOJO");
+
         try {
 
             List<InstamojoPaymentModel.InstServiceTaxBean> taxArrayBean = new ArrayList<>();
