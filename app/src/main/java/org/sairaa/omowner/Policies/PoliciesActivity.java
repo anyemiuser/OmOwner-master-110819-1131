@@ -1,12 +1,10 @@
 package org.sairaa.omowner.Policies;
 
-import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 
 
 import org.sairaa.omowner.R;
@@ -14,6 +12,16 @@ import org.sairaa.omowner.R;
 public class PoliciesActivity extends AppCompatActivity {
 
     ActionBar actionBar;
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
+    }
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,9 +34,13 @@ public class PoliciesActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);*/
 
-
-        Toolbar toolbar = (Toolbar)findViewById(R.id.tool_bar);
-        setSupportActionBar(toolbar);
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        if(actionBar!= null) {
+            actionBar.setTitle("Policies");
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+     /*   Toolbar toolbar = (Toolbar)findViewById(R.id.tool_bar);
+        setSupportActionBar(toolbar);*/
        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Terms and Conditions"));
         tabLayout.addTab(tabLayout.newTab().setText("Privacy"));

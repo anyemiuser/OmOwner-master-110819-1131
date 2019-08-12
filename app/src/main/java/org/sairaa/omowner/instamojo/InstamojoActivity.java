@@ -23,6 +23,8 @@ import com.instamojo.android.Instamojo;
 
 import org.sairaa.omowner.Api.ApiUtils;
 import org.sairaa.omowner.Api.OmRoomApi;
+import org.sairaa.omowner.CheckIn.CheckInActivity;
+import org.sairaa.omowner.CheckIn.CheckInForm;
 import org.sairaa.omowner.R;
 import org.sairaa.omowner.instamojo.adapter.PaymentModesAdapter;
 import org.sairaa.omowner.instamojo.model.InstamojoPaymentModel;
@@ -306,7 +308,7 @@ public class InstamojoActivity extends AppCompatActivity implements Instamojo.In
         showToast("Checking transaction status");
         Call<GatewayOrderStatus> getOrderStatusCall = myBackendService.orderStatus(mCurrentEnv.name().toLowerCase(),
                 orderID, transactionID);
-        getOrderStatusCall.enqueue(new retrofit2.Callback<GatewayOrderStatus>() {
+        getOrderStatusCall.enqueue(new Callback<GatewayOrderStatus>() {
             @Override
             public void onResponse(Call<GatewayOrderStatus> call, final Response<GatewayOrderStatus> response) {
                 if (dialog != null && dialog.isShowing()) {
@@ -357,7 +359,7 @@ public class InstamojoActivity extends AppCompatActivity implements Instamojo.In
         Call<ResponseBody> refundCall = myBackendService.refundAmount(
                 mCurrentEnv.name().toLowerCase(),
                 transactionID, amount);
-        refundCall.enqueue(new retrofit2.Callback<ResponseBody>() {
+        refundCall.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (dialog != null && dialog.isShowing()) {
@@ -433,6 +435,10 @@ public class InstamojoActivity extends AppCompatActivity implements Instamojo.In
 //        }, getString(R.string.loading_txt)).execute();
 //
 //
+
+
+        Intent it = new Intent(InstamojoActivity.this, CheckInActivity.class);
+        startActivity(it);
     }
 
 

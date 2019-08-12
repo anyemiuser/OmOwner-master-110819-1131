@@ -53,6 +53,6 @@ class UtilityDetailAdapter extends RecyclerView.Adapter<UtilItemViewHolder> {
     }
 
     interface UtilAdapterCallback{
-        void setUtilityStatus(RoomUtility utility,String roomType);
+        void setUtilityStatus(RoomUtility utility, String roomType);
     }
 }

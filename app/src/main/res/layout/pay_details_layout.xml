@@ -151,7 +151,7 @@
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:text="Collect Amount"
-            android:visibility="invisible"
+            android:visibility="visible"
             android:layout_marginBottom="8dp"/>
 
         <Button

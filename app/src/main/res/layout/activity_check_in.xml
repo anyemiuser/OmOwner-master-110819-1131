@@ -19,6 +19,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+
+
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/room_id_rv"
         android:layout_width="0dp"
