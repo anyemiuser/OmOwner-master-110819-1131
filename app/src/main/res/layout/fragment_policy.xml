@@ -6,6 +6,7 @@
     <LinearLayout android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp">
         <TextView
@@ -13,12 +14,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/policyhead"
+            android:textStyle="bold"
             android:textAppearance="?android:attr/textAppearanceMedium"/>
 
         <TextView
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="@string/policyhd"
             />
         <TextView
@@ -34,12 +37,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/policyh1"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
             android:textAppearance="?android:attr/textAppearanceMedium"/>
 
         <TextView
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="@string/policy1"
             />
 
@@ -48,12 +54,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/policyh2"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
             android:textAppearance="?android:attr/textAppearanceMedium"/>
 
         <TextView
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="@string/policy2"
             />
 
@@ -61,6 +70,8 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
             android:text="@string/policyh3"
             android:textAppearance="?android:attr/textAppearanceMedium"/>
 
@@ -68,6 +79,7 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="@string/policy3"
             />
 
@@ -77,6 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/policyh4"
+            android:textStyle="bold"
             android:textAppearance="?android:attr/textAppearanceMedium"/>
 
         <TextView
@@ -90,6 +103,8 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
             android:text="@string/policyh5"
             android:textAppearance="?android:attr/textAppearanceMedium"/>
 
@@ -97,6 +112,7 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="@string/policy5"
             />
         <TextView
@@ -104,12 +120,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/policyh6"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
             android:textAppearance="?android:attr/textAppearanceMedium"/>
 
         <TextView
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="@string/policy6"
             />
         <TextView
@@ -117,18 +136,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/policyh7"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
             android:textAppearance="?android:attr/textAppearanceMedium"/>
 
         <TextView
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="@string/policy7"
             />
         <TextView
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
             android:text="@string/policyh8"
             android:textAppearance="?android:attr/textAppearanceMedium"/>
 
@@ -136,6 +160,7 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="@string/policy8"
             />
         <TextView
@@ -143,18 +168,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/policyh9"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
             android:textAppearance="?android:attr/textAppearanceMedium"/>
 
         <TextView
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="@string/policy9"
             />
         <TextView
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
             android:text="@string/policyh10"
             android:textAppearance="?android:attr/textAppearanceMedium"/>
 
@@ -162,6 +192,7 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="@string/policy10"
             />
         <TextView
@@ -169,12 +200,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/policyh11"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
             android:textAppearance="?android:attr/textAppearanceMedium"/>
 
         <TextView
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="@string/policy11"
             />
 
@@ -183,12 +217,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/policyh12"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
             android:textAppearance="?android:attr/textAppearanceMedium"/>
 
         <TextView
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
+            android:layout_marginTop="10dp"
             android:text="@string/policy12"
             />
 
@@ -197,6 +235,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/policyh13"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
             android:textAppearance="?android:attr/textAppearanceMedium"/>
 
         <TextView

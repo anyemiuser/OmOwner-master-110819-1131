@@ -1,7 +1,9 @@
 package org.sairaa.omowner.Main;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
@@ -29,6 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.sairaa.omowner.BookingDetails.BookingDetailsActivity;
+import org.sairaa.omowner.CheckIn.CheckInActivity;
 import org.sairaa.omowner.HomeRules.HomeRulesActivity;
 import org.sairaa.omowner.HotelContact.YourHotelContacts;
 import org.sairaa.omowner.LoginActivity;
@@ -353,7 +356,189 @@ public class MainActivity extends AppCompatActivity
                 m.findItem(R.id.nav_policies).setVisible(b);
                 m.findItem(R.id.nav_help).setVisible(b);
                 return true;
-        }else if (id == R.id.nav_omsupport) {
+        }else if (id == R.id.nav_raiseissue) {
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+            View mview = getLayoutInflater().inflate(R.layout.dialog_spinner,null);
+            alertDialog.setTitle("Raise an Issue");
+            final Spinner sp = mview.findViewById(R.id.spinner);
+            final Spinner sp1 = mview.findViewById(R.id.spinner1);
+            final Spinner sp3 = mview.findViewById(R.id.spinner3);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_spinner_dropdown_item
+                    ,getResources().getStringArray(R.array.Main));
+
+
+
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            sp.setAdapter(adapter);
+
+            sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+            {
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+                {
+                    String selectedItem = parent.getItemAtPosition(position).toString();
+                    if(selectedItem.equals("Guest Experience"))
+                    {
+                        // do your stuff
+                        sp1.setVisibility(View.VISIBLE);
+                        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_spinner_dropdown_item
+                                ,getResources().getStringArray(R.array.Sub_Guest));
+                        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        sp1.setAdapter(adapter1);
+
+
+                    }
+                    else if(selectedItem.equals("Manage Property on OM App"))
+                    {
+                        // do your stuff
+                        sp1.setVisibility(View.VISIBLE);
+                        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_spinner_dropdown_item
+                                ,getResources().getStringArray(R.array.Sub_Manage));
+
+                        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        sp1.setAdapter(adapter1);
+
+                    }
+                    else if(selectedItem.equals("Revenue related enquiry"))
+                    {
+                        // do your stuff
+                        sp1.setVisibility(View.VISIBLE);
+                        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_spinner_dropdown_item
+                                ,getResources().getStringArray(R.array.Sub_Revenue));
+
+                        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        sp1.setAdapter(adapter1);
+
+                    }
+                    else if(selectedItem.equals("General Requests and Feedback"))
+                    {
+
+                        // do your stuff
+                        sp1.setVisibility(View.VISIBLE);
+                        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_spinner_dropdown_item
+                                ,getResources().getStringArray(R.array.Sub_General));
+
+                        // adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        sp1.setAdapter(adapter1);
+
+                    }
+                    else  if(selectedItem.equals("Products and Services"))
+                    {
+                        // do your stuff
+                        sp1.setVisibility(View.VISIBLE);
+                        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_spinner_dropdown_item
+                                ,getResources().getStringArray(R.array.Sub_General));
+
+                        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        sp1.setAdapter(adapter1);
+
+                    }
+                    else  if(selectedItem.equals("Tech Issues"))
+                    {
+                        // do your stuff
+                        sp1.setVisibility(View.VISIBLE);
+                        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_spinner_dropdown_item
+                                ,getResources().getStringArray(R.array.Sub_Tech));
+
+                        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        sp1.setAdapter(adapter1);
+
+                    }
+                    else  if(selectedItem.equals("Value Added Services Enquiry"))
+                    {
+                        // do your stuff
+
+                        sp1.setVisibility(View.GONE);
+
+                    }
+                    else  if(selectedItem.equals("Others"))
+                    {
+                        // do your stuff
+                        sp1.setVisibility(View.GONE);
+
+                    }
+
+
+
+                } // to close the onItemSelected
+                public void onNothingSelected(AdapterView<?> parent)
+                {
+
+                }
+            });
+
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            sp.setAdapter(adapter);
+
+            sp1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+            {
+
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    String selectedItem = parent.getItemAtPosition(position).toString();
+                    if (selectedItem.equals("Update Owner info")) {
+                        // do your stuff
+                        sp3.setVisibility(View.VISIBLE);
+                        ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_spinner_dropdown_item
+                                , getResources().getStringArray(R.array.Sub_sub_Update));
+                        adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        sp3.setAdapter(adapter3);
+
+
+                    }
+                    else {
+                        sp3.setVisibility(View.GONE);
+                    }
+                }
+                public void onNothingSelected(AdapterView<?> parent)
+                {
+
+                }
+            });
+
+
+
+
+
+
+            alertDialog.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    if(!sp.getSelectedItem().toString().equals("")){
+
+                       // if(!sp1.getSelectedItem().toString().equals("")){
+
+                           /// if(!sp3.getSelectedItem().toString().equals("")){
+                                Toast.makeText(MainActivity.this,"Issue Raised Successfully", Toast.LENGTH_SHORT).show();
+
+                                dialogInterface.dismiss();
+                            /*}
+                            else
+                            {
+                                Toast.makeText(MainActivity.this,"Select Sub SubCategory", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        else
+                        {
+                            Toast.makeText(MainActivity.this,"Please Select SubCategory", Toast.LENGTH_SHORT).show();
+                        }*/
+                    }
+                    else
+                    {
+                        Toast.makeText(MainActivity.this,"Please Select Category", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+            alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            });
+            alertDialog.setView(mview);
+            AlertDialog dialog = alertDialog.create();
+            dialog.show();
+
+        }
+        else if (id == R.id.nav_omsupport) {
             Intent intent = new Intent(this, OmSupportActivity.class);
             startActivity(intent);
 
@@ -363,6 +548,11 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_your_hotel_Contacts) {
             Intent intent = new Intent(this, YourHotelContacts.class);
+            startActivity(intent);
+
+        }
+        else if (id == R.id.nav_room) {
+            Intent intent = new Intent(this, CheckInActivity.class);
             startActivity(intent);
 
         }

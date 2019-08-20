@@ -32,16 +32,15 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp"
                 android:paddingTop="25dp"
-
+                android:layout_weight="1"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textSize="15dp" />
 
             <Switch
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="200dp"
-                android:layout_marginTop="-2.5dp"
                 android:checked="true"
+                android:layout_weight="1"
                 android:switchMinWidth="56dp"
                 android:textOff="OFF"
                 android:textOn="ON" />
@@ -58,15 +57,16 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp"
                 android:paddingTop="25dp"
+                android:layout_weight="1"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textSize="15dp" />
 
             <Switch
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="142dp"
                 android:layout_marginTop="-2dp"
                 android:checked="true"
+                android:layout_weight="1"
                 android:switchMinWidth="56dp"
                 android:textOff="OFF"
                 android:textOn="ON" />
@@ -80,18 +80,19 @@
                 android:id="@+id/rule3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="20dp"
                 android:paddingTop="25dp"
+                android:paddingLeft="20dp"
+                android:layout_weight="1"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textSize="15dp" />
 
             <Switch
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="197dp"
                 android:layout_marginTop="-2dp"
                 android:checked="true"
                 android:switchMinWidth="56dp"
+                android:layout_weight="1"
                 android:textOff="OFF"
                 android:textOn="ON" />
 
@@ -106,7 +107,8 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp"
                 android:paddingTop="25dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:switchMinWidth="56dp"
+                android:layout_weight="1"
                 android:textSize="15dp" />
 
             <Switch
@@ -115,6 +117,7 @@
                 android:layout_marginLeft="154dp"
                 android:layout_marginTop="-2dp"
                 android:checked="true"
+                android:layout_weight="1"
                 android:switchMinWidth="56dp"
                 android:textOff="OFF"
                 android:textOn="ON" />
@@ -159,6 +162,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp"
                 android:paddingTop="25dp"
+                android:layout_weight="1"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textSize="15dp" />
 
@@ -168,13 +172,15 @@
                 android:layout_marginLeft="135dp"
                 android:layout_marginTop="-2dp"
                 android:checked="true"
+                android:layout_weight="1"
                 android:switchMinWidth="56dp"
                 android:textOff="OFF"
                 android:textOn="ON" />
 
-        </LinearLayout>  <LinearLayout
+        </LinearLayout>
+        <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="55dp">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/rule6"
@@ -182,6 +188,7 @@
             android:layout_height="wrap_content"
             android:paddingLeft="20dp"
             android:paddingTop="25dp"
+            android:layout_weight="1"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="15dp" />
 
@@ -192,6 +199,7 @@
             android:layout_marginTop="-2dp"
             android:checked="true"
             android:switchMinWidth="56dp"
+            android:layout_weight="1"
             android:textOff="OFF"
             android:textOn="ON" />
 
@@ -212,10 +220,7 @@
                 android:paddingRight="25dp"
                 android:text="Allow"
                 android:textAppearance="@style/TextAppearance.AppCompat.Button" />
-
         </LinearLayout>
 
     </LinearLayout>
-
-
 </LinearLayout>

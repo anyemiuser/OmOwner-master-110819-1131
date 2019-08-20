@@ -31,7 +31,7 @@ public class BookingDetailsAdapter extends RecyclerView.Adapter<BookingDetailsHo
         }
     }
 
-    public void updateList(List<CustomerBookings> bookings){
+    public void updateList(List<CustomerBookings> bookings)  {
 //        customerBookingsList.clear();
 
         customerBookingsList = bookings;
@@ -51,8 +51,6 @@ public class BookingDetailsAdapter extends RecyclerView.Adapter<BookingDetailsHo
         CustomerBookings bookings = customerBookingsList.get(position);
         holder.setAdapertCallBack(mAdapterCallback);
         holder.set(bookings);
-
-
     }
 
     @Override

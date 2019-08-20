@@ -122,7 +122,6 @@ public interface OmRoomApi {
     @GET("Customer/api.php")
     Call<InstamojoPaymentModel> getInstaMojoPaymentModes(@Query("f") String typeReport);
 
-
     @POST("Customer/api.php?f=instamojoorderid")
     Call<IstamojoModel> generateOrderId(@Body GetOrderIDRequest getOrderIDRequest);
 

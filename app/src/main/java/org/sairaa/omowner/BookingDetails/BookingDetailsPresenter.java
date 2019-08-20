@@ -24,6 +24,7 @@ public class BookingDetailsPresenter implements BookingDetailContract.UserAction
         this.bookingView = bookingView;
     }
 
+
     @Override
     public void getDetailsFromResultIntent() {
 
@@ -65,7 +66,6 @@ public class BookingDetailsPresenter implements BookingDetailContract.UserAction
                 Log.e(TAG_BOOKING_PRESENTER,"error :"+t.toString());
             }
         });
-
     }
 
     @Override

@@ -135,14 +135,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         @Override
         public void onVerificationFailed(FirebaseException e) {
             Toast.makeText(LoginActivity.this,""+e,Toast.LENGTH_SHORT).show();
-
+           // Toast.makeText(LoginActivity.this,"Verfication Failed",Toast.LENGTH_SHORT).show();
         }
     } ;
 
     private void verifyCode(String code){
         Log.e("verification id",""+verificationId);
-
-        registerOnSuccess(phoneNumber);
         if(verificationId != null){
             PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId,code);
 //        Log.e("verification id",""+verificationId);
@@ -210,13 +208,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onFailure(Call<UserTypeResponse> call, Throwable t) {
                 Log.e(LOGIN_TAG,""+t.toString());
                 Toast.makeText(LoginActivity.this, ""+t.getMessage(), Toast.LENGTH_SHORT).show();
+               // Toast.makeText(LoginActivity.this, "You Have Entered Wrong OTP", Toast.LENGTH_SHORT).show();
             }
         });
 
 
 //        omRoomApi.postUserRegister(user).enqueue(new Callback<UserResponse>() {
-        
-        
+
+
     }
 
     private void notAuthorizedAndClose() {
@@ -234,7 +233,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             registerOnSuccess(phoneNumber);
 
                         }else {
-                            Toast.makeText(LoginActivity.this,"Unsuccessful"+task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(LoginActivity.this,"Unsuccessful"+task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this,"You Have Entered Wrong OTP",Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

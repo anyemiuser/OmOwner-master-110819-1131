@@ -18,34 +18,37 @@
                 android:layout_gravity="center"
                 android:background="@color/colorAppricat"
                 android:foregroundGravity="center"
-                android:paddingTop="30dp"
-                android:text="         For any help. Please contact the following"
+                android:text="For any help. Please contact the following"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
                 android:textColor="@color/colorOrange"
                 android:textSize="18dp"
+                android:gravity="center"
+
                 android:textStyle="italic" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
 
 
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Helpdesk           :"
+                    android:text="Helpdesk:"
                     android:paddingTop="25dp"
+                    android:layout_weight="1"
                     android:textSize="15dp"
                     android:textStyle="bold"
-                    android:paddingLeft="20dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
                 <TextView
                     android:id="@+id/helpdesk_number1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="46dp"
+                    android:layout_weight="1"
                     android:text="+91 8008612200"
                     android:textStyle="normal"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
@@ -53,47 +56,89 @@
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/helpdesk_number2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="+91 8008615500"
-                android:paddingLeft="175dp"
-                android:paddingTop="15sp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
-            <TextView
-                android:id="@+id/helpdesk_email"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" helpdesk@anyemi.com"
-                android:paddingLeft="175dp"
-                android:paddingTop="15sp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="15dp">
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp">
 
 
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Reconciliation  :"
-                    android:paddingTop="25dp"
+                    android:layout_weight="1"
                     android:textSize="15dp"
-                    android:paddingLeft="20dp"
+                    android:textStyle="bold"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+
+                <TextView
+                    android:id="@+id/helpdesk_number2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="+91 8008615500"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp">
+
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+                <TextView
+                    android:id="@+id/helpdesk_email"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text=" helpdesk@anyemi.com"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
+
+                 </LinearLayout>
+
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp">
+
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Reconciliation:"
+                    android:layout_weight="1"
+                    android:textSize="15dp"
                     android:textStyle="bold"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
                 <TextView
                     android:id="@+id/reconciliation"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="accounts@anyemi.com"
-                    android:paddingTop="15sp"
-                    android:paddingLeft="50dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
             </LinearLayout>
 
@@ -101,36 +146,30 @@
 
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="15dp">
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="20dp"
-                    android:paddingTop="30dp"
-                    android:text="Tech Support    :"
+                    android:text="Tech Support :"
+                    android:layout_weight="1"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textSize="15dp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/TechSupport"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:paddingTop="15sp"
                     android:text="support@anyemi.com"
-                    android:paddingLeft="45dp"
+                    android:layout_weight="1"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
             </LinearLayout>
 
-
-
         </LinearLayout>
-
-
-
-
 
 </LinearLayout>

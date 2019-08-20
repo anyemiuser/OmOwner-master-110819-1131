@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Om Receptionist</string>
+    <string name="app_name">OM Room Receptionist</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -199,8 +199,102 @@ You also have a right to make a complaint to your local privacy supervisory auth
     <string name="policy17">A list of the EU data protection supervisory authorities is here</string>
 
 
+    <string-array name="Main">
+        <item>Please Select Category</item>
+        <item>Guest Experience</item>
+        <item>Manage Property on OM App</item>
+        <item>Revenue related enquiry</item>
+        <item>General Requests and Feedback</item>
+        <item>Products and Services</item>
+        <item>Tech Issues</item>
+        <item>Issue with OM Staff</item>
+        <item>Value Added Services Enquiry</item>
+        <item>Others</item>
+
+    </string-array>
+    <string-array name="Sub_Guest">
+        <item>Please Select SubCategory</item>
+        <item>OM feedback rating</item>
+        <item>Issue in providing Check-In to Customer</item>
+        <item>Undesirable elements/Dissatisfaction</item>
+        <item>Highlight case of customer misbehavior</item>
+        <item>Raise Booking related complaints</item>
 
 
+    </string-array>
+
+
+    <string-array name="Sub_Manage">
+        <item>Please Select SubCategory</item>
+        <item>Get hotel amenities updated</item>
+        <item>Get House Rules updated</item>
+        <item>Get map link updated</item>
+        <item>Get property address updated</item>
+        <item>Get hotel images updated</item>
+        <item>Seek help to get listed on Online APP</item>
+
+
+    </string-array>
+    <string-array name="Sub_Revenue">
+        <item>Please Select SubCategory</item>
+        <item>Enquiry on Minimum Selling Price</item>
+        <item>Not satisfied with occupancy rate</item>
+        <item>Not satisfied with selling price</item>
+        <item>Not satisfied with booking cancellation</item>
+        <item>Raise Booking related complaints</item>
+
+
+    </string-array>
+    <string-array name="Sub_General">
+        <item>Please Select SubCategory</item>
+        <item>GST related query</item>
+        <item>Update Owner info</item>
+        <item>Give your suggestions</item>
+        <item>Refer another property to OM</item>
+
+
+    </string-array>
+    <string-array name="Sub_Products">
+        <item>Please Select SubCategory</item>
+        <item>Issue with Phone/Tablet</item>
+        <item>Earnings Report Training</item>
+        <item>Owner Portal Training</item>
+        <item>Property Manager Tablet/Phone Training</item>
+        <item>Change Owner App password</item>
+        <item>Forgot Owner App login Credentials</item>
+
+
+    </string-array>
+    <string-array name="Sub_Tech">
+        <item>Please Select SubCategory</item>
+        <item>Incorrect Data/Data not visible</item>
+        <item>Not receiving One Time Password</item>
+        <item>Property Manager application not working</item>
+        <item>Owner Portal is not functioning properly</item>
+        <item>others</item>
+
+    </string-array>
+    <string-array name="Sub_sub_Update">
+
+        <item>Please Select SubCategory</item>
+        <item>Link Multiple Properties to single</item>
+        <item>Bank Details Updation</item>
+        <item>GST/PAN Updation</item>
+        <item>Email Updation</item>
+        <item>Phone Updation</item>
+
+
+    </string-array>
+
+
+    <string-array name="Addressproof">
+
+        <item>Select One</item>
+        <item>Aadhar Card</item>
+        <item>Passport</item>
+        <item>Driving Licence</item>
+        <item>Voter ID</item>
+    </string-array>
 
 
 

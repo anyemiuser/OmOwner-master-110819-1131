@@ -15,7 +15,7 @@
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Amentities" />
+            android:title="Amenties" />
 
         <item
             android:id="@+id/nav_utility"
@@ -45,12 +45,12 @@
 
         <item
             android:id="@+id/nav_omsupport"
-            android:icon="@drawable/ic_help"
+            android:icon="@drawable/ic_support"
             android:title="Om Support"
             android:visible="false"/>
         <item
             android:id="@+id/nav_raiseissue"
-            android:icon="@drawable/ic_raise_issue"
+            android:icon="@drawable/ic_raise"
             android:title="Raise Issue"
             android:visible="false"/>
         <item

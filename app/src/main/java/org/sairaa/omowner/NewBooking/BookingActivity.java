@@ -71,7 +71,7 @@ public class BookingActivity extends AppCompatActivity implements View.OnClickLi
     private TextView nights;
     private Button bookRoom;
     private ImageView successImage;
-
+    EditText phoneNo;
     BookingViewModel bookingViewModel;
     private ViewPager viewPager;
     private AlertDialog alertDialog;
@@ -310,6 +310,13 @@ public class BookingActivity extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.book_room:
 
+
+
+
+
+
+
+
                 List<BookingModel> bookingModels = new ArrayList<>();
                 List<RoomTypePrice> roomT = Objects.requireNonNull(bookingViewModel.getRoomTypesAvailable().getValue());
 
@@ -366,7 +373,7 @@ public class BookingActivity extends AppCompatActivity implements View.OnClickLi
         alertDialog.show();
         alertDialog.setCancelable(false);
 
-        EditText phoneNo = viewX.findViewById(R.id.phone_no_v);
+       phoneNo = viewX.findViewById(R.id.phone_no_v);
         if(phoneNumber != null && !phoneNumber.isEmpty()){
             phoneNo.setText(phoneNumber);
         }
@@ -504,6 +511,7 @@ public class BookingActivity extends AppCompatActivity implements View.OnClickLi
                                 break;
                             case 1:
                                 bookingViewModel.retrieveAndBook(phoneNo.getText().toString().trim());
+                                //bookRooms(phoneNo.getText().toString().trim());
                                 break;
                             case 2:
                                 //update
@@ -544,6 +552,7 @@ public class BookingActivity extends AppCompatActivity implements View.OnClickLi
                                 break;
                                 default:
                                     alertDialog.dismiss();
+
                                     bookRooms(phoneNo.getText().toString().trim());
                                     phoneNo.setEnabled(true);
                                     getORRegister = 0;
@@ -620,11 +629,72 @@ public class BookingActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    private void selectPaymentMode(Booking booking) {
+
+   //original code
+   /* private void selectPaymentMode(Booking booking) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Select Your Booking Procedure");
         builder.setCancelable(false);
         View mView = getLayoutInflater().inflate(R.layout.alert_layout, null);
+        builder.setView(mView);
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+        alertDialog.setCancelable(false);
+        mView.findViewById(R.id.cancel_text).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.setCancelable(true);
+                alertDialog.dismiss();
+            }
+        });
+        mView.findViewById(R.id.pay_at_hotel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.setCancelable(true);
+                alertDialog.dismiss();
+                booking.setTransaction_id(null);
+                booking.setTransaction_status(null);
+                Log.e(TAG_BOOKING_ACTIVITY,"pay at hotel: "+new Gson().toJson(booking));
+                bookRoomsWithPaymentStatus(booking);
+
+            }
+        });
+        mView.findViewById(R.id.payment).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.setCancelable(true);
+                alertDialog.dismiss();
+
+//                int id = Integer.parseInt(sharedPreferenceConfig.readPhoneNo());
+                Double totalPrice =0.00;
+                for(int i= 0; i<modelsForBooking.size();i++){
+                    totalPrice = totalPrice+ modelsForBooking.get(i).getNo_of_room_booked()*Double.parseDouble(modelsForBooking.get(i).getPrice_to_be_paid());
+                }
+
+//                PaymentRequestModel paymentRequestModel = new PaymentRequestModel();
+//
+//                paymentRequestModel.setMobile_number(sharedPreferenceConfig.readPhoneNo());
+//                paymentRequestModel.setEmi_ids( booking.getUser_id());
+////                paymentRequestModel.setTotal_amount( String.valueOf(totalPrice));
+//                paymentRequestModel.setTotal_amount( String.valueOf(1));
+//
+////                    Intent intent = new Intent(HotelActivity.this,PaymentActivity.class);
+//                Intent intent = new Intent(HotelActivity.this, PaymentModeActivityNew.class);
+//                intent.putExtra(Constants.PAYMENT_REQUEST_MODEL,new Gson().toJson(paymentRequestModel));
+//                intent.putExtra("user_id",sharedPreferenceConfig.readPhoneNo());
+                Intent intent = new Intent(BookingActivity.this, CollectionActivity.class);
+                startActivityForResult(intent,5);
+
+            }
+        });
+    }*/
+
+
+    private void selectPaymentMode(Booking booking) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Are you Sure?");
+        builder.setCancelable(false);
+        View mView = getLayoutInflater().inflate(R.layout.alert_layout1, null);
         builder.setView(mView);
         AlertDialog alertDialog = builder.create();
         alertDialog.show();

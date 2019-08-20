@@ -55,7 +55,7 @@ public class UtilityActivity extends AppCompatActivity implements View.OnClickLi
         initialize();
         ActionBar actionBar = getSupportActionBar();
         if(actionBar!= null){
-            actionBar.setTitle("Utility");
+            actionBar.setTitle("Amenity Details");
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
         UtilityRequest utilityRequest = new UtilityRequest(new SharedPreferenceConfig(this).readHotelId());

@@ -7,6 +7,7 @@
 
     <Button
         android:id="@+id/pay_at_hotel"
+        style="@style/buttonStyle"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
@@ -15,12 +16,11 @@
         android:layout_marginBottom="16dp"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
-        android:text="Pay At Hotel"
-        style="@style/buttonStyle"
+        android:text="Pay By Cash"
         android:theme="@style/AppTheme.CustomButton"
         app:layout_constraintBottom_toTopOf="@+id/payment"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -51,7 +51,7 @@ public class HomeRulesActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         if(actionBar!= null) {
-            actionBar.setTitle("Home Rules");
+            actionBar.setTitle("Hotel Rules");
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 

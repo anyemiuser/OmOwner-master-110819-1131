@@ -115,6 +115,7 @@ public class BookingDetailsHolder extends RecyclerView.ViewHolder implements Con
                     checkInOut.setVisibility(View.GONE);
                     extend.setVisibility(View.GONE);
                     cancel.setVisibility(View.GONE);
+                    collectAmount.setVisibility(View.GONE);
 
                 }else {
                     checkInOut.setText(ConverterUtil.getCheckInCheckOutType(type));
@@ -179,7 +180,7 @@ public class BookingDetailsHolder extends RecyclerView.ViewHolder implements Con
 //            List<RoomTypeDetails> roomTypeDetails =  bookings.getRoomtype();
                     String roomTypeNo = "";
                     int noGuest = 0;
-                    for (RoomTypeDetails roomD: bookings.getRoomtype()){
+                    for (RoomTypeDetails roomD: bookings.getRoomtype())   {
                         roomTypeNo = roomTypeNo.concat(roomD.getRoom_type()).concat(" ").concat(roomD.getBooked().concat("\n"));
 
                         noGuest = noGuest+ Integer.parseInt(roomD.getTotalguests());

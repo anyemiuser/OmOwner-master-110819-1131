@@ -24,7 +24,6 @@ import com.instamojo.android.Instamojo;
 import org.sairaa.omowner.Api.ApiUtils;
 import org.sairaa.omowner.Api.OmRoomApi;
 import org.sairaa.omowner.CheckIn.CheckInActivity;
-import org.sairaa.omowner.CheckIn.CheckInForm;
 import org.sairaa.omowner.Model.PaymentResponseModel;
 import org.sairaa.omowner.R;
 import org.sairaa.omowner.instamojo.adapter.PaymentModesAdapter;

@@ -64,10 +64,10 @@ public class CheckInActivity extends AppCompatActivity implements CheckInContrac
         setContentView(R.layout.activity_check_in);
 
         ActionBar actionBar = this.getSupportActionBar();
-        if (actionBar != null) {
+       /* if (actionBar != null) {
 
             actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+        }*/
 
 
         viewModel = ViewModelProviders.of(this).get(CheckInViewModel.class);
