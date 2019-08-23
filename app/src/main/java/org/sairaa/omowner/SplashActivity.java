@@ -32,7 +32,8 @@ public class SplashActivity extends AppCompatActivity {
         if (sharedPreferenceConfig.readPhoneNo()!=null) {
             i = MainActivity.getStartIntent(SplashActivity.this);
         } else {
-            i = LoginActivity.getStartIntent(SplashActivity.this);
+           i = LoginActivity.getStartIntent(SplashActivity.this);
+           // i = MainActivity.getStartIntent(SplashActivity.this);
         }
 
         // TODO :: check for the user_token here & redirect to corresponding class

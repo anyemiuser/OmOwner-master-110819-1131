@@ -502,24 +502,46 @@ public class MainActivity extends AppCompatActivity
             alertDialog.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    if(!sp.getSelectedItem().toString().equals("")){
+                    if(!sp.getSelectedItem().toString().equals("Select Category")){
+                        if(sp.getSelectedItem().toString().equals("Issue with OM Staff")
+                                && sp.getSelectedItem().toString().equals("Value Added Services Enquiry")
+                                && sp.getSelectedItem().toString().equals("Others")) {
 
-                       // if(!sp1.getSelectedItem().toString().equals("")){
 
-                           /// if(!sp3.getSelectedItem().toString().equals("")){
-                                Toast.makeText(MainActivity.this,"Issue Raised Successfully", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "Issue Raised Successfully", Toast.LENGTH_SHORT).show();
+
+                            dialogInterface.dismiss();
+                        }
+                        else {
+                            if (!sp1.getSelectedItem().toString().equals("Select SubCategory")) {
+                                if (!sp1.getSelectedItem().toString().equals("Update Owner info")) {
+                                /// if(!sp3.getSelectedItem().toString().equals("")){
+                                Toast.makeText(MainActivity.this, "Issue Raised Successfully", Toast.LENGTH_SHORT).show();
 
                                 dialogInterface.dismiss();
                             /*}
                             else
                             {
                                 Toast.makeText(MainActivity.this,"Select Sub SubCategory", Toast.LENGTH_SHORT).show();
+                            }*/
+                            }
+                            else {
+                                    if (!sp3.getSelectedItem().toString().equals("Select One")) {
+                                        Toast.makeText(MainActivity.this, "Issue Raised Successfully", Toast.LENGTH_SHORT).show();
+
+                                        dialogInterface.dismiss();
+                                    }
+                                    else
+                                    {
+                                        Toast.makeText(MainActivity.this, "Select Sub SubCategory", Toast.LENGTH_SHORT).show();
+                                    }
+                             }
+
+
+                        }else {
+                                Toast.makeText(MainActivity.this, "Please Select SubCategory", Toast.LENGTH_SHORT).show();
                             }
                         }
-                        else
-                        {
-                            Toast.makeText(MainActivity.this,"Please Select SubCategory", Toast.LENGTH_SHORT).show();
-                        }*/
                     }
                     else
                     {
