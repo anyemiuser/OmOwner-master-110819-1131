@@ -3,7 +3,9 @@ package com.anyemi.omrooms.payment.connection;
 import android.content.Context;
 
 import com.anyemi.omrooms.payment.CheackValidVpaModel;
+import com.anyemi.omrooms.payment.Constants;
 import com.anyemi.omrooms.payment.PaymentRequestModel;
+import com.anyemi.omrooms.payment.instamojo.GetOrderIDRequest;
 
 
 /**
@@ -19,7 +21,12 @@ public class HomeServices {
             e.printStackTrace();
             return e;
         }
-    } public static Object getConsumerDetails(Context aContext, String loginRequest) {
+    }
+
+
+
+
+    public static Object getConsumerDetails(Context aContext, String loginRequest) {
         try {
             return Connection.callHttpPostRequestsV2Jobj(aContext, Constants.GET_COSUMER_DETAILS, loginRequest);
         } catch (Exception e) {
@@ -47,14 +54,7 @@ public class HomeServices {
     }
 
 
-    public static Object test(Context aContext, String loginRequest) {
-        try {
-            return Connection.callHttpPostRequestsV2Jobj(aContext, Constants.POST_GENERATE_HASH2, loginRequest);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return e;
-        }
-    }
+
 
     public static Object resetPassword(Context aContext, String loginRequest) {
         try {
@@ -103,7 +103,6 @@ public class HomeServices {
     }
 
 
-
     public static Object getCollectionRecords(Context aContext, String id) {
         try {
             return Connection.callHttpGetRequestsV2(aContext, Constants.GET_COLLECTIONS + id, null);
@@ -139,6 +138,7 @@ public class HomeServices {
             return e;
         }
     }
+
     public static Object getDistrict(Context aContext, String id) {
         try {
             return Connection.callHttpGetRequestsV2(aContext, Constants.GET_GAS_DISTRICT + id, null);
@@ -211,7 +211,9 @@ public class HomeServices {
             e.printStackTrace();
             return e;
         }
-    } public static Object removeUPI(Context aContext, String request) {
+    }
+
+    public static Object removeUPI(Context aContext, String request) {
         try {
             return Connection.callHttpPostRequestsV2Jobj(aContext, Constants.POST_PAYMENT_REMOVE_VPA, request);
         } catch (Exception e) {
@@ -292,6 +294,7 @@ public class HomeServices {
             return e;
         }
     }
+
     public static Object verifyGasOtp(Context aContext, String request) {
         try {
             return Connection.callHttpPostRequestsV2Jobj(aContext, Constants.POST_GAS_OTP_VERIFY, request);
@@ -299,7 +302,9 @@ public class HomeServices {
             e.printStackTrace();
             return e;
         }
-    }public static Object POST_SUBMIT_GAS_OTP_VERIFY(Context aContext, String request) {
+    }
+
+    public static Object POST_SUBMIT_GAS_OTP_VERIFY(Context aContext, String request) {
         try {
             return Connection.callHttpPostRequestsV2Jobj(aContext, Constants.POST_SUBMIT_GAS_OTP_VERIFY, request);
         } catch (Exception e) {
@@ -354,20 +359,27 @@ public class HomeServices {
         }
     }
 
-    public static Object generateHash2(Context aContext, String loginRequest) {
+
+
+    /***************************bbps***********************************/
+
+
+    public static Object generateOrderId(Context aContext, GetOrderIDRequest getOrderIDRequest) {
         try {
-            return Connection.callHttpPostRequestsV2Jobj(aContext, Constants.POST_GENERATE_HASH2, loginRequest);
+            return Connection.callHttpPostRequestsV2(aContext, Constants.POST_GENERATE_OID, getOrderIDRequest);
         } catch (Exception e) {
             e.printStackTrace();
             return e;
         }
     }
 
-
-    /***************************bbps***********************************/
-
-
-
-
+    public static Object getInstaPaymodes(Context aContext) {
+        try {
+            return Connection.callHttpGetRequestsV2(aContext, Constants.GET_INSTA_PAYMENT_MODES, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return e;
+        }
+    }
 
 }

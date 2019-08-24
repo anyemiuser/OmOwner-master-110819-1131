@@ -10,7 +10,11 @@ import android.widget.Toast;
 
 import com.anyemi.omrooms.UI.HotelActivity;
 import com.anyemi.omrooms.UI.PaymentTransactionStatusActivity;
+import com.anyemi.omrooms.payment.model.InstamojoPaymentModel;
 import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -30,6 +34,85 @@ public class Globals {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+
+    public static String getInstaAmount(
+            Context activity,
+            String billAmount,
+            InstamojoPaymentModel InstamojoPaymentModel,
+            String type) {
+
+        try {
+
+            List<InstamojoPaymentModel.InstServiceTaxBean> taxArrayBean = new ArrayList<>();
+            taxArrayBean.addAll((List<InstamojoPaymentModel.InstServiceTaxBean>) InstamojoPaymentModel.getInst_service_tax());
+
+
+
+            String GST_CARD = "";
+            String SERVICE_TAX = "";
+            String ANYEMI_CHARGES = "";
+            String TOTAL_AMOUNT_WITH_ALL_CHARGES = "";
+
+
+            double TERM_BILL_AMOUNT = 0; //with Arrears etc
+
+            String FIN_ID = SharedPreferenceUtil.getFIN_ID(activity);
+            //String FIN_ID = "53";
+
+
+            for (int i = 0; i < taxArrayBean.size(); i++) {
+                Double upper_limit = Double.parseDouble(taxArrayBean.get(i).getTo());
+                Double lower_limit = Double.parseDouble(taxArrayBean.get(i).getFrom());
+                TERM_BILL_AMOUNT = Double.parseDouble(billAmount);
+
+
+                if (type.equals(taxArrayBean.get(i).getPayment_type()) && upper_limit >
+                        TERM_BILL_AMOUNT && lower_limit < TERM_BILL_AMOUNT) {
+
+                    ANYEMI_CHARGES = taxArrayBean.get(i).getExtra_tax();
+                    GST_CARD = taxArrayBean.get(i).getGst_perc();
+                    SERVICE_TAX = taxArrayBean.get(i).getExtra_tax_perc();
+
+
+
+
+                    Double card_charges = Double.parseDouble(SERVICE_TAX);
+                    Double gst_on_card_charges = Double.parseDouble(GST_CARD);
+
+                    card_charges = (card_charges * TERM_BILL_AMOUNT) / 100;
+                    gst_on_card_charges = (card_charges * gst_on_card_charges) / 100;
+
+                    Double final_amount = 0.0;
+
+                    if (gst_on_card_charges > 0) {
+                        final_amount = card_charges + TERM_BILL_AMOUNT + gst_on_card_charges;
+                    } else {
+                        final_amount = Double.valueOf(TERM_BILL_AMOUNT);
+                    }
+
+                    TOTAL_AMOUNT_WITH_ALL_CHARGES = String.valueOf(final_amount + Double.parseDouble(ANYEMI_CHARGES));
+                    break;
+                }
+            }
+
+
+
+
+
+
+            return TOTAL_AMOUNT_WITH_ALL_CHARGES;
+
+
+        } catch (Exception e) {
+            Globals.showToast(activity, "Invalid Data");
+            return null;
+
+
+        }
+
     }
 
 

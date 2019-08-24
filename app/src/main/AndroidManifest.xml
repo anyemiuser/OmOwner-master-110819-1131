@@ -13,6 +13,12 @@
         <activity android:name=".UI.BookingDetailActivity"
             android:theme="@style/AppThemeNoBar">
         </activity>
+
+        <activity android:name=".payment.instamojo.InstamojoActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+
+
+        </activity>
         <activity
             android:name=".UI.BookingConActivity"
             android:theme="@style/AppThemeNoBar" />

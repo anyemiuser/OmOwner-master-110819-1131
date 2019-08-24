@@ -33,6 +33,7 @@ public class Constants {
 
 
     public static final String PAYMENT_MODE_AADHAR = "AADHAR";
+    public static final String PAYMENT_MODE_INSTAMOJO = "INSTAMOJO";
     public static final String PAYMENT_MODE_BHARATH_QR = "BQ";
     public static final String PAYMENT_MODE_BHIM = "BHIM";
     public static final String PAYMENT_MODE_CASH = "C";
@@ -62,12 +63,10 @@ public class Constants {
 
 
 
-    public static final String PROJECT_NUMBER = "35828915253";
-
-    public static final String PHONE_NUMBER = "P_NUMBER";
 
     public static final String base_url_dev_http = "https://dev.anyemi.com/webservices/anyemi/";
-    public static final String production_base_url = "https://app.anyemi.com/anyemi/";
+    public static final String production_base_url = "https://dev.anyemi.com/webservices/omrooms/Customer/api.php?f=";
+
 
     public static final String dev_base_url_image = "https://dev.anyemi.com/anyemi_live/app/";
     public static final String production_url_image = "https://anyemi.com/app/";
@@ -82,6 +81,7 @@ public class Constants {
 //    public static String base_url=base_url_dev_http;
     public static String base_url=production_base_url;
     public static final String GET_SERVICES_LIST =base_url+"getfinancer";
+
     public static final String LOGIN_URL =base_url+"login";
     public static final String GET_COSUMER_DETAILS =base_url+"getuseraddress";
     public static final String FORGET_PASSWORD =base_url+"forgetPassword";
@@ -121,8 +121,6 @@ public class Constants {
     public static final String GET_PENDING_TRANSACTIONS =base_url+"getPendingTransactions?id=";
     public static final String POST_GENERATE_HASH  =base_url+"checksum";
 
- //public static final String POST_GENERATE_HASH  ="http://192.168.0.17:7071/Nexer/rest/NexerUser/PaytmPg";
-    public static final String POST_GENERATE_HASH2  ="http://192.168.0.16:7071/Nexer/rest/NexerUser/PaytmSample";
     public static final String GET_QR_DETAILS  ="https://dev.anyemi.com/webservices/hpcl/getqrcode.php?qr=";
 
 
@@ -136,4 +134,7 @@ public class Constants {
 
 //    https://app.anyemi.com/maheshbank/billermdm
 
+
+    public static final String GET_INSTA_PAYMENT_MODES  =base_url+"instpmodes_servtax ";
+    public static final String POST_GENERATE_OID  =base_url+"instamojoorderid";
 }
