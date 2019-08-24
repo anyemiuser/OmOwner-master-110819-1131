@@ -1,4 +1,4 @@
-package org.sairaa.omowner.instamojo.model;
+package org.sairaa.omowner.payment.model;
 
 public class IstamojoModel {
 

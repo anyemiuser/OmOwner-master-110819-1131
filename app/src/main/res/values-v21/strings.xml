@@ -27,6 +27,7 @@
     <string name="cancel_booking">Cancel</string>
     <string name="success">Success</string>
     <string name="cancelled_success">Cancelled Successfully</string>
+    <string name="loading_txt">Loading...</string>
 
     <string-array name="recent">
         <item>Today</item>

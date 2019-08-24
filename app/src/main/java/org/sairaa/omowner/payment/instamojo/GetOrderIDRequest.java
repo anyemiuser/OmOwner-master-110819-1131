@@ -1,4 +1,4 @@
-package org.sairaa.omowner.instamojo;
+package org.sairaa.omowner.payment.instamojo;
 
 import com.google.gson.annotations.SerializedName;
 

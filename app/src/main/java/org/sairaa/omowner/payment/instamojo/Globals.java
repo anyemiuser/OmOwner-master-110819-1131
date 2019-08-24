@@ -1,4 +1,4 @@
-package org.sairaa.omowner.instamojo;
+package org.sairaa.omowner.payment.instamojo;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -7,12 +7,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.google.gson.Gson;
 
 import org.sairaa.omowner.R;
-import org.sairaa.omowner.instamojo.model.InstamojoPaymentModel;
-import org.sairaa.omowner.instamojo.model.PaymentRequestModel;
+import org.sairaa.omowner.payment.instamojo.model.InstamojoPaymentModel;
+import org.sairaa.omowner.payment.instamojo.model.PaymentRequestModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,8 +47,8 @@ public class Globals {
 
         try {
 
-            List<InstamojoPaymentModel.InstServiceTaxBean> taxArrayBean = new ArrayList<>();
-            taxArrayBean.addAll((List<InstamojoPaymentModel.InstServiceTaxBean>) InstamojoPaymentModel.getInst_service_tax());
+            List<org.sairaa.omowner.payment.instamojo.model.InstamojoPaymentModel.InstServiceTaxBean> taxArrayBean = new ArrayList<>();
+            taxArrayBean.addAll((List<org.sairaa.omowner.payment.instamojo.model.InstamojoPaymentModel.InstServiceTaxBean>) InstamojoPaymentModel.getInst_service_tax());
 
 
             String GST_CARD = "";

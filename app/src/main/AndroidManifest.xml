@@ -57,7 +57,16 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".instamojo.InstamojoActivity"
+        <activity android:name=".payment.PaymentModeActivityNew"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <activity android:name=".payment.SbiPayPaymentActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <activity android:name=".payment.instamojo.InstamojoActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <activity android:name=".payment.CompleateTransactionActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

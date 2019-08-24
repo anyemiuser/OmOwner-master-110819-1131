@@ -1,4 +1,4 @@
-package org.sairaa.omowner.instamojo.adapter;
+package org.sairaa.omowner.payment.instamojo.adapter;
 
 import android.content.Context;
 import android.os.Build;
@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import org.sairaa.omowner.R;
-import org.sairaa.omowner.instamojo.model.InstamojoPaymentModel;
+import org.sairaa.omowner.payment.instamojo.model.InstamojoPaymentModel;
 
 import java.util.ArrayList;
 

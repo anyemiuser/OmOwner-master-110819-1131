@@ -1,4 +1,4 @@
-package org.sairaa.omowner.instamojo;
+package org.sairaa.omowner.payment.instamojo;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;

@@ -37,10 +37,11 @@ import org.sairaa.omowner.RoomUtility.Model.UtilityRequest;
 import org.sairaa.omowner.RoomUtility.Model.UtilityResponse;
 import org.sairaa.omowner.RoomUtility.Model.UtilityUpdateRequest;
 import org.sairaa.omowner.RoomUtility.Model.UtilityUpdateResponse;
-import org.sairaa.omowner.instamojo.GetOrderIDRequest;
-import org.sairaa.omowner.instamojo.model.InstamojoPaymentModel;
-import org.sairaa.omowner.instamojo.model.IstamojoModel;
-import org.sairaa.omowner.instamojo.model.PaymentRequestModel;
+
+import org.sairaa.omowner.payment.instamojo.GetOrderIDRequest;
+import org.sairaa.omowner.payment.instamojo.model.InstamojoPaymentModel;
+import org.sairaa.omowner.payment.instamojo.model.IstamojoModel;
+import org.sairaa.omowner.payment.instamojo.model.PaymentRequestModel;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -119,13 +120,14 @@ public interface OmRoomApi {
   /*  @POST("Owner/api.php?f=hotelcontacts")
     Call<OmContacts> omcontact(@Body OmContacts omcontactsRequest);*/
 
-    @GET("Customer/api.php")
+
+    @GET("Owner/api.php")
     Call<InstamojoPaymentModel> getInstaMojoPaymentModes(@Query("f") String typeReport);
 
-    @POST("Customer/api.php?f=instamojoorderid")
+    @POST("Owner/api.php?f=instamojoorderid")
     Call<IstamojoModel> generateOrderId(@Body GetOrderIDRequest getOrderIDRequest);
 
-    @POST("Customer/api.php?f=pay")
+    @POST("Owner/api.php?f=pay")
     Call<PaymentResponseModel> postPay(@Body PaymentRequestModel PaymentRequestModel);
     
     }

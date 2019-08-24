@@ -1,4 +1,4 @@
-package org.sairaa.omowner.instamojo.model;
+package org.sairaa.omowner.payment.model;
 
 /**
  * Created by SuryaTejaChalla on 26-12-2017.
@@ -6,30 +6,11 @@ package org.sairaa.omowner.instamojo.model;
 
 public class PaymentRequestModel {
 
-    /**
-     * user_id : 614
-     * emi_ids : 2519&2520
-     * payment_type : SBIUPI
-     * total_amount : 2000
-     * checkno : 111
-     * bankname : bankname
-     * branch : branch
-     * checkdate : checkdate
-     * rr_number : rr_number
-     * mobile_number : 1234567890
-     * upi_id : upi_id
-     * assessment_id : 1137002482
-     */
+
 
     private int user_id;
-
-
-    private String emi_ids; //this is for multiple dues
-
-
-
-    private String extrafield; //this is for multiple dues
-    private String payment_type;  //this is for Mode of payment
+    private String emi_ids;
+    private String payment_type;
     private String serviceCharge;
     private String bankCharges;
     private String actualDueAmount;
@@ -38,30 +19,74 @@ public class PaymentRequestModel {
     private String bankname;
     private String branch;
     private String checkdate;
-    private String rr_number;  // transaction reference number for mswipe ,paytm sbi upi
-    private String trsno;   // transaction number for mswipe ,paytm sbi upi
-    private String mobile_number;  // customer mobile number for sms purpose
+    private String rr_number;
+    private String trsno;
+    private String mobile_number;
     private String upi_id;
     private String assessment_id;
-
-/* internal calculations for service taxes*/
-
     private String credit_service_tax_;
-    private String debit_service_tax_; //
+    private String debit_service_tax_;
     private String gst_debit;
     private String gst_credit;
-    private String payment_through;   //mobile or web
-    private String last_paid_date;
+    private String payment_through;
+    private String tax_type;
+    private String extrafield;
+    private String fine_amount;
+    private String discount_amount;
+    private String remarks;
+    private String service_list_id;
+    private String operator_type;
+    private String recharge_type;
+    private String biller_data;
+    private String refId;
+    private String FIN_ID;
 
-    public String getExtrafield() {
-        return extrafield;
+    public String getRechargeMobileNumber() {
+        return RechargeMobileNumber;
+    }
+
+    public void setRechargeMobileNumber(String rechargeMobileNumber) {
+        RechargeMobileNumber = rechargeMobileNumber;
+    }
+
+    private String RechargeMobileNumber;
+
+    public String getRefId() {
+        return refId;
+    }
+
+    public void setRefId(String refId) {
+        this.refId = refId;
     }
 
 
 
-    public void setExtrafield(String extrafield) {
-        this.extrafield = extrafield;
+    public String getOperator_type() {
+        return operator_type;
     }
+
+    public void setOperator_type(String operator_type) {
+        this.operator_type = operator_type;
+    }
+
+    public String getRecharge_type() {
+        return recharge_type;
+    }
+
+    public void setRecharge_type(String recharge_type) {
+        this.recharge_type = recharge_type;
+    }
+
+
+
+    public String getService_list_id() {
+        return service_list_id;
+    }
+
+    public void setService_list_id(String service_list_id) {
+        this.service_list_id = service_list_id;
+    }
+
 
 
     public String getPayment_id() {
@@ -74,7 +99,65 @@ public class PaymentRequestModel {
 
     private String payment_id;
 
-    /* internal calculations for service taxes*/
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+
+
+
+
+    public String getExtrafield() {
+        return extrafield;
+    }
+
+    public void setExtrafield(String extrafield) {
+        this.extrafield = extrafield;
+    }
+
+
+
+    public String getFine_amount() {
+        return fine_amount;
+    }
+
+    public void setFine_amount(String fine_amount) {
+        this.fine_amount = fine_amount;
+    }
+
+
+    public String getTotal_amount_without_discount() {
+        return total_amount_without_discount;
+    }
+
+    public void setTotal_amount_without_discount(String total_amount_without_discount) {
+        this.total_amount_without_discount = total_amount_without_discount;
+    }
+
+    private String total_amount_without_discount;
+
+    public String getDiscount_amount() {
+        return discount_amount;
+    }
+
+    public void setDiscount_amount(String discount_amount) {
+        this.discount_amount = discount_amount;
+    }
+
+
+
+
+    public String getTax_type() {
+        return tax_type;
+    }
+
+    public void setTax_type(String tax_type) {
+        this.tax_type = tax_type;
+    }
 
 
     public String getPayment_through() {
@@ -246,11 +329,19 @@ public class PaymentRequestModel {
         this.assessment_id = assessment_id;
     }
 
-    public String getLast_paid_date() {
-        return last_paid_date;
+    public String getBiller_data() {
+        return biller_data;
     }
 
-    public void setLast_paid_date(String last_paid_date) {
-        this.last_paid_date = last_paid_date;
+    public void setBiller_data(String biller_data) {
+        this.biller_data = biller_data;
+    }
+
+    public String getFIN_ID() {
+        return FIN_ID;
+    }
+
+    public void setFIN_ID(String FIN_ID) {
+        this.FIN_ID = FIN_ID;
     }
 }

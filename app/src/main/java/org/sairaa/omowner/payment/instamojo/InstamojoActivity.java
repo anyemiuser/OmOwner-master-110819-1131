@@ -1,4 +1,4 @@
-package org.sairaa.omowner.instamojo;
+package org.sairaa.omowner.payment.instamojo;
 
 import android.content.Intent;
 import android.os.Build;
@@ -26,10 +26,10 @@ import org.sairaa.omowner.Api.OmRoomApi;
 import org.sairaa.omowner.CheckIn.CheckInActivity;
 import org.sairaa.omowner.Model.PaymentResponseModel;
 import org.sairaa.omowner.R;
-import org.sairaa.omowner.instamojo.adapter.PaymentModesAdapter;
-import org.sairaa.omowner.instamojo.model.InstamojoPaymentModel;
-import org.sairaa.omowner.instamojo.model.IstamojoModel;
-import org.sairaa.omowner.instamojo.model.PaymentRequestModel;
+import org.sairaa.omowner.payment.instamojo.adapter.PaymentModesAdapter;
+import org.sairaa.omowner.payment.instamojo.model.InstamojoPaymentModel;
+import org.sairaa.omowner.payment.instamojo.model.IstamojoModel;
+import org.sairaa.omowner.payment.instamojo.model.PaymentRequestModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,7 +40,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.instamojo.android.helpers.Constants.PAYMENT_ID;
-import static org.sairaa.omowner.instamojo.Constants.PAYMENT_REQ_ERROR;
+import static org.sairaa.omowner.payment.instamojo.Constants.PAYMENT_REQ_ERROR;
 
 public class InstamojoActivity extends AppCompatActivity implements Instamojo.InstamojoPaymentCallback {
 
@@ -79,7 +79,7 @@ public class InstamojoActivity extends AppCompatActivity implements Instamojo.In
 
         mCurrentEnv = Instamojo.Environment.PRODUCTION;
 
-       Instamojo.getInstance().initialize(InstamojoActivity.this, mCurrentEnv);
+        Instamojo.getInstance().initialize(InstamojoActivity.this, mCurrentEnv);
 
         initView();
         //createActionBar();
