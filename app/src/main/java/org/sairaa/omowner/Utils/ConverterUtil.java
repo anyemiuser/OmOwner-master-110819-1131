@@ -38,6 +38,9 @@ public class ConverterUtil implements Constants, ConstantFields{
                 break;
             case completedType:
                 typeBookingText = completedText;
+                break;
+            case cancelledType:
+                typeBookingText = cancelledText;
         }
         return typeBookingText;
     }
@@ -53,6 +56,9 @@ public class ConverterUtil implements Constants, ConstantFields{
                 break;
             case completedType:
                 typeBookingText = CompletedInActiveButton;
+                break;
+            case cancelledType:
+                typeBookingText = CancelledInActiveButton;
                 break;
         }
         return typeBookingText;

@@ -11,6 +11,7 @@ import org.sairaa.omowner.Api.OmRoomApi;
 import org.sairaa.omowner.Model.AllBookingCount;
 import org.sairaa.omowner.Model.BookingCountRequest;
 import org.sairaa.omowner.Model.BookingCountResponse;
+import org.sairaa.omowner.Model.CancelledCountList;
 import org.sairaa.omowner.Model.CompletedCountList;
 import org.sairaa.omowner.Model.InhouseCountList;
 import org.sairaa.omowner.Model.RoomTypeCount;
@@ -105,6 +106,7 @@ public class MainPresenter implements MainContract.UserActionsListener, Constant
                         UpcomingCountList upcomingCountList = bookingResponse.getUpcomingList();
                         InhouseCountList inhouseCountList = bookingResponse.getInhouseList();
                         CompletedCountList completedCountList = bookingResponse.getCompletedlist();
+                        CancelledCountList cancelledCountList = bookingResponse.getCancelledlist();
 
                         if(bookingResponse.getNoofrooms()!= null){
                             for(TotalRooms room: bookingResponse.getNoofrooms()){
@@ -165,6 +167,24 @@ public class MainPresenter implements MainContract.UserActionsListener, Constant
                                 AllBookingCount bookingCount = new AllBookingCount(completedType,
                                         Integer.parseInt(completedCountList.getCompletedbookings()),
                                         noOfRoomBooked, 10, completedCountList.getRoomtype());
+
+                                allBookingCountList.add(bookingCount);
+                            }
+                        }
+                        if (cancelledCountList != null) {
+                            if (!cancelledCountList.getCancelledbookings().equals("0") &&
+                                    cancelledCountList.getRoomtype() != null) {
+
+                                int noOfRoomBooked = 0;
+                                //                            List<RoomTypeCount> roomTypeCountList = upcomingCountList.getRoomlist();
+                                for (RoomTypeCount roomTypeCount : cancelledCountList.getRoomtype()) {
+                                    noOfRoomBooked = noOfRoomBooked + Integer.parseInt(roomTypeCount.getBooked());
+                                    listRoomBooked.add(roomTypeCount);
+                                }
+
+                                AllBookingCount bookingCount = new AllBookingCount(cancelledType,
+                                        Integer.parseInt(cancelledCountList.getCancelledbookings()),
+                                        noOfRoomBooked, 10, cancelledCountList.getRoomtype());
 
                                 allBookingCountList.add(bookingCount);
                             }

@@ -22,6 +22,7 @@ class PricingViewHolder extends RecyclerView.ViewHolder {
     private TextView roomType;
     private ImageView save, edit;
     private RoomPriceAdapter.RoomPriceAdapterCallback adapterCallback;
+    TextView tvsave , tvedit;
 
 
     public PricingViewHolder(@NonNull View itemView) {
@@ -39,6 +40,9 @@ class PricingViewHolder extends RecyclerView.ViewHolder {
 
         save = itemView.findViewById(R.id.save_i);
         edit = itemView.findViewById(R.id.edit_i);
+
+        tvsave = itemView.findViewById(R.id.tv_save);
+        tvedit = itemView.findViewById(R.id.tv_edit);
     }
 
     public void set(RoomTypeAndPrice roomTypeAndPrice) {
@@ -59,14 +63,17 @@ class PricingViewHolder extends RecyclerView.ViewHolder {
                     && roomTypeAndPrice.getMax_price() == null){
             edit.setVisibility(View.INVISIBLE);
             save.setVisibility(View.VISIBLE);
+            tvedit.setVisibility(View.INVISIBLE);
+            tvsave.setVisibility(View.VISIBLE);
             enableAll();
 
 
         }else {
             disableAll();
+            tvedit.setVisibility(View.VISIBLE);
             edit.setVisibility(View.VISIBLE);
             save.setVisibility(View.INVISIBLE);
-
+            tvedit.setVisibility(View.VISIBLE);
         }
 
         minC.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -95,8 +102,10 @@ class PricingViewHolder extends RecyclerView.ViewHolder {
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                tvsave.setVisibility(View.VISIBLE);
                 save.setVisibility(View.VISIBLE);
                 edit.setVisibility(View.INVISIBLE);
+                tvedit.setVisibility(View.INVISIBLE);
                 enableAll();
             }
         });
@@ -126,6 +135,9 @@ class PricingViewHolder extends RecyclerView.ViewHolder {
 
                                         save.setVisibility(View.INVISIBLE);
                                         edit.setVisibility(View.VISIBLE);
+                                    tvsave.setVisibility(View.INVISIBLE);
+                                    tvedit.setVisibility(View.VISIBLE);
+
                                         disableAll();
 
                                 }else{

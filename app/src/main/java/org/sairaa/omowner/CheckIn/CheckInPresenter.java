@@ -113,7 +113,7 @@ public class CheckInPresenter implements CheckInContract.UserActionsListener {
                             RoomIdCheckInResponse checkInResponse = response.body();
                             if (checkInResponse != null && checkInResponse.getStatus().equals("Success")) {
                                 Log.e(TAG_CHECKIN_PRESENTER, "" + new Gson().toJson(checkInResponse));
-                                checkInVew.toastSnack(checkInResponse.getMsg()+" "+"Successfully Checked in");
+                                checkInVew.toastSnack(checkInResponse.getMsg());
                                 checkInVew.onCheckInSuccess();
                             }
                         }

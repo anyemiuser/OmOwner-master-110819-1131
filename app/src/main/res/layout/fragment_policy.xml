@@ -7,9 +7,10 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
-        <TextView
+        android:layout_marginLeft="10dp">
+
+
+        <me.biubiubiu.justifytext.library.JustifyTextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -17,14 +18,15 @@
             android:textStyle="bold"
             android:textAppearance="?android:attr/textAppearanceMedium"/>
 
-        <TextView
+        <me.biubiubiu.justifytext.library.JustifyTextView
+
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="@string/policyhd"
+            android:text="OM Rooms is committing to protecting your information. This privacy notice provides details about the information we collect about you, how we use it and how we protect it. It also explains your rights and how to contact us if you have questions about how we use your information.\n"
             />
-        <TextView
+        <me.biubiubiu.justifytext.library.JustifyTextView
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -32,7 +34,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"/>
 
 
-        <TextView
+        <me.biubiubiu.justifytext.library.JustifyTextView
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -41,15 +43,15 @@
             android:layout_marginTop="20dp"
             android:textAppearance="?android:attr/textAppearanceMedium"/>
 
-        <TextView
+        <me.biubiubiu.justifytext.library.JustifyTextView
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="@string/policy1"
+            android:text="In this privacy notice, references to “OM Rooms”, we or us or “our” are to anyEMI Online Services Pvt Ltd., (a company incorporated under the laws of Company’s Act 2013) and its parent company and its subsidiaries (the “anyEMI”).\n"
             />
 
-        <TextView
+        <me.biubiubiu.justifytext.library.JustifyTextView
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -58,12 +60,12 @@
             android:layout_marginTop="20dp"
             android:textAppearance="?android:attr/textAppearanceMedium"/>
 
-        <TextView
+        <me.biubiubiu.justifytext.library.JustifyTextView
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="@string/policy2"
+            android:text="This notice applies to anyone who interacts with us in relation to our products and services (“you”, “your”), via any channel. We may give you additional privacy notices from time to time if required for specific interactions.\n"
             />
 
         <TextView
@@ -75,12 +77,12 @@
             android:text="@string/policyh3"
             android:textAppearance="?android:attr/textAppearanceMedium"/>
 
-        <TextView
+        <me.biubiubiu.justifytext.library.JustifyTextView
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="@string/policy3"
+            android:text="We obtain personal information from you and from our other products and services used by you.\n"
             />
 
 
@@ -92,11 +94,14 @@
             android:textStyle="bold"
             android:textAppearance="?android:attr/textAppearanceMedium"/>
 
-        <TextView
+        <me.biubiubiu.justifytext.library.JustifyTextView
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/policy4"
+            android:text="We process two categories of personal information about you namely:
+standard personal information (e.g. information we use to contact you, identify you or manage our relationship with you); and
+special categories of information (e.g. if you have indicated or have chosen a language preference for product optimization or ease of use).
+For further information on these categories of information, please expand this section.\n"
             />
 
         <TextView
@@ -108,12 +113,12 @@
             android:text="@string/policyh5"
             android:textAppearance="?android:attr/textAppearanceMedium"/>
 
-        <TextView
+        <me.biubiubiu.justifytext.library.JustifyTextView
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="@string/policy5"
+            android:text="We process your personal information for the purposes set out in this notice, based on the legal grounds set out under the “+” [insert hyperlink to section below]. Different legal grounds apply depending on what category of personal information we process. Standard personal information is normally processed by us on the basis that it is necessary for accessing the app or website via login, the performance of a contract, our or a third parties’ legitimate interests or law. Further information about this and special category processing grounds is set out below.\n"
             />
         <TextView
 
@@ -124,12 +129,14 @@
             android:layout_marginTop="20dp"
             android:textAppearance="?android:attr/textAppearanceMedium"/>
 
-        <TextView
+        <me.biubiubiu.justifytext.library.JustifyTextView
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="@string/policy6"
+            android:text="We process your personal information for a number of legitimate interests, including providing you with products and services for use, administering our relationship with you, for marketing and service/product improvement purposes and in order to exercise our rights or handle claims. More detailed information about our legitimate interests is set out below.\n"
+
+
             />
         <TextView
 
@@ -140,13 +147,16 @@
             android:layout_marginTop="20dp"
             android:textAppearance="?android:attr/textAppearanceMedium"/>
 
-        <TextView
+        <me.biubiubiu.justifytext.library.JustifyTextView
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="@string/policy7"
+            android:text="We may use your personal information to send you marketing by post, telephone, social media platforms, email, SMS, application notifications and silent notifications to track installation status of the application. We may also use your personal information to carry out online paid marketing activities in the nature of retargeting.
+We also use technology to help us understand your personal preferences and interests so that we can send recommendations and marketing communications that are likely to be of more interest to you. Using technology in this way is sometimes known as profiling.
+If you wish to unsubscribe from emails sent by us, you can do so at any time by clicking on the unsubscribe link that appears in all emails and by adjusting the settings on your device to turn off notifications from our app. Otherwise, you can always contact us at dataprotection@omrooms.com to update your contact preferences. You may also object to profiling relating to direct marketing by contacting us at dataprotection@omrooms.com.\n"
             />
+
         <TextView
 
             android:layout_width="wrap_content"
@@ -156,12 +166,13 @@
             android:text="@string/policyh8"
             android:textAppearance="?android:attr/textAppearanceMedium"/>
 
-        <TextView
+        <me.biubiubiu.justifytext.library.JustifyTextView
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="@string/policy8"
+            android:text="Third parties provide us with audience measurement and analytics services that analyze your online interactions (both with the OM Rooms and other websites), serve you with tailored marketing and report on the performance of that marketing. We also use Google Place API to make suggestions based on your location or search strings.
+OM Rooms is using Google Place API for place prediction. Please refer to their privacy policy. http://www.google.com/privacy.html\n"
             />
         <TextView
 
@@ -172,12 +183,20 @@
             android:layout_marginTop="20dp"
             android:textAppearance="?android:attr/textAppearanceMedium"/>
 
-        <TextView
+        <me.biubiubiu.justifytext.library.JustifyTextView
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="@string/policy9"
+            android:text="We share your information within the OM Room Group and with others who help us provide services. We also share your information in accordance with the law. For more information on who we share your information with, please expand this section.
+We share your information for the purposes set out in this privacy policy, with the following categories of recipients:
+other members of the OM Room Group;\n
+third party suppliers who help deliver products or services on our behalf, or who have partnered with OM Room in connection with services or a relevant promotional offering, as well as other apps or websites that integrate with our API or Services, or those with an API or Service with which we integrate;
+third parties where we have a duty to or are permitted to disclose your personal information by law (e.g. law enforcement officials, government authorities);
+with the police in the exercise of their functions or with others as required by a court order;\n
+third parties where we (or any member(s) of the OM Room Group) sell or buy any business or assets, in which case we may disclose your personal data to the prospective seller or buyer of such business or assets;
+third parties in connection with any merger, sale of company assets, consolidation or restructuring, financing, or acquisition of all or a portion of the OM Room’s Group business, in which case personal data held by it about its customers or visitors to the website may be one of the transferred assets.
+Where we share your personal information, appropriate protections will be in place to protect your personal information as required by data protection laws. Sometimes, we may share information in an aggregated, pseudonymized and/or anonymized form which cannot reasonably be used to identify an individual.\n"
             />
         <TextView
 
@@ -188,15 +207,16 @@
             android:text="@string/policyh10"
             android:textAppearance="?android:attr/textAppearanceMedium"/>
 
-        <TextView
+        <me.biubiubiu.justifytext.library.JustifyTextView
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="@string/policy10"
-            />
-        <TextView
+            android:text="OM Rooms uses global information systems. As a result, OM Room transfers your personal information to a country outside of your country and the European Economic Area (EEA, i.e. EU member states including Norway, Liechtenstein and Iceland) to India and Singapore for the purposes set out in this policy. Not all countries outside of the EEA have data protection laws that are similar to those in the EEA and they may not be regarded by the European Commission as providing an adequate level of data protection.
+OM Rooms takes steps to ensure that when your personal information is transferred internationally, it is subject to appropriate safeguards in accordance with data protection laws. Often, these safeguards include contractual safeguards. More information about these safeguards (including copies, where relevant) can be obtained by contacting [dataprotection@omrooms.com].\n" />
 
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/policyh11"
@@ -204,12 +224,12 @@
             android:layout_marginTop="20dp"
             android:textAppearance="?android:attr/textAppearanceMedium"/>
 
-        <TextView
+        <me.biubiubiu.justifytext.library.JustifyTextView
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="@string/policy11"
+            android:text="In general, we will keep your information in accordance with OM Room’s records retention policies. However, there may be circumstances that mean we must retain your personal information for longer.\n"
             />
 
         <TextView
@@ -221,13 +241,13 @@
             android:layout_marginTop="20dp"
             android:textAppearance="?android:attr/textAppearanceMedium"/>
 
-        <TextView
+        <me.biubiubiu.justifytext.library.JustifyTextView
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
             android:layout_marginTop="10dp"
-            android:text="@string/policy12"
+            android:text="Data protection laws in the EEA and some other countries provide individuals with rights in relation to the information that OM Room holds about them on some computer and paper records. These include rights to access, correct, delete, restrict the use of, object to the use of, port to another person, and withdraw consent to the use of, your information. Exceptions may apply to these rights.\n"
             />
 
         <TextView
@@ -239,36 +259,36 @@
             android:layout_marginTop="20dp"
             android:textAppearance="?android:attr/textAppearanceMedium"/>
 
-        <TextView
+        <me.biubiubiu.justifytext.library.JustifyTextView
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/policy13"
+            android:text="If you have any questions, comments, complaints or suggestions in relation to this notice, or any other concerns about the way in which we process information about you, please contact our Privacy Team at dataprotection@omrooms.com.
+You also have a right to make a complaint to your local privacy supervisory authority. If you are in the EU, you can lodge a complaint with another supervisory authority which is based in the country or territory where:\n"
             />
 
-        <TextView
+        <me.biubiubiu.justifytext.library.JustifyTextView
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/policy14"
             />
-        <TextView
+        <me.biubiubiu.justifytext.library.JustifyTextView
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/policy15"
             />
-        <TextView
+        <me.biubiubiu.justifytext.library.JustifyTextView
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/policy16"
             />
-        <TextView
+        <me.biubiubiu.justifytext.library.JustifyTextView
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/policy17"
-            />
+            android:text="A list of the EU data protection supervisory authorities is here\n"/>
     </LinearLayout>
 </ScrollView>

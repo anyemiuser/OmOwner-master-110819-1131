@@ -5,220 +5,245 @@
     android:id="@+id/con_price_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="4dp"
     android:elevation="5dp"
     app:cardCornerRadius="10dp">
 
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/room_t"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="16dp"
-            android:text="TextView"
-            app:layout_constraintBottom_toTopOf="@+id/min_check"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            style="@style/head_semi" />
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:gravity="center">
 
-        <CheckBox
-            android:id="@+id/min_check"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/avg_check"
-            app:layout_constraintEnd_toStartOf="@+id/min_price"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+           <LinearLayout
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:gravity="end"
+               android:layout_weight="1.35">
+               <TextView
+                   android:id="@+id/room_t"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="TextView"
 
-        <EditText
-            android:id="@+id/min_price"
-            android:layout_width="wrap_content"
-            android:layout_height="29dp"
-            android:ems="10"
-            android:fontFamily="@font/opensans_regular"
-            android:hint="@string/minimum_price"
-            android:inputType="number"
-            android:textColor="@color/accent_color"
-            app:layout_constraintBottom_toBottomOf="@+id/min_check"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/min_check"
-            app:layout_constraintTop_toTopOf="@+id/min_check" />
+                   />
+           </LinearLayout>
 
-        <CheckBox
-            android:id="@+id/avg_check"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/max_check"
-            app:layout_constraintEnd_toStartOf="@+id/avg_price"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/min_check" />
+           <LinearLayout
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               android:layout_weight="1">
+               <LinearLayout
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content"
+                   android:orientation="vertical"
+                   android:gravity="center"
+                   android:layout_weight="1">
+                   <ImageView
+                       android:id="@+id/save_i"
+                       android:layout_width="30dp"
+                       android:layout_height="30dp"
+                       android:alpha="20"
+                       app:srcCompat="@drawable/ic_save"
+                       tools:ignore="VectorDrawableCompat" />
+                   <TextView
+                       android:id="@+id/tv_save"
+                       android:layout_width="wrap_content"
+                       android:visibility="gone"
+                       android:layout_height="wrap_content"
+                       android:text="save">
 
-        <EditText
-            android:id="@+id/avg_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:fontFamily="@font/opensans_regular"
-            android:hint="@string/avg_price"
-            android:inputType="number"
-            android:textColor="@color/accent_color"
-            app:layout_constraintBottom_toBottomOf="@+id/avg_check"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/avg_check"
-            app:layout_constraintTop_toTopOf="@+id/avg_check" />
+                   </TextView>
+               </LinearLayout>
+               <LinearLayout
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"
+                   android:orientation="vertical"
+                   android:gravity="center">
 
-        <CheckBox
-            android:id="@+id/max_check"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/discount_t"
-            app:layout_constraintEnd_toStartOf="@+id/max_price"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/avg_check" />
 
-        <EditText
-            android:id="@+id/max_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:fontFamily="@font/opensans_regular"
-            android:hint="@string/max_price"
-            android:inputType="number"
-            app:layout_constraintBottom_toBottomOf="@+id/max_check"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/max_check"
-            app:layout_constraintTop_toTopOf="@+id/max_check" />
+                   <ImageView
+                       android:id="@+id/edit_i"
+                       android:layout_width="wrap_content"
+                       android:layout_height="30dp"
+                       android:alpha="30"
+                       app:srcCompat="@drawable/ic_edit"
+                       tools:ignore="VectorDrawableCompat" />
 
-        <TextView
-            android:id="@+id/discount_t"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="16dp"
-            android:fontFamily="@font/opensans_regular"
-            android:text="@string/discount_per"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/discount_per"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/max_check" />
+                   <TextView
+                       android:id="@+id/tv_edit"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="Edit">
 
-        <EditText
-            android:id="@+id/discount_per"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:fontFamily="@font/opensans_regular"
-            android:hint="@string/discount_per"
-            android:inputType="number"
-            android:imeOptions="actionDone"
-            app:layout_constraintBottom_toBottomOf="@+id/discount_t"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/discount_t"
-            app:layout_constraintTop_toTopOf="@+id/discount_t" />
+                   </TextView>
+
+
+               </LinearLayout>
+           </LinearLayout>
+       </LinearLayout>
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:gravity="center">
+           <LinearLayout
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_weight="1"
+               android:layout_marginLeft="20dp">
+
+               <CheckBox
+                   android:id="@+id/min_check"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="24dp"
+                   android:layout_marginBottom="8dp"
+                   />
+
+
+           </LinearLayout>
+           <LinearLayout
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_gravity="center"
+               android:layout_weight="3">
+
+               <EditText
+                   android:id="@+id/min_price"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:hint="Minimum Price"
+                   android:ems="10" />
+           </LinearLayout>
+
+       </LinearLayout>
 
 
 
-        <ImageView
-            android:id="@+id/save_i"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="8dp"
-            android:alpha="20"
-            app:layout_constraintBottom_toBottomOf="@+id/edit_i"
-            app:layout_constraintEnd_toStartOf="@+id/edit_i"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/room_t"
-            app:layout_constraintTop_toTopOf="@+id/edit_i"
-            app:srcCompat="@drawable/ic_save" />
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:gravity="center">
+           <LinearLayout
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_weight="1"
+               android:layout_marginLeft="20dp">
 
-      <!--  <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:text="Save"
-            app:layout_constraintBottom_toBottomOf="@+id/save_i"
-            app:layout_constraintEnd_toEndOf="@+id/room_t"
-            app:layout_constraintStart_toStartOf="@+id/edit_i"
-            tools:ignore="MissingConstraints"
-            app:layout_constraintTop_toTopOf="@+id/edit_i"/>
--->
-        <ImageView
-            android:id="@+id/edit_i"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:alpha="30"
-            app:layout_constraintBottom_toBottomOf="@+id/room_t"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/save_i"
-            app:layout_constraintTop_toTopOf="@+id/room_t"
-            app:srcCompat="@drawable/ic_edit" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Edit"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="342dp"
-            tools:layout_editor_absoluteY="44dp" />
-
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Save"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="281dp"
-            tools:layout_editor_absoluteY="44dp" />
+               <CheckBox
+                   android:id="@+id/avg_check"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="8dp"
+                   android:layout_marginBottom="8dp"
+                   />
 
 
-        <!--<ImageView
-            android:id="@+id/save_i"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="8dp"
-            android:alpha="20"
-            app:layout_constraintBottom_toBottomOf="@+id/edit_i"
-            app:layout_constraintEnd_toStartOf="@+id/edit_i"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/room_t"
-            app:layout_constraintTop_toTopOf="@+id/edit_i"
-            app:srcCompat="@drawable/ic_save" />
+           </LinearLayout>
+           <LinearLayout
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_gravity="center"
+               android:layout_weight="3">
 
-        <ImageView
-            android:id="@+id/edit_i"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:alpha="30"
-            app:layout_constraintBottom_toBottomOf="@+id/room_t"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/save_i"
-            app:layout_constraintTop_toTopOf="@+id/room_t"
-            app:srcCompat="@drawable/ic_edit" />-->
+               <EditText
+                   android:id="@+id/avg_price"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:ems="10"
+                   android:inputType="number"
+                   android:hint="Average Price"/>
+           </LinearLayout>
 
-    </android.support.constraint.ConstraintLayout>
+       </LinearLayout>
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:gravity="center">
+           <LinearLayout
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_weight="1"
+               android:layout_marginLeft="20dp">
+
+               <CheckBox
+                   android:id="@+id/max_check"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="8dp"
+                   android:layout_marginBottom="8dp"
+                   />
+
+
+           </LinearLayout>
+           <LinearLayout
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_gravity="center"
+               android:layout_weight="3">
+
+               <EditText
+                   android:id="@+id/max_price"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:ems="10"
+                   android:hint="Maximum Price"
+                   android:inputType="number"
+                   />
+           </LinearLayout>
+
+       </LinearLayout>
+
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:gravity="center">
+           <LinearLayout
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_weight="1"
+               android:layout_marginLeft="20dp">
+
+               <TextView
+                   android:id="@+id/discount_t"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="24dp"
+                   android:layout_marginBottom="16dp"
+
+                   android:text="Discount Percentage"
+                   />
+
+           </LinearLayout>
+           <LinearLayout
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_gravity="center"
+               android:layout_weight="1">
+
+               <EditText
+                   android:id="@+id/discount_per"
+                   android:layout_width="150dp"
+                   android:layout_height="wrap_content"
+                   android:ems="10"
+                   android:hint="Discount Percentage"
+                   android:inputType="number"
+                   android:imeOptions="actionDone"
+                   />
+           </LinearLayout>
+
+       </LinearLayout>
+
+
+   </LinearLayout>
 
 
 </android.support.v7.widget.CardView>

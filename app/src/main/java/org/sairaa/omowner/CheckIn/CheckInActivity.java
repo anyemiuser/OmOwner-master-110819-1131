@@ -104,6 +104,7 @@ public class CheckInActivity extends AppCompatActivity implements CheckInContrac
             checkIn.setVisibility(View.GONE);
             if (actionBar != null) {
                 actionBar.setTitle("Rooms");
+                actionBar.setDisplayHomeAsUpEnabled(true);
             }
 
             roomTypeQty.setText("Room Status");
@@ -124,8 +125,6 @@ public class CheckInActivity extends AppCompatActivity implements CheckInContrac
         checkIn = findViewById(R.id.check_in);
         checkIn.setOnClickListener(this);
         checkInPresenter.retrieveRooms(sharedPreferenceConfig.readHotelId());
-
-
 
 
     }

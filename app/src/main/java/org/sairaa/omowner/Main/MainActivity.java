@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -22,14 +23,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.sairaa.omowner.Api.ApiUtils;
+import org.sairaa.omowner.Api.OmRoomApi;
+import org.sairaa.omowner.Api.RetrofitClient;
 import org.sairaa.omowner.BookingDetails.BookingDetailsActivity;
 import org.sairaa.omowner.CheckIn.CheckInActivity;
 import org.sairaa.omowner.HomeRules.HomeRulesActivity;
@@ -44,6 +51,7 @@ import org.sairaa.omowner.NewBooking.BookingActivity;
 import org.sairaa.omowner.Policies.PoliciesActivity;
 import org.sairaa.omowner.Pricing.PriceActivity;
 import org.sairaa.omowner.R;
+import org.sairaa.omowner.RaiseIssue.RaiseIssueRequest;
 import org.sairaa.omowner.RoomUtility.UtilityActivity;
 import org.sairaa.omowner.Support.OmSupportActivity;
 import org.sairaa.omowner.Utils.Constants;
@@ -53,6 +61,10 @@ import org.sairaa.omowner.Utils.SharedPreferenceConfig;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
@@ -83,6 +95,7 @@ public class MainActivity extends AppCompatActivity
     private SharedPreferenceConfig sharedPreferenceConfig;
 
     private static String retrieveDate = "";
+    public static String bookdrm,totalrm;
 
     private String day;
     private String index;
@@ -92,6 +105,8 @@ public class MainActivity extends AppCompatActivity
     ConstraintLayout progressLayout;
     ProgressBar progressBar;
     TextView progressText;
+
+    String category,subcategory,subsubcategory,comment;
 
     private TextView dateFor, eodPer, eodRoomType;
 
@@ -363,6 +378,7 @@ public class MainActivity extends AppCompatActivity
             final Spinner sp = mview.findViewById(R.id.spinner);
             final Spinner sp1 = mview.findViewById(R.id.spinner1);
             final Spinner sp3 = mview.findViewById(R.id.spinner3);
+            final EditText textArea_information = mview.findViewById(R.id.textArea_information);
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_spinner_dropdown_item
                     ,getResources().getStringArray(R.array.Main));
 
@@ -388,6 +404,7 @@ public class MainActivity extends AppCompatActivity
 
                     }
                     else if(selectedItem.equals("Manage Property on OM App"))
+
                     {
                         // do your stuff
                         sp1.setVisibility(View.VISIBLE);
@@ -458,7 +475,6 @@ public class MainActivity extends AppCompatActivity
                     }
 
 
-
                 } // to close the onItemSelected
                 public void onNothingSelected(AdapterView<?> parent)
                 {
@@ -503,20 +519,26 @@ public class MainActivity extends AppCompatActivity
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     if(!sp.getSelectedItem().toString().equals("Select Category")){
+                        category = sp.getSelectedItem().toString();
+                        comment= textArea_information.getText().toString();
+
                         if(sp.getSelectedItem().toString().equals("Issue with OM Staff")
                                 && sp.getSelectedItem().toString().equals("Value Added Services Enquiry")
                                 && sp.getSelectedItem().toString().equals("Others")) {
 
-
-                            Toast.makeText(MainActivity.this, "Issue Raised Successfully", Toast.LENGTH_SHORT).show();
+                            IssuedRaise();
+                           // Toast.makeText(MainActivity.this, "Issue Raised Successfully", Toast.LENGTH_SHORT).show();
 
                             dialogInterface.dismiss();
                         }
                         else {
                             if (!sp1.getSelectedItem().toString().equals("Select SubCategory")) {
+                                subcategory = sp1.getSelectedItem().toString();
+
                                 if (!sp1.getSelectedItem().toString().equals("Update Owner info")) {
                                 /// if(!sp3.getSelectedItem().toString().equals("")){
-                                Toast.makeText(MainActivity.this, "Issue Raised Successfully", Toast.LENGTH_SHORT).show();
+                                    IssuedRaise();
+                               // Toast.makeText(MainActivity.this, "Issue Raised Successfully", Toast.LENGTH_SHORT).show();
 
                                 dialogInterface.dismiss();
                             /*}
@@ -527,8 +549,10 @@ public class MainActivity extends AppCompatActivity
                             }
                             else {
                                     if (!sp3.getSelectedItem().toString().equals("Select One")) {
-                                        Toast.makeText(MainActivity.this, "Issue Raised Successfully", Toast.LENGTH_SHORT).show();
+                                        subsubcategory = sp3.getSelectedItem().toString();
 
+                                       // Toast.makeText(MainActivity.this, "Issue Raised Successfully", Toast.LENGTH_SHORT).show();
+                                        IssuedRaise();
                                         dialogInterface.dismiss();
                                     }
                                     else
@@ -693,7 +717,44 @@ public class MainActivity extends AppCompatActivity
 //
 //        dialog.show();
 
+    private void IssuedRaise() {
+       /* name = etUser.getText().toString().trim();
+        email = etEmail.getText().toString().trim();
+        password = etPassword.getText().toString().trim();
+        gender = etGender.getText().toString().trim();*/
 
+
+      //  progressDialog.show();
+        OmRoomApi omRoomApi = ApiUtils.getOmRoomApi();
+        // OmRoomApi apiInterface = RetrofitClient.getClient().create(OmRoomApi.class);
+        Call<RaiseIssueRequest> userRegisterCall = omRoomApi.loginUser(new RaiseIssueRequest(Integer.parseInt(sharedPreferenceConfig.readHotelId()), category, subcategory, subsubcategory, comment));
+        userRegisterCall.enqueue(new Callback<RaiseIssueRequest>() {
+            @Override
+            public void onResponse(Call<RaiseIssueRequest> call, Response<RaiseIssueRequest> response) {
+              //  progressDialog.hide();
+                Log.d("res",response.toString());
+                if (response.isSuccessful()) {
+                    RaiseIssueRequest dtos = response.body();
+                    if (dtos != null) {
+                        if (dtos.getStatus().equals("Success")) ;
+                        Toast.makeText(MainActivity.this, dtos.getMsg(), Toast.LENGTH_SHORT).show();
+                     /*   Intent intent = new Intent(RaiseIssueActivity.this, WelComeActivity.class);
+                        intent.putExtra("Name", etUser.getText().toString().trim());
+                        intent.putExtra("Email", etEmail.getText().toString().trim());
+                        startActivity(intent);*/
+                    }
+                } else {
+                    Toast.makeText(MainActivity.this, "Data not Found!", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RaiseIssueRequest> call, Throwable t) {
+              //  progressDialog.hide();
+                Toast.makeText(MainActivity.this, "Something went wrong!" + t, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
     @Override
     public void onSignOutNavigateToLogin() {
@@ -775,7 +836,8 @@ public class MainActivity extends AppCompatActivity
         double percen =(double)totalBookedRoom/totalRoom; //(Math.round(((totalBookedRoom*100)/totalRoom)));
         percen = percen* 100;
 
-
+        bookdrm = String.valueOf(totalBookedRoom);
+          totalrm = String.valueOf(totalRoom);
         eodPer.setText("EOD Occupancy: ".concat(String.valueOf(Math.round(percen))).concat("%").concat(" (")
                 .concat(String.valueOf(totalBookedRoom).concat("/").concat(String.valueOf(totalRoom)).concat(" )")));
         String type ="";

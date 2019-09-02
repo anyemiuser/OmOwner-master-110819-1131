@@ -36,6 +36,7 @@ import java.util.List;
 import static org.sairaa.omowner.Utils.Constants.completedType;
 import static org.sairaa.omowner.Utils.Constants.inHouseType;
 import static org.sairaa.omowner.Utils.Constants.upComingType;
+//import static org.sairaa.omowner.Utils.Constants.cancelledType;
 
 public class CheckInForm extends AppCompatActivity implements  BookingDetailContract.View{
     private static final String TAG_BOOKING_DETAIL = BookingDetailsActivity.class.getName();
@@ -304,6 +305,10 @@ public class CheckInForm extends AppCompatActivity implements  BookingDetailCont
             }else if(status.equals(inHouseType)  )  {
                 status = completedType;
             }
+           /* else
+            {
+                status = cancelledType;
+            }*/
             CustomerBookingDetailsRequest request = new CustomerBookingDetailsRequest(hotelId,status,day,index);
             bookingPresenter.retrieveBookingDetails(request);
         }

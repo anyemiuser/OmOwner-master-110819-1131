@@ -1,6 +1,7 @@
 package org.sairaa.omowner.Api;
 
 
+import org.sairaa.omowner.CheckInform.CheckinformRequest;
 import org.sairaa.omowner.Model.BokedRoomResponse;
 import org.sairaa.omowner.Model.BookedRoomRequest;
 import org.sairaa.omowner.Model.BookingCountRequest;
@@ -33,6 +34,7 @@ import org.sairaa.omowner.Pricing.Model.RoomTypeList;
 import org.sairaa.omowner.Pricing.Model.RoomTypeRequest;
 import org.sairaa.omowner.Pricing.Model.UpdateRoomPriceRequest;
 import org.sairaa.omowner.Pricing.Model.UpdateRoomPriceResponse;
+import org.sairaa.omowner.RaiseIssue.RaiseIssueRequest;
 import org.sairaa.omowner.RoomUtility.Model.UtilityRequest;
 import org.sairaa.omowner.RoomUtility.Model.UtilityResponse;
 import org.sairaa.omowner.RoomUtility.Model.UtilityUpdateRequest;
@@ -46,6 +48,7 @@ import org.sairaa.omowner.payment.instamojo.model.PaymentRequestModel;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
@@ -59,7 +62,7 @@ public interface OmRoomApi {
     //https://dev.anyemi.com/webservices/omrooms/Owner/api.php?f=hotelStatusOnDate
 
 //    @POST("Owner/api.php?f=hotelStatusOnDate")
-    @POST("Owner/api.php?f=hotelStatus")
+    @POST("Owner/api.php?f=hotelStatuss")
     Call<BookingCountResponse> getBookingCountDetails(@Body BookingCountRequest bookingCountRequest);
 
 //    @POST("Owner/api.php?f=listofbookings")
@@ -73,7 +76,7 @@ public interface OmRoomApi {
     Call<RoomIdCheckInResponse> doCheckIn(@Body RoomCheckInRequest checkInRequest);
 
 
-    @POST("Owner/api.php?f=getBookedRoom ")
+    @POST("Owner/api.php?f=getBookedRoom")
     Call<BokedRoomResponse> getBookedRoomDetailOnEachBooking(@Body BookedRoomRequest bookedRoomRequest);
 
     @POST("Owner/api.php?f=doCheckout")
@@ -117,7 +120,7 @@ public interface OmRoomApi {
     @POST("Customer/api.php?f=CancelBookedHotel")
     Call<CancelResponse> cancelBookedHotel(@Body CancelRequest cancelRequest);
 
-  /*  @POST("Owner/api.php?f=hotelcontacts")
+  /*@POST("Owner/api.php?f=hotelcontacts")
     Call<OmContacts> omcontact(@Body OmContacts omcontactsRequest);*/
 
 
@@ -129,5 +132,15 @@ public interface OmRoomApi {
 
     @POST("Owner/api.php?f=pay")
     Call<PaymentResponseModel> postPay(@Body PaymentRequestModel PaymentRequestModel);
-    
+
+    @Headers("Content-Type: application/json")
+    @POST("Owner/api.php?f=insertraiseissue")
+    Call<RaiseIssueRequest> loginUser(@Body RaiseIssueRequest user);
+
+    @Headers("Content-Type: application/json")
+    @POST("Owner/api.php?f=insertaddressproof")
+    Call<CheckinformRequest> Checkinform(@Body CheckinformRequest user);
+
+
+
     }

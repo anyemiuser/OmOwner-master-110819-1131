@@ -53,8 +53,7 @@
 
     <string name="tandchd">OM Rooms Terms and conditions of Use</string>
     <string name="tandch1">1. TERMS OF USE</string>
-    <string name="tandc1">By downloading, browsing, accessing or using the OM Receptionist  Platform website located at [www.omrooms.com] or OM Receptionist Platform (hereinafter collectively, the OM Rooms Platform) on any device and/or before availing any services offered on the OM Receptionist, you agree to be bound by these Terms and Conditions of Use (hereinafter referred, “Terms and Conditions of Use”). In these Terms and Conditions of Use “we”, “us”, or “our” refers to OM Receptionist and “you” or “your” refers to you as the User of the OM Rooms Platform. These Terms and Conditions of Use constitute a legally binding agreement between you and OM Rooms governing access to and use of the OM Rooms Platform. We reserve the right to amend these Terms and conditions of use at any time. If you disagree with any of these Terms and Conditions of Use, you must immediately discontinue your access to the OM Rooms Platform and your use of the services offered on the OM Rooms Platform.
-</string>
+    <string name="tandc1">By downloading, browsing, accessing or using the OM Receptionist  Platform website located at [www.omrooms.com] or OM Receptionist Platform (hereinafter collectively, the OM Rooms Platform) on any device and/or before availing any services offered on the OM Receptionist, you agree to be bound by these Terms and Conditions of Use (hereinafter referred, “Terms and Conditions of Use”). In these Terms and Conditions of Use “we”, “us”, or “our” refers to OM Receptionist and “you” or “your” refers to you as the User of the OM Rooms Platform. These Terms and Conditions of Use constitute a legally binding agreement between you and OM Rooms governing access to and use of the OM Rooms Platform. We reserve the right to amend these Terms and conditions of use at any time. If you disagree with any of these Terms and Conditions of Use, you must immediately discontinue your access to the OM Rooms Platform and your use of the services offered on the OM Rooms Platform.<br /></string>
     <string name="tandch2">2. DEFINITIONS</string>
     <string name="tandc2">In these Terms and Conditions of Use, the following capitalised terms shall have the following meanings, except where the context otherwise requires:
 
@@ -62,43 +61,66 @@ Account means an account created by a User on the OM Rooms Platform as part of R
 Company refers to an entity known by the name anyEMI Online Services Pvt Ltd., duly registered under the laws of Companies Act 2013, having its registered office at 39-27-19/2, Appayyanagar, Marripalem, Visakhapatnam-530001.
 Register means to create an Account on the OM Rooms Platform and "Registration" means the act of creating such an Account.
 Services means all the services provided by Company via the OM Rooms Platform to Users, and "Service" means any one of them.
-Users means users of the OM Rooms Platform, including you and "User" means any one of them.</string>
+Users means users of the OM Rooms Platform, including you and "User" means any one of them.<br /></string>
     <string name="tandch3">3. GENERAL ISSUES ABOUT THE SERVICES AND THE OM ROOMS</string>
     <string name="tandc3">Platform Applicability of terms and conditions: The use of any Services on the OM Rooms Platform is subject to these Terms and Conditions of Use.
 Scope: The OM Rooms Platform is intended solely for use by Users who access the OM Receptionist Platform. The OM Rooms Platform is for business purposes and must not be used for non-commercial or personal use.
 Prevention on use: We reserve the right to prevent you from using the OM Rooms Platform and from availing the Services (or any part of them).
-Equipment and Networks: To use any Services offered by the OM ROOMS Platform, you will require internet connectivity and appropriate telecommunication links. You acknowledge that the terms of agreement with your respective mobile network provider ("Mobile Provider") will continue to apply when using the OM Rooms Platform. As a result, you may be charged by the Mobile Provider for access to network connection services for the duration of the connection while accessing the OM Rooms Platform or any such third-party charges as may arise. You accept responsibility for any such charges that arise.</string>
+Equipment and Networks: To use any Services offered by the OM ROOMS Platform, you will require internet connectivity and appropriate telecommunication links. You acknowledge that the terms of agreement with your respective mobile network provider ("Mobile Provider") will continue to apply when using the OM Rooms Platform. As a result, you may be charged by the Mobile Provider for access to network connection services for the duration of the connection while accessing the OM Rooms Platform or any such third-party charges as may arise. You accept responsibility for any such charges that arise.<br /></string>
     <string name="tandch4">4. YOUR OBLIGATIONS</string>
-    <string name="tandc41">1. Terms: You agree to abide by the Terms and Conditions of Use of the OM Rooms Platform, as may be amended from time to time.</string>
-    <string name="tandc42">2. Eligibility: You warrant that you are at least 18 (eighteen) years of age and can enter into binding contracts.</string>
-    <string name="tandc43">3. Accurate information: You warrant that all information provided on Registration and contained as part of your Account is true, complete and accurate. You undertake that any information submitted through your Account, in all respects, be complete, true, accurate and not misleading. You are obliged to inform the Company immediately, by contacting us at support@anyemi.com, on becoming aware of and/or suspecting a case of any unauthorized use, disclosure and/or misuse of your access data or of your User Account.</string>
-    <string name="tandc44">4. Prohibitions in relation to usage of Services on OM ROOMS Platform: Without limitation, you undertake not to use or permit anyone else to use the Services on the OM Rooms Platform: -</string>
-    <string name="tandc45">5. to send or receive any material which is not civil or tasteful</string>
-    <string name="tandc46">6. to send or receive any material which is threatening, grossly offensive, of an indecent, obscene or menacing character, blasphemous or defamatory of any person, in contempt of court or in breach of confidence, copyright, rights of personality, publicity or privacy or any other third-party rights;</string>
-
-    <string name="tandc47">7. to send or receive any material which constitutes or encourages conduct that would be considered a criminal offence, give rise to civil liability, or otherwise be contrary to the law of or infringe the rights of any third party in any country in the world;</string>
-    <string name="tandc48">8. to send or receive any material which is technically harmful (including computer viruses, logic bombs, Trojan horses, worms, harmful components, corrupted data or other malicious software or harmful data);</string>
-    <string name="tandc49">9. for a purpose other than which we have designed them or intended them to be used;</string>
-    <string name="tandc411">10. for any fraudulent purpose;</string>
-    <string name="tandc412">11. other than in conformance with accepted internet practices and practices of any connected networks;</string>
-    <string name="tandc413">12. in any way which is calculated to incite hatred against any ethnic, religious or any other minority or is otherwise calculated to adversely affect any individual, group or entity; or</string>
-    <string name="tandc414">13. in such a way as to, or commit any act that would or does, impose an unreasonable or disproportionately large load on our infrastructure.</string>
-    <string name="tandc415">14. Prohibited conduct in relation to usage of Services on OM Rooms Platform: Without limitation, you further undertake not to or permit anyone else to: -</string>
-    <string name="tandc416">15. furnish false data including false names, addresses and contact details and fraudulently use credit/debit card numbers;</string>
-    <string name="tandc417">16. attempt to circumvent our security or network including to access data not intended for you, log into a server or account you are not expressly authorized to access, or probe the security of other networks (such as running a port scan);</string>
-    <string name="tandc418">17. execute any form of network monitoring which will intercept data not intended for you;</string>
-    <string name="tandc419">18. enter into fraudulent interactions or transactions with us;</string>
-    <string name="tandc420">19. extract data from or hack into the OM Rooms Platform;</string>
-    <string name="tandc421">use the Services on the OM Rooms Platform in breach of these Terms and Conditions of Use;</string>
-    <string name="tandc422">other than in conformance with accepted internet practices and practices of any connected networks;</string>
-    <string name="tandc423">engage in any unlawful activity in connection with the use of the OM Rooms Platform or the Services; or</string>
-    <string name="tandc424">engage in any conduct which, in our exclusive reasonable opinion, restricts or inhibits any other user from properly using or enjoying the OM Rooms Platform or Services.</string>
-    <string name="tandch5">5. RULES ABOUT USE OF THE SERVICES AND THE OYO OS Platform</string>
+    <string name="tandc41">1. Terms: You agree to abide by the Terms and Conditions of Use of the OM Rooms Platform, as may be amended from time to time.<br />
+    </string>
+    <string name="tandc42">2. Eligibility: You warrant that you are at least 18 (eighteen) years of age and can enter into binding contracts.<br />
+    </string>
+    <string name="tandc43">3. Accurate information: You warrant that all information provided on Registration and contained as part of your Account is true, complete and accurate. You undertake that any information submitted through your Account, in all respects, be complete, true, accurate and not misleading. You are obliged to inform the Company immediately, by contacting us at support@anyemi.com, on becoming aware of and/or suspecting a case of any unauthorized use, disclosure and/or misuse of your access data or of your User Account.
+    <br /></string>
+    <string name="tandc44">4. Prohibitions in relation to usage of Services on OM ROOMS Platform: Without limitation, you undertake not to use or permit anyone else to use the Services on the OM Rooms Platform: -<br /></string>
+    <string name="tandc45">5. to send or receive any material which is not civil or tasteful<br />
+    </string>
+    <string name="tandc46">6. to send or receive any material which is threatening, grossly offensive, of an indecent, obscene or menacing character, blasphemous or defamatory of any person, in contempt of court or in breach of confidence, copyright, rights of personality, publicity or privacy or any other third-party rights;<br />
+    </string>
+    <string name="tandc47">7. to send or receive any material which constitutes or encourages conduct that would be considered a criminal offence, give rise to civil liability, or otherwise be contrary to the law of or infringe the rights of any third party in any country in the world;<br />
+    </string>
+    <string name="tandc48">8. to send or receive any material which is technically harmful (including computer viruses, logic bombs, Trojan horses, worms, harmful components, corrupted data or other malicious software or harmful data);<br />
+    </string>
+    <string name="tandc49">9. for a purpose other than which we have designed them or intended them to be used;<br />
+    </string>
+    <string name="tandc411">10. for any fraudulent purpose;
+    </string>
+    <string name="tandc412">11. other than in conformance with accepted internet practices and practices of any connected networks;<br />
+    </string>
+    <string name="tandc413">12. in any way which is calculated to incite hatred against any ethnic, religious or any other minority or is otherwise calculated to adversely affect any individual, group or entity; or<br />
+</string>
+    <string name="tandc414">13. in such a way as to, or commit any act that would or does, impose an unreasonable or disproportionately large load on our infrastructure.<br />
+    </string>
+    <string name="tandc415">14. Prohibited conduct in relation to usage of Services on OM Rooms Platform: Without limitation, you further undertake not to or permit anyone else to: -<br />
+    </string>
+    <string name="tandc416">15. furnish false data including false names, addresses and contact details and fraudulently use credit/debit card numbers;<br />
+    </string>
+    <string name="tandc417">16. attempt to circumvent our security or network including to access data not intended for you, log into a server or account you are not expressly authorized to access, or probe the security of other networks (such as running a port scan);<br />
+    </string>
+    <string name="tandc418">17. execute any form of network monitoring which will intercept data not intended for you;<br />
+    </string>
+    <string name="tandc419">18. enter into fraudulent interactions or transactions with us;<br />
+    </string>
+    <string name="tandc420">19. extract data from or hack into the OM Rooms Platform;<br />
+    </string>
+    <string name="tandc421">use the Services on the OM Rooms Platform in breach of these Terms and Conditions of Use;<br />
+    </string>
+    <string name="tandc422">other than in conformance with accepted internet practices and practices of any connected networks;<br />
+    </string>
+    <string name="tandc423">engage in any unlawful activity in connection with the use of the OM Rooms Platform or the Services; or<br />
+    </string>
+    <string name="tandc424">engage in any conduct which, in our exclusive reasonable opinion, restricts or inhibits any other user from properly using or enjoying the OM Rooms Platform or Services.<br />
+    </string>
+    <string name="tandch5">5. RULES ABOUT USE OF THE SERVICES AND THE OYO OS Platform
+    </string>
     <string name="tandc5">We will use reasonable endeavors to correct any errors or omissions as soon as practicable after being notified of them. However, we do not guarantee that the Services provided on the OM Rooms Platform will be free of faults, and we do not accept liability for any such faults, errors or omissions. In the event of any such error, fault or omission, you should report it by contacting us at support@anyemi.com.
 We do not warrant that your use of the Services on the OM Rooms Platform will be uninterrupted, and we do not warrant that any information (or messages) transmitted via the OM Rooms Platform will be transmitted accurately, reliably, in a timely manner or at all. Notwithstanding that we will try to allow uninterrupted access to the Services and the OM Rooms Platform, access to the Services and the OM Rooms Platform may be suspended, restricted or terminated at any time.
 We do not give any warranty that the OM Rooms Platform is free from viruses or anything else which may have a harmful effect on any technology.
 We reserve the right to change, modify, substitute, suspend or remove without notice any information or Services on the OM Rooms Platform from time to time. Your access to the OM Rooms Platform and/or the Services may also be occasionally restricted to allow for repairs, maintenance or the introduction of new facilities or services. We will attempt to restore such access as soon as we reasonably can. For the avoidance of doubt, we reserve the right to withdraw any information or Services from the OM Rooms Platform at any time.
-We reserve the right to block access to and/or to edit or remove any material which in our reasonable opinion may give rise to a breach of these Terms and Conditions of Use.</string>
+We reserve the right to block access to and/or to edit or remove any material which in our reasonable opinion may give rise to a breach of these Terms and Conditions of Use.<br />
+    </string>
     <string name="tandch6">6. SUSPENSION AND TERMINATION</string>
     <string name="tandc6">If you use (or anyone other than you, with your permission uses) the Services and/or the OM Rooms Platform in contravention of these Terms and Conditions of Use, we may suspend your use of the Services and/or OM Rooms Platform.
 If we suspend the Services or OM Rooms Platform, we may refuse to restore the Services or OM Rooms Platform, for your use until we receive an assurance from you, in a form we deem acceptable, that there will be no further breach of the provisions of these Terms and Conditions of Use.
@@ -109,7 +131,8 @@ Without limitation to anything else in this Clause 6, we shall be entitled immed
 you commit any breach of these Terms and Conditions of Use;
 we suspect, on reasonable grounds, that you have, might or will commit a breach of these Terms and Conditions of Use; or
 we suspect, on reasonable grounds, that you may have committed or be committing any fraud against us or any person.
-Our rights under this Clause 6 shall not prejudice any other right or remedy we may have in respect of any breach or any rights, obligations or liabilities accrued prior to termination.</string>
+Our rights under this Clause 6 shall not prejudice any other right or remedy we may have in respect of any breach or any rights, obligations or liabilities accrued prior to termination.<br />
+    </string>
     <string name="tandch7">7. DISCLAIMER AND EXCLUSION OF LIABILITY</string>
     <string name="tandc7">The OM Receptionist Platform, the Services, the information on the OM Rooms Platform and use of all related facilities are provided on an "as is, as available" basis without any warranties whether express or implied.
 To the fullest extent permitted by applicable law, we disclaim all representations and warranties relating to the OM Rooms Platform and its contents, including in relation to any inaccuracies or omissions in the OM Receptionist Platform, warranties of merchantability, quality, fitness for a particular purpose, accuracy, availability, non-infringement or implied warranties from course of dealing or usage of trade.
@@ -117,86 +140,111 @@ We do not warrant that the OM Rooms Platform will always be accessible, uninterr
 While we may use reasonable efforts to include accurate and up-to-date information on the OM Receptionist Platform, we make no warranties or representations as to its accuracy, timeliness or completeness.
 Notwithstanding our efforts to ensure that our system is secure, you acknowledge that all electronic data transfers are potentially susceptible to interception by others. We cannot, and do not, warrant that data transfers pursuant to the OM Receptionist Platform, or electronic mail transmitted to and from us, will not be monitored or read by others.
 
-</string>
+<br /></string>
     <string name="tandch8">8. INDEMNITY</string>
     <string name="tandc8">You agree to indemnify and keep us indemnified against any claim, action, suit or proceeding brought or threatened to be brought against us which is caused by or arising out of
 (a) your use of the Services,
 (b) any other party’s use of the Services using your user ID, verification PIN and/or any identifier number allocated by the Company, and/or
-(c) your breach of any of these Terms and Conditions of Use, and to pay us damages, costs and interest in connection with such claim, action, suit or proceeding.</string>
+(c) your breach of any of these Terms and Conditions of Use, and to pay us damages, costs and interest in connection with such claim, action, suit or proceeding.<br />
+    </string>
     <string name="tandch9">9. INTELLECTUAL PROPERTY RIGHTS</string>
     <string name="tandc9">All editorial content, information, photographs and other graphic materials, and names, logos and trademarks on the OM Rooms Platform are protected by copyright laws and/or other laws and/or international treaties, and belong to us and/or our suppliers, as the case may be. These works, logos, graphics, sounds or images may not be copied, reproduced, retransmitted, distributed, disseminated, sold, published, broadcasted or circulated whether in whole or in part, unless expressly permitted by us and/or our suppliers, as the case may be.
 Nothing contained on the OM Rooms Platform should be construed as granting by implication, estoppel, or otherwise, any license or right to use any trademark displayed on the OM Rooms Platform without our written permission. Misuse of any trademarks or any other content displayed on the OM Rooms Platform is prohibited.
-We will not hesitate to take legal action against any unauthorized usage of our trademarks, name or symbols to preserve and protect its rights in the matter. All rights not expressly granted herein are reserved. Other product and company names mentioned herein may also be the trademarks of their respective owners.</string>
+We will not hesitate to take legal action against any unauthorized usage of our trademarks, name or symbols to preserve and protect its rights in the matter. All rights not expressly granted herein are reserved. Other product and company names mentioned herein may also be the trademarks of their respective owners.<br />
+    </string>
     <string name="tandch10">10. AMENDMENTS</string>
     <string name="tandc10">We may periodically make changes to the contents of the OM Receptionist Platform, at any time and without notice. We assume no liability or responsibility for any errors or omissions in the content of the OM Receptionist Platform.
-We reserve the right to amend these Terms and Conditions of Use from time to time without notice. The revised Terms and Conditions of Use will be posted on the OM Rooms Platform and shall take effect from the date of such posting. You are advised to review these terms and conditions periodically as they are binding upon you.</string>
+We reserve the right to amend these Terms and Conditions of Use from time to time without notice. The revised Terms and Conditions of Use will be posted on the OM Rooms Platform and shall take effect from the date of such posting. You are advised to review these terms and conditions periodically as they are binding upon you.<br />
+    </string>
     <string name="tandch11">11. APPLICABLE LAW AND JURISDICTION</string>
     <string name="tandc11">The OM Rooms Platform can be accessed from all countries around the world where the local technology permits. As each of these places have differing laws, by accessing the OM Rooms Platform both you and we agree that the laws of India will govern and apply to all matters relating to the use of the OM Receptionist Platform.
-You accept and agree that in case of any dispute arising out of or in connection with these Terms and Conditions of Use, shall be referred to and finally resolved by Jurisdiction at Visakhapatnam</string>
+You accept and agree that in case of any dispute arising out of or in connection with these Terms and Conditions of Use, shall be referred to and finally resolved by Jurisdiction at Visakhapatnam<br />
+    </string>
     <string name="tandch12">12. Privacy Policy</string>
-    <string name="tandc12">Access to the OM Rooms Platform and use of the Services offered on the OM Rooms Platform by the Company is subject to this Privacy Policy. By accessing the OM Rooms Platform and by continuing to use the Services offered, you are deemed to have accepted this Privacy Policy, and in particular, you are deemed to have consented to our use and disclosure of your personal information in the manner prescribed and for the purposes set out in this Privacy Policy. We reserve the right to amend this Privacy Policy from time to time. If you disagree with any part of this Privacy Policy, you must immediately discontinue your access to the OM Rooms Platform and your use of the Services.</string>
+    <string name="tandc12">Access to the OM Rooms Platform and use of the Services offered on the OM Rooms Platform by the Company is subject to this Privacy Policy. By accessing the OM Rooms Platform and by continuing to use the Services offered, you are deemed to have accepted this Privacy Policy, and in particular, you are deemed to have consented to our use and disclosure of your personal information in the manner prescribed and for the purposes set out in this Privacy Policy. We reserve the right to amend this Privacy Policy from time to time. If you disagree with any part of this Privacy Policy, you must immediately discontinue your access to the OM Rooms Platform and your use of the Services.<br />
+    </string>
 
 
 
-    <string name="policyhead">OM Rooms Privacy Notice</string>
-    <string name="policyhd">OM Rooms is committing to protecting your information. This privacy notice provides details about the information we collect about you, how we use it and how we protect it. It also explains your rights and how to contact us if you have questions about how we use your information.</string>
-    <string name="policyhd1">Policy last updated: 10th August 2019</string>
-    <string name="policyh1">1. Information about OM Rooms</string>
-    <string name="policy1">In this privacy notice, references to “OM Rooms”, "we" or "us" or “our” are to anyEMI Online Services Pvt Ltd., (a company incorporated under the laws of Company’s Act 2013) and its parent company and its subsidiaries (the “anyEMI”).</string>
-    <string name="policyh2">2. Scope of our privacy notice</string>
-    <string name="policy2">This notice applies to anyone who interacts with us in relation to our products and services (“you”, “your”), via any channel. We may give you additional privacy notices from time to time if required for specific interactions.</string>
-    <string name="policyh3">3. Ways in which we obtain personal information</string>
-    <string name="policy3">We obtain personal information from you and from our other products and services used by you.</string>
-    <string name="policyh4">Categories of personal information</string>
+    <string name="policyhead">OM Rooms Privacy Notice
+    </string>
+    <string name="policyhd">OM Rooms is committing to protecting your information. This privacy notice provides details about the information we collect about you, how we use it and how we protect it. It also explains your rights and how to contact us if you have questions about how we use your information.<br />
+    </string>
+    <string name="policyhd1">Policy last updated: 10th August 2019
+    </string>
+    <string name="policyh1">1. Information about OM Rooms
+    </string>
+    <string name="policy1">In this privacy notice, references to “OM Rooms”, "we" or "us" or “our” are to anyEMI Online Services Pvt Ltd., (a company incorporated under the laws of Company’s Act 2013) and its parent company and its subsidiaries (the “anyEMI”).<br />
+    </string>
+    <string name="policyh2">2. Scope of our privacy notice
+    </string>
+    <string name="policy2">This notice applies to anyone who interacts with us in relation to our products and services (“you”, “your”), via any channel. We may give you additional privacy notices from time to time if required for specific interactions.<br />
+    </string>
+    <string name="policyh3">3. Ways in which we obtain personal information
+    </string>
+    <string name="policy3">We obtain personal information from you and from our other products and services used by you.<br />
+    </string>
+    <string name="policyh4">Categories of personal information
+    </string>
     <string name="policy4">We process two categories of personal information about you namely:
-
 standard personal information (e.g. information we use to contact you, identify you or manage our relationship with you); and
 special categories of information (e.g. if you have indicated or have chosen a language preference for product optimization or ease of use).
-For further information on these categories of information, please expand this section.</string>
-    <string name="policyh5">5. Purposes and lawful grounds of our processing personal information</string>
-    <string name="policy5">We process your personal information for the purposes set out in this notice, based on the legal grounds set out under the “+” [insert hyperlink to section below]. Different legal grounds apply depending on what category of personal information we process. Standard personal information is normally processed by us on the basis that it is necessary for accessing the app or website via login, the performance of a contract, our or a third parties’ legitimate interests or law. Further information about this and special category processing grounds is set out below.</string>
-    <string name="policyh6">6. Legitimate interests</string>
+For further information on these categories of information, please expand this section.<br />
+    </string>
+    <string name="policyh5">5. Purposes and lawful grounds of our processing personal information
+    </string>
+    <string name="policy5">We process your personal information for the purposes set out in this notice, based on the legal grounds set out under the “+” [insert hyperlink to section below]. Different legal grounds apply depending on what category of personal information we process. Standard personal information is normally processed by us on the basis that it is necessary for accessing the app or website via login, the performance of a contract, our or a third parties’ legitimate interests or law. Further information about this and special category processing grounds is set out below.<br />
+    </string>
+    <string name="policyh6">6. Legitimate interests
+    </string>
 
-    <string name="policy6">We process your personal information for a number of legitimate interests, including providing you with products and services for use, administering our relationship with you, for marketing and service/product improvement purposes and in order to exercise our rights or handle claims. More detailed information about our legitimate interests is set out below.</string>
-    <string name="policyh7">7. Marketing and Preferences</string>
+    <string name="policy6">We process your personal information for a number of legitimate interests, including providing you with products and services for use, administering our relationship with you, for marketing and service/product improvement purposes and in order to exercise our rights or handle claims. More detailed information about our legitimate interests is set out below.<br />
+    </string>
+    <string name="policyh7">7. Marketing and Preferences
+    </string>
     <string name="policy7">We may use your personal information to send you marketing by post, telephone, social media platforms, email, SMS, application notifications and silent notifications to track installation status of the application. We may also use your personal information to carry out online paid marketing activities in the nature of retargeting.
-
 We also use technology to help us understand your personal preferences and interests so that we can send recommendations and marketing communications that are likely to be of more interest to you. Using technology in this way is sometimes known as profiling.
-
-If you wish to unsubscribe from emails sent by us, you can do so at any time by clicking on the "unsubscribe" link that appears in all emails and by adjusting the settings on your device to turn off notifications from our app. Otherwise, you can always contact us at dataprotection@omrooms.com to update your contact preferences. You may also object to profiling relating to direct marketing by contacting us at dataprotection@omrooms.com.</string>
-    <string name="policyh8">8. Analytics and Advertising Services Provided by Others</string>
+If you wish to unsubscribe from emails sent by us, you can do so at any time by clicking on the "unsubscribe" link that appears in all emails and by adjusting the settings on your device to turn off notifications from our app. Otherwise, you can always contact us at dataprotection@omrooms.com to update your contact preferences. You may also object to profiling relating to direct marketing by contacting us at dataprotection@omrooms.com.<br />
+    </string>
+    <string name="policyh8">8. Analytics and Advertising Services Provided by Others
+    </string>
     <string name="policy8">Third parties provide us with audience measurement and analytics services that analyze your online interactions (both with the OM Rooms and other websites), serve you with tailored marketing and report on the performance of that marketing. We also use Google Place API to make suggestions based on your location or search strings.
-
-OM Rooms is using Google Place API for place prediction. Please refer to their privacy policy. http://www.google.com/privacy.html</string>
-    <string name="policyh9">9. Sharing your information</string>
+OM Rooms is using Google Place API for place prediction. Please refer to their privacy policy. http://www.google.com/privacy.html<br />
+    </string>
+    <string name="policyh9">9. Sharing your information
+    </string>
     <string name="policy9">We share your information within the OM Room Group and with others who help us provide services. We also share your information in accordance with the law. For more information on who we share your information with, please expand this section.
-
 We share your information for the purposes set out in this privacy policy, with the following categories of recipients:
-
-other members of the OM Room Group;
+other members of the OM Room Group;\n
 third party suppliers who help deliver products or services on our behalf, or who have partnered with OM Room in connection with services or a relevant promotional offering, as well as other apps or websites that integrate with our API or Services, or those with an API or Service with which we integrate;
 third parties where we have a duty to or are permitted to disclose your personal information by law (e.g. law enforcement officials, government authorities);
-with the police in the exercise of their functions or with others as required by a court order;
+with the police in the exercise of their functions or with others as required by a court order;\n
 third parties where we (or any member(s) of the OM Room Group) sell or buy any business or assets, in which case we may disclose your personal data to the prospective seller or buyer of such business or assets;
 third parties in connection with any merger, sale of company assets, consolidation or restructuring, financing, or acquisition of all or a portion of the OM Room’s Group business, in which case personal data held by it about its customers or visitors to the website may be one of the transferred assets.
-Where we share your personal information, appropriate protections will be in place to protect your personal information as required by data protection laws. Sometimes, we may share information in an aggregated, pseudonymized and/or anonymized form which cannot reasonably be used to identify an individual.</string>
-    <string name="policyh10">10. Transfers outside of your country</string>
+Where we share your personal information, appropriate protections will be in place to protect your personal information as required by data protection laws. Sometimes, we may share information in an aggregated, pseudonymized and/or anonymized form which cannot reasonably be used to identify an individual.<br />
+    </string>
+    <string name="policyh10">10. Transfers outside of your country
+    </string>
     <string name="policy10">OM Rooms uses global information systems. As a result, OM Room transfers your personal information to a country outside of your country and the European Economic Area ("EEA", i.e. EU member states including Norway, Liechtenstein and Iceland) to India and Singapore for the purposes set out in this policy. Not all countries outside of the EEA have data protection laws that are similar to those in the EEA and they may not be regarded by the European Commission as providing an adequate level of data protection.
-
-OM Rooms takes steps to ensure that when your personal information is transferred internationally, it is subject to appropriate safeguards in accordance with data protection laws. Often, these safeguards include contractual safeguards. More information about these safeguards (including copies, where relevant) can be obtained by contacting [dataprotection@omrooms.com].</string>
-    <string name="policyh11">11. Retention period</string>
-    <string name="policy11">In general, we will keep your information in accordance with OM Room’s records retention policies. However, there may be circumstances that mean we must retain your personal information for longer.</string>
+OM Rooms takes steps to ensure that when your personal information is transferred internationally, it is subject to appropriate safeguards in accordance with data protection laws. Often, these safeguards include contractual safeguards. More information about these safeguards (including copies, where relevant) can be obtained by contacting [dataprotection@omrooms.com].<br />
+    </string>
+    <string name="policyh11">11. Retention period
+    </string>
+    <string name="policy11">In general, we will keep your information in accordance with OM Room’s records retention policies. However, there may be circumstances that mean we must retain your personal information for longer.<br />
+    </string>
 
     <string name="policyh12">12. Your rights</string>
-    <string name="policy12">Data protection laws in the EEA and some other countries provide individuals with rights in relation to the information that OM Room holds about them on some computer and paper records. These include rights to access, correct, delete, restrict the use of, object to the use of, port to another person, and withdraw consent to the use of, your information. Exceptions may apply to these rights.</string>
+    <string name="policy12">Data protection laws in the EEA and some other countries provide individuals with rights in relation to the information that OM Room holds about them on some computer and paper records. These include rights to access, correct, delete, restrict the use of, object to the use of, port to another person, and withdraw consent to the use of, your information. Exceptions may apply to these rights.<br />
+    </string>
     <string name="policyh13">13. Data protection contacts</string>
     <string name="policy13">If you have any questions, comments, complaints or suggestions in relation to this notice, or any other concerns about the way in which we process information about you, please contact our Privacy Team at dataprotection@omrooms.com.
-
-You also have a right to make a complaint to your local privacy supervisory authority. If you are in the EU, you can lodge a complaint with another supervisory authority which is based in the country or territory where:</string>
+You also have a right to make a complaint to your local privacy supervisory authority. If you are in the EU, you can lodge a complaint with another supervisory authority which is based in the country or territory where:<br />
+    </string>
     <string name="policy14">you are living,</string>
     <string name="policy15">you work, or</string>
     <string name="policy16">the alleged infringement took place.</string>
-    <string name="policy17">A list of the EU data protection supervisory authorities is here</string>
+    <string name="policy17">A list of the EU data protection supervisory authorities is here
+    </string>
 
 
     <string-array name="Main">

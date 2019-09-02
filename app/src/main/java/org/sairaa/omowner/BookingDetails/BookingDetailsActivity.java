@@ -14,11 +14,13 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -30,6 +32,7 @@ import com.google.gson.Gson;
 import org.sairaa.omowner.Api.ApiUtils;
 import org.sairaa.omowner.Api.OmRoomApi;
 import org.sairaa.omowner.CheckIn.CheckInActivity;
+import org.sairaa.omowner.CheckInform.CheckinformRequest;
 import org.sairaa.omowner.Collection.CollectionActivity;
 import org.sairaa.omowner.Model.BokedRoomResponse;
 import org.sairaa.omowner.Model.BookedRoom;
@@ -47,8 +50,10 @@ import org.sairaa.omowner.payment.PaymentModeActivityNew;
 import org.sairaa.omowner.payment.PaymentRequestModel;
 import org.sairaa.omowner.payment.instamojo.InstamojoActivity;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -73,7 +78,9 @@ public class BookingDetailsActivity extends AppCompatActivity implements Booking
     private String hotelId;
     private SharedPreferenceConfig sharedPreferenceConfig;
     ImageView uploadproof, uploadphoto;
-
+    String strname,stradressproof,struploadproof,struploadphoto,comment;
+int inbookingid;
+    BigInteger inphonenumber;
     @Override
     public boolean onSupportNavigateUp() {
         finish();
@@ -137,6 +144,10 @@ public class BookingDetailsActivity extends AppCompatActivity implements Booking
                 break;
             case completedType:
                 Objects.requireNonNull(getSupportActionBar()).setTitle("Completed");
+                break;
+            case cancelledType:
+                Objects.requireNonNull(getSupportActionBar()).setTitle("Cancelled");
+                break;
         }
 
     }
@@ -192,8 +203,12 @@ public class BookingDetailsActivity extends AppCompatActivity implements Booking
                 if (!isCancel) {
                     status = inHouseType;
                 }
+
             } else if (status.equals(inHouseType)) {
                 status = completedType;
+            }else
+            {
+                status = cancelledType;
             }
             CustomerBookingDetailsRequest request = new CustomerBookingDetailsRequest(hotelId, status, day, index);
             bookingPresenter.retrieveBookingDetails(request);
@@ -292,10 +307,15 @@ public class BookingDetailsActivity extends AppCompatActivity implements Booking
                         Spinner sp_addressproof = mView.findViewById(R.id.Spinner_address);
                         Button bt_photoupload = mView.findViewById(R.id.bt_photoupload);
                         Button bt_proofbutton = (Button) mView.findViewById(R.id.bt_proofupload);
+                        EditText textArea = mView.findViewById(R.id.textArea);
 
                         etbookid.setText(list.getBooking_id());
                         etname.setText(list.getUser_name());
                         etnumber.setText(list.getPhone_no());
+
+                        inbookingid =  Integer.parseInt(etbookid.getText().toString());
+                        strname =  etname.getText().toString();
+                        inphonenumber = new BigInteger(etnumber.getText().toString()) ;
 
                         ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(BookingDetailsActivity.this, android.R.layout.simple_spinner_dropdown_item
                                 , getResources().getStringArray(R.array.Addressproof)) {
@@ -364,14 +384,15 @@ public class BookingDetailsActivity extends AppCompatActivity implements Booking
 
                                 if (!etbookid.getText().toString().equals("")) {
                                     if (!etname.getText().toString().equals("")) {
-                                        if (!etnumber.getText().toString().equals("")) {
+                                        if(!etnumber.getText().toString().equals("")) {
 
                                             if (etnumber.getText().toString().length() == 10) {
                                                 if (!sp_addressproof.getSelectedItem().toString().equals("Select One")) {
-
+                                                        stradressproof = sp_addressproof.getSelectedItem().toString();
                                                     if (uploadproof.getDrawable() != null) {
-                                                        if (uploadphoto.getDrawable() != null) {
 
+                                                        if (uploadphoto.getDrawable() != null) {
+                                                            comment = textArea.getText().toString();
                                                             alertDialog.setCancelable(true);
                                                             alertDialog.dismiss();
                                                             // Toast.makeText(BookingDetailsActivity.this, "iuvlbs", Toast.LENGTH_SHORT).show();
@@ -396,10 +417,11 @@ public class BookingDetailsActivity extends AppCompatActivity implements Booking
 
                                                             if (ConverterUtil.isDateToday(list.getFrom_date())
                                                                     || ConverterUtil.checkCurrentDateIsLessThenSaved(ConverterUtil.parseDateToddMMMyyyy(list.getFrom_date()))) {
+                                                                Checkinform();
                                                                 Intent checkInIntent = new Intent(BookingDetailsActivity.this, CheckInActivity.class);
                                                                 checkInIntent.putExtra("bookingD", "" + new Gson().toJson(list));
                                                                 startActivityForResult(checkInIntent, CheckInRequestCode);
-                                                                Toast.makeText(BookingDetailsActivity.this, "Details Submitted Successfully", Toast.LENGTH_LONG).show();
+                                                               // Toast.makeText(BookingDetailsActivity.this, "Details Submitted Successfully", Toast.LENGTH_LONG).show();
                                                             } else {
                                                                 Toast.makeText(BookingDetailsActivity.this, "Today is not the Check In Date", Toast.LENGTH_LONG).show();
                                                             }
@@ -438,6 +460,36 @@ public class BookingDetailsActivity extends AppCompatActivity implements Booking
                         OmRoomApi omRoomApi = ApiUtils.getOmRoomApi();
                         BookedRoomRequest bookedRoomRequest = new BookedRoomRequest(list.getBooking_id());
                         omRoomApi.getBookedRoomDetailOnEachBooking(bookedRoomRequest).enqueue(new Callback<BokedRoomResponse>() {
+                            @Override
+                            public void onResponse(Call<BokedRoomResponse> call, Response<BokedRoomResponse> response) {
+                                if (response.isSuccessful()) {
+
+                                    BokedRoomResponse bookedResponse = response.body();
+                                    Log.e(TAG_BOOKING_DETAIL, "" + new Gson().toJson(bookedResponse));
+                                    if (bookedResponse != null && bookedResponse.getStatus().equals("Success")) {
+                                        initiateCheckOutDialoge(bookedResponse.getGetBookedRoom(), list.getBooking_id());
+                                    }
+
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<BokedRoomResponse> call, Throwable t) {
+                                Log.e(TAG_BOOKING_DETAIL, "" + t.toString());
+//                                initiateCheckOutDialoge("Trial", list.getBooking_id());
+                            }
+                        });
+
+
+//                        Intent checkOuttent = new Intent(this, CheckOutActivity.class);
+//                        checkOuttent.putExtra("bookingD", ""+new Gson().toJson(list));
+//                        startActivityForResult(checkOuttent,CheckOutRequestCode);
+                        break;
+                    case cancelledType:
+                        // navigate to check out
+                        OmRoomApi omRoomApi1 = ApiUtils.getOmRoomApi();
+                        BookedRoomRequest bookedRoomRequest1 = new BookedRoomRequest(list.getBooking_id());
+                        omRoomApi1.getBookedRoomDetailOnEachBooking(bookedRoomRequest1).enqueue(new Callback<BokedRoomResponse>() {
                             @Override
                             public void onResponse(Call<BokedRoomResponse> call, Response<BokedRoomResponse> response) {
                                 if (response.isSuccessful()) {
@@ -558,6 +610,68 @@ public class BookingDetailsActivity extends AppCompatActivity implements Booking
         });
     }
 
+
+    private void Checkinform() {
+     /*   name = etUser.getText().toString().trim();
+        email = etEmail.getText().toString().trim();
+        password = etPassword.getText().toString().trim();
+        gender = etGender.getText().toString().trim();
+        progressDialog.show();*/
+        //OmApiInterface apiInterface = RetrofitInstance.getRetrofitInstance().create(OmApiInterface.class);
+        OmRoomApi omRoomApi = ApiUtils.getOmRoomApi();
+       Call<CheckinformRequest> checkinFormCall = omRoomApi.Checkinform(new CheckinformRequest(Integer.parseInt(sharedPreferenceConfig.readHotelId()),inbookingid,strname,inphonenumber,stradressproof,struploadphoto,struploadproof,comment));
+       // Call<CheckinformRequest> checkinFormCall = omRoomApi.Checkinform(new CheckinformRequest(1,2,"sfd",4,"ff","efsd","ff","FF"));
+        checkinFormCall.enqueue(new Callback<CheckinformRequest>() {
+            @Override
+            public void onResponse(Call<CheckinformRequest> call, Response<CheckinformRequest> response) {
+
+                Log.d("Sur",response.toString());
+              //  progressDialog.hide();
+                if (response.isSuccessful()){
+                    CheckinformRequest dtos = response.body();
+                    if (dtos!=null){
+                        if (dtos.getStatus().equals("Success"));
+                        Toast.makeText(BookingDetailsActivity.this,dtos.getMsg(),Toast.LENGTH_SHORT).show();
+                       /* Intent intent = new Intent(Book.this,WelComeActivity.class);
+                        intent.putExtra("Name",etUser.getText().toString().trim());
+                        intent.putExtra("Email",etEmail.getText().toString().trim());
+                        startActivity(intent);*/
+                    }
+                }else {
+                    Toast.makeText(BookingDetailsActivity.this,"Data not Found!",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CheckinformRequest> call, Throwable t) {
+              //  progressDialog.hide();
+                Toast.makeText(BookingDetailsActivity.this,"Something went wrong!"+t,Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
+    public static String encodeTobase64(Bitmap image)
+    {
+        Bitmap immagex=image;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        immagex.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] b = baos.toByteArray();
+        String imageEncoded = Base64.encodeToString(b,Base64.DEFAULT);
+
+        Log.e("LOOK", imageEncoded);
+        return imageEncoded;
+    }
+    public static Bitmap decodeBase64(String input)
+    {
+        byte[] decodedByte = Base64.decode(input, 0);
+        return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
+    }
+
+
+
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -591,6 +705,7 @@ public class BookingDetailsActivity extends AppCompatActivity implements Booking
                         final Bitmap selectedImage1 = BitmapFactory.decodeStream(imageStream1);
 
                         uploadphoto.setImageBitmap(selectedImage1);
+                        struploadphoto = encodeTobase64(selectedImage1);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                         Toast.makeText(BookingDetailsActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
@@ -607,6 +722,7 @@ public class BookingDetailsActivity extends AppCompatActivity implements Booking
                         final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                         final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
                         uploadproof.setImageBitmap(selectedImage);
+                        struploadproof = encodeTobase64(selectedImage);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                         Toast.makeText(BookingDetailsActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();

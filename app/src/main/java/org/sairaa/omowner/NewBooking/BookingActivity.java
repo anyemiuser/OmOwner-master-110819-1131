@@ -32,7 +32,9 @@ import com.google.gson.Gson;
 
 import org.sairaa.omowner.Api.ApiUtils;
 import org.sairaa.omowner.Api.OmRoomApi;
+import org.sairaa.omowner.BookingDetails.BookingDetailsActivity;
 import org.sairaa.omowner.Collection.CollectionActivity;
+import org.sairaa.omowner.Main.MainActivity;
 import org.sairaa.omowner.NewBooking.Adapter.RoomTypeAdapter;
 import org.sairaa.omowner.NewBooking.Model.Booking;
 import org.sairaa.omowner.NewBooking.Model.BookingModel;
@@ -325,7 +327,16 @@ public class BookingActivity extends AppCompatActivity implements View.OnClickLi
                     roomCount = roomCount +roomP.getNoOfRoomSelected();
                 }
                 if(roomCount == noOfRoom){
-                    takeUserDetailsAndBookRoom();
+                    if(MainActivity.bookdrm.equals(MainActivity.totalrm))
+                    {
+                        Toast.makeText(this, "Rooms Full", Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        takeUserDetailsAndBookRoom();
+                    }
+
+
                 }else {
                     ToastSnackMessage("Select minimum "+noOfRoom+ " Rooms");
                 }
@@ -358,8 +369,11 @@ public class BookingActivity extends AppCompatActivity implements View.OnClickLi
                 alertDialog.dismiss();
 
         }
-
     }
+
+
+
+
 
     private void takeUserDetailsAndBookRoom() {
         getORRegister = 0;
@@ -408,7 +422,7 @@ public class BookingActivity extends AppCompatActivity implements View.OnClickLi
             public void onChanged(@Nullable String s) {
                 if (s != null) {
                     if(s.equals("exits")){
-                        //                    bookingViewModel.updateProfileDetails();
+                        // bookingViewModel.updateProfileDetails();
                         getORRegister = 1;
                         getRegister.setText("Retrieve");
                         phoneNo.setEnabled(false);
@@ -692,7 +706,7 @@ public class BookingActivity extends AppCompatActivity implements View.OnClickLi
 
     private void selectPaymentMode(Booking booking) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Are you Sure?");
+        builder.setTitle("Are you want to proceed now");
         builder.setCancelable(false);
         View mView = getLayoutInflater().inflate(R.layout.alert_layout1, null);
         builder.setView(mView);

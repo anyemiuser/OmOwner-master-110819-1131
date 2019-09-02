@@ -12,10 +12,12 @@ public interface Constants {
     String upComingType = "u";
     String inHouseType = "i";
     String completedType = "s";
+    String cancelledType = "c";
 
     String upComingText = "To-Check In >>";
     String inHouseText = "To-Check Out >>";
     String completedText = "Completed >>";
+    String cancelledText = "Cancelled >>";
 
     String Extend = "extend";
     String CheckInOut = "checkInOut";
@@ -25,6 +27,7 @@ public interface Constants {
     String UpcomingCheckIn = "Check In";
     String InHouseCheckOut = "Check Out";
     String CompletedInActiveButton = "In Active";
+    String CancelledInActiveButton = "Cancelled";
 
 
 }

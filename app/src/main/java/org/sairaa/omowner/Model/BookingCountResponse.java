@@ -11,11 +11,12 @@ public class BookingCountResponse {
     private UpcomingCountList upcomingList;
     private InhouseCountList inhouseList;
     private CompletedCountList completedlist;
+    private CancelledCountList cancelledlist;
 
     public BookingCountResponse() {
     }
 
-    public BookingCountResponse(String status, String message, List<TotalRooms> noofrooms, List<RoomTarrif> tarrif, UpcomingCountList upcomingList, InhouseCountList inhouseList, CompletedCountList completedlist) {
+    public BookingCountResponse(String status, String message, List<TotalRooms> noofrooms, List<RoomTarrif> tarrif, UpcomingCountList upcomingList, InhouseCountList inhouseList, CompletedCountList completedlist, CancelledCountList cancelledlist) {
         this.status = status;
         this.message = message;
         this.noofrooms = noofrooms;
@@ -23,6 +24,7 @@ public class BookingCountResponse {
         this.upcomingList = upcomingList;
         this.inhouseList = inhouseList;
         this.completedlist = completedlist;
+        this.cancelledlist = cancelledlist;
     }
 
     public String getStatus() {
@@ -79,5 +81,13 @@ public class BookingCountResponse {
 
     public void setCompletedlist(CompletedCountList completedlist) {
         this.completedlist = completedlist;
+    }
+
+    public CancelledCountList getCancelledlist() {
+        return cancelledlist;
+    }
+
+    public void setCancelledlist(CancelledCountList cancelledlist) {
+        this.cancelledlist = cancelledlist;
     }
 }
