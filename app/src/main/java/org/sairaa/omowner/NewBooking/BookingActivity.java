@@ -239,13 +239,13 @@ public class BookingActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void assignValuesToRGView(List<RoomsGuest> roomsGuests) {
-        rooms.setText(String.valueOf(roomsGuests.size()).concat(" Roooms"));
+        rooms.setText(String.valueOf(roomsGuests.size()).concat(" Rooms"));
         noOfRoom = roomsGuests.size();
         guestCount = 0;
         for(RoomsGuest roomsG: roomsGuests){
             guestCount = guestCount + roomsG.getGuests();
         }
-        guests.setText(String.valueOf(guestCount).concat(" Guests"));
+        guests.setText(String.valueOf(guestCount).concat(" Persons"));
         roomDialogeCount.setText(String.valueOf(roomsGuests.size()));
         guestDialogCount.setText(String.valueOf(guestCount));
 
@@ -338,7 +338,7 @@ public class BookingActivity extends AppCompatActivity implements View.OnClickLi
 
 
                 }else {
-                    ToastSnackMessage("Select minimum "+noOfRoom+ " Rooms");
+                    ToastSnackMessage("Select "+noOfRoom+ " Rooms");
                 }
 
 //

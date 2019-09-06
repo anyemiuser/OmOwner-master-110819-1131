@@ -51,6 +51,7 @@ import org.sairaa.omowner.NewBooking.BookingActivity;
 import org.sairaa.omowner.Policies.PoliciesActivity;
 import org.sairaa.omowner.Pricing.PriceActivity;
 import org.sairaa.omowner.R;
+import org.sairaa.omowner.RaiseIssue.RaiseIssueActivity;
 import org.sairaa.omowner.RaiseIssue.RaiseIssueRequest;
 import org.sairaa.omowner.RoomUtility.UtilityActivity;
 import org.sairaa.omowner.Support.OmSupportActivity;
@@ -372,7 +373,11 @@ public class MainActivity extends AppCompatActivity
                 m.findItem(R.id.nav_help).setVisible(b);
                 return true;
         }else if (id == R.id.nav_raiseissue) {
-            AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+
+            Intent intent = new Intent(this, RaiseIssueActivity.class);
+            startActivity(intent);
+
+           /* AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
             View mview = getLayoutInflater().inflate(R.layout.dialog_spinner,null);
             alertDialog.setTitle("Raise an Issue");
             final Spinner sp = mview.findViewById(R.id.spinner);
@@ -518,59 +523,63 @@ public class MainActivity extends AppCompatActivity
             alertDialog.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    if(!sp.getSelectedItem().toString().equals("Select Category")){
-                        category = sp.getSelectedItem().toString();
-                        comment= textArea_information.getText().toString();
+                    if(!textArea_information.getText().toString().equals("")) {
 
-                        if(sp.getSelectedItem().toString().equals("Issue with OM Staff")
-                                && sp.getSelectedItem().toString().equals("Value Added Services Enquiry")
-                                && sp.getSelectedItem().toString().equals("Others")) {
 
-                            IssuedRaise();
-                           // Toast.makeText(MainActivity.this, "Issue Raised Successfully", Toast.LENGTH_SHORT).show();
+                        if (!sp.getSelectedItem().toString().equals("Select Category")) {
+                            category = sp.getSelectedItem().toString();
+                            comment = textArea_information.getText().toString();
 
-                            dialogInterface.dismiss();
-                        }
-                        else {
-                            if (!sp1.getSelectedItem().toString().equals("Select SubCategory")) {
-                                subcategory = sp1.getSelectedItem().toString();
 
-                                if (!sp1.getSelectedItem().toString().equals("Update Owner info")) {
-                                /// if(!sp3.getSelectedItem().toString().equals("")){
-                                    IssuedRaise();
-                               // Toast.makeText(MainActivity.this, "Issue Raised Successfully", Toast.LENGTH_SHORT).show();
+                            if (sp.getSelectedItem().toString().equals("Issue with OM Staff")
+                                    && sp.getSelectedItem().toString().equals("Value Added Services Enquiry")
+                                    && sp.getSelectedItem().toString().equals("Others")) {
+
+                                IssuedRaise();
+                                // Toast.makeText(MainActivity.this, "Issue Raised Successfully", Toast.LENGTH_SHORT).show();
 
                                 dialogInterface.dismiss();
-                            /*}
+                            } else {
+                                if (!sp1.getSelectedItem().toString().equals("Select SubCategory")) {
+                                    subcategory = sp1.getSelectedItem().toString();
+
+                                    if (!sp1.getSelectedItem().toString().equals("Update Owner info")) {
+                                        /// if(!sp3.getSelectedItem().toString().equals("")){
+                                        IssuedRaise();
+                                        // Toast.makeText(MainActivity.this, "Issue Raised Successfully", Toast.LENGTH_SHORT).show();
+
+                                        dialogInterface.dismiss();
+                            *//*}
                             else
                             {
                                 Toast.makeText(MainActivity.this,"Select Sub SubCategory", Toast.LENGTH_SHORT).show();
-                            }*/
-                            }
-                            else {
-                                    if (!sp3.getSelectedItem().toString().equals("Select One")) {
-                                        subsubcategory = sp3.getSelectedItem().toString();
+                            }*//*
+                                    } else {
+                                        if (!sp3.getSelectedItem().toString().equals("Select One")) {
+                                            subsubcategory = sp3.getSelectedItem().toString();
 
-                                       // Toast.makeText(MainActivity.this, "Issue Raised Successfully", Toast.LENGTH_SHORT).show();
-                                        IssuedRaise();
-                                        dialogInterface.dismiss();
+                                            // Toast.makeText(MainActivity.this, "Issue Raised Successfully", Toast.LENGTH_SHORT).show();
+                                            IssuedRaise();
+                                            dialogInterface.dismiss();
+                                        } else {
+                                            Toast.makeText(MainActivity.this, "Select Sub SubCategory", Toast.LENGTH_SHORT).show();
+                                        }
                                     }
-                                    else
-                                    {
-                                        Toast.makeText(MainActivity.this, "Select Sub SubCategory", Toast.LENGTH_SHORT).show();
-                                    }
-                             }
 
 
-                        }else {
-                                Toast.makeText(MainActivity.this, "Please Select SubCategory", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(MainActivity.this, "Please Select SubCategory", Toast.LENGTH_SHORT).show();
+                                }
                             }
+                        } else {
+                            Toast.makeText(MainActivity.this, "Please Select Category", Toast.LENGTH_SHORT).show();
+
                         }
                     }
                     else
-                    {
-                        Toast.makeText(MainActivity.this,"Please Select Category", Toast.LENGTH_SHORT).show();
-                    }
+                        {
+                            Toast.makeText(MainActivity.this, "Please add comment", Toast.LENGTH_SHORT).show();
+                        }
                 }
             });
             alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -581,7 +590,7 @@ public class MainActivity extends AppCompatActivity
             });
             alertDialog.setView(mview);
             AlertDialog dialog = alertDialog.create();
-            dialog.show();
+            dialog.show();*/
 
         }
         else if (id == R.id.nav_omsupport) {

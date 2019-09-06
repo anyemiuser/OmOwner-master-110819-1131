@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/share"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_changeinplan" />
+
+                <!-- <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="Change in Plan"
+            android:layout_marginLeft="16dp"
+            android:textColor="@android:color/black"/>-->
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/get_link"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_bymistake" />
+
+                <!--   <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="Booking created by mistake"
+            android:layout_marginLeft="16dp"
+            android:textColor="@android:color/black"/>-->
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/edit_name"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_differenthotel" />
+
+                <!--   <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_marginLeft="16dp"
+            android:text="want to book a different hotel"
+            android:textColor="@android:color/black"/>-->
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/others"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_betterdeal" />
+
+                <!--   <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="Delete collection"
+            android:layout_marginLeft="16dp"
+            android:textColor="@android:color/black"/>-->
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/delete"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_others" />
+
+                <!--  <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="Delete collection"
+            android:layout_marginLeft="16dp"
+
+            android:textColor="@android:color/black"/>-->
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+<LinearLayout
+    android:layout_width="0dp"
+    android:layout_weight="1"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+<RadioGroup
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <RadioButton
+        android:id="@+id/changeinplan"
+        android:layout_width="fill_parent"
+        android:layout_height="56dp"
+        android:layout_gravity="right"
+        android:button="@null"
+        android:drawablePadding="30dp"
+        android:drawableRight="@android:drawable/btn_radio"
+        android:text="Change in plan"
+        android:textSize="20dip" />
+    <RadioButton
+        android:id="@+id/bymistake"
+        android:layout_width="fill_parent"
+        android:layout_height="56dp"
+        android:layout_gravity="right"
+        android:button="@null"
+        android:drawablePadding="30dp"
+        android:drawableRight="@android:drawable/btn_radio"
+        android:text="Booking created by mistake"
+        android:textSize="20dip" />
+    <RadioButton
+        android:id="@+id/differenthotel"
+        android:layout_width="fill_parent"
+        android:layout_height="56dp"
+        android:layout_gravity="right"
+        android:button="@null"
+        android:drawablePadding="30dp"
+        android:drawableRight="@android:drawable/btn_radio"
+        android:text="Want to book a different hotel"
+        android:textSize="20dip" />
+    <RadioButton
+        android:id="@+id/betterdeal"
+        android:layout_width="fill_parent"
+        android:layout_height="56dp"
+        android:layout_gravity="right"
+        android:button="@null"
+        android:drawablePadding="30dp"
+        android:drawableRight="@android:drawable/btn_radio"
+        android:text="Found a better deal"
+        android:textSize="20dip" />
+    <RadioButton
+        android:id="@+id/other"
+        android:layout_width="fill_parent"
+        android:layout_height="56dp"
+        android:layout_gravity="right"
+        android:button="@null"
+        android:drawablePadding="30dp"
+        android:drawableRight="@android:drawable/btn_radio"
+        android:text="Other"
+        android:textSize="20dip" />
+
+
+</RadioGroup>
+</LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <Button
+        android:id="@+id/close"
+        style="@style/buttonStyle"
+        android:layout_weight="1"
+        android:layout_marginLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Close" />
+
+    <Button
+        android:id="@+id/cancelbooking"
+        style="@style/buttonStyle"
+        android:layout_weight="1"
+        android:layout_marginLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cancel This Booking" />
+
+</LinearLayout>
+
+</LinearLayout>

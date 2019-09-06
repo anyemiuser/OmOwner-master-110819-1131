@@ -243,7 +243,7 @@ int inbookingid;
                 if(roomCount == noOfRoom){
                     takeUserDetailsAndBookRoom();
                 }else {
-                    ToastSnackMessage("Select minimum "+noOfRoom+ " Rooms");
+                    ToastSnackMessage("Select "+noOfRoom+ " Rooms");
                 }*/
 
 

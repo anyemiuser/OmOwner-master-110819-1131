@@ -1,8 +1,13 @@
 package org.sairaa.omowner.BookingDetails;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,6 +19,8 @@ import org.sairaa.omowner.Model.RoomTypeDetails;
 import org.sairaa.omowner.R;
 import org.sairaa.omowner.Utils.Constants;
 import org.sairaa.omowner.Utils.ConverterUtil;
+import android.support.design.widget.BottomSheetDialog;
+import android.widget.Toast;
 
 public class BookingDetailsHolder extends RecyclerView.ViewHolder implements Constants {
     private TextView bookingId;
@@ -30,6 +37,8 @@ public class BookingDetailsHolder extends RecyclerView.ViewHolder implements Con
     private Button collectAmount;
     private TextView roomTypeAnaNo;
     private TextView guests;
+    private BottomSheetDialog bottomSheetDialog;
+
 
     private ConstraintLayout checkInOutLayout;
     //Layout for short and details
@@ -117,6 +126,13 @@ public class BookingDetailsHolder extends RecyclerView.ViewHolder implements Con
                     cancel.setVisibility(View.GONE);
                     collectAmount.setVisibility(View.GONE);
 
+                }else if(ConverterUtil.getCheckInCheckOutType(type).equals(CancelledInActiveButton)){
+                    //completed and inactive the check in and check out button
+                    checkInOut.setVisibility(View.GONE);
+                    extend.setVisibility(View.GONE);
+                    cancel.setVisibility(View.GONE);
+                    collectAmount.setVisibility(View.GONE);
+
                 }else {
                     checkInOut.setText(ConverterUtil.getCheckInCheckOutType(type));
                     if(ConverterUtil.getCheckInCheckOutType(type).equals(UpcomingCheckIn)){
@@ -187,7 +203,7 @@ public class BookingDetailsHolder extends RecyclerView.ViewHolder implements Con
                     }
 
                     roomTypeAnaNo.setText(roomTypeNo);
-                    guests.setText("No Of Guests: ".concat(String.valueOf(noGuest)));
+                    guests.setText("No Of Persons: ".concat(String.valueOf(noGuest)));
                 }
 
 
@@ -217,6 +233,10 @@ public class BookingDetailsHolder extends RecyclerView.ViewHolder implements Con
                 cancel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
+
+                        openBottomSheet(view);
+
                         mAdapterCallback.cancelBooking(bookings.getBooking_id());
                     }
                 });
@@ -238,4 +258,50 @@ public class BookingDetailsHolder extends RecyclerView.ViewHolder implements Con
     public void setAdapertCallBack(BookingDetailsAdapter.BookingAdapterCallback mAdapterCallback) {
         this.mAdapterCallback = mAdapterCallback;
     }
+
+    private  void openBottomSheet(View v) {
+        //View view = activity.getLayoutInflater ().inflate (R.layout.bottom_sheet, null);
+        // View view = inflater.inflate( R.layout.bottom_sheet, null );
+        Context context=v.getContext();
+        LayoutInflater inflater;
+        inflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+        View view = inflater.inflate (R.layout.cancel_bottom_nav, null);
+        Button close = view.findViewById(R.id.close);
+        Button cancel = view.findViewById(R.id.cancelbooking);
+      /*  TextView txtBackup = (TextView)view.findViewById(R.id.txt_backup);
+        TextView txtDetail = (TextView)view.findViewById(R.id.txt_detail);
+        TextView txtOpen = (TextView)view.findViewById(R.id.txt_open);
+        final TextView txtUninstall = (TextView)view.findViewById( R.id.txt_backup);*/
+
+        final Dialog mBottomSheetDialog = new Dialog (context);
+        mBottomSheetDialog.setContentView (view);
+        mBottomSheetDialog.setCancelable (true);
+        mBottomSheetDialog.getWindow ().setLayout (LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        mBottomSheetDialog.getWindow ().setGravity (Gravity.BOTTOM);
+        mBottomSheetDialog.show ();
+
+
+        close.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+             //   Toast.makeText(v.getContext(),"Clicked Backup",Toast.LENGTH_SHORT).show();
+
+                mBottomSheetDialog.dismiss();
+            }
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(),"Cancelled Successfully",Toast.LENGTH_SHORT).show();
+                mBottomSheetDialog.dismiss();
+            }
+        });
+
+
+    }
+
 }

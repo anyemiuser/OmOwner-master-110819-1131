@@ -103,11 +103,11 @@ public class CheckInActivity extends AppCompatActivity implements CheckInContrac
         }else {
             checkIn.setVisibility(View.GONE);
             if (actionBar != null) {
-                actionBar.setTitle("Rooms");
+                actionBar.setTitle("Rooms Status");
                 actionBar.setDisplayHomeAsUpEnabled(true);
             }
 
-            roomTypeQty.setText("Room Status");
+         //   roomTypeQty.setText("Room Status");
         }
         Log.e(TAG_CHECKIN,""+new Gson().toJson(customerBookings));
     }

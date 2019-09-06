@@ -17,7 +17,7 @@
     <string name="higher_date">Select higher date</string>
     <string name="enter_phone_no">Enter Phone Number</string>
     <string name="hotel_image_url">org.sairaa.omowner.hotel_image_url</string>
-    <string name="max_guest">Maximun Guest Can Allowed:</string>
+    <string name="max_guest">Maximun persons Can Allowed:</string>
     <string name="no_of_rooms">Number Of Rooms</string>
     <string name="minimum_price">Minimu Price</string>
     <string name="avg_price">Average Price</string>
@@ -44,8 +44,6 @@
         <item>F</item>
         <item>O</item>
     </string-array>
-
-
 
 
     <string name="tandchead">Terms and Conditions of Use:</string>
@@ -163,7 +161,6 @@ You accept and agree that in case of any dispute arising out of or in connection
     <string name="tandch12">12. Privacy Policy</string>
     <string name="tandc12">Access to the OM Rooms Platform and use of the Services offered on the OM Rooms Platform by the Company is subject to this Privacy Policy. By accessing the OM Rooms Platform and by continuing to use the Services offered, you are deemed to have accepted this Privacy Policy, and in particular, you are deemed to have consented to our use and disclosure of your personal information in the manner prescribed and for the purposes set out in this Privacy Policy. We reserve the right to amend this Privacy Policy from time to time. If you disagree with any part of this Privacy Policy, you must immediately discontinue your access to the OM Rooms Platform and your use of the Services.<br />
     </string>
-
 
 
     <string name="policyhead">OM Rooms Privacy Notice
@@ -343,7 +340,6 @@ You also have a right to make a complaint to your local privacy supervisory auth
         <item>Driving Licence</item>
         <item>Voter ID</item>
     </string-array>
-
 
 
 </resources>
