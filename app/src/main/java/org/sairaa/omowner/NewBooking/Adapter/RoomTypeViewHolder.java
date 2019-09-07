@@ -1,6 +1,7 @@
 package org.sairaa.omowner.NewBooking.Adapter;
 
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
@@ -20,7 +21,9 @@ class RoomTypeViewHolder extends RecyclerView.ViewHolder {
     private TextView roomType;
     private TextView payblePrice,discountPrice,basePrice,roomNightPrice;
     private RoomTypeAdapter.RoomTypeAdapterCallback adapterCallBack;
+    ConstraintLayout RmTypeLl;
     BookingViewModel bookingViewModel;
+    TextView noroomsleft;
 
 
     public RoomTypeViewHolder(@NonNull View itemView) {
@@ -36,10 +39,11 @@ class RoomTypeViewHolder extends RecyclerView.ViewHolder {
         basePrice = itemView.findViewById(R.id.base_price);
         payblePrice = itemView.findViewById(R.id.payble_price);
         discountPrice = itemView.findViewById(R.id.discount_price);
-
+        noroomsleft = itemView.findViewById(R.id.noroomleft);
         roomNightPrice = itemView.findViewById(R.id.room_night_price);
+        RmTypeLl = itemView.findViewById(R.id.room_type_ll);
 
-//        bookingViewModel = ViewModelProviders.of().get(BookingViewModel .class);
+//      bookingViewModel = ViewModelProviders.of().get(BookingViewModel .class);
     }
 
     public void set(RoomTypePrice room) {
@@ -62,18 +66,24 @@ class RoomTypeViewHolder extends RecyclerView.ViewHolder {
         if(room.getNoOfRoomSelected()>0){
             addDeleteLayout.setVisibility(View.VISIBLE);
             noOfRoom.setText(String.valueOf(room.getNoOfRoomSelected()));
-            add.setVisibility(View.INVISIBLE);
+           add.setVisibility(View.INVISIBLE);
+           // RmTypeLl.setVisibility(View.INVISIBLE);
         }else {
             add.setVisibility(View.VISIBLE);
             addDeleteLayout.setVisibility(View.INVISIBLE);
         }
 
         if(!room.isRoomAvailable()){
-            add.setVisibility(View.INVISIBLE);
+          // add.setVisibility(View.INVISIBLE);
+            RmTypeLl.setVisibility(View.INVISIBLE);
+            noroomsleft.setText("No Rooms Left");
+            noroomsleft.setVisibility(View.VISIBLE);
+
         }
-//        else {
-//            add.setVisibility(View.VISIBLE);
-//        }
+        else {
+          //  add.setVisibility(View.VISIBLE);
+            RmTypeLl.setVisibility(View.VISIBLE);
+        }
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override

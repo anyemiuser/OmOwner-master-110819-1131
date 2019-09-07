@@ -85,8 +85,8 @@ public class BookingDetailsPresenter implements BookingDetailContract.UserAction
                         }else {
                             bookingView.toastMessage(checkOutResponse.getMsg());
                         }
-                    }else {
-                        bookingView.toastMessage("Unable to check Out");
+                    }else{
+                        bookingView.toastMessage("Please Make Payment Before Checkout");
                     }
                     Log.e(TAG_BOOKING_PRESENTER,""+new Gson().toJson(checkOutResponse));
 

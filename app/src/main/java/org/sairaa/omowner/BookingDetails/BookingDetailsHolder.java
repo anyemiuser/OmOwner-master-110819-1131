@@ -3,6 +3,7 @@ package org.sairaa.omowner.BookingDetails;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
@@ -12,15 +13,26 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import org.sairaa.omowner.Api.ApiUtils;
+import org.sairaa.omowner.Api.OmRoomApi;
+import org.sairaa.omowner.CancelForm.CancelformRequest;
 import org.sairaa.omowner.Model.CustomerBookings;
 import org.sairaa.omowner.Model.RoomTypeDetails;
 import org.sairaa.omowner.R;
 import org.sairaa.omowner.Utils.Constants;
 import org.sairaa.omowner.Utils.ConverterUtil;
+import org.sairaa.omowner.Utils.SharedPreferenceConfig;
+
 import android.support.design.widget.BottomSheetDialog;
 import android.widget.Toast;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class BookingDetailsHolder extends RecyclerView.ViewHolder implements Constants {
     private TextView bookingId;
@@ -38,7 +50,9 @@ public class BookingDetailsHolder extends RecyclerView.ViewHolder implements Con
     private TextView roomTypeAnaNo;
     private TextView guests;
     private BottomSheetDialog bottomSheetDialog;
+    private SharedPreferenceConfig sharedPreferenceConfig;
 
+    private RadioButton radioButton;
 
     private ConstraintLayout checkInOutLayout;
     //Layout for short and details
@@ -56,6 +70,7 @@ public class BookingDetailsHolder extends RecyclerView.ViewHolder implements Con
     private Button extend;
     private Button checkInOut;
     private Button cancel;
+    private  RadioGroup radioGroup;
 
     private BookingDetailsAdapter.BookingAdapterCallback mAdapterCallback;
 
@@ -64,6 +79,8 @@ public class BookingDetailsHolder extends RecyclerView.ViewHolder implements Con
 
         bookingId = itemView.findViewById(R.id.booking_id);
         bookingTime = itemView.findViewById(R.id.booking_time);
+        sharedPreferenceConfig = new SharedPreferenceConfig(itemView.getContext());
+        radioGroup = (RadioGroup) itemView.findViewById(R.id.radio_group);
 
         customerName = itemView.findViewById(R.id.customer_name);
         phoneNo = itemView.findViewById(R.id.customer_phone_no);
@@ -159,7 +176,6 @@ public class BookingDetailsHolder extends RecyclerView.ViewHolder implements Con
                     default:
                         payStatus = payStatus.concat(" Paritallly paid");
 
-
                 }
                 paymentStatus.setText(payStatus);
 
@@ -232,12 +248,89 @@ public class BookingDetailsHolder extends RecyclerView.ViewHolder implements Con
 
                 cancel.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View view) {
+                    public void onClick(View v) {
 
 
-                        openBottomSheet(view);
 
-                        mAdapterCallback.cancelBooking(bookings.getBooking_id());
+
+                     // bottom alertbox
+                        Context context=v.getContext();
+                        LayoutInflater inflater;
+                        inflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+                        View view = inflater.inflate (R.layout.cancel_bottom_nav, null);
+                        Button close = view.findViewById(R.id.close);
+                        Button cancel = view.findViewById(R.id.cancelbooking);
+
+                        final Dialog mBottomSheetDialog = new Dialog (context);
+                        mBottomSheetDialog.setContentView (view);
+                        mBottomSheetDialog.setCancelable (true);
+                        mBottomSheetDialog.getWindow ().setLayout (LinearLayout.LayoutParams.MATCH_PARENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT);
+                        mBottomSheetDialog.getWindow ().setGravity (Gravity.BOTTOM);
+                        mBottomSheetDialog.show ();
+
+                        close.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                //Toast.makeText(v.getContext(),"Clicked Backup",Toast.LENGTH_SHORT).show();
+                                mBottomSheetDialog.dismiss();
+                            }
+                        });
+                        cancel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+/*
+
+                                int selectedId = radioGroup.getCheckedRadioButtonId();
+
+                                radioButton = (RadioButton) itemView.findViewById(selectedId);
+
+
+                                String reason = radioButton.getText().toString();*/
+                                int bookid = Integer.parseInt(bookings.getBooking_id());
+                                OmRoomApi omRoomApi = ApiUtils.getOmRoomApi();
+                                //OmApiInterface apiInterface = RetrofitInstance.getRetrofitInstance().create(OmApiInterface.class);
+                                Call<CancelformRequest> userRegisterCall = omRoomApi.canceluser(new CancelformRequest(Integer.parseInt(sharedPreferenceConfig.readHotelId()),sharedPreferenceConfig.readHotelIName(),bookid,"Found a better deal"));
+                                userRegisterCall.enqueue(new Callback<CancelformRequest>() {
+                                    @Override
+                                    public void onResponse(Call<CancelformRequest> call, Response<CancelformRequest> response) {
+                                        //  progressDialog.hide();
+                                        if (response.isSuccessful()){
+                                            CancelformRequest dtos = response.body();
+                                            if (dtos!=null){
+                                                if (dtos.getStatus().equals("Success"));
+                                                mAdapterCallback.cancelBooking(bookings.getBooking_id());
+                                                Toast.makeText(itemView.getContext(),dtos.getMsg(),Toast.LENGTH_SHORT).show();
+                                            }
+                                        }else {
+                                              Toast.makeText(itemView.getContext(),"Data not Found!",Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<CancelformRequest> call, Throwable t) {
+                                        // progressDialog.hide();
+                                         Toast.makeText(itemView.getContext(),"Something went wrong!"+t,Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
+
+
+
+
+
+
+                             //   registerUser();
+                               // mAdapterCallback.cancelBooking(bookings.getBooking_id());
+                              //Toast.makeText(v.getContext(),"Cancelled Successfully",Toast.LENGTH_SHORT).show();
+                                mBottomSheetDialog.dismiss();
+                            }
+                        });
+
+                       // openBottomSheet(view);
+                       // mAdapterCallback.cancelBooking(bookings.getBooking_id());
+
                     }
                 });
             }
@@ -259,7 +352,49 @@ public class BookingDetailsHolder extends RecyclerView.ViewHolder implements Con
         this.mAdapterCallback = mAdapterCallback;
     }
 
-    private  void openBottomSheet(View v) {
+    private void registerUser() {
+       /* name = etUser.getText().toString().trim();
+        email = etEmail.getText().toString().trim();
+        password = etPassword.getText().toString().trim();
+        gender = etGender.getText().toString().trim();*/
+      //  progressDialog.show();
+
+        OmRoomApi omRoomApi = ApiUtils.getOmRoomApi();
+       // OmApiInterface apiInterface = RetrofitInstance.getRetrofitInstance().create(OmApiInterface.class);
+        Call<CancelformRequest> userRegisterCall = omRoomApi.canceluser(new CancelformRequest(Integer.parseInt(sharedPreferenceConfig.readHotelId()),sharedPreferenceConfig.readHotelIName(),475,"SuryaKommana"));
+        userRegisterCall.enqueue(new Callback<CancelformRequest>() {
+            @Override
+            public void onResponse(Call<CancelformRequest> call, Response<CancelformRequest> response) {
+              //  progressDialog.hide();
+                if (response.isSuccessful()){
+                    CancelformRequest dtos = response.body();
+                    if (dtos!=null){
+                        if (dtos.getStatus().equals("Success"));
+                      Toast.makeText(itemView.getContext(),dtos.getMsg(),Toast.LENGTH_SHORT).show();
+                       /*   Intent intent = new Intent(RaiseIssueActivity.this,WelComeActivity.class);
+                        intent.putExtra("Name",etUser.getText().toString().trim());
+                        intent.putExtra("Email",etEmail.getText().toString().trim());
+                        startActivity(intent);*/
+
+                    }
+                }else {
+                  //  Toast.makeText(,"Data not Found!",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CancelformRequest> call, Throwable t) {
+               // progressDialog.hide();
+               // Toast.makeText(RaiseIssueActivity.this,"Something went wrong!"+t,Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
+
+
+
+   /* private  void openBottomSheet(View v) {
         //View view = activity.getLayoutInflater ().inflate (R.layout.bottom_sheet, null);
         // View view = inflater.inflate( R.layout.bottom_sheet, null );
         Context context=v.getContext();
@@ -268,10 +403,10 @@ public class BookingDetailsHolder extends RecyclerView.ViewHolder implements Con
         View view = inflater.inflate (R.layout.cancel_bottom_nav, null);
         Button close = view.findViewById(R.id.close);
         Button cancel = view.findViewById(R.id.cancelbooking);
-      /*  TextView txtBackup = (TextView)view.findViewById(R.id.txt_backup);
+      *//*  TextView txtBackup = (TextView)view.findViewById(R.id.txt_backup);
         TextView txtDetail = (TextView)view.findViewById(R.id.txt_detail);
         TextView txtOpen = (TextView)view.findViewById(R.id.txt_open);
-        final TextView txtUninstall = (TextView)view.findViewById( R.id.txt_backup);*/
+        final TextView txtUninstall = (TextView)view.findViewById( R.id.txt_backup);*//*
 
         final Dialog mBottomSheetDialog = new Dialog (context);
         mBottomSheetDialog.setContentView (view);
@@ -287,7 +422,7 @@ public class BookingDetailsHolder extends RecyclerView.ViewHolder implements Con
             @Override
             public void onClick(View v) {
              //   Toast.makeText(v.getContext(),"Clicked Backup",Toast.LENGTH_SHORT).show();
-
+                mAdapterCallback.cancelBooking(bookings.getBooking_id());
                 mBottomSheetDialog.dismiss();
             }
         });
@@ -296,12 +431,13 @@ public class BookingDetailsHolder extends RecyclerView.ViewHolder implements Con
 
             @Override
             public void onClick(View v) {
+
                 Toast.makeText(v.getContext(),"Cancelled Successfully",Toast.LENGTH_SHORT).show();
                 mBottomSheetDialog.dismiss();
             }
         });
 
 
-    }
+    }*/
 
 }

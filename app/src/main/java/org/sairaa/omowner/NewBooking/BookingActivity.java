@@ -307,8 +307,10 @@ public class BookingActivity extends AppCompatActivity implements View.OnClickLi
 
 
                 popUpRoomGuestDialog();
+
+
                 assignValuesToRGView(Objects.requireNonNull(bookingViewModel.getRoomGuestList().getValue()));
-                Toast.makeText(this, "ok"+bookingViewModel.getRoomGuestList().getValue().size(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "ok"+bookingViewModel.getRoomGuestList().getValue().size(), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.book_room:
 
@@ -347,12 +349,12 @@ public class BookingActivity extends AppCompatActivity implements View.OnClickLi
                 break;
 
             case R.id.room_up:
-                Toast.makeText(this, "up", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(this, "up", Toast.LENGTH_SHORT).show();
                 RoomsGuest roomsGuest = new RoomsGuest(1,2,0);
                 bookingViewModel.insertNewRooomGuest(roomsGuest);
                 break;
             case R.id.room_down:
-                Toast.makeText(this, "down", Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(this, "down", Toast.LENGTH_SHORT).show();
 
                 bookingViewModel.removeRoomGuests();
                 break;
@@ -1042,7 +1044,6 @@ public class BookingActivity extends AppCompatActivity implements View.OnClickLi
                 ToastSnackMessage("Number of room cannot be zero");
             }
         }
-
     }
 
     private void ToastSnackMessage(String message) {

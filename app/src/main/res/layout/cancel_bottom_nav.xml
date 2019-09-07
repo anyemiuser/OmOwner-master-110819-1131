@@ -14,7 +14,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="0.2"
+            android:layout_weight="0"
             android:orientation="vertical">
 
             <LinearLayout
@@ -154,11 +154,13 @@
 <LinearLayout
     android:layout_width="0dp"
     android:layout_weight="1"
+    android:layout_marginRight="15dp"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 <RadioGroup
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:id="@+id/radio_group"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent">
     <RadioButton
         android:id="@+id/changeinplan"
         android:layout_width="fill_parent"
@@ -167,18 +169,16 @@
         android:button="@null"
         android:drawablePadding="30dp"
         android:drawableRight="@android:drawable/btn_radio"
-        android:text="Change in plan"
-        android:textSize="20dip" />
+        android:text="Change in plan" />
     <RadioButton
         android:id="@+id/bymistake"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_gravity="right"
         android:button="@null"
         android:drawablePadding="30dp"
         android:drawableRight="@android:drawable/btn_radio"
-        android:text="Booking created by mistake"
-        android:textSize="20dip" />
+        android:text="Booking created by mistake" />
     <RadioButton
         android:id="@+id/differenthotel"
         android:layout_width="fill_parent"
@@ -187,8 +187,7 @@
         android:button="@null"
         android:drawablePadding="30dp"
         android:drawableRight="@android:drawable/btn_radio"
-        android:text="Want to book a different hotel"
-        android:textSize="20dip" />
+        android:text="Want to book a different hotel" />
     <RadioButton
         android:id="@+id/betterdeal"
         android:layout_width="fill_parent"
@@ -197,8 +196,7 @@
         android:button="@null"
         android:drawablePadding="30dp"
         android:drawableRight="@android:drawable/btn_radio"
-        android:text="Found a better deal"
-        android:textSize="20dip" />
+        android:text="Found a better deal" />
     <RadioButton
         android:id="@+id/other"
         android:layout_width="fill_parent"
@@ -207,8 +205,7 @@
         android:button="@null"
         android:drawablePadding="30dp"
         android:drawableRight="@android:drawable/btn_radio"
-        android:text="Other"
-        android:textSize="20dip" />
+        android:text="Other"/>
 
 
 </RadioGroup>
@@ -221,7 +218,8 @@
 
 <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="20dp">
     <Button
         android:id="@+id/close"
         style="@style/buttonStyle"
@@ -236,6 +234,7 @@
         style="@style/buttonStyle"
         android:layout_weight="1"
         android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Cancel This Booking" />

@@ -17,7 +17,7 @@
     <string name="higher_date">Select higher date</string>
     <string name="enter_phone_no">Enter Phone Number</string>
     <string name="hotel_image_url">org.sairaa.omowner.hotel_image_url</string>
-    <string name="max_guest">Maximun Guest Can Allowed:</string>
+    <string name="max_guest">Maximum persons Can Allowed:</string>
     <string name="no_of_rooms">Number Of Rooms</string>
     <string name="minimum_price">Minimu Price</string>
     <string name="avg_price">Average Price</string>

@@ -1,6 +1,7 @@
 package org.sairaa.omowner.Api;
 
 
+import org.sairaa.omowner.CancelForm.CancelformRequest;
 import org.sairaa.omowner.CheckInform.CheckinformRequest;
 import org.sairaa.omowner.Model.BokedRoomResponse;
 import org.sairaa.omowner.Model.BookedRoomRequest;
@@ -141,6 +142,8 @@ public interface OmRoomApi {
     @POST("Owner/api.php?f=insertaddressproof")
     Call<CheckinformRequest> Checkinform(@Body CheckinformRequest user);
 
-
+    @Headers("Content-Type: application/json")
+    @POST("Owner/api.php?f=CancelReason")
+    Call<CancelformRequest> canceluser(@Body CancelformRequest user);
 
     }
