@@ -52,7 +52,6 @@ public class BookingDetailsHolder extends RecyclerView.ViewHolder implements Con
     private BottomSheetDialog bottomSheetDialog;
     private SharedPreferenceConfig sharedPreferenceConfig;
 
-    private RadioButton radioButton;
 
     private ConstraintLayout checkInOutLayout;
     //Layout for short and details
@@ -70,7 +69,7 @@ public class BookingDetailsHolder extends RecyclerView.ViewHolder implements Con
     private Button extend;
     private Button checkInOut;
     private Button cancel;
-    private  RadioGroup radioGroup;
+    String reason;
 
     private BookingDetailsAdapter.BookingAdapterCallback mAdapterCallback;
 
@@ -80,7 +79,7 @@ public class BookingDetailsHolder extends RecyclerView.ViewHolder implements Con
         bookingId = itemView.findViewById(R.id.booking_id);
         bookingTime = itemView.findViewById(R.id.booking_time);
         sharedPreferenceConfig = new SharedPreferenceConfig(itemView.getContext());
-        radioGroup = (RadioGroup) itemView.findViewById(R.id.radio_group);
+
 
         customerName = itemView.findViewById(R.id.customer_name);
         phoneNo = itemView.findViewById(R.id.customer_phone_no);
@@ -219,7 +218,7 @@ public class BookingDetailsHolder extends RecyclerView.ViewHolder implements Con
                     }
 
                     roomTypeAnaNo.setText(roomTypeNo);
-                    guests.setText("No Of Persons: ".concat(String.valueOf(noGuest)));
+                    guests.setText("No of Persons: ".concat(String.valueOf(noGuest)));
                 }
 
 
@@ -258,8 +257,16 @@ public class BookingDetailsHolder extends RecyclerView.ViewHolder implements Con
                         LayoutInflater inflater;
                         inflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
                         View view = inflater.inflate (R.layout.cancel_bottom_nav, null);
+
                         Button close = view.findViewById(R.id.close);
                         Button cancel = view.findViewById(R.id.cancelbooking);
+                        RadioGroup radioGroup = (RadioGroup)view.findViewById(R.id.radio_group);
+                        RadioButton r1,r2,r3,r4,r5;
+                        r1 = view.findViewById(R.id.changeinplan);
+                        r2 = view.findViewById(R.id.bymistake);
+                        r3 = view.findViewById(R.id.differenthotel);
+                        r4 = view.findViewById(R.id.betterdeal);
+                        r5 = view.findViewById(R.id.other);
 
                         final Dialog mBottomSheetDialog = new Dialog (context);
                         mBottomSheetDialog.setContentView (view);
@@ -269,6 +276,28 @@ public class BookingDetailsHolder extends RecyclerView.ViewHolder implements Con
                         mBottomSheetDialog.getWindow ().setGravity (Gravity.BOTTOM);
                         mBottomSheetDialog.show ();
 
+                        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                            @Override
+                            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+
+                                if(r1.isChecked()){
+                                    reason = "Change in plan";
+                                }
+                                else if (r2.isChecked()){
+                                    reason = "Booking created by mistake";
+                                }
+                                else if (r3.isChecked()){
+                                    reason = "Want to book a different hotel";
+                                }
+                                else if (r4.isChecked()){
+                                    reason = "Found a better deal";
+                                }
+                                else {
+                                    reason = "Others";
+                                }
+                            }
+                        });
+
                         close.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -276,48 +305,51 @@ public class BookingDetailsHolder extends RecyclerView.ViewHolder implements Con
                                 mBottomSheetDialog.dismiss();
                             }
                         });
+
                         cancel.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
 
-/*
-
-                                int selectedId = radioGroup.getCheckedRadioButtonId();
-
-                                radioButton = (RadioButton) itemView.findViewById(selectedId);
-
-
-                                String reason = radioButton.getText().toString();*/
-                                int bookid = Integer.parseInt(bookings.getBooking_id());
-                                OmRoomApi omRoomApi = ApiUtils.getOmRoomApi();
-                                //OmApiInterface apiInterface = RetrofitInstance.getRetrofitInstance().create(OmApiInterface.class);
-                                Call<CancelformRequest> userRegisterCall = omRoomApi.canceluser(new CancelformRequest(Integer.parseInt(sharedPreferenceConfig.readHotelId()),sharedPreferenceConfig.readHotelIName(),bookid,"Found a better deal"));
-                                userRegisterCall.enqueue(new Callback<CancelformRequest>() {
-                                    @Override
-                                    public void onResponse(Call<CancelformRequest> call, Response<CancelformRequest> response) {
-                                        //  progressDialog.hide();
-                                        if (response.isSuccessful()){
-                                            CancelformRequest dtos = response.body();
-                                            if (dtos!=null){
-                                                if (dtos.getStatus().equals("Success"));
-                                                mAdapterCallback.cancelBooking(bookings.getBooking_id());
-                                                Toast.makeText(itemView.getContext(),dtos.getMsg(),Toast.LENGTH_SHORT).show();
-                                            }
-                                        }else {
-                                              Toast.makeText(itemView.getContext(),"Data not Found!",Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onFailure(Call<CancelformRequest> call, Throwable t) {
-                                        // progressDialog.hide();
-                                         Toast.makeText(itemView.getContext(),"Something went wrong!"+t,Toast.LENGTH_SHORT).show();
-                                    }
-                                });
 
 
 
 
+
+if(reason.equals("")){
+    Toast.makeText(context, "Choose reason", Toast.LENGTH_SHORT).show();
+}
+else {
+
+
+    int bookid = Integer.parseInt(bookings.getBooking_id());
+    OmRoomApi omRoomApi = ApiUtils.getOmRoomApi();
+    //OmApiInterface apiInterface = RetrofitInstance.getRetrofitInstance().create(OmApiInterface.class);
+    Call<CancelformRequest> userRegisterCall = omRoomApi.canceluser(new CancelformRequest(Integer.parseInt(sharedPreferenceConfig.readHotelId()), sharedPreferenceConfig.readHotelIName(), bookid, "Want to book a different hotel"));
+    userRegisterCall.enqueue(new Callback<CancelformRequest>() {
+        @Override
+        public void onResponse(Call<CancelformRequest> call, Response<CancelformRequest> response) {
+            //  progressDialog.hide();
+            if (response.isSuccessful()) {
+                CancelformRequest dtos = response.body();
+                if (dtos != null) {
+                    if (dtos.getStatus().equals("Success")) ;
+                    mAdapterCallback.cancelBooking(bookings.getBooking_id());
+                    Toast.makeText(itemView.getContext(), dtos.getMsg(), Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(itemView.getContext(), "Data not Found!", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        @Override
+        public void onFailure(Call<CancelformRequest> call, Throwable t) {
+            // progressDialog.hide();
+            Toast.makeText(itemView.getContext(), "Something went wrong!" + t, Toast.LENGTH_SHORT).show();
+        }
+    });
+
+
+}
 
 
 

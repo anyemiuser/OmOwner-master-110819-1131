@@ -45,7 +45,7 @@ public class RaiseIssueActivity extends AppCompatActivity {
 
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         if(actionBar!= null) {
-            actionBar.setTitle("Issue Raised");
+            actionBar.setTitle("Raise Issue");
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
@@ -203,7 +203,7 @@ public class RaiseIssueActivity extends AppCompatActivity {
           @Override
           public void onClick(View view) {
 
-              if(!textArea_information.getText().toString().equals("")) {
+
 
 
                     if (!sp.getSelectedItem().toString().equals("Select Category")) {
@@ -214,8 +214,13 @@ public class RaiseIssueActivity extends AppCompatActivity {
                         if (sp.getSelectedItem().toString().equals("Issue with OM Staff")
                                 && sp.getSelectedItem().toString().equals("Value Added Services Enquiry")
                                 && sp.getSelectedItem().toString().equals("Others")) {
-
-                            IssuedRaise();
+                            if(!textArea_information.getText().toString().equals("")) {
+                                IssuedRaise();
+                            }
+                            else
+                            {
+                                Toast.makeText(RaiseIssueActivity.this, "Please add comment", Toast.LENGTH_SHORT).show();
+                            }
                             // Toast.makeText(MainActivity.this, "Issue Raised Successfully", Toast.LENGTH_SHORT).show();
 
                           //  dialogInterface.dismiss();
@@ -225,7 +230,13 @@ public class RaiseIssueActivity extends AppCompatActivity {
 
                                 if (!sp1.getSelectedItem().toString().equals("Update Owner info")) {
                                     /// if(!sp3.getSelectedItem().toString().equals("")){
-                                    IssuedRaise();
+                                    if(!textArea_information.getText().toString().equals("")) {
+                                        IssuedRaise();
+                                    }
+                                    else
+                                    {
+                                        Toast.makeText(RaiseIssueActivity.this, "Please add comment", Toast.LENGTH_SHORT).show();
+                                    }
                                     // Toast.makeText(MainActivity.this, "Issue Raised Successfully", Toast.LENGTH_SHORT).show();
 
                                     //dialogInterface.dismiss();
@@ -239,7 +250,13 @@ public class RaiseIssueActivity extends AppCompatActivity {
                                         subsubcategory = sp3.getSelectedItem().toString();
 
                                         // Toast.makeText(MainActivity.this, "Issue Raised Successfully", Toast.LENGTH_SHORT).show();
-                                        IssuedRaise();
+                                        if(!textArea_information.getText().toString().equals("")) {
+                                            IssuedRaise();
+                                        }
+                                        else
+                                        {
+                                            Toast.makeText(RaiseIssueActivity.this, "Please add comment", Toast.LENGTH_SHORT).show();
+                                        }
                                       //  dialogInterface.dismiss();
                                     } else {
                                         Toast.makeText(RaiseIssueActivity.this, "Select Sub SubCategory", Toast.LENGTH_SHORT).show();
@@ -255,11 +272,11 @@ public class RaiseIssueActivity extends AppCompatActivity {
                         Toast.makeText(RaiseIssueActivity.this, "Please Select Category", Toast.LENGTH_SHORT).show();
 
                     }
-                }
+               /* }
                 else
                 {
                     Toast.makeText(RaiseIssueActivity.this, "Please add comment", Toast.LENGTH_SHORT).show();
-                }
+                }*/
             }
         });
        cancel.setOnClickListener(new View.OnClickListener() {

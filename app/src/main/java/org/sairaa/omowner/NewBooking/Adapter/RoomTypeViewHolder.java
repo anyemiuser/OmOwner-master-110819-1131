@@ -83,6 +83,7 @@ class RoomTypeViewHolder extends RecyclerView.ViewHolder {
         else {
           //  add.setVisibility(View.VISIBLE);
             RmTypeLl.setVisibility(View.VISIBLE);
+            noroomsleft.setVisibility(View.INVISIBLE);
         }
 
         add.setOnClickListener(new View.OnClickListener() {

@@ -71,7 +71,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Raise Issue"
+        android:text="Submit"
         style="@style/buttonStyle"
         />
 </LinearLayout>
