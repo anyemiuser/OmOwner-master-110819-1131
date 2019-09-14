@@ -14,11 +14,27 @@ import org.sairaa.omowner.payment.exceptions.BadRequestException;
 import org.sairaa.omowner.payment.exceptions.InternalServerError;
 import org.sairaa.omowner.payment.exceptions.JavaLangException;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.KeyManagementException;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.Certificate;
+import java.security.cert.CertificateException;
+import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManagerFactory;
 
 /**
  * @author Surya Teja Challa
@@ -65,6 +81,7 @@ public class Connection {
         //String accessToken = SharedPreferenceUtil.getAccessToken(context);
 
         try {
+            initSsl(context);
             HttpURLConnection.setFollowRedirects(false);
             connection = (HttpURLConnection) new URL(url).openConnection();
             connection.setDoOutput(true);
@@ -156,6 +173,7 @@ public class Connection {
             AppLogs.log(TAG, url);
 
             try {
+                initSsl(aContext);
                 connection = (HttpURLConnection) new URL(url).openConnection();
                 // connection.setDoOutput(true);
                 connection.setRequestMethod("GET");
@@ -190,6 +208,56 @@ public class Connection {
         } else {
             return new BadRequestException("No Internet Connection Please Connect to Internet");
         }
+
+    }
+
+
+
+    static void initSsl(Context aContext) {
+
+
+        try {
+            HostnameVerifier var10000 = new HostnameVerifier() {
+                public boolean verify(String hostname, SSLSession session) {
+                    return true;
+                }
+            };
+
+            CertificateFactory cf = CertificateFactory.getInstance("X.509");
+            BufferedInputStream caInputNew = new BufferedInputStream(aContext.getAssets()
+                    .open("anyemi_com.crt"));
+
+            Certificate caNew;
+            try {
+                caNew = cf.generateCertificate(caInputNew);
+                System.out.println("ca=" + ((X509Certificate) caNew).getSubjectDN());
+            } finally {
+                caInputNew.close();
+            }
+
+            String var10 = KeyStore.getDefaultType();
+            KeyStore keyStore = KeyStore.getInstance(var10);
+            keyStore.load(null, null);
+            keyStore.setCertificateEntry("caNew", caNew);
+            String var12 = TrustManagerFactory.getDefaultAlgorithm();
+            TrustManagerFactory tmf = TrustManagerFactory.getInstance(var12);
+            tmf.init(keyStore);
+            SSLContext context = SSLContext.getInstance("TLS");
+            context.init(null, tmf.getTrustManagers(), null);
+            HttpsURLConnection.setDefaultSSLSocketFactory(context.getSocketFactory());
+
+        } catch (NoSuchAlgorithmException var22) {
+//            LogUtils.d("allowAllSSL", var22.toString());
+        } catch (KeyManagementException var23) {
+//            LogUtils.d("allowAllSSL", var23.toString());
+        } catch (CertificateException var24) {
+//            LogUtils.d("Exception = ", "" + var24.toString());
+        } catch (KeyStoreException var25) {
+//            LogUtils.d("Exception = ", "" + var25.toString());
+        } catch (IOException var26) {
+//            LogUtils.d("Exception = ", "" + var26.toString());
+        }
+
 
     }
 }

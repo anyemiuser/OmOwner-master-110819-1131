@@ -260,7 +260,10 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
         } else if (!et_sbi_id.getText().toString().contains("@")) {
             til_sbi_id.setError("Please enter a valid VPA");
             et_sbi_id.requestFocus();
-        } else if (et_sbi_id.getText().toString().length() > 255) {
+        } else if (!checkTwice(et_sbi_id.getText().toString())) {
+            til_sbi_id.setError("Please enter a valid VPA");
+            et_sbi_id.requestFocus();
+        }else if (et_sbi_id.getText().toString().length() > 255) {
             til_sbi_id.setError("More than 255 character are not allowed");
             et_sbi_id.requestFocus();
         } else if (et_phone_num.getText().toString().equals("")) {
@@ -289,6 +292,25 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
         }
         return isValid;
     }
+
+    private boolean checkTwice(String s) {
+        boolean isValid = false;
+        String ss[] = s.split("@");
+        if (ss.length == 2) {
+            String prefix = ss[0];
+            String post = ss[1];
+
+            if (prefix.equals("") || prefix.length() == 0) {
+                isValid = false;
+            } else if (post.equals("") || post.length() == 0) {
+                isValid = false;
+            }else{
+                isValid=true;
+            }
+        }
+        return isValid;
+    }
+
 
     @Override
     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

@@ -37,9 +37,9 @@
         <ImageView
             android:id="@+id/iv_add_new"
             android:layout_width="60dp"
-            android:layout_height="match_parent"
+            android:layout_height="60dp"
             android:layout_marginRight="60dp"
-            android:src="@mipmap/ic_launcher"
+            android:src="@drawable/logohdpi"
             android:visibility="visible" />
 
 

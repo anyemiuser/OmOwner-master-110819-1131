@@ -2,7 +2,6 @@ package org.sairaa.omowner.payment.connection;
 
 import android.content.Context;
 
-
 import org.sairaa.omowner.payment.CheackValidVpaModel;
 import org.sairaa.omowner.payment.PaymentRequestModel;
 
@@ -21,8 +20,6 @@ public class HomeServices {
             return e;
         }
     }
-
-
 
 
     public static Object getConsumerDetails(Context aContext, String loginRequest) {
@@ -52,7 +49,14 @@ public class HomeServices {
         }
     }
 
-
+    public static Object getMachineDetails(Context aContext, String loginRequest) {
+        try {
+            return Connection.callHttpPostRequestsV2Jobj(aContext, Constants.ONGO_LIST, loginRequest);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return e;
+        }
+    }
 
 
     public static Object resetPassword(Context aContext, String loginRequest) {
@@ -357,7 +361,6 @@ public class HomeServices {
             return e;
         }
     }
-
 
 
     /***************************bbps***********************************/

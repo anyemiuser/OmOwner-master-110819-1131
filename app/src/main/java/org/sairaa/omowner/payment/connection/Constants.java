@@ -19,6 +19,7 @@ public class Constants {
     public static final String GET_COSUMER_DETAILS =base_url+"getuseraddress";
     public static final String FORGET_PASSWORD =base_url+"forgetPassword";
     public static final String UPI_LIST =base_url+"getuserUPI";
+    public static final String ONGO_LIST =base_url+"login_test";
     public static final String RESET_PASSWORD =base_url+"changePassword";
     public static final String REQUEST_WALLET_BALANCE =base_url+"walletrefill";
     public static final String ASS_URL =base_url+"getassment_details";

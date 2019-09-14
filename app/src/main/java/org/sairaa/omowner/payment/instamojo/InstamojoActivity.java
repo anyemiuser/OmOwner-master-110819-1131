@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -82,7 +83,7 @@ public class InstamojoActivity extends AppCompatActivity implements Instamojo.In
         Instamojo.getInstance().initialize(InstamojoActivity.this, mCurrentEnv);
 
         initView();
-        //createActionBar();
+        createActionBar();
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         Window window = this.getWindow();
@@ -99,6 +100,29 @@ public class InstamojoActivity extends AppCompatActivity implements Instamojo.In
         getInstaPModes();
     }
 
+
+    private void createActionBar() {
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle("");
+
+        LayoutInflater mInflater = LayoutInflater.from(this);
+        View mCustomView = mInflater.inflate(R.layout.custom_action_bar_with_home_button, null);
+
+        aTitle = (TextView) mCustomView.findViewById(R.id.title_text);
+        rl_new_mails = (RelativeLayout) mCustomView.findViewById(R.id.rl_new_mails);
+        notification_count = (TextView) mCustomView.findViewById(R.id.text_count);
+        iv_add_new = (ImageView) mCustomView.findViewById(R.id.iv_add_new);
+
+        getSupportActionBar().setCustomView(mCustomView);
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        aTitle.setTextColor(getResources().getColor(R.color.colorWhite));
+        aTitle.setText("Complete payment");
+
+    }
 
     private void initView() {
 

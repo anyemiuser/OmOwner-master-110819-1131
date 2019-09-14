@@ -33,6 +33,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
+import org.sairaa.omowner.BookingDetails.BookingDetailsActivity;
 import org.sairaa.omowner.R;
 import org.sairaa.omowner.payment.bgtask.BackgroundTask;
 import org.sairaa.omowner.payment.bgtask.BackgroundThread;
@@ -375,10 +376,10 @@ public class CompleateTransactionActivity extends AppCompatActivity implements T
 //                       SharedPreferenceUtil.setWalletBalance(getApplicationContext(),upDatedBalance+"");
 
                         Globals.showToast(getApplicationContext(), "Payment Success");
-//                        Intent intent = new Intent(getApplicationContext(), CollectionsTabbedActivity.class);
-//                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                        intent.putExtra("FRAGMENT", "COLLECTION");
-//                        startActivity(intent);
+                       Intent intent = new Intent(getApplicationContext(), BookingDetailsActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        intent.putExtra("FRAGMENT", "COLLECTION");
+                        startActivity(intent);
                     }
                 }
             }

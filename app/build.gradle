@@ -65,6 +65,19 @@ dependencies {
     implementation 'me.biubiubiu.justifytext:library:1.1'
 
     implementation 'com.codesgood:justifiedtextview:1.1.0'
+
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.1.16'
+    implementation 'com.skyfishjy.ripplebackground:library:1.0.1'
+    implementation 'com.scottyab:rootbeer-lib:0.0.6'
+
+    implementation(name: 'mposLib_Prod_17_01_2019', ext: 'aar')
+   // implementation files('libs/mposLib_Prod_17_01_2019.aar')
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
 }
 
 apply plugin: 'com.google.gms.google-services'

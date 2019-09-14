@@ -177,6 +177,9 @@ public class PaymentModeActivityNew extends AppCompatActivity {
 
         Intent paymentIntent;
 
+
+
+
         if (payment_mode.equals(org.sairaa.omowner.payment.Constants.PAYMENT_MODE_PAYTM_SBI_UPI)) {
             paymentIntent = new Intent(getApplicationContext(), SbiPayPaymentActivity.class);
 
@@ -191,10 +194,24 @@ public class PaymentModeActivityNew extends AppCompatActivity {
             startActivityForResult(paymentIntent, 5);
         } else if (payment_mode.equals(org.sairaa.omowner.payment.Constants.PAYMENT_MODE_CASH)) {
             paymentIntent = new Intent(getApplicationContext(), CompleateTransactionActivity.class);
+            paymentRequestModel.setPayment_type(Constants.PAYMENT_MODE_CREDIT_CARD);
+            paymentIntent = new Intent(getApplicationContext(), CreditAndDebitCardActivity.class);
             paymentIntent.putExtra(org.sairaa.omowner.payment.Constants.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
             startActivity(paymentIntent);
         } else if (payment_mode.equals(org.sairaa.omowner.payment.Constants.PAYMENT_MODE_ANYEMI_WALLET)) {
             paymentIntent = new Intent(getApplicationContext(), CompleateTransactionActivity.class);
+            paymentIntent.putExtra(Constants.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
+            startActivity(paymentIntent);
+        }  else if (payment_mode.equals(org.sairaa.omowner.payment.Constants.PAYMENT_MODE_ANYEMI_WALLET)) {
+            paymentIntent = new Intent(getApplicationContext(), CompleateTransactionActivity.class);
+            paymentIntent.putExtra(Constants.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
+            startActivity(paymentIntent);
+        }else if (payment_mode.equals(Constants.PAYMENT_MODE_CREDIT_CARD)) {
+            paymentIntent = new Intent(getApplicationContext(), CreditAndDebitCardActivity.class);
+            paymentIntent.putExtra(Constants.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
+            startActivity(paymentIntent);
+        } else if (payment_mode.equals(Constants.PAYMENT_MODE_DEBIT_CARD)) {
+            paymentIntent = new Intent(getApplicationContext(), CreditAndDebitCardActivity.class);
             paymentIntent.putExtra(Constants.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
             startActivity(paymentIntent);
         } else {
