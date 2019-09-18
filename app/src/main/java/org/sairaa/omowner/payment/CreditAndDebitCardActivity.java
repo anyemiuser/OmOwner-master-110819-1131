@@ -38,12 +38,12 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.sairaa.omowner.R;
+import org.sairaa.omowner.Utils.SharedPreferenceConfig;
 import org.sairaa.omowner.payment.bgtask.BackgroundTask;
 import org.sairaa.omowner.payment.bgtask.BackgroundThread;
 import org.sairaa.omowner.payment.connection.HomeServices;
 import org.sairaa.omowner.payment.model.OngoModel;
 import org.sairaa.omowner.payment.model.PaymentChooserModel;
-import org.sairaa.omowner.payment.model.VpaListModel;
 
 import java.util.ArrayList;
 import java.util.Set;
@@ -58,6 +58,8 @@ public class CreditAndDebitCardActivity extends AppCompatActivity implements Vie
 
 
     Intent intent = null;
+
+
 
     Gson gson = new Gson();
 
@@ -85,7 +87,7 @@ public class CreditAndDebitCardActivity extends AppCompatActivity implements Vie
 
 
     String selection_amount;
-
+    SharedPreferenceConfig sharedPreferenceConfig;
 
     Dialog chooserDialog;
     private String sessionkey;
@@ -110,6 +112,7 @@ public class CreditAndDebitCardActivity extends AppCompatActivity implements Vie
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.setStatusBarColor(ContextCompat.getColor(CreditAndDebitCardActivity.this, R.color.colorPrimaryDark));
         }
+        sharedPreferenceConfig= new SharedPreferenceConfig(this);
         createActionBar();
         //initView();s
         initView2();
@@ -130,14 +133,27 @@ public class CreditAndDebitCardActivity extends AppCompatActivity implements Vie
             tv_amount.setText("Rs." + resultStr + " /-");
 
 
-
             if (paymentRequestModel.getPayment_type().equals(Constants.PAYMENT_MODE_CREDIT_CARD)
                     || paymentRequestModel.getPayment_type().equals(Constants.PAYMENT_MODE_DEBIT_CARD)
             ) {
-              //  getMachineDetails();
+                String data="";
+                data = SharedPreferenceUtil.getUserData(getApplicationContext());
+                ServicesResponseModel servicesResponseModel = new ServicesResponseModel();
+                servicesResponseModel = new Gson().fromJson(data.toString(), ServicesResponseModel.class);
+
+                paymentRequestModel = Globals.calculateAnyEMIServiceCharge(getApplicationContext(),
+                        paymentRequestModel.getActualDueAmount(),
+                        servicesResponseModel,
+                        paymentRequestModel);
+
+
+                getMachineDetails();
+
                 SharedPreferenceUtil.setMPOSID(getApplicationContext(),"IB125092");
 
             }
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -154,10 +170,10 @@ public class CreditAndDebitCardActivity extends AppCompatActivity implements Vie
                 if (data != null || data.equals("")) {
                     if (data != null || data.equals("")) {
                         try {
-                            OngoModel ongoModel= new OngoModel();
-                            ongoModel= new Gson().fromJson(data.toString(),OngoModel.class);
+                            OngoModel ongoModel = new OngoModel();
+                            ongoModel = new Gson().fromJson(data.toString(), OngoModel.class);
 
-                            SharedPreferenceUtil.setMPOSID(getApplicationContext(),ongoModel.getMpos_id());
+                            SharedPreferenceUtil.setMPOSID(getApplicationContext(), ongoModel.getMpos_id());
 
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -173,8 +189,8 @@ public class CreditAndDebitCardActivity extends AppCompatActivity implements Vie
 
         JSONObject requestObject = new JSONObject();
         try {
-            requestObject.put("username", paymentRequestModel.getMobile_number());
-            requestObject.put("username", paymentRequestModel.getMobile_number());
+            requestObject.put("username",sharedPreferenceConfig.readPhoneNo());
+            requestObject.put("username", "9912931499");
             System.out.println(requestObject.toString());
 
 
@@ -183,6 +199,7 @@ public class CreditAndDebitCardActivity extends AppCompatActivity implements Vie
         }
         return requestObject.toString();
     }
+
 
     private void initView2() {
 
@@ -211,15 +228,15 @@ public class CreditAndDebitCardActivity extends AppCompatActivity implements Vie
 
         if (payment_mode.equals(Constants.PAYMENT_MODE_CREDIT_CARD)) {
 
-           // paymentRequestModel.setTotal_amount(calculateCharges(Constants.PAYMENT_MODE_CREDIT_CARD));
-            paymentRequestModel.setTotal_amount("10");
-           // paymentRequestModel.setPayment_type(Constants.PAYMENT_MODE_CREDIT_CARD);
+             paymentRequestModel.setTotal_amount(calculateCharges(Constants.PAYMENT_MODE_CREDIT_CARD));
+           // paymentRequestModel.setTotal_amount("10");
+            paymentRequestModel.setPayment_type(Constants.PAYMENT_MODE_CREDIT_CARD);
             chbk_credit.setChecked(true);
             chbk_debit.setChecked(false);
 
         } else if (payment_mode.equals(Constants.PAYMENT_MODE_DEBIT_CARD)) {
             paymentRequestModel.setPayment_type(Constants.PAYMENT_MODE_DEBIT_CARD);
-         //   paymentRequestModel.setTotal_amount(calculateCharges(Constants.PAYMENT_MODE_DEBIT_CARD));
+            paymentRequestModel.setTotal_amount(calculateCharges(Constants.PAYMENT_MODE_DEBIT_CARD));
             chbk_credit.setChecked(false);
             chbk_debit.setChecked(true);
         }

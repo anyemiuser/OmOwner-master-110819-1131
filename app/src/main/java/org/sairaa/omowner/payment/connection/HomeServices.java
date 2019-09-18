@@ -57,6 +57,14 @@ public class HomeServices {
             return e;
         }
     }
+ public static Object getServiceCharge(Context aContext) {
+        try {
+            return Connection.callHttpGetRequestsV2(aContext, Constants.GET_SERVICES_LIST, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return e;
+        }
+    }
 
 
     public static Object resetPassword(Context aContext, String loginRequest) {
