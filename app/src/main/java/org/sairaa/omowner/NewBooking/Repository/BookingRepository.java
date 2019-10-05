@@ -3,6 +3,7 @@ package org.sairaa.omowner.NewBooking.Repository;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 
+import org.sairaa.omowner.NewBooking.BookingActivity;
 import org.sairaa.omowner.NewBooking.Model.HotelDetails;
 import org.sairaa.omowner.NewBooking.Model.ProfileDetails;
 import org.sairaa.omowner.NewBooking.Model.RoomTypePrice;
@@ -47,6 +48,7 @@ public class BookingRepository {
     }
 
     public void insertRoomGuest(RoomsGuest roomGuest){
+
         roomsGuests.add(roomGuest);
         roomG.setValue(roomsGuests);
 

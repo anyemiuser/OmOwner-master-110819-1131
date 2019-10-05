@@ -1,8 +1,12 @@
 package org.sairaa.omowner.Api;
 
 
+import org.sairaa.omowner.Availability.AvailabilityondateRequest;
 import org.sairaa.omowner.CancelForm.CancelformRequest;
 import org.sairaa.omowner.CheckInform.CheckinformRequest;
+import org.sairaa.omowner.HomeRules.UpdateHotelRulesAllowRequest;
+import org.sairaa.omowner.HomeRules.UpdateHotelRulesRequest;
+import org.sairaa.omowner.Login.LoginOtpRequest;
 import org.sairaa.omowner.Model.BokedRoomResponse;
 import org.sairaa.omowner.Model.BookedRoomRequest;
 import org.sairaa.omowner.Model.BookingCountRequest;
@@ -146,4 +150,20 @@ public interface OmRoomApi {
     @POST("Owner/api.php?f=CancelReason")
     Call<CancelformRequest> canceluser(@Body CancelformRequest user);
 
+    @Headers("Content-Type: application/json")
+    @POST("Owner/api.php?f=updaterules")
+    Call<UpdateHotelRulesRequest> updatehotelrules(@Body UpdateHotelRulesRequest user);
+
+    @Headers("Content-Type: application/json")
+    @POST("Owner/api.php?f=updaterules")
+    Call<UpdateHotelRulesAllowRequest> updatehotelrulesallow(@Body UpdateHotelRulesAllowRequest user);
+
+    @Headers("Content-Type: application/json")
+    @POST("Owner/api.php?f=resendotp")
+    Call<LoginOtpRequest> loginotp(@Body LoginOtpRequest user);
+
+
+    @Headers("Content-Type: application/json")
+    @POST("Owner/api.php?f=Availabilityondate ")
+    Call<AvailabilityondateRequest> availabilityondate(@Body AvailabilityondateRequest user);
     }

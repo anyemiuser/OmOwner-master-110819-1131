@@ -8,7 +8,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import org.sairaa.omowner.NewBooking.BookingActivity;
 import org.sairaa.omowner.NewBooking.BookingViewModel;
 import org.sairaa.omowner.NewBooking.Model.RoomTypePrice;
 import org.sairaa.omowner.R;
@@ -73,10 +75,10 @@ class RoomTypeViewHolder extends RecyclerView.ViewHolder {
             addDeleteLayout.setVisibility(View.INVISIBLE);
         }
 
-        if(!room.isRoomAvailable()){
+       /* if(!room.isRoomAvailable()){
           // add.setVisibility(View.INVISIBLE);
             RmTypeLl.setVisibility(View.INVISIBLE);
-            noroomsleft.setText("No Rooms Left");
+            //noroomsleft.setText("No Rooms Left");
             noroomsleft.setVisibility(View.VISIBLE);
 
         }
@@ -84,7 +86,7 @@ class RoomTypeViewHolder extends RecyclerView.ViewHolder {
           //  add.setVisibility(View.VISIBLE);
             RmTypeLl.setVisibility(View.VISIBLE);
             noroomsleft.setVisibility(View.INVISIBLE);
-        }
+        }*/
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,7 +100,14 @@ class RoomTypeViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View view) {
 //                room.setNoOfRoomSelected(room.getNoOfRoomSelected()+1);
-                adapterCallBack.setBookedRoomCount(room,1);
+                if(noOfRoom.getText().toString().equals(BookingActivity.strclassicroom)) {
+                    Toast.makeText(view.getContext(), "Only "+BookingActivity.strclassicroom +" Rooms are Available", Toast.LENGTH_SHORT).show();
+
+                }
+                else
+                {
+                    adapterCallBack.setBookedRoomCount(room, 1);
+                }
             }
         });
 

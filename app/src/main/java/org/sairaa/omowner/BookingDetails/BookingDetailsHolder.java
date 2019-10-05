@@ -69,7 +69,7 @@ public class BookingDetailsHolder extends RecyclerView.ViewHolder implements Con
     private Button extend;
     private Button checkInOut;
     private Button cancel;
-    String reason;
+    String reason="asd";
 
     private BookingDetailsAdapter.BookingAdapterCallback mAdapterCallback;
 
@@ -315,7 +315,7 @@ public class BookingDetailsHolder extends RecyclerView.ViewHolder implements Con
 
 
 
-if(reason.equals("")){
+if(reason.equals("asd")){
     Toast.makeText(context, "Choose reason", Toast.LENGTH_SHORT).show();
 }
 else {
@@ -324,7 +324,8 @@ else {
     int bookid = Integer.parseInt(bookings.getBooking_id());
     OmRoomApi omRoomApi = ApiUtils.getOmRoomApi();
     //OmApiInterface apiInterface = RetrofitInstance.getRetrofitInstance().create(OmApiInterface.class);
-    Call<CancelformRequest> userRegisterCall = omRoomApi.canceluser(new CancelformRequest(Integer.parseInt(sharedPreferenceConfig.readHotelId()), sharedPreferenceConfig.readHotelIName(), bookid, "Want to book a different hotel"));
+  //  Call<CancelformRequest> userRegisterCall = omRoomApi.canceluser(new CancelformRequest(Integer.parseInt(sharedPreferenceConfig.readHotelId()), sharedPreferenceConfig.readHotelIName(), bookid, "Want to book a different hotel"));
+    Call<CancelformRequest> userRegisterCall = omRoomApi.canceluser(new CancelformRequest(Integer.parseInt(sharedPreferenceConfig.readHotelId()), sharedPreferenceConfig.readPhoneNo(), bookid, reason));
     userRegisterCall.enqueue(new Callback<CancelformRequest>() {
         @Override
         public void onResponse(Call<CancelformRequest> call, Response<CancelformRequest> response) {
@@ -384,16 +385,16 @@ else {
         this.mAdapterCallback = mAdapterCallback;
     }
 
-    private void registerUser() {
-       /* name = etUser.getText().toString().trim();
+   /* private void registerUser() {
+       *//* name = etUser.getText().toString().trim();
         email = etEmail.getText().toString().trim();
         password = etPassword.getText().toString().trim();
-        gender = etGender.getText().toString().trim();*/
+        gender = etGender.getText().toString().trim();*//*
       //  progressDialog.show();
 
         OmRoomApi omRoomApi = ApiUtils.getOmRoomApi();
        // OmApiInterface apiInterface = RetrofitInstance.getRetrofitInstance().create(OmApiInterface.class);
-        Call<CancelformRequest> userRegisterCall = omRoomApi.canceluser(new CancelformRequest(Integer.parseInt(sharedPreferenceConfig.readHotelId()),sharedPreferenceConfig.readHotelIName(),475,"SuryaKommana"));
+        Call<CancelformRequest> userRegisterCall = omRoomApi.canceluser(new CancelformRequest(Integer.parseInt(sharedPreferenceConfig.readHotelId()),Integer.parseInt(sharedPreferenceConfig.readHotelIName()),475,"SuryaKommana"));
         userRegisterCall.enqueue(new Callback<CancelformRequest>() {
             @Override
             public void onResponse(Call<CancelformRequest> call, Response<CancelformRequest> response) {
@@ -403,10 +404,10 @@ else {
                     if (dtos!=null){
                         if (dtos.getStatus().equals("Success"));
                       Toast.makeText(itemView.getContext(),dtos.getMsg(),Toast.LENGTH_SHORT).show();
-                       /*   Intent intent = new Intent(RaiseIssueActivity.this,WelComeActivity.class);
+                       *//*   Intent intent = new Intent(RaiseIssueActivity.this,WelComeActivity.class);
                         intent.putExtra("Name",etUser.getText().toString().trim());
                         intent.putExtra("Email",etEmail.getText().toString().trim());
-                        startActivity(intent);*/
+                        startActivity(intent);*//*
 
                     }
                 }else {
@@ -420,7 +421,7 @@ else {
                // Toast.makeText(RaiseIssueActivity.this,"Something went wrong!"+t,Toast.LENGTH_SHORT).show();
             }
         });
-    }
+    }*/
 
 
 

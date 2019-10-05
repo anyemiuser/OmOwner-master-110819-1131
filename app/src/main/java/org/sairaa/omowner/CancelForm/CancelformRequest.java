@@ -8,9 +8,9 @@ public class CancelformRequest {
     @Expose
     private int hotel_id;
 
-    @SerializedName("hotel_name")
+    @SerializedName("user_id")
     @Expose
-    private String hotel_name;
+    private String user_id;
     @SerializedName("booking_id")
     @Expose
     private int booking_id;
@@ -27,9 +27,9 @@ public class CancelformRequest {
     @Expose
     private String msg;
 
-    public CancelformRequest(int hotel_id, String hotel_name, int booking_id, String cancelation_reason) {
+    public CancelformRequest(int hotel_id, String user_id, int booking_id, String cancelation_reason) {
         this.hotel_id = hotel_id;
-        this.hotel_name = hotel_name;
+        this.user_id = user_id;
         this.booking_id = booking_id;
         Cancelation_reason = cancelation_reason;
     }
@@ -42,12 +42,12 @@ public class CancelformRequest {
         this.hotel_id = hotel_id;
     }
 
-    public String getHotel_name() {
-        return hotel_name;
+    public String getUser_id() {
+        return user_id;
     }
 
-    public void setHotel_name(String hotel_name) {
-        this.hotel_name = hotel_name;
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
     }
 
     public int getBooking_id() {

@@ -32,6 +32,7 @@ import com.google.gson.Gson;
 
 import org.sairaa.omowner.Api.ApiUtils;
 import org.sairaa.omowner.Api.OmRoomApi;
+import org.sairaa.omowner.Availability.AvailabilityondateRequest;
 import org.sairaa.omowner.BookingDetails.BookingDetailsActivity;
 import org.sairaa.omowner.Collection.CollectionActivity;
 import org.sairaa.omowner.Main.MainActivity;
@@ -47,6 +48,8 @@ import org.sairaa.omowner.NewBooking.Model.RoomPriceOnDate;
 import org.sairaa.omowner.NewBooking.Model.RoomTypePrice;
 import org.sairaa.omowner.NewBooking.Model.RoomsGuest;
 import org.sairaa.omowner.R;
+import org.sairaa.omowner.RaiseIssue.RaiseIssueActivity;
+import org.sairaa.omowner.RaiseIssue.RaiseIssueRequest;
 import org.sairaa.omowner.Utils.AllUtil;
 import org.sairaa.omowner.Utils.ConverterUtil;
 import org.sairaa.omowner.Utils.SharedPreferenceConfig;
@@ -79,6 +82,9 @@ public class BookingActivity extends AppCompatActivity implements View.OnClickLi
     private AlertDialog alertDialog;
     private View view, viewX;
     private TextView roomDialogeCount, guestDialogCount;
+    List<RoomsGuest> roomsGuests;
+
+    public static String strdelexeroom,strclassicroom,strtotalroom;
 
     private SharedPreferenceConfig sharedPreferenceConfig;
     private int noOfRoom = 1;
@@ -227,7 +233,7 @@ public class BookingActivity extends AppCompatActivity implements View.OnClickLi
 
             }
         });
-
+        Availabilityondate();
     }
 
     private void retrieveFreshRoomDetails() {
@@ -350,8 +356,15 @@ public class BookingActivity extends AppCompatActivity implements View.OnClickLi
 
             case R.id.room_up:
                // Toast.makeText(this, "up", Toast.LENGTH_SHORT).show();
-                RoomsGuest roomsGuest = new RoomsGuest(1,2,0);
+            if(roomDialogeCount.getText().toString().equals(strtotalroom)) {
+                Toast.makeText(this, "Only "+strtotalroom +" Room are Available", Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                RoomsGuest roomsGuest = new RoomsGuest(1, 2, 0);
+
                 bookingViewModel.insertNewRooomGuest(roomsGuest);
+            }
                 break;
             case R.id.room_down:
               //  Toast.makeText(this, "down", Toast.LENGTH_SHORT).show();
@@ -1048,5 +1061,48 @@ public class BookingActivity extends AppCompatActivity implements View.OnClickLi
 
     private void ToastSnackMessage(String message) {
         Toast.makeText(this, ""+message, Toast.LENGTH_SHORT).show();
+    }
+
+
+    private void Availabilityondate() {
+       /* name = etUser.getText().toString().trim();
+        email = etEmail.getText().toString().trim();
+        password = etPassword.getText().toString().trim();
+        gender = etGender.getText().toString().trim();*/
+
+
+        //  progressDialog.show();
+        OmRoomApi omRoomApi = ApiUtils.getOmRoomApi();
+        // OmRoomApi apiInterface = RetrofitClient.getClient().create(OmRoomApi.class);
+        Call<AvailabilityondateRequest> userRegisterCall = omRoomApi.availabilityondate(new AvailabilityondateRequest(Integer.parseInt(sharedPreferenceConfig.readHotelId()),checkInDate.getText().toString(),checkOutDate.getText().toString()));
+        userRegisterCall.enqueue(new Callback<AvailabilityondateRequest>() {
+            @Override
+            public void onResponse(Call<AvailabilityondateRequest> call, Response<AvailabilityondateRequest> response) {
+                //  progressDialog.hide();
+                Log.d("res",response.toString());
+                if (response.isSuccessful()) {
+                    AvailabilityondateRequest dtos = response.body();
+                    if (dtos != null) {
+                        if (dtos.getStatus().equals("Success")) ;
+                     //   Toast.makeText(BookingActivity.this, dtos.getMsg(), Toast.LENGTH_SHORT).show();
+                      /*  Intent intent = new Intent(BookingActivity.this, MainActivity.class);
+                       *//* intent.putExtra("Name", etUser.getText().toString().trim());
+                        intent.putExtra("Email", etEmail.getText().toString().trim());*//*
+                        startActivity(intent);*/
+                        strclassicroom = dtos.getNo_of_classicrooms();
+                        strdelexeroom = dtos.getNo_of_deluxerooms();
+                        strtotalroom = dtos.getTotal_rooms();
+                    }
+                } else {
+                    Toast.makeText(BookingActivity.this, "Data not Found!", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AvailabilityondateRequest> call, Throwable t) {
+                //  progressDialog.hide();
+                Toast.makeText(BookingActivity.this, "Something went wrong!" + t, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

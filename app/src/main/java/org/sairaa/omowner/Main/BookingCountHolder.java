@@ -71,7 +71,7 @@ public class BookingCountHolder extends RecyclerView.ViewHolder implements View.
 //        }
         noRooms = noRooms.concat(String.valueOf(eachTypeBooking.getNoOfRoomBooked()));//.concat(" / ").concat(String.valueOf(eachTypeBooking.getTotalRooms()));
         noOfRoom.setText(noRooms);
-        noOfBooking.setText("Total No Of Bookings: ".concat(String.valueOf(eachTypeBooking.getNoOfBookings())));
+        noOfBooking.setText("Total No of Bookings: ".concat(String.valueOf(eachTypeBooking.getNoOfBookings())));
 
 
 

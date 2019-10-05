@@ -18,17 +18,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.sairaa.omowner.R;
+import org.sairaa.omowner.Utils.SharedPreferenceConfig;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class YourHotelContacts extends AppCompatActivity {
 
-    private static final String URL_DATA = "https://dev.anyemi.com/webservices/omrooms/Owner/api.php?f=hotelcontacts&hotel_id=905";
+    private static final String URL_DATA = "https://dev.anyemi.com/webservices/omrooms/Owner/api.php?f=hotelcontacts&hotel_id=";
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private List<ContactListItem> listitems;
-
+    private SharedPreferenceConfig sharedPreferenceConfig;
 
 
     @Override
@@ -40,7 +41,7 @@ public class YourHotelContacts extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_your_hotel_contacts);
-
+        sharedPreferenceConfig = new SharedPreferenceConfig(this);
         ActionBar actionBar = getSupportActionBar();
         if(actionBar!= null) {
             actionBar.setTitle("Hotel Contacts");
@@ -64,7 +65,7 @@ public class YourHotelContacts extends AppCompatActivity {
         progressDialog.show();
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                URL_DATA,
+                URL_DATA +sharedPreferenceConfig.readHotelId(),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

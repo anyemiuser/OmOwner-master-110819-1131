@@ -57,6 +57,7 @@ public class InstamojoActivity extends AppCompatActivity implements Instamojo.In
 
 
     //Action Bar
+
     TextView aTitle, notification_count;
     RelativeLayout rl_new_mails;
     ImageView iv_add_new;
@@ -457,9 +458,11 @@ public class InstamojoActivity extends AppCompatActivity implements Instamojo.In
                     if (paymentResponseModel != null) {
                         if (paymentResponseModel.getStatus().equals("Success")) {
 
-                            Intent it = new Intent(InstamojoActivity.this, CheckInActivity.class);
-                            startActivity(it);
+//                            Intent it = new Intent(InstamojoActivity.this, CheckInActivity.class);
+//                            startActivity(it);
 
+                            org.sairaa.omowner.payment.Globals.ProceedNextScreen(getApplicationContext());
+                        //    org.sairaa.omowner.payment.Globals.ProceedNextScreen(getApplicationContext(),paymentRequestModel);
                             // initiateCustomPayment(checkSumModel.getOrder_id());
                         } else {
                             Globals.showToast(getApplicationContext(), "Unable to generate hash");

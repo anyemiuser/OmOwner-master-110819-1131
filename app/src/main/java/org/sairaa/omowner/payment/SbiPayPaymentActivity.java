@@ -664,7 +664,8 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
                 if (data != null || data.equals("")) {
                     if (data.toString().contains("SUCCESS")) {
                         paymentRequestModel.setRemarks("SUCCESS");
-                        Globals.ProceedNextScreen(getApplicationContext(), paymentRequestModel);
+                      //  Globals.ProceedNextScreen(getApplicationContext(), paymentRequestModel);
+                        Globals.ProceedNextScreen(getApplicationContext());
                     }
                 }
             }
