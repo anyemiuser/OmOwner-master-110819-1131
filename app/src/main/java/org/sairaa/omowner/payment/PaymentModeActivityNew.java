@@ -120,7 +120,7 @@ public class PaymentModeActivityNew extends AppCompatActivity {
                     try {
                         servicesResponseModel = new ServicesResponseModel();
                         servicesResponseModel = new Gson().fromJson(data.toString(), ServicesResponseModel.class);
-                        //applicationData.setServicesResponseModel(servicesResponseModel);
+                       SharedPreferenceUtil.setUserData(getApplicationContext(),data.toString());
 
                         parseData();
 
