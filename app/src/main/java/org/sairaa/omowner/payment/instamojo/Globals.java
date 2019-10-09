@@ -29,7 +29,7 @@ public class Globals {
             Toast toast = Toast.makeText(applicationContext, msg, Toast.LENGTH_LONG);
             LinearLayout toastLayout = (LinearLayout) toast.getView();
             TextView toastTV = (TextView) toastLayout.getChildAt(0);
-            toastTV.setTextSize(TypedValue.COMPLEX_UNIT_PX, applicationContext.getResources().getDimension(R.dimen.bottom_text_size));
+        //    toastTV.setTextSize(TypedValue.COMPLEX_UNIT_PX, applicationContext.getResources().getDimension(R.dimen.bottom_text_size));
             toast.show();
         } catch (Exception e) {
             e.printStackTrace();
