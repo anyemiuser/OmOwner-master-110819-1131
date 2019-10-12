@@ -81,7 +81,7 @@ public class Connection {
         //String accessToken = SharedPreferenceUtil.getAccessToken(context);
 
         try {
-            //initSsl(context);
+            initSsl(context);
             HttpURLConnection.setFollowRedirects(false);
             connection = (HttpURLConnection) new URL(url).openConnection();
             connection.setDoOutput(true);
@@ -173,7 +173,7 @@ public class Connection {
             AppLogs.log(TAG, url);
 
             try {
-                //initSsl(aContext);
+                initSsl(aContext);
                 connection = (HttpURLConnection) new URL(url).openConnection();
                 // connection.setDoOutput(true);
                 connection.setRequestMethod("GET");
@@ -225,7 +225,7 @@ public class Connection {
 
             CertificateFactory cf = CertificateFactory.getInstance("X.509");
             BufferedInputStream caInputNew = new BufferedInputStream(aContext.getAssets()
-                    .open("anyemi_com.crt"));
+                    .open("www.anyemi.com.crt"));
 
             Certificate caNew;
             try {

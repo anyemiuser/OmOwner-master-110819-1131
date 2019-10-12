@@ -266,11 +266,11 @@ public class InstamojoActivity extends AppCompatActivity implements Instamojo.In
 
         // String amount = paymentRequestModel.getTotal_amount();
 
-        paymentRequestModel = Globals.getInstaAmount(
-                getApplicationContext(),
-                paymentRequestModel,
-                instamojoPaymentModel,
-                type);
+//        paymentRequestModel = Globals.getInstaAmount(
+//                getApplicationContext(),
+//                paymentRequestModel,
+//                instamojoPaymentModel,
+//                type);
         String name = "";
         String email = "";
         String moile = "";
