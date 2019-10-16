@@ -36,6 +36,7 @@ import org.sairaa.omowner.Availability.AvailabilityondateRequest;
 import org.sairaa.omowner.BookingDetails.BookingDetailsActivity;
 import org.sairaa.omowner.Collection.CollectionActivity;
 import org.sairaa.omowner.Main.MainActivity;
+import org.sairaa.omowner.Model.CustomerBookings;
 import org.sairaa.omowner.NewBooking.Adapter.RoomTypeAdapter;
 import org.sairaa.omowner.NewBooking.Model.Booking;
 import org.sairaa.omowner.NewBooking.Model.BookingModel;
@@ -76,6 +77,8 @@ public class BookingActivity extends AppCompatActivity implements View.OnClickLi
     private TextView nights;
     private Button bookRoom;
     private ImageView successImage;
+    CustomerBookings
+            bookings;
     EditText phoneNo;
     BookingViewModel bookingViewModel;
     private ViewPager viewPager;
@@ -1070,11 +1073,14 @@ public class BookingActivity extends AppCompatActivity implements View.OnClickLi
         password = etPassword.getText().toString().trim();
         gender = etGender.getText().toString().trim();*/
 
-
+        String checkInDa = ConverterUtil.parseDateToyyyymmdd(bookingViewModel.getCheckInDate().getValue());
+        String checkOutDa = ConverterUtil.parseDateToyyyymmdd(bookingViewModel.getCheckOutDate().getValue());
         //  progressDialog.show();
         OmRoomApi omRoomApi = ApiUtils.getOmRoomApi();
         // OmRoomApi apiInterface = RetrofitClient.getClient().create(OmRoomApi.class);
-        Call<AvailabilityondateRequest> userRegisterCall = omRoomApi.availabilityondate(new AvailabilityondateRequest(Integer.parseInt(sharedPreferenceConfig.readHotelId()),checkInDate.getText().toString(),checkOutDate.getText().toString()));
+        Call<AvailabilityondateRequest> userRegisterCall = omRoomApi.availabilityondate(new AvailabilityondateRequest(Integer.parseInt(sharedPreferenceConfig.readHotelId()),checkInDa,checkOutDa));
+      /*  Log.d ( "ci", bookings.getChecked_in_date());
+        Log.d ( "co", bookings.getChecked_out_date());*/
         userRegisterCall.enqueue(new Callback<AvailabilityondateRequest>() {
             @Override
             public void onResponse(Call<AvailabilityondateRequest> call, Response<AvailabilityondateRequest> response) {

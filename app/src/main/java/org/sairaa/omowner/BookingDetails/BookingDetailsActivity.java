@@ -221,6 +221,12 @@ int inbookingid;
         snackbar.show();
     }
 
+
+
+
+
+
+
     @Override
     public void getActionAndBookingList(String bookingType, CustomerBookings list) {
         switch (bookingType) {
@@ -575,10 +581,16 @@ int inbookingid;
         return status;
     }
 
+
+
+
+
+
+
     @Override
-    public void cancelBooking(String booking_id) {
+    public void cancelBooking(String booking_id,String reason) {
         OmRoomApi omRoomApi = ApiUtils.getOmRoomApi();
-        CancelRequest cancelRequest = new CancelRequest(booking_id, sharedPreferenceConfig.readPhoneNo(), "Receptionist");
+        CancelRequest cancelRequest = new CancelRequest(booking_id, sharedPreferenceConfig.readPhoneNo(), reason);
         omRoomApi.cancelBookedHotel(cancelRequest).enqueue(new Callback<CancelResponse>() {
             @Override
             public void onResponse(Call<CancelResponse> call, Response<CancelResponse> response) {

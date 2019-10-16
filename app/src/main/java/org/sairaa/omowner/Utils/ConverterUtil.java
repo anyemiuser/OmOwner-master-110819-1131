@@ -157,6 +157,24 @@ public class ConverterUtil implements Constants, ConstantFields{
         return str;
     }
 
+  /*  public static String parseDateToddMMMyyyy(String time) {
+        String inputPattern = "yyyy-MM-dd";
+        String outputPattern = "yyyy-MM-dd";
+        SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
+        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
+
+        Date date = null;
+        String str = null;
+
+        try {
+            date = inputFormat.parse(time);
+            str = outputFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return str;
+    }*/
+
     public static int noOfDays(String checkInDate, String checkOutDate) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MMM/yyyy");
         Calendar calendar = Calendar.getInstance();

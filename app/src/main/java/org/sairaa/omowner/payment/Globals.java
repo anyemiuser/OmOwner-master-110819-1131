@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import org.sairaa.omowner.BookingDetails.BookingDetailsActivity;
+import org.sairaa.omowner.Main.MainActivity;
 import org.sairaa.omowner.payment.model.InstamojoPaymentModel;
 
 
@@ -135,7 +136,7 @@ public class Globals {
 
     public static void ProceedNextScreen(final Context context) {
 
-        Intent intent = new Intent(context, BookingDetailsActivity.class);
+        Intent intent = new Intent(context, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
       //  intent.putExtra(Constants.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
         context.startActivity(intent);

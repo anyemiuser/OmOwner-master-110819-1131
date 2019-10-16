@@ -65,6 +65,6 @@ public class BookingDetailsAdapter extends RecyclerView.Adapter<BookingDetailsHo
 
         String getBookingTypeCheckInOrOut();
 
-        void cancelBooking(String booking_id);
+        void cancelBooking(String booking_id, String reason);
     }
 }

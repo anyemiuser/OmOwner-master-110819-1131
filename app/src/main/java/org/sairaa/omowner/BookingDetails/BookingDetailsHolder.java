@@ -20,6 +20,7 @@ import android.widget.TextView;
 import org.sairaa.omowner.Api.ApiUtils;
 import org.sairaa.omowner.Api.OmRoomApi;
 import org.sairaa.omowner.CancelForm.CancelformRequest;
+import org.sairaa.omowner.Main.MainActivity;
 import org.sairaa.omowner.Model.CustomerBookings;
 import org.sairaa.omowner.Model.RoomTypeDetails;
 import org.sairaa.omowner.R;
@@ -149,9 +150,27 @@ public class BookingDetailsHolder extends RecyclerView.ViewHolder implements Con
                     cancel.setVisibility(View.GONE);
                     collectAmount.setVisibility(View.GONE);
 
-                }else {
+                }
+               /* else if(ConverterUtil.getCheckInCheckOutType(type).equals(UpcomingCheckIn)){
+                    //completed and inactive the check in and check out button
+                  if( bookings.getPayment_status ( ).equals ( "Paid" )) {
+                      collectAmount.setVisibility ( View.GONE );
+                  }
+                  else {
+                      collectAmount.setVisibility ( View.VISIBLE );
+                  }
+
+                }*/
+                else {
                     checkInOut.setText(ConverterUtil.getCheckInCheckOutType(type));
                     if(ConverterUtil.getCheckInCheckOutType(type).equals(UpcomingCheckIn)){
+                        if( bookings.getPayment_status ( ).equals ( " Paid" )) {
+                            collectAmount.setVisibility ( View.GONE );
+                        }
+                       /* else {
+                            collectAmount.setVisibility ( View.VISIBLE );
+                        }*/
+                       // collectAmount.setVisibility ( View.GONE );
                         cancel.setVisibility(View.VISIBLE);
                     }else {
                         cancel.setVisibility(View.GONE);
@@ -169,6 +188,10 @@ public class BookingDetailsHolder extends RecyclerView.ViewHolder implements Con
                         payStatus = payStatus.concat(" Not Paid");
                         break;
                     case "p":
+                        collectAmount.setVisibility ( View.GONE );
+                        paidAmount.setText(bookings.getPrice_to_be_paid());
+                        totalAmount.setText(bookings.getPrice_to_be_paid());
+                        balance.setText(String.valueOf(Math.round(balanceAmount)));
                         payStatus = payStatus.concat(" Paid");
                         break;
 
@@ -190,6 +213,11 @@ public class BookingDetailsHolder extends RecyclerView.ViewHolder implements Con
                 paidAmount.setText(String.valueOf(Math.round(paidAmountR)));
                 totalAmount.setText(bookings.getPrice_to_be_paid());
                 balance.setText(String.valueOf(Math.round(balanceAmount)));
+
+
+             /*   paidAmount.setText(String.valueOf(Math.round(balanceAmount)));
+                totalAmount.setText(bookings.getPrice_to_be_paid());
+                balance.setText(String.valueOf(Math.round(paidAmountR)));*/
 
                 if(bookings.getChecked_in_date() == null){
                     checkInLayout.setVisibility(View.GONE);
@@ -334,16 +362,18 @@ else {
                 CancelformRequest dtos = response.body();
                 if (dtos != null) {
                     if (dtos.getStatus().equals("Success")) ;
-                    mAdapterCallback.cancelBooking(bookings.getBooking_id());
-                    Toast.makeText(itemView.getContext(), dtos.getMsg(), Toast.LENGTH_SHORT).show();
+                    mAdapterCallback.cancelBooking(bookings.getBooking_id(), reason);
+                   // Toast.makeText(itemView.getContext(), dtos.getMsg(),  Toast.LENGTH_SHORT).show();
+              Intent it = new Intent ( context,MainActivity.class );
+              context.startActivity ( it );
                 }
             } else {
-                Toast.makeText(itemView.getContext(), "Data not Found!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(itemView.getContext(), "Data not Found!",  Toast.LENGTH_SHORT).show();
             }
         }
 
         @Override
-        public void onFailure(Call<CancelformRequest> call, Throwable t) {
+        public void onFailure(Call<CancelformRequest> call, Throwable t)  {
             // progressDialog.hide();
             Toast.makeText(itemView.getContext(), "Something went wrong!" + t, Toast.LENGTH_SHORT).show();
         }
