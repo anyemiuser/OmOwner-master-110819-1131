@@ -357,6 +357,7 @@ public class CompleateTransactionActivity extends AppCompatActivity implements T
 
     private void submitPayment() {
 
+
         new BackgroundTask(CompleateTransactionActivity.this, new BackgroundThread() {
             @Override
             public Object runTask() {

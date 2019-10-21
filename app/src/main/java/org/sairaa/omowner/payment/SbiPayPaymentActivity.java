@@ -594,13 +594,9 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
                                 paymentRequestModel.setTrsno(jsonObject.getString("custRefNo"));
                                 paymentRequestModel.setExtrafield(mResponsedata.getApiResp().getPayeeVPA());
                                 Log.e("sbi pay cust ref no", "" + paymentRequestModel.getTrsno() + new Gson().toJson(paymentRequestModel));
-//                                Intent intent = new Intent(getApplicationContext(), PaymentTransactionStatusActivity.class);
-////                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                                intent.putExtra(Constants.PAYMENT_REQUEST_MODEL, new Gson().toJson(paymentRequestModel));
-//                                startActivityForResult(intent, 5);
+                                openInfoDialog(mResponsedata.getApiResp().getStatusDesc() + " : " + mResponsedata.getApiResp().getResponseMsg());
 
-                                Intent it = new Intent(getApplicationContext(), CheckInActivity.class);
-                                startActivity(it);
+                                finish();
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -609,9 +605,11 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
                         } else if (mResponsedata.getApiResp().getStatus().equals("F")) {
                             mTransDone = true;
                             openInfoDialog(mResponsedata.getApiResp().getStatusDesc() + " : " + mResponsedata.getApiResp().getResponseMsg());
+                            finish();
                         } else if (mResponsedata.getApiResp().getStatus().equals("T")) {
                             mTransDone = true;
                             openInfoDialog(mResponsedata.getApiResp().getStatusDesc() + " : " + mResponsedata.getApiResp().getResponseMsg());
+                            finish();
                         }
                         Log.e("sbi payment status", "" + mResponsedata.getApiResp().getStatus());
                     } catch (Exception e) {

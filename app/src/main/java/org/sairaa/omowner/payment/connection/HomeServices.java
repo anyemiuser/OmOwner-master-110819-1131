@@ -1,6 +1,7 @@
 package org.sairaa.omowner.payment.connection;
 
 import android.content.Context;
+import android.util.Log;
 
 import org.sairaa.omowner.payment.CheackValidVpaModel;
 import org.sairaa.omowner.payment.PaymentRequestModel;
@@ -334,6 +335,7 @@ public class HomeServices {
     }
 
     public static Object submitPayment(Context aContext, PaymentRequestModel request) {
+        Log.e("pament request",request.getTotal_amount());
         try {
             return Connection.callHttpPostRequestsV2(aContext, Constants.POST_PAYMENT_SUBMIT, request);
         } catch (Exception e) {
