@@ -25,7 +25,7 @@ import java.util.List;
 
 public class YourHotelContacts extends AppCompatActivity {
 
-    private static final String URL_DATA = "https://dev.anyemi.com/webservices/omrooms/Owner/api.php?f=hotelcontacts&hotel_id=";
+    private static final String URL_DATA = "https://www.omrooms.com/webservices/omrooms/Owner/api.php?f=hotelcontacts&hotel_id=";
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private List<ContactListItem> listitems;

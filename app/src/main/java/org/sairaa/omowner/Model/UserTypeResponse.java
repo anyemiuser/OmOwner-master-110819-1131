@@ -3,20 +3,19 @@ package org.sairaa.omowner.Model;
 import java.util.List;
 
 public class UserTypeResponse {
+
+
+    /**
+     * status : success
+     * message : success
+     * usertype : b
+     * hoteldetails : [{"hotelid":"902","hotelname":"Vamsi Krishna Residency"}]
+     */
+
     private String status;
     private String message;
     private String usertype;
-    private List<Hotels> hoteldetails;
-
-    public UserTypeResponse() {
-    }
-
-    public UserTypeResponse(String status, String message, String usertype, List<Hotels> hoteldetails) {
-        this.status = status;
-        this.message = message;
-        this.usertype = usertype;
-        this.hoteldetails = hoteldetails;
-    }
+    private List<HoteldetailsBean> hoteldetails;
 
     public String getStatus() {
         return status;
@@ -42,11 +41,37 @@ public class UserTypeResponse {
         this.usertype = usertype;
     }
 
-    public List<Hotels> getHoteldetails() {
+    public List<HoteldetailsBean> getHoteldetails() {
         return hoteldetails;
     }
 
-    public void setHoteldetails(List<Hotels> hoteldetails) {
+    public void setHoteldetails(List<HoteldetailsBean> hoteldetails) {
         this.hoteldetails = hoteldetails;
+    }
+
+    public static class HoteldetailsBean {
+        /**
+         * hotelid : 902
+         * hotelname : Vamsi Krishna Residency
+         */
+
+        private String hotelid;
+        private String hotelname;
+
+        public String getHotelid() {
+            return hotelid;
+        }
+
+        public void setHotelid(String hotelid) {
+            this.hotelid = hotelid;
+        }
+
+        public String getHotelname() {
+            return hotelname;
+        }
+
+        public void setHotelname(String hotelname) {
+            this.hotelname = hotelname;
+        }
     }
 }

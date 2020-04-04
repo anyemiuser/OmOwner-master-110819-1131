@@ -31,8 +31,8 @@ import java.util.List;
 public class HomeRulesActivity extends AppCompatActivity {
 
 
-    private static final String URL_DATA = "https://dev.anyemi.com/webservices/omrooms/Owner/api.php?f=hotelrules&hotel_id=";
-    private static final String URL_DATA1 = "https://dev.anyemi.com/webservices/omrooms/Owner/api.php?f=getnumrules&hotel_id=";
+    private static final String URL_DATA = "https://www.omrooms.com/webservices/omrooms/Owner/api.php?f=hotelrules&hotel_id=";
+    private static final String URL_DATA1 = "https://www.omrooms.com/webservices/omrooms/Owner/api.php?f=getnumrules&hotel_id=";
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private List<RulesListItem> listitems;
@@ -131,9 +131,6 @@ t1 = findViewById(R.id.t1);
                               //  Log.d("res", item.toString());
                                // listitems.add(item);
                             }
-
-
-
 
 
                            /* adapter = new RulesListAdapter(listitems,getApplicationContext());

@@ -594,7 +594,8 @@ public class SbiPayPaymentActivity extends AppCompatActivity implements View.OnC
                                 paymentRequestModel.setTrsno(jsonObject.getString("custRefNo"));
                                 paymentRequestModel.setExtrafield(mResponsedata.getApiResp().getPayeeVPA());
                                 Log.e("sbi pay cust ref no", "" + paymentRequestModel.getTrsno() + new Gson().toJson(paymentRequestModel));
-                                openInfoDialog(mResponsedata.getApiResp().getStatusDesc() + " : " + mResponsedata.getApiResp().getResponseMsg());
+                               // openInfoDialog(mResponsedata.getApiResp().getStatusDesc() + " : " + mResponsedata.getApiResp().getResponseMsg());
+                                Globals.showToast(getApplicationContext(), mResponsedata.getApiResp().getResponseMsg());
 
                                 finish();
                             } catch (JSONException e) {

@@ -16,6 +16,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -249,11 +250,13 @@ public class CreditAndDebitCardActivity extends AppCompatActivity implements Vie
     }
 
 
+    @SuppressLint("SetTextI18n")
     private String calculateCharges(String payment_mode) {
 
         if (payment_mode.equals(Constants.PAYMENT_MODE_CREDIT_CARD)) {
 
             Double due_amount = AMOUNT_WITHOUT_CHARGES;
+            Log.e("due_amount",due_amount+"");
 
             Double card_charges = Double.parseDouble(paymentRequestModel.getCredit_service_tax_());
             Double gst_on_card_charges = Double.parseDouble(paymentRequestModel.getGst_credit());
@@ -266,7 +269,7 @@ public class CreditAndDebitCardActivity extends AppCompatActivity implements Vie
             if (gst_on_card_charges > 0) {
                 final_amount = card_charges + due_amount + gst_on_card_charges;
             } else {
-                final_amount = Double.valueOf(due_amount);
+                final_amount = due_amount;
             }
             String bank_charges = Utils.parseTwoDigitAmount(String.valueOf(card_charges + gst_on_card_charges));
 
@@ -276,7 +279,11 @@ public class CreditAndDebitCardActivity extends AppCompatActivity implements Vie
 
             tv_bank_charges.setText("Rs." + Utils.parseAmount(String.valueOf(card_charges)) + " /-");
             tv_gst_charges.setText("Rs." + Utils.parseAmount(String.valueOf(gst_on_card_charges)) + " /-");
-            tv_amount.setText("Rs." + Utils.parseAmount(String.valueOf(final_amount)) + " /-");
+            String amt="RS. ".concat(resultStr);
+           // amt=amt.concat(" /-");
+            tv_amount.setText(amt);
+            Log.e("resultStr",resultStr+"");
+
 
             return resultStr;
 
@@ -295,7 +302,7 @@ public class CreditAndDebitCardActivity extends AppCompatActivity implements Vie
             if (gst_on_card_charges > 0) {
                 final_amount = card_charges + due_amount + gst_on_card_charges;
             } else {
-                final_amount = Double.valueOf(due_amount);
+                final_amount = due_amount;
             }
             String bank_charges = Utils.parseTwoDigitAmount(String.valueOf(card_charges + gst_on_card_charges));
 
@@ -305,7 +312,10 @@ public class CreditAndDebitCardActivity extends AppCompatActivity implements Vie
 
             tv_bank_charges.setText("Rs." + Utils.parseAmount(String.valueOf(card_charges)) + " /-");
             tv_gst_charges.setText("Rs." + Utils.parseAmount(String.valueOf(gst_on_card_charges)) + " /-");
-            tv_amount.setText("Rs." + Utils.parseAmount(String.valueOf(final_amount)) + " /-");
+            String amt="RS. ".concat(resultStr);
+          //  amt=amt.concat(" /-");
+
+            tv_amount.setText(amt);
 
             return resultStr;
         }

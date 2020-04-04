@@ -183,21 +183,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         omRoomApi.getUserTypeAndHotel(user).enqueue(new Callback<UserTypeResponse>() {
             @Override
             public void onResponse(Call<UserTypeResponse> call, Response<UserTypeResponse> response) {
-
+              //  Log.e(LOGIN_TAG,"hotel jk"+new Gson().toJson(response));
                 if(response.isSuccessful()){
                     UserTypeResponse userTypeResponse = response.body();
-                    Log.e(LOGIN_TAG,""+new Gson().toJson(userTypeResponse));
+                    Log.e(LOGIN_TAG,"hotel "+new Gson().toJson(userTypeResponse));
                     if (userTypeResponse != null) {
                         if(userTypeResponse.getStatus().equals("success") && userTypeResponse.getMessage().equals("success")){
-                            List<Hotels> hotels = userTypeResponse.getHoteldetails();
+                            List<UserTypeResponse.HoteldetailsBean> hotels = userTypeResponse.getHoteldetails();
                             sharedPreferenceConfig.writePhoneNo(phoneNumber);
 
                             sharedPreferenceConfig.writeUserType(userTypeResponse.getUsertype());
                             if(hotels != null){
                                 if(hotels.size()>0){
-                                    Hotels eachHotel = hotels.get(0);
-                                    sharedPreferenceConfig.writeHotelId(eachHotel.getHotel_id());
-                                    sharedPreferenceConfig.writeHotelName(eachHotel.getHotel_name());
+                                    UserTypeResponse.HoteldetailsBean eachHotel = hotels.get(0);
+                                    sharedPreferenceConfig.writeHotelId(eachHotel.getHotelid());
+                                    sharedPreferenceConfig.writeHotelName(eachHotel.getHotelname());
 
                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -225,7 +225,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
 
             }
-
             @Override
             public void onFailure(Call<UserTypeResponse> call, Throwable t) {
                 Log.e(LOGIN_TAG,""+t.toString());
@@ -279,7 +278,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onResponse(Call<LoginOtpRequest> call, Response<LoginOtpRequest> response) {
                 //  progressDialog.hide();
-                Log.d("res",response.toString());
+                Log.e("res",response.toString());
                 if (response.isSuccessful()) {
                     LoginOtpRequest dtos = response.body();
                     if (dtos != null) {
@@ -313,17 +312,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         OmRoomApi omRoomApi = ApiUtils.getOmRoomApi();
         UserTypeRequest user = new UserTypeRequest(phoneNumber);
-        Log.e(LOGIN_TAG,""+new Gson().toJson(user));
+        Log.e(LOGIN_TAG,"request"+new Gson().toJson(user));
         omRoomApi.getUserTypeAndHotel(user).enqueue(new Callback<UserTypeResponse>() {
             @Override
             public void onResponse(Call<UserTypeResponse> call, Response<UserTypeResponse> response) {
+                Log.e(LOGIN_TAG,response+"");
 
                 if(response.isSuccessful()){
                     UserTypeResponse userTypeResponse = response.body();
-                    Log.e(LOGIN_TAG,""+new Gson().toJson(userTypeResponse));
+                    Log.e(LOGIN_TAG,"hotels"+new Gson().toJson(userTypeResponse));
                     if (userTypeResponse != null) {
                         if(userTypeResponse.getStatus().equals("success") && userTypeResponse.getMessage().equals("success")){
-                            List<Hotels> hotels = userTypeResponse.getHoteldetails();
+                            List<UserTypeResponse.HoteldetailsBean> hotels = userTypeResponse.getHoteldetails();
                            // sharedPreferenceConfig.writePhoneNo(phoneNumber);
 
                            // sharedPreferenceConfig.writeUserType(userTypeResponse.getUsertype());
@@ -363,7 +363,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             @Override
             public void onFailure(Call<UserTypeResponse> call, Throwable t) {
-                Log.e(LOGIN_TAG,""+t.toString());
+                Log.e(LOGIN_TAG,"error"+t.toString());
                 Toast.makeText(LoginActivity.this, ""+t.getMessage(), Toast.LENGTH_SHORT).show();
                 // Toast.makeText(LoginActivity.this, "You Have Entered Wrong OTP", Toast.LENGTH_SHORT).show();
             }

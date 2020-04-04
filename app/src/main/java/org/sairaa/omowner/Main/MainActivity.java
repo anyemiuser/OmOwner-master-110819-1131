@@ -620,7 +620,10 @@ public class MainActivity extends AppCompatActivity
         else if (id == R.id.nav_policies) {
             Intent intent = new Intent(this, PoliciesActivity.class);
             startActivity(intent);
-
+        }else if(id==R.id.nav_help){
+            Toast.makeText(getApplicationContext(),"We Will Update Soon...",Toast.LENGTH_SHORT).show();
+        }else if(id==R.id.nav_guest_reviews){
+            Toast.makeText(getApplicationContext(),"We Will Update Soon...",Toast.LENGTH_SHORT).show();
         }
 //        else if (id == R.id.nav_share) {
 //

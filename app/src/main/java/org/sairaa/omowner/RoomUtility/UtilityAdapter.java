@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UtilityAdapter extends RecyclerView.Adapter<UtilityMainHolder> {
-    private List<UtilitiyDetails> utilitiyDetails;
+    private List<UtilitiyDetails> utilitiyDetails=new ArrayList<>();
     private Context context;
     public UtilityAdapter(List<UtilitiyDetails> utilitiyDetails, Context context) {
         this.utilitiyDetails = utilitiyDetails;

@@ -152,6 +152,8 @@ public class CheckInPresenter implements CheckInContract.UserActionsListener {
         omRoomApi.getCheckInDetails(request).enqueue(new Callback<RoomAvailabilityResponse>() {
             @Override
             public void onResponse(Call<RoomAvailabilityResponse> call, Response<RoomAvailabilityResponse> response) {
+                Log.e(TAG_CHECKIN_PRESENTER,"response: "+response);
+
                 if(response.isSuccessful()){
                     RoomAvailabilityResponse checkInResponse = response.body();
                     Log.e(TAG_CHECKIN_PRESENTER,"Success"+new Gson().toJson(checkInResponse));
